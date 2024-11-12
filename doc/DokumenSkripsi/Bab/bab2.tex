@@ -2,201 +2,361 @@
 \chapter{Landasan Teori}
 \label{chap:teori}
 
-\section{Skripsi}
-\label{sec:skripsi} 
- 
-Rencananya akan diisi dengan penjelasan umum mengenai buku skripsi.
+% label: {what for}:{page}:{section}:{subsection}:{name}
 
-\dtext{11-12} 
+\section{SharIF Judge}
+\label{sec:2:sharifjudge}
 
-\section{\LaTeX}
-\label{sec:latex}
+SharIF Judge merupakan modifikasi dari \textit{open source} bernama Sharif Judge, sebuah website judge gratis dengan kemampuan mengkompilasi bahasa C, C++, Java, dan Python. Sharif Judge dibuat oleh Mohammad Javad Naderi dengan interface web berbahasa PHP menggunakan framework CodeIgniter dan BASH~\cite{sharif}. Modifikasi dilakukan untuk menambahkan fitur pada Sharif Judge dan juga untuk menyesuaikan sesuai dengan kebutuhan Teknik Informatika UNPAR.
 
-Mengapa menggunakan \LaTeX{} untuk buku skripsi dan apa keunggulan/kerugiannya bagi mahasiswa dan pembuat template. 
+\subsection{Instalasi}
+\label{subs:2:1:instalasi}
 
-\dtext{13-14}
+Ada beberapa prasyarat yang diperlukan dalam menjalankan SharIF Judge pada sebuah \textit{server} Linux adalah sebagai berikut:
 
-
-\section{Template Skripsi FTIS UNPAR}
-\label{sec:template}
- 
-Akan dipaparkan bagaimana menggunakan template ini, termasuk petunjuk singkat membuat referensi, gambar dan tabel.
-Juga hal-hal lain yang belum terpikir sampai saat ini. 
- 
-\dtext{15-16}
-
-\subsection{Tabel}  
-Berikut adalah contoh pembuatan tabel. 
-Penempatan tabel dan gambar secara umum diatur secara otomatis oleh \LaTeX{}, perhatikan contoh di file bab2.tex untuk melihat bagaimana cara memaksa tabel ditempatkan sesuai keinginan kita.
-
-Perhatikan bawa berbeda dengan penempatan judul gambar gambar, keterangan tabel harus diletakkan di atas tabel!!
-Lihat Tabel~\ref{tab:contoh1} berikut ini:
-
-\begin{table}[H] %atau h saja untuk "kira kira di sini"
-	\centering 
-	\caption{Tabel contoh}
-	\label{tab:contoh1}
-	\begin{tabular}{cccc}
-		\toprule
-		& $v_{start}$ & $\mathcal{S}_{1}$ & $v_{end}$\\
-
-		\midrule
-		$\tau_{1}$ & 1 & 12& 20\\
-		$\tau_{2}$ & 1 &  & 20\\
-		$\tau_{3}$ & 1 & 9 & 20\\
-		$\tau_{4}$ & 1 &  & 20\\
-
-		\bottomrule
-		
-	\end{tabular} 
-\end{table}
-Tabel~\ref{tab:cthwarna1} dan Tabel~\ref{tab:cthwarna2} berikut ini adalah tabel dengan sel yang berwarna dan ada dua tabel yang bersebelahan. 
-\begin{table}[H]
-	\begin{minipage}[c]{0.49\linewidth}
-		\centering
-		\caption{Tabel bewarna(1)}
-		\label{tab:cthwarna1}
-		\begin{tabular}{ccccc}
-			\toprule
-			 & $v_{start}$ & $\mathcal{S}_{2}$ & $\mathcal{S}_{1}$ & $v_{end}$\\
-			
-			\midrule
-			$\tau_{1}$ & 1 & 5 \cellcolor{green}& 12& 20\\
-			$\tau_{2}$ & 1 & 8 \cellcolor{green}& & 20\\
-			$\tau_{3}$ & 1 & 2/8/17 \cellcolor{green}& 9 & 20\\
-			$\tau_{4}$ & 1 & \cellcolor{red}& & 20\\
-			
-			\bottomrule
-
-		\end{tabular}
-	\end{minipage}
-	\begin{minipage}[c]{0.49\linewidth}
-		
-		\centering 
-		\caption{Tabel bewarna(2)}
-		\label{tab:cthwarna2}
-		\begin{tabular}{ccccc}
-			\toprule
-			 & $v_{start}$ & $\mathcal{S}_{1}$ & $\mathcal{S}_{2}$ & $v_{end}$\\
-			
-			\midrule
-			$\tau_{1}$ & 1 & 12& 5 \cellcolor{red} &20\\
-			$\tau_{2}$ & 1 &  &  8 \cellcolor{green} &20\\
-			$\tau_{3}$ & 1 & 9 & 2/8/17 \cellcolor{green} &20\\
-			$\tau_{4}$ & 1 &   & \cellcolor{red} &20\\
-			
-			\bottomrule
-		
-		\end{tabular}
-	\end{minipage}
-\end{table}
-
- 
-\subsection{Kutipan}
-\label{subs:kutipan} 
-Berikut contoh kutipan dari berbagai sumber, untuk keterangan lebih lengkap, silahkan membaca file referensi.bib yang disediakan juga di template ini.
-Contoh kutipan:
 \begin{itemize}
-	\item Buku:~\cite{berg:08:compgeom} 
-	\item Bab dalam buku:~\cite{kreveld:04:GIS}
-	\item Artikel dari Jurnal:~\cite{buchin:13:median}
-	\item Artikel dari prosiding seminar/konferensi:~\cite{kreveld:11:median}
-	\item Skripsi/Thesis/Disertasi:~\cite{lionov:02:animasi}~\cite{wiratma:10:following}~\cite{wiratma:22:later}
-	\item Technical/Scientific Report:~\cite{kreveld:07:watertight}
-	\item RFC (Request For Comments):~\cite{RFC1654}
-	\item Technical Documentation/Technical Manual:~\cite{Z.500}~\cite{unicode:16:stdv9}~\cite{google:16:and7}
-	\item Paten:~\cite{webb:12:comm}
-	\item Tidak dipublikasikan:~\cite{wiratma:09:median}~\cite{lionov:11:cpoly}
-	\item Laman web:~\cite{erickson:03:cgmodel}  
-	\item Lain-lain:~\cite{agung:12:tango}
-\end{itemize}    
-  
-\subsection{Gambar}
-
-Pada hampir semua editor, penempatan gambar di dalam dokumen \LaTeX{} tidak dapat dilakukan melalui proses {\it drag and drop}.
-Perhatikan contoh pada file bab2.tex untuk melihat bagaimana cara menempatkan gambar.
-Beberapa hal yang harus diperhatikan pada saat menempatkan gambar:
-\begin{itemize}
-	\item Setiap gambar {\bf harus} diacu di dalam teks (gunakan {\it field} {\sc label})
-	\item {\it Field} {\sc caption} digunakan untuk teks pengantar pada gambar. Terdapat dua bagian yaitu yang ada di antara tanda $[$ dan $]$ dan yang ada di antara tanda $\{$ dan $\}$. Yang pertama akan muncul di Daftar Gambar, sedangkan yang kedua akan muncul di teks pengantar gambar. Untuk skripsi ini, samakan isi keduanya.
-	\item Jenis file yang dapat digunakan sebagai gambar cukup banyak, tetapi yang paling populer adalah tipe {\sc png} (lihat Gambar~\ref{fig:ularpng}), tipe {\sc jpg} (Gambar~\ref{fig:ularjpg}) dan tipe {\sc pdf} (Gambar~\ref{fig:ularpdf})
-	\item Besarnya gambar dapat diatur dengan {\it field} {\sc scale}.
-	\item Penempatan gambar diatur menggunakan {\it placement specifier} (di antara tanda  $[$ dan $]$ setelah deklarasi gambar.
-	Yang umum digunakan adalah {\bf H} untuk menempatkan gambar {\bf sesuai} penempatannya di file .tex atau  {\bf h} yang berarti "kira-kira" di sini. \\
-	Jika tidak menggunakan {\it placement specifier}, \LaTeX{} akan menempatkan gambar secara otomatis untuk menghindari bagian kosong pada dokumen anda.
-	Walaupun cara ini sangat mudah, hindarkan terjadinya penempatan dua gambar secara berurutan. 	
-	\begin{itemize}
-		\item Gambar~\ref{fig:ularpng} ditempatkan di bagian atas halaman, walaupun penempatannya dilakukan setelah penulisan 3 paragraf setelah penjelasan ini.
-		\item Gambar~\ref{fig:ularjpg} dengan skala 0.5 ditempatkan di antara dua buah paragraf. Perhatikan penulisannya di dalam file bab2.tex!
-		\item Gambar~\ref{fig:ularpdf} ditempatkan menggunakan {\it specifier} {\bf h}.
-	\end{itemize}
+	\item \textit{Webserver} dengan PHP versi 5.3 atau lebih dengan \texttt{mysqli} extension
+	\item PHP Command Line Interface (CLI)
+	\item \textit{Database} MySql atau PostgreSql
+	\item PHP harus memiliki akses untuk menjalankan \textit{shell commands} dengan fungsi \verb|shell_exec|
+	\item Kemampuan untuk mengompilasi dan menjalankan kode yang dikumpulkan (\texttt{gcc}, \texttt{g++}, \texttt{javac}, \texttt{java}, \texttt{python2}, dan \texttt{python3})
+	\item Perl
 \end{itemize}
- 
-\dtext{17-18}
-\begin{figure} 
-	\centering  
-	\includegraphics[scale=1]{ular-png}  
-	\caption[Gambar {\it Serpentes} dalam format png]{Gambar {\it Serpentes} dalam format png} 
-	\label{fig:ularpng} 
-\end{figure} 
 
-\dtext{19-20}
+Setelah perangkat yang sudah memenuhi prasyarat, berikut merupakan cara instalasi SharIF Judge:
+
+\begin{enumerate}
+	\item Unduh versi terakhir dari Sharif Judge dan menempatkannya pada direktori publik.
+	\item Pindahkan folder \texttt{system} dan \texttt{application} ke luar direktori publik. Kemudian simpan alamatnya pada \texttt{index.php}.
+	\item Buat sebuah \textit{Database} MySql atau PostgreSql.
+	\item Atur pengaturan koneksi \textit{database} pada \texttt{application/config/database.php}.
+	\item Atur pengaturan koneksi \texttt{RADIUS} dan \texttt{SMTP} pada \texttt{application/config/secrets.php} jika dibutuhkan.
+	\item Atur agar direktori \texttt{application/cache/Twig} dapat ditulis oleh php.
+	\item Buka halaman utama SharIF Judge pada \textit{browser} dan ikuti proses instalasi.
+	\item Log in dengan akun admin
+	\item Pindahkan folder \texttt{tester} dan \texttt{assignments} ke luar direktori publik. Kemudian simpan alamatnya pada halaman pengaturan.
+\end{enumerate}
+
+\newpage
+
+\subsection{Users}
+\label{subs:2:1:fitur}
+
+Pada SharIF Judge, pengguna dibagi menjadi 4 buah \textit{role}. Role yang tersedia adalah sebagai berikut:
+
+\begin{enumerate}
+	\item \textit{admin}
+	\item \textit{head instructor}
+	\item \textit{instructor}
+	\item \textit{student}
+\end{enumerate}
+
+Setiap \textit{role} memiliki akses pada aksi yang berbeda berdasakan \textit{role}-nya. Tabel \ref{tab:fitur_user} merupakan aksi-aksi yang dapat dilakukan untuk setiap pengguna pada SharIF Judge.
+
+\begin{table}[H]
+	\centering
+	\caption{\textit{Tabel fitur untuk setiap role}}
+	\label{tab:fitur_user}
+	\begin{tabular}{|l|c|c|c|c|}
+		\hline
+		Aksi                              & \textit{Admin} & \textit{Head Instructor} & \textit{Instructor} & \textit{Student} \\
+
+		\hline
+		Mengubah \textit{Settings}        & \ding{51}      & \ding{53}                & \ding{53}           & \ding{53}        \\
+		Mengelola Pengguna                & \ding{51}      & \ding{53}                & \ding{53}           & \ding{53}        \\
+		Mengelola \textit{Assignment}     & \ding{51}      & \ding{51}                & \ding{53}           & \ding{53}        \\
+
+		Mengelola Notifikasi              & \ding{51}      & \ding{51}                & \ding{53}           & \ding{53}        \\
+		\textit{Rejudge}                  & \ding{51}      & \ding{51}                & \ding{53}           & \ding{53}        \\
+		Mengelola \textit{Queue}          & \ding{51}      & \ding{51}                & \ding{53}           & \ding{53}        \\
+		Mendeteksi Kode yang Mirip        & \ding{51}      & \ding{51}                & \ding{53}           & \ding{53}        \\
+		Melihat Semua \textit{Submission} & \ding{51}      & \ding{51}                & \ding{51}           & \ding{53}        \\
+
+		Mengunduh Kode Final              & \ding{51}      & \ding{51}                & \ding{51}           & \ding{53}        \\
+		Memilih \textit{Assignment}       & \ding{51}      & \ding{51}                & \ding{51}           & \ding{51}        \\
+		\textit{Submit} Kode              & \ding{51}      & \ding{51}                & \ding{51}           & \ding{51}        \\
+
+		\hline
+	\end{tabular}
+\end{table}
+
+\section{CodeIgniter 3}
+\label{sec:2:codeigniter}
+
+CodeIgniter 3 adalah sebuah \textit{framework opensource} untuk mempermudah pengguna dalam membangun sebuah aplikasi \textit{website} menggunakan bahasa PHP. CodeIgniter 3 bertujuan untuk membantu pengguna dalam membangun sebuah aplikasi \textit{website} lebih cepat dengan menyedikan \textit{library} yang beragam dengan fungsi yang umum digunakan dan tampilan dan \textit{logic} yang simpel. Gambar \ref{fig:2:ciflowchart} merupakan bagaimana data mengalir pada sistem CodeIgniter.
+
 \begin{figure}[H]
-	\centering  
-	\includegraphics[scale=0.5]{ular-jpg}  
-	\caption[Ular kecil]{Ular kecil} 
-	\label{fig:ularjpg} 
-\end{figure} 
-\dtext{21-22}
+	\centering
+	\includegraphics[scale=0.3]{ci-flowchart.png}
+	\caption{\textit{Flow Chart} CodeIgniter}
+	\label{fig:2:ciflowchart}
+\end{figure}
 
-\begin{figure}[ht] 
-	\centering  
-	\includegraphics[scale=1]{ular-pdf}  
-	\caption[ {\it Serpentes} betina]{ {\it Serpentes} jantan} 
-	\label{fig:ularpdf} 
-\end{figure} 
- 
-\subsection{Kode Program}
+Berikut merupakan penjelasan sederhana dari \textit{flow chart} sistem CodeIgniter 3:
 
-Kode program dalam bahasa tertentu seringkali harus ditulis di dalam bab, bukan hanya dilampirkan di bagian Lampiran. 
-Kode~\ref{kode:aneh} menampilkan penggunaan karakter-karakter yang umum digunakan dalam sebuah program yang ditulis dengan bahasa C.
+\begin{enumerate}
+	\item \verb|index.php| berfungsi sebagai \textit{front controller} yang akan melakukan inisiasi \textit{resource} utama untuk menjalankan CodeIgniter.
+	\item Router meneliti \textit{request} HTTP dan menentukan apa yang harus dilakukan dengan \textit{request} tersebut.
+	\item Jika terdapat \textit{file cache}, maka langsung dikirimkan ke \textit{browser} melewati eksekusi sistem yang biasanya.
+	\item Sebelum \textit{controller} dimuat, seluruh \textit{request} HTTP dan data dari user disaring terlebih dahulu untuk keamanan.
+	\item \textit{Controller} memuat \textit{model}, \textit{library} utama, dan \textit{resource} lainnya yang diperlukan.
+	\item \textit{View} akhir lalu dikirim ke browser untuk dilihat. \textit{Cache} akan dibuat terlebih dahulu bila diaktifkan.
+\end{enumerate}
 
+\subsection{Model-View-Controller}
+\label{sec:2:2:modelviewcontroller}
 
-\begin{lstlisting}[language=Java, caption=Kode untuk menampilkan karakter-karakter aneh, label=kode:aneh]
-// This does not make algorithmic sense, 
-// but it shows off significant programming characters.
+CodeIgniter merupakan framework berbasis arsitektur Model-View-Controller atau yang selanjutnya akan disebut dengan MVC. MVC adalah pendekatan \textit{software} yang memisahkan \textit{logic} aplikasi dan tampilannya. Pendekatan ini membuat \textit{website} hanya memiliki sedikit \textit{script} karena tampilan \textit{website} terpisah dari \textit{scripting} PHP. Berikut merupakan penjelasan mengenai struktur MVC:
 
-#include<stdio.h>
+\subsubsection{Model}
+\label{sec:2:2:1:model}
 
-void myFunction( int input, float* output ) {
-	switch ( array[i] ) {
-		case 1: // This is silly code
-			if ( a >= 0 || b <= 3 && c != x )
-				*output += 0.005 + 20050;
-			char = 'g';
-			b = 2^n + ~right_size - leftSize * MAX_SIZE;
-			c = (--aaa + &daa) / (bbb++ - ccc % 2 );
-			strcpy(a,"hello $@?"); 
+\textit{Model} mewakili struktur data pada sistem untuk mengambil, memasukkan, dan memperbaharui data pada \textit{database}. \textit{Model} dapat dibuat dengan membuat sebuah kelas yang mengekstensi \verb|CI_Model| dan diletakkan pada \verb|application/models/|.
+
+\begin{lstlisting}[language=php, caption=Contoh \textit{model}, label=kode:2:2:1:model]
+class Blog_model extends CI_Model {
+
+	public $title;
+	public $content;
+	public $date;
+
+	public function get_last_ten_entries()
+	{
+			$query = $this->db->get('entries', 10);
+			return $query->result();
 	}
-	count = ~mask | 0x00FF00AA;
+
+	public function insert_entry()
+	{
+			$this->title    = $_POST['title'];
+			$this->content  = $_POST['content'];
+			$this->date     = time();
+
+			$this->db->insert('entries', $this);
+	}
+
+	public function update_entry()
+	{
+			$this->title    = $_POST['title'];
+			$this->content  = $_POST['content'];
+			$this->date     = time();
+
+			$this->db->update('entries', $this, array('id' => $_POST['id']));
+	}
+
 }
-
-// Fonts for Displaying Program Code in LATEX
-// Adrian P. Robson, nepsweb.co.uk
-// 8 October 2012
-// http://nepsweb.co.uk/docs/progfonts.pdf
-
 \end{lstlisting}
 
-\subsection{Notasi}
+Kode \ref{kode:2:2:1:model} merupakan contoh model kelas bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan mengperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (akan dijelaskan pada bagian \hyperref[sec:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan \textit{syntax} sebagai berikut:
 
-Simbol-simbol (matematika) yang sering digunakan sepanjang penulisan skripsi, dapat dimasukkan ke dalam ``Daftar Notasi''. Daftar ini ada di halaman depan sebelum Bab~\ref{chap:intro}.
-Cara memasukkan sebuah simbol ke dalam Daftar Notasi adalah menggunakan perintah \verb|\nomenclature|. Contoh:
 \begin{center}
-    \verb|\nomenclature[]{$A$}{luas kandang ular}|    
+	\verb|$this->load->model('Blog_model');|.
 \end{center}
-\nomenclature[]{$A$}{luas kandang ular}
-\nomenclature[]{$n$}{banyaknya ular}
-\nomenclature[]{$k$}{jumlah kepala per seekor ular\nomrefpage}
-Argumen opsional digunakan untuk mengurutkan notasi. Silahkan lihat sendiri dokumentasi package \verb|nomencl|
 
+Untuk memanggil \textit{method} yang terdapat pada model tersebut, \textit{syntax} yang digunakan adalah sebagai berikut:
+
+\begin{center}
+	\verb|$this->Blog_model->get_last_ten_entries();|
+\end{center}
+
+\textit{Syntax} diatas akan memuat \verb|model| dengan nama \verb|Blog_model| dan akan memanggil \textit{method} \verb|get_last_ten_entries|.
+
+\subsubsection{View}
+\label{sec:2:2:2:View}
+
+\textit{View} adalah informasi yang akan di tunjukkan kepada user. Biasanya \textit{view} merupakan sebuah halaman web, tetapi pada CodeIgniter, view dapat berupa pecahan halaman seperti \textit{header, footer, sidebar}, dan lainnya. Pecahan halaman tersebut dapat dimasukkan secara fleksibel kedalam \textit{view} lainnya apabila dibutuhkan.
+
+\begin{lstlisting}[language=php, caption={Contoh \textit{view}}, label={kode:2:2:2:view}]
+<html>
+<head>
+        <title>My Blog</title>
+</head>
+<body>
+        <h1>Welcome to my Blog!</h1>
+</body>
+</html>
+\end{lstlisting}
+
+Kode \ref{kode:2:2:2:view} merupakan contoh dari \textit{file view} pada CodeIgniter. File akan disimpan pada direktori \verb|application/views/|. Untuk dapat diperlihatkan dibutuhkannya penggalian halaman pada \textit{file controller} dengan cara sebagai berikut:
+
+\begin{center}
+	\verb|$this->load->view(`name');|
+\end{center}
+
+\textit{Syntax} diatas akan mengembalikan halaman \textit{view} dengan nama \verb|name| yang terletak pada direktori \verb|application/views/name.php| dan menampilkannya kepada pengguna.
+
+\subsubsection{Controller}
+\label{sec:2:2:3:Controller}
+
+\textit{Controller} adalah bagian utama dari aplikasi CodeIgniter, berfungsi sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan untuk memproses HTTP \textit{request} dan membuat sebuah web page. Kelas \textit{Controller} akan mengekstensi \verb|CI_Controller| dan disimpan pada \verb|application/controllers/|. Contoh \textit{controller} ditunjukkan pada Kode \ref{kode:2:2:3:controller}.
+
+\begin{lstlisting}[language=php, caption={Contoh \textit{controller}}, label={kode:2:2:3:controller}]
+<?php
+class Blog extends CI_Controller {
+
+		public function index()
+		{
+				echo 'Hello World!';
+		}
+
+		public function comments()
+		{
+				echo 'Look at this!';
+		}
+}
+\end{lstlisting}
+
+Kode \ref{kode:2:2:3:controller} berfungsi dalam mengembalikan string sesuai dengan fungsi \textit{controller} yang dipanggil. Nama file \textit{controller} pada direktori \verb|application/controllers/blog.php| dan metode diatas akan dijadikan segmen pada URL seperti berikut:
+
+\begin{center}
+	\verb|example.com/index.php/blog/index/|
+\end{center}
+
+URL diatas akan mengembalikan sebuah teks `Hello World!'.
+
+\begin{lstlisting}[language=php, caption=Contoh memuat \textit{model} dan menampilkan \textit{view}, label=kode:2:2:3:cimodelview]
+	class Blog_controller extends CI_Controller {
+	
+			public function blog()
+			{
+					$this->load->model('blog');
+	
+					$data['query'] = $this->blog->get_last_ten_entries();
+	
+					$this->load->view('blog', $data);
+			}
+	}
+}
+\end{lstlisting}
+
+Pada CodeIgniter, \textit{model} dan \textit{view} hanya dapat dimuat melalui controller. Seperti contoh, Kode \ref{kode:2:2:3:cimodelview} akan memuat \textit{model} \verb|blog| dan mengambil data dari \textit{database}, lalu menampilkan \textit{view} yang memuat data tersebut.
+
+\subsection{CodeIgniter URLs}
+\label{sec:2:2:codeigniterurls}
+
+URL pada CodeIgniter menggunakan \textit{segment-based approach} dibandingkan dengan \textit{query string approach} yang biasanya dipakai. \textit{Segment-based approach} dirancang untuk \textit{search-engine} dan dapat mempermudah pengguna juga. Berikut merupakan contoh dari URL CodeIgniter:
+
+\begin{center}
+	\verb|example.com/news/article/my_article|
+\end{center}
+
+Struktur URL pada CodeIgniter juga mengikuti pendekatan MVC (referensi \ref{sec:2:2:modelviewcontroller}) dan biasanya memiliki struktur sebagai berikut:
+
+\begin{center}
+	\verb|example.com/class/function/ID|
+\end{center}
+
+\begin{enumerate}
+	\item Segmen pertama mewakili kelas \textit{controller} yang ingin dipanggil.
+	\item Segmen berikutnya mewakili fungsi kelas atau \textit{method} yang ingin di panggil.
+	\item Segmen ketiga dan selanjutnya mewakili \textit{identifier} atau pengenal dan variable-variable lain yang akan di kirimkan ke \textit{controller}.
+\end{enumerate}
+
+\section{Twig}
+\label{sec:2:twig}
+
+Twig merupakan sebuah \textit{template engine} untuk PHP. Ada beberapa \textit{expression}, \textit{expression}, atau \textit{statement} yang ditemupakan pada template Twig adalah sebagai berikut:
+\begin{itemize}
+	\item Pewarisan \textit{Template}
+	\item Struktur Kontrol (mengunaan kondisional, \textit{looping})
+	\item Filter
+	\item Variable pada PHP
+\end{itemize}
+
+Pada saat template dievaluasi, semua \textit{variable} atau \textit{expression} akan dibuah menjadi value dan \textit{tag} yang mengontrol logika template.
+
+\begin{lstlisting}[language={php}, caption={Contoh template Twig}, label={kode:2:4:twig}]
+{% extends "base.html" %}
+{% block navigation %}
+	<ul id="navigation">
+	{% for item in navigation %}
+		<li>
+			<a href="{{item.href}}">
+				{% if item.level == 2 %}&nbsp;&nbsp;{% endif %}
+				{{ item.caption|upper }}
+			</a>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock navigation %}
+\end{lstlisting}
+
+Kode \ref{kode:2:4:twig} merupakan contoh sebuah template Twig. Terdapat dua jenis \textit{delimiter}, yaitu \verb|{% ... %}| dan \verb|{{ ... }}|. \textit{Delimiter} \verb|{% ... %}| digunakan untuk Menjalankan sebuah \textit{statement} seperti \textit{for-loops}, sedangkan \textit{delimiter} \verb|{{ ... }}| digunakan untuk mengubah sebuah \textit{variable} atau \textit{expression} menjadi nilai sesungguhnya.
+
+\section{Integrated Development Environment}
+\label{sec:2:ide}
+
+Intergrated Development Environment (IDE) merupakan sebuah aplikasi yang menyediakan berbagai peralatan yang diperlukan untuk membantu pengembangan perangkat lunak. Beberapa peralatan umum yang dimiliki oleh sebuah IDE adalah sebagai berikut:
+
+\begin{itemize}
+	\item \textit{Editor} \\
+	      Editor teks sebagai tempat untuk mengetik kode, dapat dilengkapi dengan berbagai fitur seperti \textit{syntax highlighting} (menampilkan teks dengan warna yang berbeda untuk menginkatkan keterbacaan kode) dan \textit{word completion} (menampilkan prediksi kata yang sedang atau yang akan diketik pengguna).
+	\item \textit{Complier} \\
+	      Digunakan untuk menterjemahkan kode program yang dibuat pada editor teks kedalam sebuah program yang dapat dijalankan oleh komputer.
+	\item \textit{Execution} \\
+	      Menjalankan kode program yang sudah dikompilasi, dengan input jika dibutuhkan, dan mengembalikan hasilnya.
+\end{itemize}
+
+\section{Ace}
+\label{sec:2:ace}
+
+Ace merupakan sebuah editor kode yang dapat dimasukkan kedalam sebuah website yang dibuah mengunakan bahasa \textit{Javasciprt}. Ace memiliki kemampuan dari editor pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
+
+\begin{itemize}
+	\item \textit{Syntax highlighting} untuk bahasa pemrograman.
+	\item Automatic indent dan  outdent.
+	\item Kemampuan \textit{cut}, \textit{copy}, dan \textit{paste}.
+	\item Kemampuan \textit{drag and drop} teks menggunakan mouse.
+	\item Banyak \textit{Cursors} dan \textit{selections}
+	\item \textit{Line wrapping}
+	\item \textit{Code folding}
+\end{itemize}
+
+Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
+
+% TODO: Butuh dilengkapi sesuai kebutuhan kode yang akan ditulis
+
+\begin{itemize}
+	\item \verb|Ace| \\
+	      Merupakan kelas utama untuk menyiapkan editor kode Ace pada \textit{browser}
+	\item \verb|Anchor| \\
+	      Menangani posisi \textit{pointer} pada dokumen.
+	\item \verb|Document| \\
+	      Menyimpan teks dokumen.
+	\item \verb|Editor| \\
+	      Entri utama untuk fungsionalitas library Ace.
+\end{itemize}
+
+\begin{lstlisting}[language={php}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+	#editor { 
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+</style>
+</head>
+<body>
+
+<div id="editor">function foo(items) {
+	var x = "All this is syntax highlighted";
+	return x;
+}</div>
+	
+<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/monokai");
+	editor.session.setMode("ace/mode/javascript");
+</script>
+</body>
+</html>
+\end{lstlisting}
+
+Kode \ref{kode:2:5:ace} merupakan cara pengunaan Ace pada sebuah \texttt{div} dengan id \texttt{editor}. Ace juga memiliki beberapa konfigurasi, seperti contoh ini yaitu mengunakan tema \textit{monokai} dan mengunakan \textit{syntax highlighting} untuk bahasa pemrograman JavaScript.
