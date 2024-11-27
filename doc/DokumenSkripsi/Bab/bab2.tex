@@ -7,7 +7,7 @@
 \section{SharIF Judge}
 \label{sec:2:sharifjudge}
 
-SharIF Judge merupakan modifikasi dari \textit{open source} bernama Sharif Judge, sebuah website judge gratis dengan kemampuan mengkompilasi bahasa C, C++, Java, dan Python. Sharif Judge dibuat oleh Mohammad Javad Naderi dengan interface web berbahasa PHP menggunakan framework CodeIgniter dan BASH~\cite{sharif}. Modifikasi dilakukan untuk menambahkan fitur pada Sharif Judge dan juga untuk menyesuaikan sesuai dengan kebutuhan Teknik Informatika UNPAR.
+SharIF Judge merupakan modifikasi dari \textit{open source} bernama Sharif Judge, sebuah website judge gratis dengan kemampuan mengkompilasi bahasa C, C++, Java, dan Python. Sharif Judge dibuat oleh Mohammad Javad Naderi dengan interface web berbahasa PHP menggunakan \textit{framework} CodeIgniter 3 dan BASH~\cite{sharif}. Modifikasi dilakukan untuk menambahkan fitur pada Sharif Judge dan juga untuk menyesuaikan sesuai dengan kebutuhan Teknik Informatika UNPAR.
 
 \subsection{Instalasi}
 \label{subs:2:1:instalasi}
@@ -40,7 +40,7 @@ Setelah perangkat yang sudah memenuhi prasyarat, berikut merupakan cara instalas
 \newpage
 
 \subsection{Users}
-\label{subs:2:1:fitur}
+\label{subs:2:1:users}
 
 Pada SharIF Judge, pengguna dibagi menjadi 4 buah \textit{role}. Role yang tersedia adalah sebagai berikut:
 
@@ -147,7 +147,7 @@ class Blog_model extends CI_Model {
 }
 \end{lstlisting}
 
-Kode \ref{kode:2:2:1:model} merupakan contoh model kelas bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan mengperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (akan dijelaskan pada bagian \hyperref[sec:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan \textit{syntax} sebagai berikut:
+Kode \ref{kode:2:2:1:model} merupakan contoh model kelas bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan memperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (akan dijelaskan pada bagian \hyperref[sec:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan \textit{syntax} sebagai berikut:
 
 \begin{center}
 	\verb|$this->load->model('Blog_model');|.
@@ -164,7 +164,7 @@ Untuk memanggil \textit{method} yang terdapat pada model tersebut, \textit{synta
 \subsubsection{View}
 \label{sec:2:2:2:View}
 
-\textit{View} adalah informasi yang akan di tunjukkan kepada user. Biasanya \textit{view} merupakan sebuah halaman web, tetapi pada CodeIgniter, view dapat berupa pecahan halaman seperti \textit{header, footer, sidebar}, dan lainnya. Pecahan halaman tersebut dapat dimasukkan secara fleksibel kedalam \textit{view} lainnya apabila dibutuhkan.
+\textit{View} adalah informasi yang akan di tunjukkan kepada user. Biasanya \textit{view} merupakan sebuah halaman web, tetapi pada CodeIgniter, view dapat berupa pecahan halaman seperti \textit{header, footer, sidebar}, dan lainnya. Pecahan halaman tersebut dapat dimasukkan secara fleksibel ke dalam \textit{view} lainnya apabila dibutuhkan.
 
 \begin{lstlisting}[language=php, caption={Contoh \textit{view}}, label={kode:2:2:2:view}]
 <html>
@@ -292,7 +292,7 @@ Intergrated Development Environment (IDE) merupakan sebuah aplikasi yang menyedi
 	\item \textit{Editor} \\
 	      Editor teks sebagai tempat untuk mengetik kode, dapat dilengkapi dengan berbagai fitur seperti \textit{syntax highlighting} (menampilkan teks dengan warna yang berbeda untuk menginkatkan keterbacaan kode) dan \textit{word completion} (menampilkan prediksi kata yang sedang atau yang akan diketik pengguna).
 	\item \textit{Complier} \\
-	      Digunakan untuk menterjemahkan kode program yang dibuat pada editor teks kedalam sebuah program yang dapat dijalankan oleh komputer.
+	      Digunakan untuk menterjemahkan kode program yang dibuat pada editor teks ke dalam sebuah program yang dapat dijalankan oleh komputer.
 	\item \textit{Execution} \\
 	      Menjalankan kode program yang sudah dikompilasi, dengan input jika dibutuhkan, dan mengembalikan hasilnya.
 \end{itemize}
@@ -300,7 +300,7 @@ Intergrated Development Environment (IDE) merupakan sebuah aplikasi yang menyedi
 \section{Ace}
 \label{sec:2:ace}
 
-Ace merupakan sebuah editor kode yang dapat dimasukkan kedalam sebuah website yang dibuah mengunakan bahasa \textit{Javasciprt}. Ace memiliki kemampuan dari editor pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
+Ace merupakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah website yang dibuah mengunakan bahasa \textit{Javasciprt}. Ace memiliki kemampuan dari editor pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
 
 \begin{itemize}
 	\item \textit{Syntax highlighting} untuk bahasa pemrograman.
@@ -315,6 +315,7 @@ Ace merupakan sebuah editor kode yang dapat dimasukkan kedalam sebuah website ya
 Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 
 % TODO: Butuh dilengkapi sesuai kebutuhan kode yang akan ditulis
+% TODO: Butuh tambahin kalo si ace bisa nangkep event apa aja?
 
 \begin{itemize}
 	\item \verb|Ace| \\

@@ -268,172 +268,172 @@
 
 %isi dokumen
 \begin{document}
-	
+
 \raggedbottom
- 
+
 \pagestyle{empty}%tidak ada nomor halaman
 
 \nottoggle{vbimbingan}{
 
-	\pagenumbering{roman}
- 
-	%cover INA 
-	\begin{center}
-		{\Large \textbf{%
-		\vstaINA\\\vspace{1.5cm}
-		\vjudulINA\\\vspace{2.5cm}
-		\includegraphics{Logo-UNPAR}\\\vspace{1cm}
-		\uppercase{\vnama}\\\vspace{0.5cm}
-		NPM: \vnpm\\
-		\vfill
-		PROGRAM STUDI \vprodiINA\\
-		FAKULTAS TEKNOLOGI INFORMASI DAN SAINS\\
-		UNIVERSITAS KATOLIK PARAHYANGAN\\
-		\vtahun 
+\pagenumbering{roman}
+
+%cover INA 
+\begin{center}
+	{\Large \textbf{%
+			\vstaINA\\\vspace{1.5cm}
+			\vjudulINA\\\vspace{2.5cm}
+			\includegraphics{Logo-UNPAR}\\\vspace{1cm}
+			\uppercase{\vnama}\\\vspace{0.5cm}
+			NPM: \vnpm\\
+			\vfill
+			PROGRAM STUDI \vprodiINA\\
+			FAKULTAS TEKNOLOGI INFORMASI DAN SAINS\\
+			UNIVERSITAS KATOLIK PARAHYANGAN\\
+			\vtahun
 		}}
-	\end{center}
-	\cleardoublepage
+\end{center}
+\cleardoublepage
 
 \nottoggle{vsidang}{
-	
-	%cover ENG
-	\begin{center}
-		{\Large \textbf{%
-		\vstaENG\\\vspace{1.5cm}
-		\vjudulENG\\\vspace{2.5cm}
-		\includegraphics{Logo-UNPAR}\\\vspace{1cm}
-		\uppercase{\vnama}\\\vspace{0.5cm}
-		NPM: \vnpm \\
-		\vfill
-		DEPARTMENT OF \vprodiENG \\
-		%mencegah overfull dan memaksa nama fakultas dalam satu baris
-		\newcommand{\oridim}{\fontdimen2\font}
-		\fontdimen2\font=3.28pt
-		FACULTY OF INFORMATION TECHNOLOGY AND SCIENCES\\
-		\fontdimen2\font=\oridim
-		PARAHYANGAN CATHOLIC UNIVERSITY\\
-		\vtahun 
+
+%cover ENG
+\begin{center}
+	{\Large \textbf{%
+			\vstaENG\\\vspace{1.5cm}
+			\vjudulENG\\\vspace{2.5cm}
+			\includegraphics{Logo-UNPAR}\\\vspace{1cm}
+			\uppercase{\vnama}\\\vspace{0.5cm}
+			NPM: \vnpm \\
+			\vfill
+			DEPARTMENT OF \vprodiENG \\
+			%mencegah overfull dan memaksa nama fakultas dalam satu baris
+			\newcommand{\oridim}{\fontdimen2\font}
+			\fontdimen2\font=3.28pt
+			FACULTY OF INFORMATION TECHNOLOGY AND SCIENCES\\
+			\fontdimen2\font=\oridim
+			PARAHYANGAN CATHOLIC UNIVERSITY\\
+			\vtahun
 		}}
-	\end{center}
-	\cleardoublepage
+\end{center}
+\cleardoublepage
 
-\nottoggle{vsidangakhir}{	
+\nottoggle{vsidangakhir}{
 
-	% Lembar pengesahan
-	\begin{center}
-		{\Large \textbf{
-		LEMBAR PENGESAHAN \\\vspace{1.5cm} \vfill
-		\vjudulINA \\\vspace{1cm} \vfill
-		\uppercase{\vnama} \\\vspace{0.5cm}
-		NPM: \vnpm \\\vspace{0.5cm}
-		}}	
-		{\large \textbf{
-		\begin{center} 
-			Bandung, \vtanggal\ \vbulan\ \vtahun \\ \vspace{0.5cm} 
-			Menyetujui,\\ \vspace{0.25cm}
-			\ifdefempty{\vpembs}
-			{\begin{center} Pembimbing\\ 
-			    \IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}			    
-			    {\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpembu}\ \end{Form}\\}
-			    \vpembu\end{center}}
-			{\begin{minipage}[b]{0.475\textwidth}
-				 \begin{center}Pembimbing Utama \\ 
-				 \IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
-				 {\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpembu}\ \end{Form}\\} 
-				 \vpembu\end{center}
-			 \end{minipage} \hspace{0.5cm}
-			 \begin{minipage}[b]{0.475\textwidth}
-				 \begin{center} Pembimbing Pendamping \\
-				 \IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
-				 {\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpembs}\ \end{Form}\\}
-				 \vpembs\end{center}
-			 \end{minipage}	
-			}
-		\end{center}  
-		\vspace{0.75cm} 
-		\begin{center}	
-			\begin{minipage}[b]{0.475\textwidth}
-				\begin{center}Ketua Tim Penguji \\ 
+% Lembar pengesahan
+\begin{center}
+	{\Large \textbf{
+			LEMBAR PENGESAHAN \\\vspace{1.5cm} \vfill
+			\vjudulINA \\\vspace{1cm} \vfill
+			\uppercase{\vnama} \\\vspace{0.5cm}
+			NPM: \vnpm \\\vspace{0.5cm}
+		}}
+	{\large \textbf{
+			\begin{center}
+				Bandung, \vtanggal\ \vbulan\ \vtahun \\ \vspace{0.5cm}
+				Menyetujui,\\ \vspace{0.25cm}
+				\ifdefempty{\vpembs}
+				{\begin{center} Pembimbing\\
+						\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
+						{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpembu}\ \end{Form}\\}
+						\vpembu\end{center}}
+				{\begin{minipage}[b]{0.475\textwidth}
+						\begin{center}Pembimbing Utama \\
+							\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
+							{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpembu}\ \end{Form}\\}
+							\vpembu\end{center}
+					\end{minipage} \hspace{0.5cm}
+					\begin{minipage}[b]{0.475\textwidth}
+						\begin{center} Pembimbing Pendamping \\
+							\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
+							{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpembs}\ \end{Form}\\}
+							\vpembs\end{center}
+					\end{minipage}
+				}
+			\end{center}
+			\vspace{0.75cm}
+			\begin{center}
+				\begin{minipage}[b]{0.475\textwidth}
+					\begin{center}Ketua Tim Penguji \\
+						\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
+						{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpengi}\ \end{Form}\\}
+						\vpengi\end{center}
+				\end{minipage} \hspace{0.5cm}
+				\begin{minipage}[b]{0.475\textwidth}
+					\begin{center}Anggota Tim Penguji \\
+						\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
+						{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpengii}\ \end{Form}\\}
+						\vpengii\end{center}
+				\end{minipage}
+			\end{center}
+			\vspace{0.75cm}
+			\begin{center}
+				Mengetahui,\\ \vspace{0.5cm}
+				Ketua Program Studi \\
 				\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
-				{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpengi}\ \end{Form}\\}
-				\vpengi\end{center}
-			\end{minipage} \hspace{0.5cm}
-			\begin{minipage}[b]{0.475\textwidth}
-				\begin{center}Anggota Tim Penguji \\ 
-				\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
-				{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vpengii}\ \end{Form}\\}
-				\vpengii\end{center} 
-			\end{minipage} 
-		\end{center}
-		\vspace{0.75cm}
-		\begin{center} 
-		Mengetahui,\\ \vspace{0.5cm}	
-		Ketua Program Studi \\
-		\IfStrEq{\vttddosen}{no}{\vspace{2.5cm}}
-		{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vkaprodi\ (Kaprodi)}\ \end{Form}\\}
-		\vkaprodi
-		\end{center}
-		}}			 
-	\end{center}
-	\cleardoublepage 
-	
-	% Lembar Pernyataan
-	\vspace*{4cm}
-	\begin{center} 
-		{\Large \textbf{PERNYATAAN}\\} \vspace{1cm}
-	\end{center}
-	{\noindent Dengan ini saya yang bertandatangan di bawah ini menyatakan bahwa \MakeLowercase{\vstaINA} dengan judul:  \vspace{0.5cm}
-	\begin{center} {\large \textbf{\vjudulINA}}\end{center}
-	\vspace{0.5cm}
-	adalah benar-benar karya saya sendiri, dan saya tidak melakukan penjiplakan atau pengutipan dengan cara-cara yang tidak sesuai dengan etika keilmuan yang berlaku dalam masyarakat keilmuan.}
-	\vspace{0pt}\\
-	{\noindent			
-	Atas pernyataan ini, saya siap menanggung segala risiko dan sanksi yang dijatuhkan kepada saya, apabila di kemudian hari ditemukan adanya pelanggaran terhadap etika keilmuan dalam karya saya, atau jika ada tuntutan formal atau non-formal dari pihak lain berkaitan dengan keaslian~karya~saya~ini.\\}
-	\vspace{0.25cm}
-	
-	\begin{flushright}	
-		Dinyatakan di Bandung,\\
-		Tanggal \vtanggal\ \vbulan\ \vtahun \\
-		\IfStrEq{\vttd}{digital}
-		    {\begin{Form} \ \digsigfield{5cm}{2.25cm}{\vnama}\ \end{Form}\\}
-		    {\IfStrEq{\vttd}{gambar}
-		        {\includegraphics[width=3.5cm,height=3.5cm,keepaspectratio]{ttd}\\}
-		        {{\IfStrEq{\vttd}{meterai}
-		            {\vspace{0.5cm}
-        		    \begin{tabular}{|p{1.75cm}|}\hline\\Meterai\\Rp. 10000\\ \hline\end{tabular}\\\vspace{0.5cm}}
-        		    {\vspace{2.5cm}}
-		        }
-		        }    
-        	}
-		\vnama \\
-		NPM: \vnpm
-	\end{flushright}
-	 \cleardoublepage 
+				{\begin{Form} \ \digsigfield{5cm}{2.5cm}{\vkaprodi\ (Kaprodi)}\ \end{Form}\\}
+				\vkaprodi
+			\end{center}
+		}}
+\end{center}
+\cleardoublepage
+
+% Lembar Pernyataan
+\vspace*{4cm}
+\begin{center}
+	{\Large \textbf{PERNYATAAN}\\} \vspace{1cm}
+\end{center}
+{\noindent Dengan ini saya yang bertandatangan di bawah ini menyatakan bahwa \MakeLowercase{\vstaINA} dengan judul:  \vspace{0.5cm}
+\begin{center} {\large \textbf{\vjudulINA}}\end{center}
+\vspace{0.5cm}
+adalah benar-benar karya saya sendiri, dan saya tidak melakukan penjiplakan atau pengutipan dengan cara-cara yang tidak sesuai dengan etika keilmuan yang berlaku dalam masyarakat keilmuan.}
+\vspace{0pt}\\
+{\noindent
+Atas pernyataan ini, saya siap menanggung segala risiko dan sanksi yang dijatuhkan kepada saya, apabila di kemudian hari ditemukan adanya pelanggaran terhadap etika keilmuan dalam karya saya, atau jika ada tuntutan formal atau non-formal dari pihak lain berkaitan dengan keaslian~karya~saya~ini.\\}
+\vspace{0.25cm}
+
+\begin{flushright}
+	Dinyatakan di Bandung,\\
+	Tanggal \vtanggal\ \vbulan\ \vtahun \\
+	\IfStrEq{\vttd}{digital}
+	{\begin{Form} \ \digsigfield{5cm}{2.25cm}{\vnama}\ \end{Form}\\}
+	{\IfStrEq{\vttd}{gambar}
+		{\includegraphics[width=3.5cm,height=3.5cm,keepaspectratio]{ttd}\\}
+		{{\IfStrEq{\vttd}{meterai}
+					{\vspace{0.5cm}
+						\begin{tabular}{|p{1.75cm}|}\hline\\Meterai\\Rp. 10000\\ \hline\end{tabular}\\\vspace{0.5cm}}
+					{\vspace{2.5cm}}
+				}
+		}
+	}
+	\vnama \\
+	NPM: \vnpm
+\end{flushright}
+\cleardoublepage
 
 }{} %vsidangakhir	
 
-	% Abstrak & Abstract
-	\renewcommand{\abstractname}{Abstrak} 
-	\vspace*{4cm} 
-	\begin{abstract} 
-		{\noindent \vabstrakINA} \vskip 1cm
+% Abstrak & Abstract
+\renewcommand{\abstractname}{Abstrak}
+\vspace*{4cm}
+\begin{abstract}
+	{\noindent \vabstrakINA} \vskip 1cm
 		{\noindent \textbf{Kata-kata kunci:} \vkunciINA}
-	\end{abstract}
-	\cleardoublepage 
-	\renewcommand{\abstractname}{Abstract}
-	\vspace*{4cm}
-	\begin{abstract}
-		{\noindent \vabstrakENG} \vskip 1cm		
-		{\noindent \textbf{Keywords:} \vkunciENG} 
-	\end{abstract}			
-	\cleardoublepage
+\end{abstract}
+\cleardoublepage
+\renewcommand{\abstractname}{Abstract}
+\vspace*{4cm}
+\begin{abstract}
+	{\noindent \vabstrakENG} \vskip 1cm
+		{\noindent \textbf{Keywords:} \vkunciENG}
+\end{abstract}
+\cleardoublepage
 
-\nottoggle{vsidangakhir}{	
+\nottoggle{vsidangakhir}{
 
 	% Lembar persembahan
 	\vspace*{5cm} \begin{quote} \raggedleft {\em \Large{\vuntuk}} \end{quote}
 	\cleardoublepage
-	
+
 	\pagestyle{plain} %nomor halaman (romawi) dan tidak ada header	  
 	% Kata pengantar
 	\chapter*{Kata Pengantar}
@@ -441,7 +441,7 @@
 	\addcontentsline{toc}{chapter}{Kata Pengantar}
 	\vprakata \vspace{0.25cm}
 	\begin{flushright} Bandung,\ \vbulan\ \vtahun \\ \vspace{1cm} Penulis \end{flushright}
-	\cleardoublepage		
+	\cleardoublepage
 }{}%vsidangakhir
 
 }{} %vsidang 
@@ -450,13 +450,13 @@
 \IfStrEq{\vgambar}{yes}{\listoffigures \cleardoublepage}{} 	% Daftar gambar
 \IfStrEq{\vtabel}{yes}{\listoftables \cleardoublepage}{} 	% Daftar tabel  
 \IfStrEq{\vkode}{yes}{
-    \lstlistoflistings \addcontentsline{toc}{chapter}{Daftar Kode Program}
-    \cleardoublepage}{} % Daftar kode 
-\IfStrEq{\vnotasi}{yes}{    
-    \setlength{\nomitemsep}{-\parsep}
-    \printnomenclature 
-    \addcontentsline{toc}{chapter}{Daftar Notasi}
-    \cleardoublepage}{} % Daftar notasi 
+	\lstlistoflistings \addcontentsline{toc}{chapter}{Daftar Kode Program}
+	\cleardoublepage}{} % Daftar kode 
+\IfStrEq{\vnotasi}{yes}{
+	\setlength{\nomitemsep}{-\parsep}
+	\printnomenclature
+	\addcontentsline{toc}{chapter}{Daftar Notasi}
+	\cleardoublepage}{} % Daftar notasi 
 }{} %vbimbingan
 
 \pagenumbering{arabic} %nomor halaman 
@@ -465,11 +465,11 @@
 \appline%apply line number
 
 \setpagewiselinenumbers  %supaya reset ke 1 di setiap halaman
- 
+
 \pagestyle{fancy}%header 
 
 %include bab 
-\foreach \i in \vbab { \edef\vfile{Bab/bab\i} \IfFileExists{\vfile}{\include{\vfile}}} 
+\foreach \i in \vbab { \edef\vfile{Bab/bab\i} \IfFileExists{\vfile}{\include{\vfile}}}
 
 %update nama daftar referensi
 \renewcommand{\bibname}{Daftar Referensi}
@@ -484,6 +484,6 @@
 \appendix%Penomoran lampiran dengan huruf  
 
 %include lampiran
-\foreach \i in \vlamp { \edef\vfile{Lampiran/lamp\i} \IfFileExists{\vfile}{\include{\vfile}}} 
+\foreach \i in \vlamp { \edef\vfile{Lampiran/lamp\i} \IfFileExists{\vfile}{\include{\vfile}}}
 
 \end{document}

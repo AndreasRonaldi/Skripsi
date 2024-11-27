@@ -3,12 +3,14 @@
 
 \section{Latar Belakang}
 \label{sec:1:latar_belakang}
+% TODO: Kalau ada claim harus ada backing-nya
 Ujian merupakan sebuah alat bantu untuk menilai pemahaman pelajar tentang ilmu yang diberikan oleh pengajar. Salah satu ujian yang diberikan kepada pelajar informatika adalah ujian koding yang biasanya dinilai berdasarkan ketepatan algoritma yang dipakai. Tetapi melakukan penilaian untuk setiap kode merupakan sebuah hal yang sulit untuk dilakukan karena dibutuhkannya waktu yang lama. Maka dari itu website \textit{judge} dibuat untuk memudahkan pekerjaan pengajar.
 
 \textit{Judge} merupakan sebuah website yang akan menilai sebuah kode dengan menjalankannya berdasarkan masukkan yang ditentukan dan menyamakan keluaran dari kode dengan keluaran yang sudah ditetapkan oleh pembuat soal dalam kurun waktu yang ditetapkan. Oleh karena itu, kode yang dibuat harus dapat mencakupi waktu yang diberikan dengan mengunakan algoritma yang tepat. Bukan hanya menilai dengan keluaran yang tetap tetapi \textit{judge} juga dapat mengunakan kode yang sudah dibuat oleh pengajar dan membandingkannya dengan keluaran kode yang di kumpulkan.
 
 Sudah banyak perguruan tinggi informatika yang mengunakan website \textit{judge} dalam pemeriksaan kode pelajar termasuk perguruan UNPAR untuk penilai kode dari para mahasiswanya. Judge yang digunakan adalah SharIF-Judge~\cite{sharif} yang dimodifikasi oleh Stillmen Vallian terhadap Sharif-Judge~\cite{stillmen:sharif} buatan Mohammad Javad Naderi dengan \textit{framework} CodeIgniter dan Bash. Gambar~\ref{fig:1:dashboardpng} merupakan halaman utama setelah masuk ke dalam website SharIF-Judge.
 
+% TODO: Gambar foto harus full
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.25]{dashboard}
@@ -16,8 +18,9 @@ Sudah banyak perguruan tinggi informatika yang mengunakan website \textit{judge}
     \label{fig:1:dashboardpng}
 \end{figure}
 
-Tugas akhir ini merupakan sebuah pengembangan lanjutan dari tugas akhir yang bertopik "Implementasi editor kode pada Sharif Judge"~\cite{nicholas:sharif} oleh Nicholas Aditya Halim. Tugas akhir tersebut menceritakan bahwa SharIF-Judge tidak memiliki kemampuan untuk mengawasi proses pembuatan kode program karena para mahasiswa menggunakan aplikasi eksternal untuk pembuatan kode program tersebut. Sehingga dibuatnya modifikasi terhadap SharIF-Judge untuk menambahkan \textit{Intergrated Development Enviroment} (IDE), sebuah aplikasi untuk mengedit, mengompilasi, dan menjalankan kode program pada SharIF-Judge dengan editor kode bernama Ace~\cite{ace}. Gambar~\ref{fig:1:editor-kode} merupakan tampilan editor kode yang sudah diimplementasikan pada SharIF-Judge.
+Tugas akhir ini merupakan sebuah pengembangan lanjutan dari tugas akhir yang bertopik ``Implementasi editor kode pada Sharif Judge''~\cite{nicholas:sharif} oleh Nicholas Aditya Halim. Tugas akhir tersebut menceritakan bahwa SharIF-Judge tidak memiliki kemampuan untuk mengawasi proses pembuatan kode program karena para mahasiswa menggunakan aplikasi eksternal untuk pembuatan kode program tersebut. Sehingga dibuatnya modifikasi terhadap SharIF-Judge untuk menambahkan \textit{Intergrated Development Enviroment} (IDE), sebuah aplikasi untuk mengedit, mengompilasi, dan menjalankan kode program pada SharIF-Judge dengan editor kode bernama Ace~\cite{ace}. Gambar~\ref{fig:1:editor-kode} merupakan tampilan editor kode yang sudah diimplementasikan pada SharIF-Judge.
 
+% TODO: Gambar foto harus full
 \begin{figure}
     \centering
     \includegraphics[scale=0.25]{kode-editor}
