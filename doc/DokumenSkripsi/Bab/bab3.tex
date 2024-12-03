@@ -6,7 +6,7 @@
 \section{Analisis Sistem Kini}
 \label{sec:3:sistemkini}
 
-Seperti yang sudah dibahas pada bab \ref{sec:2:sharifjudge}, SharIF Judge merupakan sebuah website judge yang dimodifikasi sesuai dengan kebutuhan Teknik Informatika UNPAR. Analisis diawali dengan MVC aplikasi SharIF Judge. Berikut merupakan hasil eksplorasi SharIF Judge yang telah dilakukan:
+Seperti yang sudah dibahas pada subbab \ref{sec:2:sharifjudge}, SharIF Judge merupakan sebuah website judge yang dimodifikasi sesuai dengan kebutuhan Teknik Informatika UNPAR. Analisis diawali dengan MVC aplikasi SharIF Judge. Berikut merupakan hasil eksplorasi SharIF Judge yang telah dilakukan:
 
 \subsection{Model, View, Controller}
 \label{sec:3:1:modelviewcontroller}
@@ -672,7 +672,7 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
 
 \end{itemize}
 
-\subsection{Penyimpanan Kode}
+\subsection{Penyimpanan Kode Submission}
 \label{sec:3:1:penyimpanankode}
 Pada SharIF Judge, Kode akan disimpan pada lokasi \verb|Assignment| yang dapat di ubah pada halaman \verb|Settings|. Berikut merupakan format penyimpanan sebuah kode:
 
@@ -729,12 +729,12 @@ SharIF Judge sudah memiliki editor kode dengan \textit{framework} \verb|Ace|. \v
 \subsection{Fitur-fitur}
 \label{sec:3:2:fitur}
 
-\subsubsection{Mengotomatiskan saving}
-\label{sec:3:2:1:autosave}
+% \subsubsection{Mengotomatiskan saving}
+% \label{sec:3:2:1:autosave}
 
-ada dua cara?
-Cara 1 kalau inactive selama 5 detik = autosave, dan kalau active selama 20 detik = autosave jg
-Cara 2 pake web sockets, simpen di dalem servernya terus write?
+% ada dua cara?
+% Cara 1 kalau inactive selama 5 detik = autosave, dan kalau active selama 20 detik = autosave jg
+% Cara 2 pake web sockets, simpen di dalem servernya terus write?
 
 \subsubsection{Perekam event pada editor kode}
 \label{sec:3:2:1:rekam}
@@ -745,12 +745,13 @@ Rekam 2 event aja:
 
 Rekam juga input + output yang dimasukkin tapi ga sampe cursor
 
+Simpen di tempat yg sama kaya penyimpanan kode, mungkin di pisah per submission juga. simpen kaya json aja biar gampang dibaca?. simpen timestart, event: [time: {action: ?, payload: ?}].
+% 
+
 \subsubsection{Pemutar ulang event}
 \label{sec:3:2:1:pemutarulang}
 
-Simpen di tempat yg sama kaya penyimpanan kode, mungkin di pisah per submission juga. simpen kaya json aja biar gampang dibaca?. simpen timestart, event: [time: {action: ?, payload: ?}].
-
-Pemuratar ulang, bikin halaman baru. ada list user-nya, di click baru kaya ngeload gt dari folder assignment.
+Pemuratar ulang, bikin halaman baru. ada list user-nya, problemnya, di click baru kaya ngeload gt dari folder assignment.
 
 \subsection{Use Case}
 \label{sec:3:2:usecase}
