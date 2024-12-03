@@ -231,25 +231,81 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
 \begin{itemize}
       \item \verb|errors| \\
-            Pada direktori \textit{errors}, berisi tampilan halaman \textit{error} jika terjadi error pada pengunaan SharIF Judge.
+            Pada direktori \textit{errors}, berisi tampilan halaman \textit{error} jika terjadi error pada pengunaan SharIF Judge. Berikut merupakan \textit{view} yang terdapat pada direktori \verb|errors|:
+
+            \begin{itemize}
+                  \item \verb|error_404|
+                  \item \verb|error_db|
+                  \item \verb|error_expection|
+                  \item \verb|error_general|
+                  \item \verb|error_php|
+            \end{itemize}
+
       \item \verb|pages| \\
-            Pada direktori \textit{pages}, berisi tampilan halaman-halaman utama. \textit{pages} juga memiliki dua direktori selain halaman-halaman utama yaitu:
+            Pada direktori \textit{pages}, berisi tampilan halaman-halaman utama. \textit{pages} juga memiliki dua direktori selain halaman-halama. Berikut merupakan \textit{views} dan direktori yang terdapat pada direktori \verb|pages|:
 
             \begin{itemize}
                   \item \verb|pages/admin| \\
-                        Direktori \textit{admin} berisi tampilan halaman khusus untuk \textit{role admin}.
+                        Direktori \textit{admin} berisi tampilan halaman khusus untuk \textit{role admin}. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|admin|:
+
+                        \begin{itemize}
+                              \item \verb|add_assignment.twig|
+                              \item \verb|add_notification.twig|
+                              \item \verb|add_user.twig|
+                              \item \verb|add_user_result.twig|
+                              \item \verb|delete_assignment.twig|
+                              \item \verb|edit_problem_html.twig|
+                              \item \verb|edit_problem_md.twig|
+                              \item \verb|edit_problem_plain.twig|
+                              \item \verb|install.twig|
+                              \item \verb|logs.twig|
+                              \item \verb|moss.twig|
+                              \item \verb|queue.twig|
+                              \item \verb|rejudge.twig|
+                              \item \verb|settings.twig|
+                              \item \verb|users.twig|
+                        \end{itemize}
+
                   \item \verb|pages/authentication| \\
-                        Direktori \textit{authentication} berisi tampilan halaman khusus untuk \textit{authentication} seperti halaman \textit{Login}.
+                        Direktori \textit{authentication} berisi tampilan halaman khusus untuk \textit{authentication} seperti halaman direktori \textit{Login}. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|admin|:
+
+                        \begin{itemize}
+                              \item \verb|login.twig|
+                              \item \verb|lost.twig|
+                              \item \verb|register.twig|
+                              \item \verb|register_success.twig|
+                              \item \verb|reset_password.twig|
+                        \end{itemize}
+
+                  \item \verb|assignments.twig|
+                  \item \verb|dashboard.twig|
+                  \item \verb|halloffame.twig|
+                  \item \verb|notification.twig|
+                  \item \verb|problems.twig|
+                  \item \verb|profile.twig|
+                  \item \verb|scoreboard.twig|
+                  \item \verb|scoreboard_tabel.twig|
+                  \item \verb|submissions.twig|
+                  \item \verb|submit.twig|
             \end{itemize}
 
       \item \verb|templates| \\
-            Pada direktori \textit{templates}, berisikan tampilan yang digunakan berulang oleh halaman utama seperti \textit{header}, \textit{side bar}, dan \textit{base}.
+            Pada direktori \textit{templates}, berisikan tampilan yang digunakan berulang oleh halaman utama seperti \textit{header}, \textit{side bar}, dan \textit{base}. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|templates|:
+
+            \begin{itemize}
+                  \item \verb|base.twig|
+                  \item \verb|side_bar.twig|
+                  \item \verb|simple_header.twig|
+                  \item \verb|top_bar.twig|
+            \end{itemize}
+
 \end{itemize}
 
+\begin{comment}
 \textit{View} akan diberikan data yang dibutuhkan sesuai spesifikasi pada twig oleh \textit{Controller} dan menjadi sebuah halaman yang ditampilkan kepada pengguna. Berikut merupakan halaman-halaman yang ada pada SharIF Judge:
 
 \begin{itemize}
-      \item Install
+      \item Install %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/install.png}
@@ -259,7 +315,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:install} menunjukkan halaman Install. Pada halaman ini terdapat form untuk memperbaharui \textit{detail user admin}.
 
-      \item Login
+      \item Login %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/login.png}
@@ -268,7 +324,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
             \end{figure}
 
             Gambar \ref{fig:3:1:1:login} menunjukkan halaman Login.
-      \item Dashboard
+      \item Dashboard %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/dashboard.png}
@@ -278,7 +334,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:dashboard} menunjukkan halaman Dashboard yang dapat diakses oleh semua \textit{role}.
 
-      \item Settings
+      \item Settings %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/settings.png}
@@ -288,7 +344,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:settings} menunjukkan halaman Users yang hanya dapat di akses oleh \textit{role admin} dan \textit{head instructor}.
 
-      \item User
+      \item User %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/users.png}
@@ -298,7 +354,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:users} menunjukkan halaman Users. Pada halaman ini terdapat daftar seluruh \textit{user} yang terdaftar pada SharIF Judge. Pengguna dapat membuat, memperbaharui, dan menghapus \textit{user}.
 
-      \item Profile
+      \item Profile %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/profile.png}
@@ -308,8 +364,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:profile} menunjukkan halaman Profile yang dapat di akses oleh semua \textit{role}. Tetapi ada fitur yang hanya dapat di akses oleh \textit{role admin} dan \textit{head instructor} yaitu pergantian role.
 
-      \item Notifications
-            % TODO: Screenshot page notif
+      \item Notifications %controller
             % \begin{figure}[H]
             %       \centering
             %       \includegraphics[width=\textwidth]{views/notifications.png}
@@ -318,7 +373,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
             % \end{figure}
 
             % Gambar \ref{fig:3:1:1:notif} menunjukkan halaman Notifikasi.
-      \item Assignments
+      \item Assignments %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/assignments.png}
@@ -328,7 +383,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:assignments} menunjukkan halaman Assignment. Pengguna dapat memilih assignment. Pada halaman ini terdapat \textit{actions} yang dibatasi akses oleh \textit{role} dapat dilihat \textit{actions} pada bab \ref{subs:2:1:users}.
 
-      \item Rejudge
+      \item Rejudge %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/rejudge.png}
@@ -338,8 +393,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:rejudge} menunjukkan halaman Rejudge. Halaman ini hanya dapat di akses oleh \textit{role admin} dan \textit{head instructor}.
 
-      \item Submission Queue
-            % TODO: Ini blom di screenshot
+      \item Submission Queue %controller
             % \begin{figure}[H]
             %       \centering
             %       \includegraphics[width=\textwidth]{views/queue.png}
@@ -348,7 +402,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
             % \end{figure}
 
             % Gambar \ref{fig:3:1:1:queue} menunjukkan halaman Queue.
-      \item Cheat Detection
+      \item Cheat Detection %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/moss.png}
@@ -358,7 +412,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:moss} menunjukkan halaman Cheat Detection. Halaman ini hanya dapat di akses oleh \textit{role admin} dan \textit{head instructor}.
 
-      \item Problems
+      \item Problems %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/problem.png}
@@ -368,7 +422,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:problem} menunjukkan halaman Problems yang dapat diakses oleh semua \textit{role}.
 
-      \item Submit
+      \item Submit %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/submit.png}
@@ -378,7 +432,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:submit} menunjukkan halaman Submit yang dapat diakses oleh semua \textit{role}. Halaman ini terdapat editor kode yang sudah di implementasikan~\cite{nicholas:sharif}.
 
-      \item Final Submissions
+      \item Final Submissions %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/final_submissions.png}
@@ -388,7 +442,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions yang dapat diakses oleh semua \textit{role}.
 
-      \item All Submissions
+      \item All Submissions %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/all_submissions.png}
@@ -397,7 +451,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
             \end{figure}
 
             Gambar \ref{fig:3:1:1:all} menunjukkan halaman All Submissions yang dapat diakses oleh semua \textit{role}.
-      \item Scoreboard
+      \item Scoreboard %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/scoreboard.png}
@@ -407,7 +461,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:scoreboard} menunjukkan halaman Scoreboard yang dapat diakses oleh semua \textit{role}.
 
-      \item Hall of Fame
+      \item Hall of Fame %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/hof.png}
@@ -417,7 +471,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
             Gambar \ref{fig:3:1:1:hof} menunjukkan halaman Hall of Fame yang dapat diakses oleh semua \textit{role}.
 
-      \item 24-Hour Log
+      \item 24-Hour Log %controller
             \begin{figure}[H]
                   \centering
                   \includegraphics[width=\textwidth]{views/log.png}
@@ -428,6 +482,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
             Gambar \ref{fig:3:1:1:log} menunjukkan halaman 24-Hour Log. Halaman ini hanya dapat di akses oleh \textit{role admin} dan \textit{head instructor}.
 
 \end{itemize}
+\end{comment}
 
 \subsubsection{Controller}
 \label{sec:3:1:1:controller}
@@ -439,8 +494,6 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Assignments.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mengambil data dari \verb|Assignment_model| dan menaruh data dan menunjukkan halaman \verb|assignments.twig|.
                   \item \verb|select()| \\
                         Memilih \textit{assignment} yang ditampilkan pada \textit{top bar} menggunakan \textit{ajax request}.
                   \item \verb|pdf($assignment_id, $problem_id, $no_download)| \\
@@ -459,37 +512,69 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Menandai \textit{assignment} yang akan di \textit{edit} dan memanggil fungsi \verb|add|.
                   \item \verb|pdfCheck($assignment_id, $problem_id)| \\
                         Melakukan validasi ketersediaan pdf pada sebuah \textit{assignment} atau pada sebuah \textit{problem}.
+                  \item \verb|index()| \\
+                        Mengambil data dari \verb|Assignment_model| dan menaruh data dan mengembalikan \textit{views} \verb|assignments.twig|. Gambar \ref{fig:3:1:1:assignments} menunjukkan hasil halaman Assignment.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/assignments.png}
+                              \caption{Halaman Assignments}
+                              \label{fig:3:1:1:assignments}
+                        \end{figure}
             \end{itemize}
 
       \item \verb|Dashboard.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Dashboard.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari beberapa model yaitu \verb|Assignment_model|, \verb|Settings_model|, \verb|User|, dan \verb|Notifications_model|. Data akan dimasukkan ke dalam \verb|dashboard.twig| yang akan dimunculkan ke pengguna.
                   \item \verb|widget_positions()| \\
                         Mengunakan \textit{ajax request} untuk menyimpan posisi \textit{widget}.
+
+                  \item \verb|index()| \\
+                        Mendapatkan data dari beberapa model yaitu \verb|Assignment_model|, \verb|Settings_model|, \verb|User|, dan \verb|Notifications_model|. Data akan dimasukkan ke dalam \verb|dashboard.twig| yang akan dikembalikan ke pengguna. Gambar \ref{fig:3:1:1:dashboard} menunjukkan hasil halaman Dashboard yang dapat diakses oleh semua \textit{role}.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/dashboard.png}
+                              \caption{Halaman Dashboard}
+                              \label{fig:3:1:1:dashboard}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Halloffame.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Halloffame.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari \verb|Hof_model| dan menampilkan halaman \verb|halloffame.twig|.
                   \item \verb|hof_details()| \\
                         Menampilkan nilai akhir semua \textit{problem} dan \textit{assignments} pada sebuah \textit{user}.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari \verb|Hof_model| dan mengembalikan \textit{view} \verb|halloffame.twig|. Gambar \ref{fig:3:1:1:hof} menunjukkan hasil halaman Hall of Fame yang dapat diakses oleh semua \textit{role}.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/hof.png}
+                              \caption{Halaman Hall of Fame}
+                              \label{fig:3:1:1:hof}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Install.php| \\
-            Pada \textit{controller} \verb|Install.php| hanya ada satu fungsi yang menangani pembuatan seluruh tabel pada \textit{database} yang dibutuhkan oleh SharIF Judge. Setelah membuat \textit{database} akan memunculkan halaman \verb|install.twig| yang dapat diisi oleh pengguna tentang data \textit{user} dengan role \textit{admin} saat \textit{form} di kirim.
+            Pada \textit{controller} \verb|Install.php| hanya ada satu fungsi yang menangani pembuatan seluruh tabel pada \textit{database} yang dibutuhkan oleh SharIF Judge. Setelah membuat \textit{database} akan mengembalikan \textit{view} \verb|install.twig| yang dapat diisi oleh pengguna tentang data \textit{user} dengan role \textit{admin} saat \textit{form} di kirim. Gambar \ref{fig:3:1:1:install} menunjukkan hasil halaman Install.
+
+            \begin{figure}[H]
+                  \centering
+                  \includegraphics[width=\textwidth]{views/install.png}
+                  \caption{Halaman Install}
+                  \label{fig:3:1:1:install}
+            \end{figure}
+
 
       \item \verb|Login.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Login.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Menunjukkan halaman \verb|login.twig| dan memeriksa username dan password pada \textit{form} saat di kirim.
                   \item \verb|_registration_code($code)| \\
                         Melakukan validasi kode registrasi.
                   \item \verb|register()| \\
@@ -500,29 +585,53 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Mengirimkan email \textit{reset password}.
                   \item \verb|reset($passchange_key)| \\
                         Melakukan \textit{reset password} dengan halaman \verb|reset_password.twig|.
+                  \item \verb|index()| \\
+                        Mengembalikan \textit{view} \verb|login.twig| dan memeriksa username dan password pada \textit{form} saat di kirim. Gambar \ref{fig:3:1:1:login} menunjukkan hasil halaman Login.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/login.png}
+                              \caption{Halaman Login}
+                              \label{fig:3:1:1:login}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Logs.php| \\
-            Pada \textit{controller} \verb|Logs.php| hanya memiliki satu fungsi yaitu \verb|index()|, dimana fungsi tersebut akan mendapatkan data dari \verb|Logs_model| dan memunculkan halaman \verb|logs.twig|.
+            Pada \textit{controller} \verb|Logs.php| hanya memiliki satu fungsi yaitu \verb|index()|, dimana fungsi tersebut akan mendapatkan data dari \verb|Logs_model| dan memunculkan halaman \verb|logs.twig|. Gambar \ref{fig:3:1:1:log} menunjukkan halaman Log yang dinamakan halaman 24-Hour Log.
+
+            \begin{figure}[H]
+                  \centering
+                  \includegraphics[width=\textwidth]{views/log.png}
+                  \caption{Halaman 24-Hour Log}
+                  \label{fig:3:1:1:log}
+            \end{figure}
+
 
       \item \verb|Moss.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Moss.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mengambil data dan memasukkannya ke dalam halaman \verb|moss.twig|. Fungsi \verb|_detect| juga akan dijalankan saat \textit{form} terkirim.
                   \item \verb|update($assignment_id)| \\
                         Memperbaharui \textit{settings} dari masukkan \verb|moss_userid| pengguna.
                   \item \verb|_detect($assignment_id)| \\
                         Melakukan pemeriksaan kesamaan kode dengan Moss.
+                  \item \verb|index()| \\
+                        Mengambil data dan memasukkannya ke dalam \textit{view} \verb|moss.twig|. Gambar \ref{fig:3:1:1:moss} merupakan hasil halaman moss. Fungsi \verb|_detect| juga akan dijalankan saat \textit{form} terkirim.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/moss.png}
+                              \caption{Halaman Moss}
+                              \label{fig:3:1:1:moss}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Notifications.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Notifications.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari dua model yaitu \verb|Assignment_model| dan \verb|Notifications_model|. Data akan dimasukkan ke dalam \verb|notifications.twig| yang akan dimunculkan ke pengguna.
                   \item \verb|add()| \\
                         Menambahkan atau memperbaharui sebuah \textit{notification}.
                   \item \verb|edit($notif_id)| \\
@@ -531,24 +640,40 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Menghapus sebuah \textit{notification}.
                   \item \verb|check()| \\
                         Mengunakan \textit{ajax request} untuk mengetahui ketersediaan \textit{notification} baru.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari dua model yaitu \verb|Assignment_model| dan \verb|Notifications_model|. Data akan dimasukkan ke dalam \textit{view} \verb|notifications.twig| yang akan dikembalikan ke pengguna. Gambar \ref{fig:3:1:1:notif} menunjukkan hasil halaman \textit{Notifications}.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/notifications.png}
+                              \caption{Halaman Notifications}
+                              \label{fig:3:1:1:notif}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Problems.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Notifications.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data \textit{problem} dari berbagai \textit{model} sesuai dengan \textit{assignment} yang dipilih dan menaruh data tersebut pada halaman \verb|problems.twig| yang akan ditampilkan ke pengguna.
                   \item \verb|edit()| \\
                         Memperbaharui deskripsi sebuah \textit{problem} dalam bentuk \verb|html| atau \verb|markdown|.
+                  \item \verb|index()| \\
+                        Mendapatkan data \textit{problem} dari berbagai \textit{model} sesuai dengan \textit{assignment} yang dipilih dan menaruh data tersebut pada halaman \verb|problems.twig| yang akan ditampilkan ke pengguna. Gambar \ref{fig:3:1:1:problem} menunjukkan hasil halaman Problems.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/problem.png}
+                              \caption{Halaman Problems}
+                              \label{fig:3:1:1:problem}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Profile.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Profile.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari berbagai \textit{model} terutama dari \textit{User} yang akan dimasukkan ke dalam \verb|profile.twig|. Fungsi ini juga menangani pengiriman \textit{form} pembaharuan data \textit{user} pengguna.
                   \item \verb|_password_check($str)| \\
                         Melakukan validasi \textit{input password}.
                   \item \verb|_password_again_check($str)| \\
@@ -557,20 +682,38 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Melakukan validasi ketersediaan email pada \textit{database}.
                   \item \verb|_role_check($str)| \\
                         Melakukan validasi \textit{role} pengguna saat ingin mengubah \textit{role user}.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari berbagai \textit{model} terutama dari \textit{User} yang akan dimasukkan ke dalam \textit{view} \verb|profile.twig|. Fungsi ini juga menangani pengiriman \textit{form} pembaharuan data \textit{user} pengguna. Gambar \ref{fig:3:1:1:profile} menunjukkan hasil halaman Profile.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/profile.png}
+                              \caption{Halaman Profile}
+                              \label{fig:3:1:1:profile}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Queue.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Profile.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari \textit{model} \verb|Queue|, \verb|Assignments_model|, dan \verb|Settings_model| yang dipakai untuk halaman \verb|queue.twig| dan ditampilkan kepada pengguna.
                   \item \verb|pause()| \\
                         Memberhentikan proses \textit{queue}.
                   \item \verb|resume()| \\
                         Melanjutkan proses \textit{queue}.
                   \item \verb|empty_queue()| \\
                         Menghapus semua \textit{queue} yang ada.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari \textit{model} \verb|Queue|, \verb|Assignments_model|, dan \verb|Settings_model| yang dipakai dalam \textit{view} \verb|queue.twig| dan ditampilkan kepada pengguna. Gambar \ref{fig:3:1:1:queue} menunjukkan hasil halaman Queue.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/queue.png}
+                              \caption{Halaman Queue}
+                              \label{fig:3:1:1:queue}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Queueprocess.php| \\
@@ -580,14 +723,29 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Profile.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dan menampilkan halaman \verb|rejudge.twig|. Fungsi ini juga dapat melakukan \textit{rejudge} pada sebuah \textit{problem} tertentu.
                   \item \verb|rejudge_single()| \\
                         Melakukan \textit{rejudge} untuk satu buah \textit{submission}.
+                  \item \verb|index()| \\
+                        Mendapatkan data dan menampilkan \textit{view} \verb|rejudge.twig|. Fungsi ini juga dapat melakukan \textit{rejudge} pada sebuah \textit{problem} tertentu. Gambar \ref{fig:3:1:1:rejudge} menunjukkan halaman Rejudge.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/rejudge.png}
+                              \caption{Halaman Rejudge}
+                              \label{fig:3:1:1:rejudge}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Scoreboard.php| \\
-            \textit{Controller} \verb|Queueprocess.php| hanya memiliki satu fungsi yaitu \verb|index()| yang akan menampilkan halaman \verb|scoreboard.twig| dengan data dari \verb|Scoreboard_model|.
+            \textit{Controller} \verb|Queueprocess.php| hanya memiliki satu fungsi yaitu \verb|index()| yang akan menampilkan \textit{view} \verb|scoreboard.twig| dengan data dari \verb|Scoreboard_model|. Gambar \ref{fig:3:1:1:scoreboard} menunjukkan hasil halaman Scoreboard.
+
+            \begin{figure}[H]
+                  \centering
+                  \includegraphics[width=\textwidth]{views/scoreboard.png}
+                  \caption{Halaman Scoreboard}
+                  \label{fig:3:1:1:scoreboard}
+            \end{figure}
 
       \item \verb|Server_time.php| \\
             \textit{Controller} \verb|Queueprocess.php| hanya memiliki satu fungsi yaitu \verb|index()| yang akan mencetak waktu pada \textit{server}, waktu akan digunakan untuk sinkronisasi waktu.
@@ -596,10 +754,18 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Settings.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari \verb|Settings_model| dan menampilkan halaman \verb|settings.twig|. Jika terdapat \textit{error setting} pada sistem, akan ditampilkan juga pada halaman tersebut.
                   \item \verb|update()| \\
                         Memperbaharui \textit{settings} dari masukkan pengguna.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari \verb|Settings_model| dan menampilkan \textit{view} \verb|settings.twig|. Jika terdapat \textit{error setting} pada sistem, akan ditampilkan juga pada \textit{view} tersebut. Gambar \ref{fig:3:1:1:settings} menunjukkan hasil halaman Users.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/settings.png}
+                              \caption{Halaman Settings}
+                              \label{fig:3:1:1:settings}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|Submissions.php| \\
@@ -612,10 +778,6 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Menggunakan fungsi \verb|_download_excel| untuk mendownload \textit{final submission}.
                   \item \verb|all_excel()| \\
                         Menggunakan fungsi \verb|_download_excel| untuk mendownload seluruh \textit{submission}.
-                  \item \verb|the_final()| \\
-                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}.
-                  \item \verb|all()| \\
-                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan seluruh \textit{submission} dan menampilkan halaman \verb|submission.twig| berisi semua \textit{submission}.
                   \item \verb|select()| \\
                         Menggunakan \textit{ajax request} untuk memilih \textit{submission} yang akan dikumpulkan atau menjadi \textit{final}.
                   \item \verb|_check_type($type)| \\
@@ -624,6 +786,24 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Digunakan untuk melihat kode, melihat hasil kode, atau melihat \textit{log} sebuah \textit{submission}.
                   \item \verb|download_file()| \\
                         Mengunduh \textit{file} kode sebuah \textit{submission}.
+                  \item \verb|the_final()| \\
+                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}. Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions .
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/final_submissions.png}
+                              \caption{Halaman Final Submissions}
+                              \label{fig:3:1:1:final}
+                        \end{figure}
+
+                  \item \verb|all()| \\
+                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan seluruh \textit{submission} dan menampilkan halaman \verb|submission.twig| berisi semua \textit{submission}. Gambar \ref{fig:3:1:1:all} menunjukkan halaman All Submissions .
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/all_submissions.png}
+                              \caption{Halaman All Submissions}
+                              \label{fig:3:1:1:all}
+                        \end{figure}
             \end{itemize}
 
       \item \verb|Submit.php| \\
@@ -638,8 +818,6 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Melakukan validasi untuk \verb|$type| dan \verb|$extension| agar sesuai.
                   \item \verb|_check_language($str)| \\
                         Melakukan validasi sudah dipilihannya bahasa.
-                  \item \verb|index()| \\
-                        Mendapatkan data dari \textit{model} \verb|Assignments_model| untuk mendapatkan \textit{problem} dan data lainnya. Semua data akan dimasukkan dan ditampilkan pada halaman \verb|submit.twig|.
                   \item \verb|_upload()| \\
                         Menyimpan jawaban pengguna yang dikirim dan menambahkannya ke dalam \textit{queue} untuk dinilai jika bukan \textit{upload only problem}.
                   \item \verb|load($problem_id)| \\
@@ -652,14 +830,22 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Menambahkan kode ke dalam \textit{queue} untuk di jalankan saja.
                   \item \verb|get_output($problem_id)| \\
                         Mendapatkan keluaran dari kode yang telah dijalankan sebagai hasil eksekusi.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari \textit{model} \verb|Assignments_model| untuk mendapatkan \textit{problem} dan data lainnya. Semua data akan dimasukkan dalam \textit{view} \verb|submit.twig|. Gambar \ref{fig:3:1:1:submit} menunjukkan hasil halaman Submit. Halaman ini terdapat editor kode yang sudah di implementasikan~\cite{nicholas:sharif}.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/submit.png}
+                              \caption{Halaman Submit}
+                              \label{fig:3:1:1:submit}
+                        \end{figure}
+
             \end{itemize}
 
       \item \verb|User.php| \\
             Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|User.php|:
 
             \begin{itemize}
-                  \item \verb|index()| \\
-                        Mendapatkan data dari \verb|User_model| dan menampilkan halaman \verb|users.twig|.
                   \item \verb|add()| \\
                         Menambahkan \textit{user} baru ke dalam \textit{sistem}.
                   \item \verb|delete()| \\
@@ -668,6 +854,17 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
                         Menghapus seluruh \textit{submissions} dari sebuah \textit{user}.
                   \item \verb|list_excel()| \\
                         Menggunakan \textit{library} PHPExcel untuk membuat sebuah file excel dari seluruh daftar \textit{user} yang akan diunduh pengguna.
+                  \item \verb|index()| \\
+                        Mendapatkan data dari \verb|User_model| dan menunjukkan \textit{view} \verb|users.twig|. Gambar \ref{fig:3:1:1:users} menunjukkan hasil halaman Users. Pada halaman ini terdapat daftar seluruh \textit{user} yang terdaftar pada SharIF Judge. Pengguna dapat membuat, memperbaharui, dan menghapus \textit{user}.
+
+                        \begin{figure}[H]
+                              \centering
+                              \includegraphics[width=\textwidth]{views/users.png}
+                              \caption{Halaman Users}
+                              \label{fig:3:1:1:users}
+                        \end{figure}
+
+
             \end{itemize}
 
 \end{itemize}
@@ -726,9 +923,6 @@ Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada ant
 
 SharIF Judge sudah memiliki editor kode dengan \textit{framework} \verb|Ace|. \verb|Ace| juga sudah menyediakan fitur-fitur untuk menangkap berbagai \textit{event} yang terjadi pada editor kode.
 
-\subsection{Fitur-fitur}
-\label{sec:3:2:fitur}
-
 % \subsubsection{Mengotomatiskan saving}
 % \label{sec:3:2:1:autosave}
 
@@ -736,25 +930,18 @@ SharIF Judge sudah memiliki editor kode dengan \textit{framework} \verb|Ace|. \v
 % Cara 1 kalau inactive selama 5 detik = autosave, dan kalau active selama 20 detik = autosave jg
 % Cara 2 pake web sockets, simpen di dalem servernya terus write?
 
-\subsubsection{Perekam event pada editor kode}
-\label{sec:3:2:1:rekam}
+\subsection{Perekam event pada editor kode}
+\label{sec:3:2:rekam}
 
 Rekam 2 event aja:
-- CursorChange (ini ngeliat cursor movement + selection movement). [yang ini buat mouse].
+- Mouseup (ini ngeliat cursor movement + selection movement). [yang ini buat mouse].
 - Semua operation yang akan dilakukan di keyboard (kaya "insert", "copy", "paste"), tapi kaya right-click mouse terus paste jg bisa.
 
 Rekam juga input + output yang dimasukkin tapi ga sampe cursor
 
 Simpen di tempat yg sama kaya penyimpanan kode, mungkin di pisah per submission juga. simpen kaya json aja biar gampang dibaca?. simpen timestart, event: [time: {action: ?, payload: ?}].
-% 
 
-\subsubsection{Pemutar ulang event}
-\label{sec:3:2:1:pemutarulang}
+\subsection{Pemutar ulang event}
+\label{sec:3:2:pemutarulang}
 
 Pemuratar ulang, bikin halaman baru. ada list user-nya, problemnya, di click baru kaya ngeload gt dari folder assignment.
-
-\subsection{Use Case}
-\label{sec:3:2:usecase}
-
-\subsection{Sequence Diagram}
-\label{sec:3:2:seqdiagram}
