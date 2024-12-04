@@ -9,12 +9,12 @@
 Seperti yang sudah dibahas pada subbab \ref{sec:2:sharifjudge}, SharIF Judge merupakan sebuah website judge yang dimodifikasi sesuai dengan kebutuhan Teknik Informatika UNPAR. Analisis diawali dengan MVC aplikasi SharIF Judge. Berikut merupakan hasil eksplorasi SharIF Judge yang telah dilakukan:
 
 \subsection{Model, View, Controller}
-\label{sec:3:1:modelviewcontroller}
+\label{sub:3:1:modelviewcontroller}
 
-SharIF Judge menggunakan \textit{framework} CodeIgniter 3 yang berbesis arsitektur Model-View-Controller seperti yang dijelaskan pada bab \ref{sec:2:2:modelviewcontroller}. Berikut merupakan analisis MVC pada SharIF Judge:
+SharIF Judge menggunakan \textit{framework} CodeIgniter 3 yang berbesis arsitektur Model-View-Controller seperti yang dijelaskan pada bab \ref{sub:2:2:modelviewcontroller}. Berikut merupakan analisis MVC pada SharIF Judge:
 
 \subsubsection{Model}
-\label{sec:3:1:1:model}
+\label{sub:3:1:1:model}
 
 Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb|application/models|. Direktori \textit{Model} berisi kelas-kelas yang digunakan untuk mengelola dan mengembalikan data dari \textit{database}. Berikut merupakan file \textit{model} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
 
@@ -223,11 +223,9 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 \end{itemize}
 
 \subsubsection{View}
-\label{sec:3:1:1:view}
+\label{sub:3:1:1:view}
 
 \textit{View} merupakan tampilan yang menjadi perantara antara pengguna dan \textit{sistem}. Pada SharIF Judge, \textit{View} disimpan pada direktori \verb|application/views| dan dibagi menjadi 3 direktori terpisah yaitu:
-
-% TODO: Kayanya tambahin file apa aja yg ada di direktori"-nya
 
 \begin{itemize}
       \item \verb|errors| \\
@@ -485,9 +483,9 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 \end{comment}
 
 \subsubsection{Controller}
-\label{sec:3:1:1:controller}
+\label{sub:3:1:1:controller}
 
-Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada direktori \\ \verb|application/controller|. Seperti yang dijelaskan pada bab \ref{sec:2:2:3:Controller}, \textit{Controller} digunakan sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan saat membuat sebuah web page. Direktori controller berisi kelas-kelas yang akan mengolah data yang didapat pada \textit{model} dan menyatukan data tersebut ke dalam \textit{views} yang akan ditampilkan kepada pengguna. Pada setiap kelas \textit{controller}, terdapat fungsi \verb|index()| yang menjadi fungsi utama saat kelas di akses oleh pengguna. Berikut merupakan file \textit{controller} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
+Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada direktori \\ \verb|application/controller|. Seperti yang dijelaskan pada bab \ref{sub:2:2:3:Controller}, \textit{Controller} digunakan sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan saat membuat sebuah web page. Direktori controller berisi kelas-kelas yang akan mengolah data yang didapat pada \textit{model} dan menyatukan data tersebut ke dalam \textit{views} yang akan ditampilkan kepada pengguna. Pada setiap kelas \textit{controller}, terdapat fungsi \verb|index()| yang menjadi fungsi utama saat kelas di akses oleh pengguna. Berikut merupakan file \textit{controller} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
 
 \begin{itemize}
       \item \verb|Assignments.php| \\
@@ -870,7 +868,7 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
 \end{itemize}
 
 \subsection{Penyimpanan Kode Submission}
-\label{sec:3:1:penyimpanankode}
+\label{sub:3:1:penyimpanankode}
 Pada SharIF Judge, Kode akan disimpan pada lokasi \verb|Assignment| yang dapat di ubah pada halaman \verb|Settings|. Berikut merupakan format penyimpanan sebuah kode:
 
 \begin{center}
@@ -901,12 +899,12 @@ Sebagai contoh, pengguna bernama \verb|kenzhi| mengumpulkan kode dengan nama fil
 \end{center}
 
 \subsection{Antrean Penilaian Kode}
-\label{sec:3:1:antreanpenilaiankode}
+\label{sub:3:1:antreanpenilaiankode}
 
 Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada antrean menggunakan \verb|bash|. Berikut merupakan cara SharIF Judge menilai kode dari awal pengumpulan pada sistem:
 
 \begin{enumerate}
-      \item \textit{Controller} \verb|Submit| akan menyimpan file pada folder sesuai pada \ref{sec:3:1:penyimpanankode}.
+      \item \textit{Controller} \verb|Submit| akan menyimpan file pada folder sesuai pada \ref{sub:3:1:penyimpanankode}.
       \item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} kedalam \textit{model} \verb|Queue_model|.
       \item \textit{Model} \verb|Queue_model| akan menyimpan data \textit{submission} pada \textit{database} \verb|submission| dan menambahkan data \verb|queue|.
       \item Selanjutnya \textit{Controller} \verb|Submit| akan memanggil fungsi \verb|process_the_queue()| yang akan menjalankan fungsi \verb|run()| pada \textit{controller} \verb|Queueprocess|.
@@ -921,27 +919,90 @@ Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada ant
 \section{Analisis Sistem Usulan}
 \label{sec:3:sistemusulan}
 
-SharIF Judge sudah memiliki editor kode dengan \textit{framework} \verb|Ace|. \verb|Ace| juga sudah menyediakan fitur-fitur untuk menangkap berbagai \textit{event} yang terjadi pada editor kode.
+Pembuatan sistem pemutaran ulang ketikan membutuhkan 2 fitur penting yaitu perekaman ketikan pada sebuah masukkan dan pemutaran ketikan pada masukkan tersebut. Masukkan yang dimaksud pada tugas akhir ini adalah IDE SharIF Judge. IDE SharIF Judge memiliki berbagai masukkan penting yaitu editor kode, \textit{input}, dan \textit{output}. Berikut merupakan fitur-fitur yang akan ditambahkan pada SharIF Judge untuk membangun sistem perekaman ketikan.
 
 % \subsubsection{Mengotomatiskan saving}
 % \label{sec:3:2:1:autosave}
-
+% ga ush ini mah, kan ga perlu, mungkin jadi ide buat skripsi lain aja wkwkw
 % ada dua cara?
 % Cara 1 kalau inactive selama 5 detik = autosave, dan kalau active selama 20 detik = autosave jg
 % Cara 2 pake web sockets, simpen di dalem servernya terus write?
 
 \subsection{Perekam event pada editor kode}
-\label{sec:3:2:rekam}
+\label{sub:3:2:rekam}
 
-Rekam 2 event aja:
-- Mouseup (ini ngeliat cursor movement + selection movement). [yang ini buat mouse].
-- Semua operation yang akan dilakukan di keyboard (kaya "insert", "copy", "paste"), tapi kaya right-click mouse terus paste jg bisa.
+Sebelum ketikan dapat di putar kembali, dibutuhkannya fitur untuk merekam segala \textit{event} yang terjadi pada masukkan tersebut. Berikut merupakan masukkan yang akan ditanggap oleh sistem:
+
+\begin{itemize}
+      \item \verb|Editor Kode| \\
+            % FIXME: Udh di jelasin di atas, tp ulang aja kah?
+            Editor Kode pada SharIF Judge dibuat dengan \textit{framework} \verb|Ace|. Pada \textit{framework} \verb|Ace| sudah menyediakan fitur untuk penangkapan \textit{event} seperti yang sudah dijelaskan pada subbab \ref{sec:2:ace}. Berikut \textit{event} pada \verb|Ace| yang akan ditanggap oleh sistem:
+
+            \begin{itemize}
+                  \item \verb|editor.commands.on("afterExec")| \\
+                        \verb|afterExec| akan merekam semua \textit{command} yang dijalankan pada editor kode seperti \textit{paste}, \textit{copy}, \textit{insert} dan banyak lagi.
+                  \item \verb|editor.on("mouseup")| \\
+                        \verb|mouseup| akan merekam \textit{event} saat dilepaskannya tekanan pada \textit{mouse}. Pada \textit{event} ini akan dipakai untuk merekam posisi \textit{cursor} dan \textit{selection}.
+                  \item \verb|editor.selection.on("beforeEndOperation")| \\
+                        \verb|beforeEndOperation| akan menangkap \textit{event} yang sama seperti \verb|mouseup| yaitu merekam posisi \textit{cursor} dan \textit{selection} saat setelah operasi command selesai dijalankan.
+            \end{itemize}
+
+      \item \verb|Input| \\
+            Perubahan \textit{input} pada IDE SharIF Judge akan di tanggap dan dicatat.
+      \item \verb|Execute| \\
+            Pada IDE SharIF Judge terdapat fungsi untuk menjalankan file dan mendapatkan keluaran program dari \textit{input}. Maka \textit{event} ini akan ditanggap dan juga keluarannya.
+\end{itemize}
+
+\textit{Event} yang sudah direkam akan disimpan bersama dengan waktu saat di terjadinya \textit{event} tersebut. Penyimpanan rekaman juga akan disimpan pada folder yang sama dengan penyimpanan kode submission seperti yang dijelaskan pada subbab \ref{sub:3:1:penyimpanankode} dengan nama file \verb|recording| dan menggunakan format file \textit{JavaScript Object Notation} atau JSON. Pemimpanan perekaman akan memiliki format sebagai berikut:
+
+\begin{center}
+      \verb|<timeline>: {event: <event>, data: <payload>}|
+\end{center}
+
+\verb|<timeline>| akan menunjukkan pada milidetik berapa \textit{event} terjadi dengan menggunakan fungsi \verb|Date.now()| pada \textit{Javascript}. sedangkan \verb|<event>| dan \verb|<payload>| merupakan data \textit{event} yang terjadi. \verb|<payload>| akan disesuaikan dengan \textit{event} yang terjadi. Sebagai contoh untuk \textit{event insert} huruf `a' akan di tuliskan menjadi sebagai berikut:
+
+\begin{center}
+      \verb|1733335637486: {event: "insert", data: "a"}|
+\end{center}
+
+Penyimpanan \textit{event} akan di lakukan oleh \textit{Controller} \verb|Submit| yang akan menyimpan \textit{file} pada saat kode disimpan. Maka fungsi yang akan dimodifikasi adalah fungsi \verb|save()|.
+
+\begin{comment}
+Rekam 3 event aja:
+- Mouseup dari editor
+- beforeEndOperation dari selection
+- afterExec dari commands
+
+Penjelasan
+- Mouseup + beforeEndOperation (ini ngeliat cursor movement + selection movement). [yang ini buat mouse].
+- afterExec: Semua operation yang akan dilakukan di keyboard (kaya "insert", "copy", "paste"), tapi kaya right-click mouse terus paste jg bisa.
 
 Rekam juga input + output yang dimasukkin tapi ga sampe cursor
 
 Simpen di tempat yg sama kaya penyimpanan kode, mungkin di pisah per submission juga. simpen kaya json aja biar gampang dibaca?. simpen timestart, event: [time: {action: ?, payload: ?}].
+\end{comment}
 
 \subsection{Pemutar ulang event}
-\label{sec:3:2:pemutarulang}
+\label{sub:3:2:pemutarulang}
 
+Fitur kedua yang akan ditambahkan adalah pemutaran ulang \textit{event} pada SharIF Judge. Fitur ini membutuhkan sebuah halaman baru yang akan dinamakan \verb|Recording|. Maka dari itu dibutuhkannya beberapa hal baru yaitu \textit{Controller} \verb|Recording.php|, \textit{View} \verb|recording.twig| dan \textit{Javascript} \verb|shj_recording.js|.
+
+\textit{Controller} \verb|Recording.php| akan memiliki beberapa fungsi yaitu:
+\begin{itemize}
+      \item \verb|index()| \\
+            fungsi ini akan mengambil list recording sesuai dengan \textit{assignment} \textit{problem} yang dipilih dan mengembalikan \textit{view} \verb|recording.twig|
+      \item \verb|load_recording()| \\
+            fungsi ini akan digunakan untuk mengambil file JSON yang sudah di simpan dan mengembalikannya.
+\end{itemize}
+
+\textit{Javasciprt} yang akan dibuat pada \verb|shj_recording.js| akan memiliki berbagai fungsi yaitu sebagai berikut:
+
+\begin{itemize}
+      \item Fungsi untuk memilih \textit{user} dan \textit{problem} yang ditampilkan.
+      \item Fungsi ajax untuk meminta \textit{file recording} sesuai dengan pilihan.
+      \item Fungsi untuk menjalankan, memberhentikan \textit{recording} dari \textit{file} JSON.
+\end{itemize}
+
+\begin{comment}
 Pemuratar ulang, bikin halaman baru. ada list user-nya, problemnya, di click baru kaya ngeload gt dari folder assignment.
+\end{comment}

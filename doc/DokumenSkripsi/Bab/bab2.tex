@@ -10,7 +10,7 @@
 SharIF Judge merupakan modifikasi dari \textit{open source} bernama Sharif Judge, sebuah website judge gratis dengan kemampuan mengkompilasi bahasa C, C++, Java, dan Python. Sharif Judge dibuat oleh Mohammad Javad Naderi dengan interface web berbahasa PHP menggunakan \textit{framework} CodeIgniter 3 dan BASH~\cite{sharif}. Modifikasi dilakukan untuk menambahkan fitur pada Sharif Judge dan juga untuk menyesuaikan sesuai dengan kebutuhan Teknik Informatika UNPAR.
 
 \subsection{Instalasi}
-\label{subs:2:1:instalasi}
+\label{sub:2:1:instalasi}
 
 Ada beberapa prasyarat yang diperlukan dalam menjalankan SharIF Judge pada sebuah \textit{server} Linux adalah sebagai berikut:
 
@@ -40,7 +40,7 @@ Setelah perangkat yang sudah memenuhi prasyarat, berikut merupakan cara instalas
 \newpage
 
 \subsection{Users}
-\label{subs:2:1:users}
+\label{sub:2:1:users}
 
 Pada SharIF Judge, pengguna dibagi menjadi 4 buah \textit{role}. Role yang tersedia adalah sebagai berikut:
 
@@ -51,12 +51,12 @@ Pada SharIF Judge, pengguna dibagi menjadi 4 buah \textit{role}. Role yang terse
 	\item \textit{student}
 \end{enumerate}
 
-Setiap \textit{role} memiliki akses pada aksi yang berbeda berdasakan \textit{role}-nya. Tabel \ref{tab:fitur_user} merupakan aksi-aksi yang dapat dilakukan untuk setiap pengguna pada SharIF Judge.
+Setiap \textit{role} memiliki akses pada aksi yang berbeda berdasakan \textit{role}-nya. Tabel \ref{tab:2:1:fitur_user} merupakan aksi-aksi yang dapat dilakukan untuk setiap pengguna pada SharIF Judge.
 
 \begin{table}[H]
 	\centering
 	\caption{\textit{Tabel fitur untuk setiap role}}
-	\label{tab:fitur_user}
+	\label{tab:2:1:fitur_user}
 	\begin{tabular}{|l|c|c|c|c|}
 		\hline
 		Aksi                              & \textit{Admin} & \textit{Head Instructor} & \textit{Instructor} & \textit{Student} \\
@@ -104,15 +104,16 @@ Berikut merupakan penjelasan sederhana dari \textit{flow chart} sistem CodeIgnit
 \end{enumerate}
 
 \subsection{Model-View-Controller}
-\label{sec:2:2:modelviewcontroller}
+\label{sub:2:2:modelviewcontroller}
 
 CodeIgniter merupakan framework berbasis arsitektur Model-View-Controller atau yang selanjutnya akan disebut dengan MVC. MVC adalah pendekatan \textit{software} yang memisahkan \textit{logic} aplikasi dan tampilannya. Pendekatan ini membuat \textit{website} hanya memiliki sedikit \textit{script} karena tampilan \textit{website} terpisah dari \textit{scripting} PHP. Berikut merupakan penjelasan mengenai struktur MVC:
 
 \subsubsection{Model}
-\label{sec:2:2:1:model}
+\label{sub:2:2:1:model}
 
 \textit{Model} mewakili struktur data pada sistem untuk mengambil, memasukkan, dan memperbaharui data pada \textit{database}. \textit{Model} dapat dibuat dengan membuat sebuah kelas yang mengekstensi \verb|CI_Model| dan diletakkan pada \verb|application/models/|.
 
+% TODO: Masukkin ke dlm folder kode
 \begin{lstlisting}[language=php, caption=Contoh \textit{model}, label=kode:2:2:1:model]
 class Blog_model extends CI_Model {
 
@@ -147,7 +148,7 @@ class Blog_model extends CI_Model {
 }
 \end{lstlisting}
 
-Kode \ref{kode:2:2:1:model} merupakan contoh model kelas bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan memperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (akan dijelaskan pada bagian \hyperref[sec:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan \textit{syntax} sebagai berikut:
+Kode \ref{kode:2:2:1:model} merupakan contoh model kelas bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan memperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (akan dijelaskan pada bagian \hyperref[sub:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan \textit{syntax} sebagai berikut:
 
 \begin{center}
 	\verb|$this->load->model('Blog_model');|.
@@ -162,7 +163,7 @@ Untuk memanggil \textit{method} yang terdapat pada model tersebut, \textit{synta
 \textit{Syntax} diatas akan memuat \verb|model| dengan nama \verb|Blog_model| dan akan memanggil \textit{method} \verb|get_last_ten_entries|.
 
 \subsubsection{View}
-\label{sec:2:2:2:View}
+\label{sub:2:2:2:View}
 
 \textit{View} adalah informasi yang akan di tunjukkan kepada user. Biasanya \textit{view} merupakan sebuah halaman web, tetapi pada CodeIgniter, view dapat berupa pecahan halaman seperti \textit{header, footer, sidebar}, dan lainnya. Pecahan halaman tersebut dapat dimasukkan secara fleksibel ke dalam \textit{view} lainnya apabila dibutuhkan.
 
@@ -186,7 +187,7 @@ Kode \ref{kode:2:2:2:view} merupakan contoh dari \textit{file view} pada CodeIgn
 \textit{Syntax} diatas akan mengembalikan halaman \textit{view} dengan nama \verb|name| yang terletak pada direktori \verb|application/views/name.php| dan menampilkannya kepada pengguna.
 
 \subsubsection{Controller}
-\label{sec:2:2:3:Controller}
+\label{sub:2:2:3:Controller}
 
 \textit{Controller} adalah bagian utama dari aplikasi CodeIgniter, berfungsi sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan untuk memproses HTTP \textit{request} dan membuat sebuah web page. Kelas \textit{Controller} akan mengekstensi \verb|CI_Controller| dan disimpan pada \verb|application/controllers/|. Contoh \textit{controller} ditunjukkan pada Kode \ref{kode:2:2:3:controller}.
 
@@ -232,7 +233,7 @@ URL diatas akan mengembalikan sebuah teks `Hello World!'.
 Pada CodeIgniter, \textit{model} dan \textit{view} hanya dapat dimuat melalui controller. Seperti contoh, Kode \ref{kode:2:2:3:cimodelview} akan memuat \textit{model} \verb|blog| dan mengambil data dari \textit{database}, lalu menampilkan \textit{view} yang memuat data tersebut.
 
 \subsection{CodeIgniter URLs}
-\label{sec:2:2:codeigniterurls}
+\label{sub:2:2:codeigniterurls}
 
 URL pada CodeIgniter menggunakan \textit{segment-based approach} dibandingkan dengan \textit{query string approach} yang biasanya dipakai. \textit{Segment-based approach} dirancang untuk \textit{search-engine} dan dapat mempermudah pengguna juga. Berikut merupakan contoh dari URL CodeIgniter:
 
@@ -240,7 +241,7 @@ URL pada CodeIgniter menggunakan \textit{segment-based approach} dibandingkan de
 	\verb|example.com/news/article/my_article|
 \end{center}
 
-Struktur URL pada CodeIgniter juga mengikuti pendekatan MVC (referensi \ref{sec:2:2:modelviewcontroller}) dan biasanya memiliki struktur sebagai berikut:
+Struktur URL pada CodeIgniter juga mengikuti pendekatan MVC (referensi \ref{sub:2:2:modelviewcontroller}) dan biasanya memiliki struktur sebagai berikut:
 
 \begin{center}
 	\verb|example.com/class/function/ID|
@@ -265,7 +266,7 @@ Twig merupakan sebuah \textit{template engine} untuk PHP. Ada beberapa \textit{e
 
 Pada saat template dievaluasi, semua \textit{variable} atau \textit{expression} akan dibuah menjadi value dan \textit{tag} yang mengontrol logika template.
 
-\begin{lstlisting}[language={php}, caption={Contoh template Twig}, label={kode:2:4:twig}]
+\begin{lstlisting}[language={php}, caption={Contoh template Twig}, label={kode:2:twig}]
 {% extends "base.html" %}
 {% block navigation %}
 	<ul id="navigation">
@@ -281,7 +282,7 @@ Pada saat template dievaluasi, semua \textit{variable} atau \textit{expression} 
 {% endblock navigation %}
 \end{lstlisting}
 
-Kode \ref{kode:2:4:twig} merupakan contoh sebuah template Twig. Terdapat dua jenis \textit{delimiter}, yaitu \verb|{% ... %}| dan \verb|{{ ... }}|. \textit{Delimiter} \verb|{% ... %}| digunakan untuk Menjalankan sebuah \textit{statement} seperti \textit{for-loops}, sedangkan \textit{delimiter} \verb|{{ ... }}| digunakan untuk mengubah sebuah \textit{variable} atau \textit{expression} menjadi nilai sesungguhnya.
+Kode \ref{kode:2:twig} merupakan contoh sebuah template Twig. Terdapat dua jenis \textit{delimiter}, yaitu \verb|{% ... %}| dan \verb|{{ ... }}|. \textit{Delimiter} \verb|{% ... %}| digunakan untuk Menjalankan sebuah \textit{statement} seperti \textit{for-loops}, sedangkan \textit{delimiter} \verb|{{ ... }}| digunakan untuk mengubah sebuah \textit{variable} atau \textit{expression} menjadi nilai sesungguhnya.
 
 \section{Integrated Development Environment}
 \label{sec:2:ide}
@@ -316,6 +317,7 @@ Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 
 % TODO: Butuh dilengkapi sesuai kebutuhan kode yang akan ditulis
 % TODO: Butuh tambahin kalo si ace bisa nangkep event apa aja?
+% TODO: Tambahin penjelasan tentang Session, Selector, Selection, Commands
 
 \begin{itemize}
 	\item \verb|Ace| \\
