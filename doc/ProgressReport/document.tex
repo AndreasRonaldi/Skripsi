@@ -1,6 +1,6 @@
 \documentclass[a4paper,twoside]{article}
 \usepackage[T1]{fontenc}
-\usepackage[bahasa]{babel}
+\usepackage[bahasa,ngerman]{babel}
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{float}
@@ -10,7 +10,12 @@
 \usepackage{setspace} 
 \usepackage{lipsum} 
 \setlength{\headsep}{30pt}
-\usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} %margin
+\usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} 
+\usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
+
+\hypersetup{unicode=true,colorlinks=true,linkcolor=blue,citecolor=green,filecolor=magenta, urlcolor=cyan}
+
+%margin
 % \pagestyle{empty}
 
 \makeatletter
@@ -23,18 +28,18 @@
 \begin{document}
 
 \title{\@judultopik}
-\author{\nama \textendash \@npm} 
+\author{\nama \textendash \@npm}
 
 %ISILAH DATA BERIKUT INI:
-\newcommand{\nama}{Lionov}
-\newcommand{\@npm}{1997730020}
-\newcommand{\tanggal}{01/01/1900} %Tanggal pembuatan dokumen
-\newcommand{\@judultopik}{Simulasi Kerumunan di Museum} % Judul/topik anda
-\newcommand{\kodetopik}{TAB0901}
-\newcommand{\jumpemb}{2} % Jumlah pembimbing, 1 atau 2
-\newcommand{\pembA}{Thomas Anung Basuki}
+\newcommand{\nama}{Andreas Ronaldi}
+\newcommand{\@npm}{6182101026}
+\newcommand{\tanggal}{05/12/2024} %Tanggal pembuatan dokumen
+\newcommand{\@judultopik}{Pemutaran Ulang Ketikan Mahasiswa pada SharIF Judge} % Judul/topik anda
+\newcommand{\kodetopik}{PAN5501}
+\newcommand{\jumpemb}{1} % Jumlah pembimbing, 1 atau 2
+\newcommand{\pembA}{Pascal~Alfadian,~Nugroho,~M.Comp.}
 \newcommand{\pembB}{-}
-\newcommand{\semesterPertama}{40 - Genap 15/16} % semester pertama kali topik diambil, angka 1 dimulai dari sem Ganjil 96/97
+\newcommand{\semesterPertama}{49 - Ganjil 24/25} % semester pertama kali topik diambil, angka 1 dimulai dari sem Ganjil 96/97
 \newcommand{\lamaSkripsi}{1} % Jumlah semester untuk mengerjakan skripsi s.d. dokumen ini dibuat
 \newcommand{\kulPertama}{Skripsi 1} % Kuliah dimana topik ini diambil pertama kali
 \newcommand{\tipePR}{B} % tipe progress report :
@@ -43,6 +48,8 @@
 % C : dokumen pendukung untuk pengambilan ke-2 di Skripsi 2
 
 % Dokumen hasil template ini harus dicetak bolak-balik !!!!
+
+\graphicspath{{./Image/}}% folder tempat gambar 
 
 \maketitle
 
@@ -57,72 +64,136 @@ Pengambilan pertama kali topik ini pada : Semester {\bf \semesterPertama} \\
 Pengambilan pertama kali topik ini di kuliah : {\bf \kulPertama} \\
 Tipe Laporan : {\bf \tipePR} -
 \ifdefstring{\tipePR}{A}{
-			Dokumen pendukung untuk {\BF pengambilan ke-2 di Skripsi 1} }
-		{
-		\ifdefstring{\tipePR}{B} {
-				Dokumen untuk reviewer pada presentasi dan {\bf review Skripsi 1}}
-			{	Dokumen pendukung untuk {\bf pengambilan ke-2 di Skripsi 2}}
-		}
-		
+	Dokumen pendukung untuk {\BF pengambilan ke-2 di Skripsi 1} }
+{
+	\ifdefstring{\tipePR}{B} {
+		Dokumen untuk reviewer pada presentasi dan {\bf review Skripsi 1}}
+	{	Dokumen pendukung untuk {\bf pengambilan ke-2 di Skripsi 2}}
+}
+
 \section{Latar Belakang}
+
+Institusi yang memberikan pendidikan, perlu memiliki cara untuk mengetahui pemahaman pelajarnya. Salah satu caranya adalah dengan memberikan tugas. Tugas merupakan sebuah bentuk penilaian dari pengajar kepada pelajarnya\footnote{Prihatini, F.~N. dan Indudewi, D. (2016) {Kesadaran dan Perilaku Plagiarisme dikalangan Mahasiswa(Studi pada Mahasiswa Fakultas Ekonomi Jurusan Akuntansi Universitas Semarang)}.
+{\em Dinamika Sosial Budaya}.}. Tugas diberikan kepada pelajar untuk membantu pelajar mendalami materi yang sudah diberikan sebelumnya oleh pengajar dan juga untuk melihat seberapa jauh pemahaman pelajar terhadap materi yang sudah diberikan.
+
+% TODO: Masukkin referensi di sini ~\cite{onder:judge}
+Pada bidang informatika, banyak materi pembelajaran yang dapat diberikan. Salah satu pembelajaran utama dalam bidang informatika adalah keterampilan pemrograman. Dikarenakan itu, perlu sebuah sistem untuk melatih keterampilan pemrograman yaitu dengan memberikan tugas menulis kode program sesuai dengan petunjuk yang diberikan dan program tersebut dapat berjalan sesuai dengan petunjuk\footnote{
+	Demir, \"o., Soysal, A., Arslan, A., Y\"urekli, B., \& Yilmazel, \"O. (2010). Automatic grading system for programming homework.
+	Proceedings of the Annual International Conference on Computer Science Education: Innovation \& Technology CSEIT 2010 \&  Proceedings of the Annual International Conference on Software Engineering SE 2010. \url{https://doi.org/10.5176/978-981-08-7466-7_itcse-19}.
+}.
+Secara tradisional, tugas ini diberikan dengan cara pengajar menyiapkan dan mendistribusikan tugas tersebut kepada pelajar, kemudian dikumpulkan kembali hasil program pekerjaan pelajar, dan pengajar akan menilai kode program sesuai ketepatan dengan program yang diinginkan secara manual seperti gambar \ref{fig:1:tradisional}. Karena menilaian kode program mencakup keluaran program dan juga analisis kode, maka proses tersebut memakan waktu yang cukup lama untuk dilakukan. Walaupun begitu, cara tradisional ini masih bekerja jika jumlah pelajarnya sedikit.
+Tetapi semakin banyak kode program yang harus di periksa maka semakin banyak waktu yang dibutuhkan dan semakin banyak pula kesalahan yang berhubungan dengan manusia. Salah satu masalah lain yang muncul juga adalah pelajar tidak dapat mengetahui apakah kode program berada pada jalur yang benar dalam menemukan solusi tugas tersebut.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{tradisional.drawio.png}
+	\caption[Sistem Tradisional Pemberian Tugas]{Sistem Tradisional Pemberian Tugas}
+	\label{fig:1:tradisional}
+\end{figure}
+
+Pemberian tugas menulis kode program memiliki banyak masalah. Oleh karena itu, dibutuhkannya sistem baru untuk memberikan tugas kepada pelajar bidang informatika. Sistem baru yang dimaksud tentunya untuk melakukan penilaian secara otomatis. Sebuah sistem yang mengambil kode program pelajar dan memberikan sebuah nilai numerik yang menandakan hasil dari kode program tersebut\footnote{Kurnia, A., Lim, A., dan Cheang, B. (2001) Online judge. {\em Computers \& Education}, {\bf  18}, 299--315.}. Suatu hal yang menarik, Tugas kode program dapat dibagi menjadi 2 jenis yaitu tugas individu dan tugas kelompok. Pada tugas kelompok merupakan tugas yang ditanggung oleh banyak pelajar, biasanya program yang dibuat memiliki antarmuka dan harus diperiksa oleh pengguna khusus yang mengetahui fitur-fitur yang dibutuhkan. Sedangkan tugas individu merupakan sebuah tugas yang diberikan untuk satu individu, biasanya program yang dibuat bersifat algoritmik dan tidak memerlukan antarmuka untuk dijalankan. Program algoritmik sebuah jenis program yang dibuat berdasarkan algoritma untuk menyelesaikan masalah tertentu. Algoritma sendiri adalah langkah-langkah dalam pemecahan masalah secara sistematis\footnote{IDCloudHost (2020) Algoritma pemrograman beserta contohnya.
+	\newblock \url{https://idcloudhost.com/blog/algoritma-pemrograman-pengertian-fungsi-cara-kerja-dan-contohnya/}.
+	6 Desember 2024.}.
+% FIXME: ini kalimat line 16, asa kurang tp buat memperjelas gt 
+Algoritma itu seperti resep makanan, dimana akan ada bahan-bahan yang dibutuhkan dan serangkaian langkah untuk membuat suatu makanan yang dijelaskan.
+
+Sebagian besar program yang bersifat algoritmik hanyak perlu mengambil input dari input standar seperti angka, huruf, dan sebuah kata atau kalimat dengan format yang sudah ditentukan, seolah-olah input ini merupakan output dari program lain. Kemudian program algoritmik akan memproses input tersebut dalam komputer dan mengeluarkan hasil komputasinya dalam format yang sudah ditentukan untuk dibaca oleh program lain dan memanfaatkan hasil komputasi tersebut. Singkatnya, program algoritmik itu seperti filter antar program. Dengan ini, sistem penilaian secara otomatis dapat dibuat dengan membuat sebuah program yang mengambil kode program, memasukkan input sesuai format ke dalam program tersebut, membaca hasil keluaran program, dan menilai hasil keluaran program tersebut\footnote{Kurnia, A., Lim, A., dan Cheang, B. (2001) Online judge. {\em Computers \& Education}, {\bf  18}, 299--315.}. Sistem penilaian otomatis \mbox{ini diberikan nama \textit{Online Judge}}. Terlebih lagi sistem ini dapat dilakukan secara \textit{offline} maupun \textit{online}. Gambar \ref{fig:1:onlinejudge} menunjukkan bagaimana \textit{online judge} berintegrasi dengan sistem pemberian tugas yang sudah ada.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{online_judge.drawio.png}
+	\caption[Sistem Integrasi oleh \textit{Online Judge}]{Sistem Integrasi oleh \textit{Online Judge}}
+	\label{fig:1:onlinejudge}
+\end{figure}
+
+Tugas pemrograman sudah menjadi keseharian dalam pembelajaran pada bidang informatika.
+Termasuk pada perguruan tinggi pada bidang informatika, maka \textit{online judge} menjadi sebuah kebutuhan termasuk pada Universitas Katolik Parahyangan atau yang biasa disebut UNPAR.
+\textit{Online Judge} yang digunakan oleh UNPAR dinamakan SharIF-Judge\footnote{Vallian, S. (2018) {Kustomisasi Sharif Judge Untuk Kebutuhan Program Studi Teknik Informatika}. Skripsi. Universitas Katolik Parahyangan, Indonesia.} yang merupakan hasil dimodifikasi oleh Stillmen Vallian terhadap Sharif-Judge\footnote{Version 1.4 (2014) {\em Sharif Judge Documentation}. Mohammad Javad Naderi. Tehran, Iran.} buatan Mohammad Javad Naderi yang dibuat menggunakan \textit{framework} CodeIgniter dan Bash. Gambar~\ref{fig:1:dashboardpng} merupakan halaman utama setelah masuk ke dalam SharIF-Judge.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{dashboard.png}
+	\caption[Tampilan Awal SharIF Judge]{Tampilan Awal SharIF Judge}
+	\label{fig:1:dashboardpng}
+\end{figure}
+
+Ujian juga merupakan sebuah bentuk penilaian dari pengajar kepada pelajarnya. Tentunya pelajar maupun mahasiswa ingin memperoleh nilai yang memuaskan dalam ujiannya. Banyak cara yang dilakukan oleh pelajar maupun mahasiswa untuk memperoleh nilai tersebut, salah satunya adalah dengan melakukan kecurangan yaitu \textit{copy paste} atau menyalin jawaban teman atau rekan mereka\footnote{Prihatini, F.~N. dan Indudewi, D. (2016) {Kesadaran dan Perilaku Plagiarisme dikalangan Mahasiswa(Studi pada Mahasiswa Fakultas Ekonomi Jurusan Akuntansi Universitas Semarang)}. {\em Dinamika Sosial Budaya}, {\bf  18}, 68--75.}. Praktek ini diperparah jika ujian dilakukan secara \textit{online}, dikarenakan pelajar dapat mengakses berbagai fasilitas di internet. Oleh karena itu, diperlukanyna sebuah sistem pada sistem \textit{online judge} untuk mengawasi saat terjadinya ujian online.
+
+Pada saat siswa mengerjakan tugas maupun ujian pembuatan kode program, umumnya pengerjaan kode tersebut dilakukan pada aplikasi eksternal seperti \textit{visual studio code} atau \textit{notepad}. Hal ini juga terjadi pada sistem dalam UNPAR dimana mahasiswa akan membuat kode program pada aplikasi eksternal. Ini membuat pengawasan saat pembuatan kode program lebih sulit untuk dilakukan, terlebih jika ujian dilakukan secara \textit{online}. Maka dari itu, Nicholas Aditya Halim memodifikasi SharIF Judge agar semua sistem pemberian tugas seperti pada gambar \ref{fig:1:onlinejudge} dapat dilakukan dalam sistem yang sama yaitu pada SharIF Judge. Sistem yang bangun oleh Nicholas Aditya Halim adalah ``Implementasi editor kode pada Sharif Judge''\footnote{Halim, N.~A. (2021) {Implementasi Editor Kode pada SharIF Judge}. Skripsi. Universitas Katolik Parahyangan,  Indonesia.}, dimana SharIF Judge ditambahkan sebuah \textit{Integrated Development Environment} atau yang disebut dengan IDE. IDE merupakan sebuah sistem yang memiliki kemampuan untuk membuat kode dalam editor kode dan menjalankan kode program tersebut. Dengan adanya IDE, seluruh proses pembuatan kode program dapat dilakukan dalam SharIF Judge. Maka dari itu, seluruh proses sistem pemberian tugas dapat dilakukan dalam satu sistem saja, yaitu SharIF Judge.
+
+Walaupun begitu, pada dasarnya IDE tidak dapat mengawasi jika terjadinya praktek \textit{copy paste}. Maka dari itu pada Tugas akhir ini, IDE pada SharIF Judge akan dimodifikasi untuk menangani hal tersebut dengan ditambahkannya fitur untuk merekam semua ketikan atau kejadian dalam editor kode dalam IDE. Lalu ketikan atau kejadian dalam editor dapat di putar kembali seperti rekaman. Fitur ini akan membuat pengawasan terhadap kegiatan kuliah lebih mudah untuk pengawas dan dapat menjadi bukti kecurangan jika dibutuhkan.
 
 \section{Rumusan Masalah}
 
+Rumusan Masalah yang akan dibahas pada tugas akhir ini adalah:
+\begin{enumerate}
+	% \item Bagaimana agar editor kode lebih mudah untuk dipakai oleh mahasiswa.
+	\item Bagaimana mengimplementasikan perekaman dan pemutaran ulang ketikan mahasiswa pada IDE SharIF-Judge?
+	\item Bagaimana cara menyimpan data pemutaran ulang mahasiswa secara rutin dengan otomatis dan tidak mengambil penyimpanan \textit{database} sangat besar?
+	\item Bagaimana tanggapan pengguna terhadap implementasi perekaman dan pemutaran ulang kode ketikan pada SharIF Judge?
+\end{enumerate}
+
 \section{Tujuan}
 
+Tujuan yang ingin dicapai skripsi ini adalah sebagai berikut:
+\begin{enumerate}
+	\item Mengimplementasikan perekaman dan pemutaran ulang ketikan mahasiswa pada IDE SharIF-Judge.
+	\item Mencari cara penyimpanan data efektif dan mengimplementasikannya pada perekaman dan pemutaran ulang ketikan.
+	\item Mendapatkan umpan balik dari tanggapan pengguna terhadap perekaman dan pemutaran ulang ketikan mahasiswa pada SharIF-Judge.
+\end{enumerate}
 
 \section{Detail Perkembangan Pengerjaan Skripsi}
-Detail bagian pekerjaan skripsi sesuai dengan rencan kerja/laporan perkembangan terkahir :
-	\begin{enumerate}
-		\item \textbf{Melakukan survei ke Museum Geologi Bandung untuk mendapatkan denah serta mengetahui perilaku pengunjung museum secara umum (arah perjalanan, kecepatan, lama melihat objek, dll).}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :} Survei sudah dilakukan sebanyak 3x pada tanggal X, Y dan Z. Pada kunjungan pertama, diperhaitkan denah museum dan dibuat sketsa berdasarkan pengamatan. Pada kunjunga kedua, bertemu dengan bagian humas museum dan berhasil mendapatkan denah serta melakukan wawancara. Hasil wawancara sudah dibuat dan ada softcopy-nya. Pada kunjungan ketiga, secara khusus dilihat perilaku pengunjung. Masih direncakanan 2x kunjungan lagi. Bukti-bukti kunjungan dapat dilihat di lampiran
-		
-		\item \textbf{Melakukan analisis pada hasil survei terhadap pergerakan pengunjung di museum dan membuat rancangan denah di komputer yang dilengkapi dengan penghalang dan objek di museum.}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+Detail bagian pekerjaan tugas akhir sesuai dengan rencan kerja/laporan perkembangan terkahir :
+\begin{enumerate}
+	\item \textbf{Melakukan survei ke Museum Geologi Bandung untuk mendapatkan denah serta mengetahui perilaku pengunjung museum secara umum (arah perjalanan, kecepatan, lama melihat objek, dll).}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :} Survei sudah dilakukan sebanyak 3x pada tanggal X, Y dan Z. Pada kunjungan pertama, diperhaitkan denah museum dan dibuat sketsa berdasarkan pengamatan. Pada kunjunga kedua, bertemu dengan bagian humas museum dan berhasil mendapatkan denah serta melakukan wawancara. Hasil wawancara sudah dibuat dan ada softcopy-nya. Pada kunjungan ketiga, secara khusus dilihat perilaku pengunjung. Masih direncakanan 2x kunjungan lagi. Bukti-bukti kunjungan dapat dilihat di lampiran
 
-		\item \textbf{Melakukan studi literatur mengenai sifat kolektif suatu kerumunan, teknik {\it social force model} dan teknik {\it flow tiles}}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+	\item \textbf{Melakukan analisis pada hasil survei terhadap pergerakan pengunjung di museum dan membuat rancangan denah di komputer yang dilengkapi dengan penghalang dan objek di museum.}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
 
-		\item \textbf{Mempelajari bahasa pemrograman C++ dan cara menggunakan framework OpenSteer}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+	\item \textbf{Melakukan studi literatur mengenai sifat kolektif suatu kerumunan, teknik {\it social force model} dan teknik {\it flow tiles}}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
 
-		\item \textbf{Merancang pergerakan kerumunan di dalam museum menggunakan teknik {\it social force model} dan {\it flow tiles} serta menggunakan teknik lainnya seperti konsep pathway dan waypoints. Selain itu, dirancang pula adanya waktu tunggu (pada saat pengunjung melihat objek di museum) dan cara pembuatan jalur bagi setiap individu pengunjung}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+	\item \textbf{Mempelajari bahasa pemrograman C++ dan cara menggunakan framework OpenSteer}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
 
-		\item \textbf{Melakukan analisa dan merancang struktur data yang cocok untuk menyimpan penghalang (obstacle)}\\
-		{\bf Status :} dihapuskan/tidak dikerjakan \\
-		{\bf Hasil :} berdasarkan analisis singkat, tidak dilakukan analisis lebih jauh karena tidak diperlukan struktur data baru, karena sudah disediakan oleh OpenSteer versi terbaru
+	\item \textbf{Merancang pergerakan kerumunan di dalam museum menggunakan teknik {\it social force model} dan {\it flow tiles} serta menggunakan teknik lainnya seperti konsep pathway dan waypoints. Selain itu, dirancang pula adanya waktu tunggu (pada saat pengunjung melihat objek di museum) dan cara pembuatan jalur bagi setiap individu pengunjung}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
 
-		\item \textbf{Mengimplementasikan keseluruhan algoritma dan struktur data yang dirancang, dengan menggunakan framework OpenSteer} \\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+	\item \textbf{Melakukan analisa dan merancang struktur data yang cocok untuk menyimpan penghalang (obstacle)}\\
+	      {\bf Status :} dihapuskan/tidak dikerjakan \\
+	      {\bf Hasil :} berdasarkan analisis singkat, tidak dilakukan analisis lebih jauh karena tidak diperlukan struktur data baru, karena sudah disediakan oleh OpenSteer versi terbaru
 
-		\item \textbf{Melakukan pengujian (dan eksperimen) yang melibatkan responde untuk menilai hasil simulasi secara kualitatif}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :}
+	\item \textbf{Mengimplementasikan keseluruhan algoritma dan struktur data yang dirancang, dengan menggunakan framework OpenSteer} \\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
 
-		\item \textbf{Menulis dokumen skripsi}\\
-		{\bf Status :} Ada sejak rencana kerja skripsi.\\
-		{\bf Hasil :} \lipsum[1]
-		
-		\item \textbf{Mempelajari cara menggunakan fitur manipulasi obstacle yang disediakan oleh framework Opensteer versi terbaru}\\
-		{\bf Status :} baru ditambahkan pada semester ini\\
-		{\bf Hasil :} baru direncanakan karena framework Opensteer versi paling akhir baru selesai diinstall dan dilihat-lihat bagian contoh-contoh simulasinya
-		
+	\item \textbf{Melakukan pengujian (dan eksperimen) yang melibatkan responde untuk menilai hasil simulasi secara kualitatif}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
 
-	\end{enumerate}
+	\item \textbf{Menulis dokumen skripsi}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :} \lipsum[1]
+
+	\item \textbf{Mempelajari cara menggunakan fitur manipulasi obstacle yang disediakan oleh framework Opensteer versi terbaru}\\
+	      {\bf Status :} baru ditambahkan pada semester ini\\
+	      {\bf Hasil :} baru direncanakan karena framework Opensteer versi paling akhir baru selesai diinstall dan dilihat-lihat bagian contoh-contoh simulasinya
+
+
+\end{enumerate}
 
 \section{Pencapaian Rencana Kerja}
 Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah sebagai berikut:
 \begin{enumerate}
-\item
-\item
-\item
+	\item
+	\item
+	\item
 \end{enumerate}
 
 
@@ -139,25 +210,25 @@ Kendala - kendala yang dihadapi selama mengerjakan skripsi :
 
 \vspace{1cm}
 \centering Bandung, \tanggal\\
-\vspace{2cm} \nama \\ 
+\vspace{2cm} \nama \\
 \vspace{1cm}
 
 Menyetujui, \\
 \ifdefstring{\jumpemb}{2}{
-\vspace{1.5cm}
-\begin{centering} Menyetujui,\\ \end{centering} \vspace{0.75cm}
-\begin{minipage}[b]{0.45\linewidth}
-% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013 \\
-\vspace{2cm} Nama: \pembA \\ Pembimbing Utama
-\end{minipage} \hspace{0.5cm}
-\begin{minipage}[b]{0.45\linewidth}
-% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
-\vspace{2cm} Nama: \pembB \\ Pembimbing Pendamping
-\end{minipage}
-\vspace{0.5cm}
+	\vspace{1.5cm}
+	\begin{centering} Menyetujui,\\ \end{centering} \vspace{0.75cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013 \\
+		\vspace{2cm} Nama: \pembA \\ Pembimbing Utama
+	\end{minipage} \hspace{0.5cm}
+	\begin{minipage}[b]{0.45\linewidth}
+		% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
+		\vspace{2cm} Nama: \pembB \\ Pembimbing Pendamping
+	\end{minipage}
+	\vspace{0.5cm}
 }{
-% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
-\vspace{2cm} Nama: \pembA \\ Pembimbing Tunggal
+	% \centering Bandung, \makebox[0.5cm]{\hrulefill}/\makebox[0.5cm]{\hrulefill}/2013\\
+	\vspace{2cm} Nama: \pembA \\ Pembimbing Tunggal
 }
 \end{document}
 
