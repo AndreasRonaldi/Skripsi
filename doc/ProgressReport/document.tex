@@ -12,8 +12,17 @@
 \setlength{\headsep}{30pt}
 \usepackage[inner=2cm,outer=2.5cm,top=2.5cm,bottom=2cm]{geometry} 
 \usepackage[plainpages=false,pdfpagelabels,unicode]{hyperref}
+\usepackage[table]{xcolor}%untuk kode program
+\usepackage{listings}
 
 \hypersetup{unicode=true,colorlinks=true,linkcolor=blue,citecolor=green,filecolor=magenta, urlcolor=cyan}
+
+\lstset{numbers=left,stepnumber=1, numbersep=5pt, frame=single,frameround={tttt},
+	tabsize=4, breaklines=true, basicstyle=\fontfamily{fvm}\selectfont\scriptsize, 
+	commentstyle=\itshape\color{gray}, keywordstyle=\bfseries\color{blue}, 
+	identifierstyle=\color{black}, stringstyle=\color{orange},
+	literate={-}{-}1{-\,-}{--}1
+} 
 
 %margin
 % \pagestyle{empty}
@@ -21,7 +30,7 @@
 \makeatletter
 \renewcommand{\@maketitle} {\begin{center} {\LARGE \textbf{ \textsc{\@title}} \par} \bigskip {\large \textbf{\textsc{\@author}} }\end{center} }
 \renewcommand{\thispagestyle}[1]{}
-\markright{\textbf{\textsc{Laporan Perkembangan Pengerjaan Skripsi\textemdash Sem. Genap 2015/2016}}}
+\markright{\textbf{\textsc{Laporan Perkembangan Pengerjaan Skripsi\textemdash Sem. Ganjil 2024/2025}}}
 
 \onehalfspacing
  
@@ -76,7 +85,6 @@ Tipe Laporan : {\bf \tipePR} -
 Institusi yang memberikan pendidikan, perlu memiliki cara untuk mengetahui pemahaman pelajarnya. Salah satu caranya adalah dengan memberikan tugas. Tugas merupakan sebuah bentuk penilaian dari pengajar kepada pelajarnya\footnote{Prihatini, F.~N. dan Indudewi, D. (2016) {Kesadaran dan Perilaku Plagiarisme dikalangan Mahasiswa(Studi pada Mahasiswa Fakultas Ekonomi Jurusan Akuntansi Universitas Semarang)}.
 {\em Dinamika Sosial Budaya}.}. Tugas diberikan kepada pelajar untuk membantu pelajar mendalami materi yang sudah diberikan sebelumnya oleh pengajar dan juga untuk melihat seberapa jauh pemahaman pelajar terhadap materi yang sudah diberikan.
 
-% TODO: Masukkin referensi di sini ~\cite{onder:judge}
 Pada bidang informatika, banyak materi pembelajaran yang dapat diberikan. Salah satu pembelajaran utama dalam bidang informatika adalah keterampilan pemrograman. Dikarenakan itu, perlu sebuah sistem untuk melatih keterampilan pemrograman yaitu dengan memberikan tugas menulis kode program sesuai dengan petunjuk yang diberikan dan program tersebut dapat berjalan sesuai dengan petunjuk\footnote{
 	Demir, \"o., Soysal, A., Arslan, A., Y\"urekli, B., \& Yilmazel, \"O. (2010). Automatic grading system for programming homework.
 	Proceedings of the Annual International Conference on Computer Science Education: Innovation \& Technology CSEIT 2010 \&  Proceedings of the Annual International Conference on Software Engineering SE 2010. \url{https://doi.org/10.5176/978-981-08-7466-7_itcse-19}.
@@ -145,45 +153,47 @@ Tujuan yang ingin dicapai skripsi ini adalah sebagai berikut:
 \section{Detail Perkembangan Pengerjaan Skripsi}
 Detail bagian pekerjaan tugas akhir sesuai dengan rencan kerja/laporan perkembangan terkahir :
 \begin{enumerate}
-	\item \textbf{Melakukan survei ke Museum Geologi Bandung untuk mendapatkan denah serta mengetahui perilaku pengunjung museum secara umum (arah perjalanan, kecepatan, lama melihat objek, dll).}\\
+	\item \textbf{Melakukan studi literatur mengenai bahasa pemrograman PHP.}\\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :} Survei sudah dilakukan sebanyak 3x pada tanggal X, Y dan Z. Pada kunjungan pertama, diperhaitkan denah museum dan dibuat sketsa berdasarkan pengamatan. Pada kunjunga kedua, bertemu dengan bagian humas museum dan berhasil mendapatkan denah serta melakukan wawancara. Hasil wawancara sudah dibuat dan ada softcopy-nya. Pada kunjungan ketiga, secara khusus dilihat perilaku pengunjung. Masih direncakanan 2x kunjungan lagi. Bukti-bukti kunjungan dapat dilihat di lampiran
+	      {\bf Hasil :} Bahasa pemrograman PHP sudah dipelajari.
 
-	\item \textbf{Melakukan analisis pada hasil survei terhadap pergerakan pengunjung di museum dan membuat rancangan denah di komputer yang dilengkapi dengan penghalang dan objek di museum.}\\
-	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :}
+	      PHP atau \textit{Hypertext Preprocessor} merupakan sebuah \textit{scripting language} yang dibuat untuk web development\footnote{https://www.php.net/}. Awalnya PHP dibuat oleh Denmark-Kanada dan Rasmus Lerdorf pada tahun 1993 dan dirilis pada tahun 1995.
 
-	\item \textbf{Melakukan studi literatur mengenai sifat kolektif suatu kerumunan, teknik {\it social force model} dan teknik {\it flow tiles}}\\
-	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :}
+	      \textit{File} php akan memiliki extensi \verb|php| seperti contohnya adalah \verb|index.php|. Biasanya \textit{file} PHP akan di proses pada web servernya oleh sebuah PHP \textit{interpreter}. Berikut merupakan contoh kode php. Pada \textit{file} php, tag \verb|<?php| menandakan dimana php \textit{interpreter} akan menterjemahkan teks menjadi kode php, sedangkan diluar
 
-	\item \textbf{Mempelajari bahasa pemrograman C++ dan cara menggunakan framework OpenSteer}\\
-	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :}
+	      \begin{lstlisting}[language={php}, caption={Contoh Sederhana \textit{File} PHP}, label={kode:5:simplephp}]
+		  <? php
+			echo 'Hello World'
+		  ?>
+		  \end{lstlisting}
 
-	\item \textbf{Merancang pergerakan kerumunan di dalam museum menggunakan teknik {\it social force model} dan {\it flow tiles} serta menggunakan teknik lainnya seperti konsep pathway dan waypoints. Selain itu, dirancang pula adanya waktu tunggu (pada saat pengunjung melihat objek di museum) dan cara pembuatan jalur bagi setiap individu pengunjung}\\
-	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :}
+	      %   https://www.freecodecamp.org/news/the-php-handbook/
+	      % https://en.wikipedia.org/wiki/PHP#
 
-	\item \textbf{Melakukan analisa dan merancang struktur data yang cocok untuk menyimpan penghalang (obstacle)}\\
-	      {\bf Status :} dihapuskan/tidak dikerjakan \\
-	      {\bf Hasil :} berdasarkan analisis singkat, tidak dilakukan analisis lebih jauh karena tidak diperlukan struktur data baru, karena sudah disediakan oleh OpenSteer versi terbaru
 
-	\item \textbf{Mengimplementasikan keseluruhan algoritma dan struktur data yang dirancang, dengan menggunakan framework OpenSteer} \\
+	\item \textbf{Melakukan studi literatur mengenai \textit{framework} CodeIgniter 3.} \\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :}
 
-	\item \textbf{Melakukan pengujian (dan eksperimen) yang melibatkan responde untuk menilai hasil simulasi secara kualitatif}\\
+	\item \textbf{Melakukan studi literatur mengenai editor kode Ace.} \\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
+
+	\item \textbf{Melakukan studi literatur mengenai cara penyimpanan rekaman ketikan.} \\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :}
+
+	\item \textbf{Melakukan studi literatur mengenai SharIF Judge.}\\
+	      {\bf Status :} baru ditambahkan pada semester ini\\
+	      {\bf Hasil :}
+
+	\item \textbf{Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.} \\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :}
 
 	\item \textbf{Menulis dokumen skripsi}\\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :} \lipsum[1]
-
-	\item \textbf{Mempelajari cara menggunakan fitur manipulasi obstacle yang disediakan oleh framework Opensteer versi terbaru}\\
-	      {\bf Status :} baru ditambahkan pada semester ini\\
-	      {\bf Hasil :} baru direncanakan karena framework Opensteer versi paling akhir baru selesai diinstall dan dilihat-lihat bagian contoh-contoh simulasinya
+	      {\bf Hasil :}
 
 
 \end{enumerate}
