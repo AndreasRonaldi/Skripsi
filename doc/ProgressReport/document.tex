@@ -159,13 +159,94 @@ Detail bagian pekerjaan tugas akhir sesuai dengan rencan kerja/laporan perkemban
 
 	      PHP atau \textit{Hypertext Preprocessor} merupakan sebuah \textit{scripting language} yang dibuat untuk web development\footnote{https://www.php.net/}. Awalnya PHP dibuat oleh Denmark-Kanada dan Rasmus Lerdorf pada tahun 1993 dan dirilis pada tahun 1995.
 
-	      \textit{File} php akan memiliki extensi \verb|php| seperti contohnya adalah \verb|index.php|. Biasanya \textit{file} PHP akan di proses pada web servernya oleh sebuah PHP \textit{interpreter}. Berikut merupakan contoh kode php. Pada \textit{file} php, tag \verb|<?php| menandakan dimana php \textit{interpreter} akan menterjemahkan teks menjadi kode php, sedangkan diluar
+	      Untuk membuat \textit{file} php, \textit{file} akan memiliki extensi \verb|php| seperti contohnya adalah \verb|index.php|. Biasanya \textit{file} PHP akan di proses pada web servernya oleh sebuah PHP \textit{interpreter}. Pada \textit{file} php, tag \verb|<?php| menandakan dimana php \textit{interpreter} akan menterjemahkan teks menjadi kode php, sedangkan diluar tag tersebut akan dianggap sebagai HTML biasa. Dalam PHP, \verb|echo| menandakan dimana PHP interpreter akan mencetak text dimana kutik ke dalam HTML. Berikut contoh kode \ref{kode:5:simplephp} sederhana dari \textit{file} php.
 
 	      \begin{lstlisting}[language={php}, caption={Contoh Sederhana \textit{File} PHP}, label={kode:5:simplephp}]
-		  <? php
-			echo 'Hello World'
-		  ?>
+	Hello 
+	<? php
+	echo 'World'
+	?>
 		  \end{lstlisting}
+
+	      Kode \ref{kode:5:simplephp} akan menghasilkan tulisan \verb|Hello World| pada websitenya. Sebagai umum bahasa pemrograman, PHP memiliki beberapa fitur yang umum yaitu sebagai berikut:
+
+	      \begin{itemize}
+		      \item \textbf{Comments} \\
+		            Salah satu hal yang penting dalam bahasa pemrograman adalah untuk memberikan komentar di dalam kodenya. Ada beberapa cara untuk memberikan komentar yaitu sebagai berikut:
+
+		            \begin{lstlisting}
+// komentar satu baris
+/* komentar sebagian kode dalam suatu baris */
+			  		\end{lstlisting}
+
+		            Untuk memberikan komentar untuk beberapa baris, caranya adalah sebagai berikut:
+
+		            \begin{lstlisting}
+/*
+Ini
+Sebuah
+Komentar
+*/
+
+// atau 
+
+/* Ini
+ * Juga
+ * Sebuah
+ * Komentar
+ */
+			  \end{lstlisting}
+
+		      \item \textbf{Variable} \\ % ada jg print var_dump
+		            Pada PHP, untuk mendefinisikan sebuah variable dimulai dengan tanda \verb|$|, dan diikuti oleh sekumpulan karakter alfabet, nomor, dan simbol \verb|_|. Nama variable pada PHP juga \textit{case-sensitive}, yang berarti nama \verb|$text| dan \verb|$Text| merupakan variable yang berbeda.
+		            PHP juga tidak perlu dan tidak bisa mendeklarasi variable. Setelah variable diberikan nilai, PHP akan membuat variable dengan tipe sesuai dengan nilai yang diberikan. Seperti contoh untuk membuat variable adalah sebagai berikut:
+
+		            \begin{lstlisting}
+$isPerson = TRUE
+$name = 'Kenzhi'
+$age = 20
+					\end{lstlisting}
+
+		            PHP juga tidak akan mengeluarkan error ketika variable dengan tipe angka di tetapkan kembali nilainya seperti \verb|$age = 'remaja'|.
+
+		            Jika ingin mengetahui isi nilai variable, dapat menggunakan fungsi \verb|var_dump()|. Sebagai contoh untuk mengetahui variable \verb|$name| akan dipanggil \verb|var_dump($name)|.
+
+		      \item \textbf{Type} \\
+		            Bahasa pemrograman juga memiliki tipe-tipe variable. Tipe-tipe dalam PHP adalah sebagai berikut:
+
+		            \begin{itemize}
+			            \item \verb|bool|: nilai boolean (\verb|TRUE| atau \verb|FALSE|)
+			            \item \verb|int|: bilangan bulat
+			            \item \verb|float|: bilangan ril
+			            \item \verb|string|: sebuah teks atau string
+			            \item \verb|array|: sebuah array
+			            \item \verb|object|: sebuah object
+			            \item \verb|null|: nilai yang menandakan nilai yang tidak diberikan
+		            \end{itemize}
+
+		      \item \textbf{Operators} \\
+		            Dalam PHP juga memiliki operators seperti umumnya. Berikut operators dalam PHP:
+
+		            \begin{itemize}
+			            \item Assignment Operators \\
+
+			            \item Arithmetic Operators
+			            \item Comparasion Operators
+			            \item Logical Operators
+			            \item Not Operators
+			            \item Unary Operators
+		            \end{itemize}
+
+		      \item \textbf{Strings}
+		      \item \textbf{Array}
+		      \item \textbf{Associative Arrays} % array key string
+		      \item \textbf{Conditionals} % if else
+		      \item \textbf{Loops}
+		      \item \textbf{Functions}
+		      \item \textbf{Class}
+		      \item \textbf{Exceptions}
+	      \end{itemize}
+
 
 	      %   https://www.freecodecamp.org/news/the-php-handbook/
 	      % https://en.wikipedia.org/wiki/PHP#
@@ -179,12 +260,12 @@ Detail bagian pekerjaan tugas akhir sesuai dengan rencan kerja/laporan perkemban
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :}
 
-	\item \textbf{Melakukan studi literatur mengenai cara penyimpanan rekaman ketikan.} \\
-	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :}
-
 	\item \textbf{Melakukan studi literatur mengenai SharIF Judge.}\\
 	      {\bf Status :} baru ditambahkan pada semester ini\\
+	      {\bf Hasil :}
+
+	\item \textbf{Melakukan studi literatur mengenai cara penyimpanan rekaman ketikan.} \\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :}
 
 	\item \textbf{Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.} \\
