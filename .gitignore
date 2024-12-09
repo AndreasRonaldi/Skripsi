@@ -6,3 +6,9 @@ Thumbs.db
 *.synctex.gz
 *.fdb_latexmk
 *.aux
+*.out
+*.log
+*.toc
+*.bbl
+*.blg
+*.lof

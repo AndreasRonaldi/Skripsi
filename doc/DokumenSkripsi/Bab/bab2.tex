@@ -216,17 +216,15 @@ Kode \ref{kode:2:2:3:controller} berfungsi dalam mengembalikan string sesuai den
 URL diatas akan mengembalikan sebuah teks `Hello World!'.
 
 \begin{lstlisting}[language=php, caption=Contoh memuat \textit{model} dan menampilkan \textit{view}, label=kode:2:2:3:cimodelview]
-	class Blog_controller extends CI_Controller {
-	
-			public function blog()
-			{
-					$this->load->model('blog');
-	
-					$data['query'] = $this->blog->get_last_ten_entries();
-	
-					$this->load->view('blog', $data);
-			}
-	}
+class Blog_controller extends CI_Controller {
+		public function blog()
+		{
+				$this->load->model('blog');
+
+				$data['query'] = $this->blog->get_last_ten_entries();
+
+				$this->load->view('blog', $data);
+		}
 }
 \end{lstlisting}
 
