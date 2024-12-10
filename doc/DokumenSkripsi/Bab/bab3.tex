@@ -227,7 +227,7 @@ Analisis MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb
 
 \begin{itemize}
 	\item \verb|errors| \\
-	      Pada direktori \textit{errors}, berisi tampilan halaman \textit{error} jika terjadi error pada pengunaan SharIF Judge. Berikut merupakan \textit{view} yang terdapat pada direktori \verb|errors|:
+	      Pada direktori \textit{errors}, berisi tampilan halaman \textit{error} jika terjadi error pada pengunaan SharIF Judge. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|errors|:
 
 	      \begin{itemize}
 		      \item \verb|error_404|
@@ -902,7 +902,7 @@ Sebagai contoh, pengguna bernama \verb|kenzhi| mengumpulkan kode dengan nama fil
 Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada antrean menggunakan \verb|bash|. Berikut merupakan cara SharIF Judge menilai kode dari awal pengumpulan pada sistem:
 
 \begin{enumerate}
-	\item \textit{Controller} \verb|Submit| akan menyimpan file pada folder sesuai pada \ref{sub:3:1:penyimpanankode}.
+	\item \textit{Controller} \verb|Submit| akan menyimpan kode ke dalam file pada folder sesuai pada \ref{sub:3:1:penyimpanankode}.
 	\item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} kedalam \textit{model} \verb|Queue_model|.
 	\item \textit{Model} \verb|Queue_model| akan menyimpan data \textit{submission} pada \textit{database} \verb|submission| dan menambahkan data \verb|queue|.
 	\item Selanjutnya \textit{Controller} \verb|Submit| akan memanggil fungsi \verb|process_the_queue()| yang akan menjalankan fungsi \verb|run()| pada \textit{controller} \verb|Queueprocess|.

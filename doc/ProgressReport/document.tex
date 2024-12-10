@@ -704,8 +704,8 @@ class Dog {
 
 		            Kode \ref{kode:5:class_ex} adalah contoh mendeklarasi sebuah kelas. Dimana \verb|Dog| memiliki sebuah \textit{attributes} \verb|$name| dan \textit{methods} \verb|bark()|. Pada \textit{methods} sebuah kelas untuk mengakses \textit{attributes} dan \textit{methods} lainnya dapat menggunakan \textit{keyword} \verb|$this|. \textit{methods} \verb|bark()| terdapat \verb|$this->name| yang akan mengakses \textit{attributes} \verb|$name| dalam kelas tersebut.
 
-		            Untuk memanggil kelas, dibutuhkannya object dengan kelas tersebut.  Untuk membuat object dengan kelas tertentu dapat menggunakan \textit{keyword new} di sebelum nama kelas. Setelah itu kelas baru akan di \textit{assign} kedalam sebuah variable. Melalui variable itu, \textit{attributes} dan \textit{methods} kelas tersebut dapat di akses.
-		            Untuk memanggil \textit{attributes} atau \textit{methods} dalam variable tersebut, butuh sebuah tanda baca panah (\verb|->|) yang menandakan php \textit{interpreter} untuk mengakses ke dalam instance object tersebut. Untuk
+		            Untuk memanggil kelas, dibutuhkannya object dengan kelas tersebut.  Untuk membuat object dengan kelas tertentu dapat menggunakan \textit{keyword new} di sebelum nama kelas. Setelah itu kelas baru akan di \textit{assign} kedalam sebuah variabel. Melalui variabel itu, \textit{attributes} dan \textit{methods} kelas tersebut dapat di akses.
+		            Untuk memanggil \textit{attributes} atau \textit{methods} dalam variabel tersebut, butuh sebuah tanda baca panah (\verb|->|) yang menandakan php \textit{interpreter} untuk mengakses ke dalam instance object tersebut. Untuk
 		            Seperti contoh menggunakan kode \ref{kode:5:class_ex} untuk membuat kelas baru dan mengakses data didalam kelas tersebut adalah sebegai berikut:
 
 		            \begin{lstlisting}[language={php}, caption={Contoh Pemanggilan Kelas}, label={kode:5:class_call_ex}]
@@ -714,7 +714,7 @@ $robert->name = 'Robert';
 $robert->bark(); // Keluaran: Robert barked!
 					\end{lstlisting}
 
-		            Pada saat membuat kelas baru, setelah nama kelas ada tanda kurung seperti pada pemanggil sebuah fungsi. Sebenarnya kelas memiliki method awal bernama \verb|_construct| yang digunakan untuk membangun object kelas tersebut pada saat object dibuat. Fungsi \verb|_construct| akan dipanggil dengan parameter yang ada saat object baru dibuat. Berikut perubahan yang akan pada Kode \ref{kode:5:class_ex} dan Kode \ref{kode:5:class_call_ex}:
+		            Pada saat membuat kelas baru ke dalam sebuah variabel, setelah nama kelas ada tanda kurung `()' seperti pada pemanggil sebuah fungsi. Sebenarnya kelas memiliki method awal bernama \verb|_construct| yang digunakan untuk membangun object kelas tersebut pada saat object dibuat. Fungsi \verb|_construct| akan dipanggil dengan parameter yang ada saat object baru dibuat. Berikut perubahan yang akan pada Kode \ref{kode:5:class_ex} dan Kode \ref{kode:5:class_call_ex}:
 
 		            \begin{lstlisting}[language={php}, caption={Contoh Kelas}, label={kode:5:class_ex}]
 class Dog {
@@ -733,7 +733,7 @@ $robert = new Dog('Robert');
 $robert->bark(); // Keluaran: Robert barked!
 					\end{lstlisting}
 
-		            Seperti pada fungsi, \textit{attributes} dan \textit{methods} dapat ditambahkan tipe contoh perubahan yang adalah sebagai berikut:
+		            Seperti pada fungsi, \textit{attributes} dan \textit{methods} dapat ditambahkan tipe untuk mengurangi \textit{error}. Contoh perubahan yang adalah sebagai berikut:
 
 		            \begin{lstlisting}[language={php}, caption={Contoh Kelas}, label={kode:5:class_ex}]
 class Dog {
@@ -782,7 +782,7 @@ try {
 
 	      \begin{figure}[H]
 		      \centering
-		      \includegraphics[scale=0.3]{ci-flowchart.png}
+		      \includegraphics[scale=0.275]{ci-flowchart.png}
 		      \caption{\textit{Flow Chart} CodeIgniter}
 		      \label{fig:2:ciflowchart}
 	      \end{figure}
@@ -790,15 +790,15 @@ try {
 	      Berikut merupakan penjelasan sederhana dari \textit{flow chart} sistem CodeIgniter 3:
 
 	      \begin{enumerate}
-		      \item \verb|index.php| berfungsi sebagai \textit{front controller} yang akan melakukan inisiasi \textit{resource} utama untuk menjalankan CodeIgniter.
-		      \item Router meneliti \textit{request} HTTP dan menentukan apa yang harus dilakukan dengan \textit{request} tersebut.
-		      \item Jika terdapat \textit{file cache}, maka langsung dikirimkan ke \textit{browser} melewati eksekusi sistem yang biasanya.
-		      \item Sebelum \textit{controller} dimuat, seluruh \textit{request} HTTP dan data dari user disaring terlebih dahulu untuk keamanan.
-		      \item \textit{Controller} memuat \textit{model}, \textit{library} utama, dan \textit{resource} lainnya yang diperlukan.
-		      \item \textit{View} akhir lalu dikirim ke browser untuk dilihat. \textit{Cache} akan dibuat terlebih dahulu bila diaktifkan.
+		      \item \verb|index.php| berfungsi sebagai \textit{front controller} yang akan melakukan inisiasi \textit{resource} utama.
+		      \item Router mencek HTTP \textit{request} dan menentukan apa yang harus dilakukan dengan \textit{request} tersebut.
+		      \item Jika terdapat \textit{cache}, maka langsung dikirimkan ke \textit{browser} melewati eksekusi sistem yang biasanya.
+		      \item Sebelum \textit{controller} dimuat, seluruh HTTP \textit{request} dan data disaring untuk keamanan.
+		      \item \textit{Controller} memuat \textit{model} dan \textit{resource} lainnya yang diperlukan.
+		      \item \textit{View} akhir lalu dikirim ke browser untuk dilihat.
 	      \end{enumerate}
 
-	      \begin{enumerate}
+	      \begin{itemize}
 		      \item \textbf{Model-View-Controller}
 		            \label{sub:2:2:modelviewcontroller}
 
@@ -844,19 +844,19 @@ class Blog_model extends CI_Model {
 }
 \end{lstlisting}
 
-			                  Kode \ref{kode:2:2:1:model} merupakan contoh model kelas bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan memperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (akan dijelaskan pada bagian \hyperref[sub:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan \textit{syntax} sebagai berikut:
+			                  Kode \ref{kode:2:2:1:model} merupakan contoh kelas model bernama \verb|Blog_model| pada CodeIgniter. \textit{Model} \verb|Blog_model| dapat mengambil, menambahkan, dan memperbaharui \textit{database} bernama `entries'. File \textit{model} tersebut akan disimpan pada \verb|application/models/Blog_model|. Selanjutnya, pengguna dapat memanggil \textit{Model} tersebut pada \textit{file controller} (dijelaskan pada bagian \hyperref[sub:2:2:3:Controller]{Controller}) untuk memanggil model pada Kode \ref{kode:2:2:1:model} dengan mengunakan notasi sebagai \mbox{berikut}:
 
 			                  \begin{center}
 				                  \verb|$this->load->model('Blog_model');|.
 			                  \end{center}
 
-			                  Untuk memanggil \textit{method} yang terdapat pada model tersebut, \textit{syntax} yang digunakan adalah sebagai berikut:
+			                  Untuk memanggil \textit{method} yang terdapat pada model tersebut, notasi yang digunakan adalah sebagai berikut:
 
 			                  \begin{center}
 				                  \verb|$this->Blog_model->get_last_ten_entries();|
 			                  \end{center}
 
-			                  \textit{Syntax} diatas akan memuat \verb|model| dengan nama \verb|Blog_model| dan akan memanggil \textit{method} \verb|get_last_ten_entries|.
+			                  Kode diatas akan memuat kelas \verb|Blog_model| dan memanggil \textit{method} \verb|get_last_ten_entries|.
 
 			            \item \textbf{View}
 			                  \label{sub:2:2:2:View}
@@ -876,11 +876,14 @@ class Blog_model extends CI_Model {
 
 			                  Kode \ref{kode:2:2:2:view} merupakan contoh dari \textit{file view} pada CodeIgniter. File akan disimpan pada direktori \verb|application/views/|. Untuk dapat diperlihatkan dibutuhkannya penggalian halaman pada \textit{file controller} dengan cara sebagai berikut:
 
+			                  \vspace{0.25cm}
 			                  \begin{center}
 				                  \verb|$this->load->view(`name');|
 			                  \end{center}
+			                  \vspace{0.25cm}
 
-			                  \textit{Syntax} diatas akan mengembalikan halaman \textit{view} dengan nama \verb|name| yang terletak pada direktori \verb|application/views/name.php| dan menampilkannya kepada pengguna.
+			                  Notasi diatas akan mengembalikan halaman \textit{view} dengan nama \verb|name| yang terletak pada direktori \verb|application/views/name.php| dan menampilkannya kepada pengguna.
+
 
 			            \item \textbf{Controller}
 			                  \label{sub:2:2:3:Controller}
@@ -900,19 +903,23 @@ class Blog extends CI_Controller {
 		{
 				echo 'Look at this!';
 		}
+
 }
 \end{lstlisting}
 
 			                  Kode \ref{kode:2:2:3:controller} berfungsi dalam mengembalikan string sesuai dengan fungsi \textit{controller} yang dipanggil. Nama file \textit{controller} pada direktori \verb|application/controllers/blog.php| dan metode diatas akan dijadikan segmen pada URL seperti berikut:
 
+			                  \vspace{0.25cm}
 			                  \begin{center}
 				                  \verb|example.com/index.php/blog/index/|
 			                  \end{center}
+			                  \vspace{0.25cm}
 
 			                  URL diatas akan mengembalikan sebuah teks `Hello World!'.
 
 			                  \begin{lstlisting}[language=php, caption=Contoh memuat \textit{model} dan menampilkan \textit{view}, label=kode:2:2:3:cimodelview]
 class Blog_controller extends CI_Controller {
+
 		public function blog()
 		{
 				$this->load->model('blog');
@@ -921,12 +928,15 @@ class Blog_controller extends CI_Controller {
 
 				$this->load->view('blog', $data);
 		}
+
 }
 					\end{lstlisting}
 
 			                  Pada CodeIgniter, \textit{model} dan \textit{view} hanya dapat dimuat melalui controller. Seperti contoh, Kode \ref{kode:2:2:3:cimodelview} akan memuat \textit{model} \verb|blog| dan mengambil data dari \textit{database}, lalu menampilkan \textit{view} yang memuat data tersebut.
 
 		            \end{enumerate}
+
+		            \newpage
 
 		      \item \textbf{CodeIgniter URLs}
 		            \label{sub:2:2:codeigniterurls}
@@ -946,9 +956,9 @@ class Blog_controller extends CI_Controller {
 		            \begin{enumerate}
 			            \item Segmen pertama mewakili kelas \textit{controller} yang ingin dipanggil.
 			            \item Segmen berikutnya mewakili fungsi kelas atau \textit{method} yang ingin di panggil.
-			            \item Segmen ketiga dan selanjutnya mewakili \textit{identifier} atau pengenal dan variable-variable lain yang akan di kirimkan ke \textit{controller}.
+			            \item Segmen ketiga dan selanjutnya mewakili \textit{identifier} atau pengenal dan variabel-variabel lain yang akan di kirimkan ke \textit{controller}.
 		            \end{enumerate}
-	      \end{enumerate}
+	      \end{itemize}
 
 	\item \textbf{Melakukan studi literatur mengenai editor kode Ace\footnote{Dokumentasi Ace. https://ace.c9.io/(10 Desember 2024)}.} \\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
@@ -990,7 +1000,7 @@ class Blog_controller extends CI_Controller {
 		            \end{enumerate}
 
 		      \item \verb|Anchor| \\
-		            Menangani posisi \textit{pointer} pada dokumen. Saat teks dimasukkan atau dihapus, posisi \textit{anchor} akan diperbaharui.
+		            Menangani posisi \textit{pointer} pada dokumen. Saat teks diperbaharui, posisi \textit{anchor} akan diperbaharui.
 		      \item \verb|Document| \\
 		            Menyimpan teks dokumen.
 		      \item \verb|Range| \\
@@ -1002,35 +1012,38 @@ class Blog_controller extends CI_Controller {
 	      \end{itemize}
 
 	      \begin{lstlisting}[language={php}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
-		  <!DOCTYPE html>
-		  <html lang="en">
-		  <head>
-		  <title>ACE in Action</title>
-		  <style type="text/css" media="screen">
-			  #editor { 
-				  position: absolute;
-				  top: 0;
-				  right: 0;
-				  bottom: 0;
-				  left: 0;
-			  }
-		  </style>
-		  </head>
-		  <body>
-		  
-		  <div id="editor">function foo(items) {
-			  var x = "All this is syntax highlighted";
-			  return x;
-		  }</div>
-			  
-		  <script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-		  <script>
-			  var editor = ace.edit("editor");
-			  editor.setTheme("ace/theme/monokai");
-			  editor.session.setMode("ace/mode/javascript");
-		  </script>
-		  </body>
-		  </html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>ACE in Action</title>
+	<style type="text/css" media="screen">
+		#editor { 
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div id="editor">function foo(items) {
+		var x = "All this is syntax highlighted";
+		return x;
+	}</div>
+	
+	<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		var editor = ace.edit("editor");
+		editor.setTheme("ace/theme/monokai");
+		editor.session.setMode("ace/mode/javascript");
+	</script>
+</body>
+
+</html>
 		  \end{lstlisting}
 
 	      Kode \ref{kode:2:5:ace} merupakan cara pengunaan Ace pada sebuah \texttt{div} dengan id \texttt{editor}. Ace juga memiliki beberapa konfigurasi, seperti contoh ini yaitu mengunakan tema \textit{monokai} dan mengunakan \textit{syntax highlighting} untuk bahasa pemrograman JavaScript.
@@ -1049,6 +1062,7 @@ class Blog_controller extends CI_Controller {
 
 		            Ada beberapa prasyarat yang diperlukan dalam menjalankan SharIF Judge pada sebuah \textit{server} Linux adalah sebagai berikut:
 
+		            \vspace{0.25cm}
 		            \begin{itemize}
 			            \item \textit{Webserver} dengan PHP versi 5.3 atau lebih dengan \texttt{mysqli} extension
 			            \item PHP Command Line Interface (CLI)
@@ -1057,22 +1071,27 @@ class Blog_controller extends CI_Controller {
 			            \item Kemampuan untuk mengompilasi dan menjalankan kode yang dikumpulkan (\texttt{gcc}, \texttt{g++}, \texttt{javac}, \texttt{java}, \texttt{python2}, dan \texttt{python3})
 			            \item Perl
 		            \end{itemize}
+		            \vspace{0.25cm}
 
 		            Setelah perangkat yang sudah memenuhi prasyarat, berikut merupakan cara instalasi SharIF Judge:
 
+		            \vspace{0.25cm}
 		            \begin{enumerate}
 			            \item Unduh versi terakhir dari Sharif Judge dan menempatkannya pada direktori publik.
 			            \item Pindahkan folder \texttt{system} dan \texttt{application} ke luar direktori publik. Kemudian simpan alamatnya pada \texttt{index.php}.
 			            \item Buat sebuah \textit{Database} MySql atau PostgreSql.
 			            \item Atur pengaturan koneksi \textit{database} pada \texttt{application/config/database.php}.
-			            \item Atur pengaturan koneksi \texttt{RADIUS} dan \texttt{SMTP} pada \texttt{application/config/secrets.php} jika dibutuhkan.
+			            \item Atur pengaturan \texttt{RADIUS} dan \texttt{SMTP} pada \texttt{application/config/secrets.php} jika dibutuhkan.
 			            \item Atur agar direktori \texttt{application/cache/Twig} dapat ditulis oleh php.
 			            \item Buka halaman utama SharIF Judge pada \textit{browser} dan ikuti proses instalasi.
 			            \item Log in dengan akun admin
 			            \item Pindahkan folder \texttt{tester} dan \texttt{assignments} ke luar direktori publik. Kemudian simpan alamatnya pada halaman pengaturan.
 		            \end{enumerate}
+		            \vspace{0.25cm}
 
 		            Dikarenakan prasyarat untuk menjalankan SharIF Judge adalah untuk menjalankannya pada sistem operasi linux. Sedangkan perangkat lunak dengan sistem operasi Windows tidak dapat menjalankannya secara langsung. Oleh karena itu, dibutuhkannya sebuah sistem lain untuk menjalankan SharIF Judge. Sistem tersebut adalah \textit{docker}, yang merupakan sebuah wadah atau \textit{container} yang dapat menjalankan sebuah aplikasi dan microservices pada sistem operasi windows, mac, atau linux\footnote{Dokumentasi Docker. https://docs.docker.com/ (10 Desember 2024)}. Untuk menjalankan SharIF Judge dalam \textit{docker} aplikasi yang dijalankan adalah sebuah web service yang mengunakan sistem operasi linux dan menjalankan SharIF Judge. Oleh karena itu, dibutuhkan dua file tambahan untuk mendefinisikan wadah yang diperlukan agar \textit{docker} dapat menjalankan SharIF Judge yaitu \verb|docker-compose.yml| dan \verb|Dockerfile| pada folder \textit{root} SharIF Judge. Isi file tersebut ada pada Kode \ref{kode:5:dockercompose} dan Kode \ref{kode:5:dockerfile}.
+
+		            \newpage
 
 		            \begin{lstlisting}[language={docker-compose}, caption={docker-compose.yml}, label={kode:5:dockercompose}]
 version: "3"
@@ -1160,7 +1179,7 @@ CMD ["apache2-foreground"]
 		      \item \textbf{Users}
 		            \label{sub:2:1:users}
 
-		            Pada SharIF Judge, pengguna dibagi menjadi 4 buah \textit{role}. Role yang tersedia adalah sebagai berikut:
+		            Pada SharIF Judge, pengguna dibagi menjadi 4 \textit{role}. Role yang tersedia adalah sebagai berikut:
 
 		            \begin{enumerate}
 			            \item \textit{admin}
@@ -1233,14 +1252,14 @@ CMD ["apache2-foreground"]
 		      \item \textbf{Antrean Penilaian Kode}
 		            \label{sub:3:1:antreanpenilaiankode}
 
-		            Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada antrean menggunakan \verb|bash|. Berikut merupakan cara SharIF Judge menilai kode dari awal pengumpulan pada sistem:
+		            Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada antrean menggunakan \verb|bash|. Berikut merupakan cara SharIF Judge menilai kode pada sistem:
 
 		            \begin{enumerate}
-			            \item \textit{Controller} \verb|Submit| akan menyimpan file pada folder sesuai pada \ref{sub:3:1:penyimpanankode}.
+			            \item \textit{Controller} \verb|Submit| akan menyimpan kode ke dalam \textit{file} pada folder sesuai pada \ref{sub:3:1:penyimpanankode}.
 			            \item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} kedalam \textit{model} \verb|Queue_model|.
 			            \item \textit{Model} \verb|Queue_model| akan menyimpan data \textit{submission} pada \textit{database} \verb|submission| dan menambahkan data \verb|queue|.
 			            \item Selanjutnya \textit{Controller} \verb|Submit| akan memanggil fungsi \verb|process_the_queue()| yang akan menjalankan fungsi \verb|run()| pada \textit{controller} \verb|Queueprocess|.
-			            \item \textit{Controller} \verb|Queueprocess| akan menjalankan \verb|tester.sh| pada folder \verb|tester| dengan data dari \verb|queue|.
+			            \item Lalu \verb|Queueprocess| akan menjalankan \verb|tester.sh| pada folder \verb|tester| dengan data dari \verb|queue|.
 			            \item \verb|tester.sh| akan menilai kode yang akan dibaca oleh \textit{controller} \verb|Queueprocess| yang akan menyimpan hasil penilaian.
 			            \item Terakhir \verb|Queueprocess| akan menyimpan hasil penilaian pada \textit{database} \verb|submission| dan menghapus data \verb|queue| menggunakan \verb|Queue_model|.
 		            \end{enumerate}
@@ -1253,7 +1272,7 @@ CMD ["apache2-foreground"]
 		      \item \textbf{Model}
 		            \label{sub:3:1:1:model}
 
-		            Hasil pembelajaran MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb|application/models|. Direktori \textit{Model} berisi kelas-kelas yang digunakan untuk mengelola dan mengembalikan data dari \textit{database}. Berikut merupakan file \textit{model} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
+		            Hasil pembelajaran MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb|application/mo|\\\verb|dels|. Direktori \textit{Model} berisi kelas-kelas yang digunakan untuk mengelola dan mengembalikan data dari \textit{database}. Berikut merupakan file \textit{model} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
 
 		            \begin{itemize}
 			            \item \verb|Assignment_model.php| \\
@@ -1309,7 +1328,7 @@ CMD ["apache2-foreground"]
 			                  \end{itemize}
 
 			            \item \verb|Notifications_model.php| \\
-			                  Model ini digunakan untuk mengelola tabel \verb|notifications|. Fungsi yang dimiliki adalah sebagai berikut:
+			                  Model ini digunakan untuk mengelola tabel \verb|notifications|. Fungsi yang dimiliki oleh \textit{model} \verb|Notifications_model.php| adalah sebagai berikut:
 
 			                  \begin{itemize}
 				                  \item \verb|get_all_notifications()| \\
@@ -1333,7 +1352,7 @@ CMD ["apache2-foreground"]
 
 			                  \begin{itemize}
 				                  \item \verb|in_queue($username, $assignment, $problem)| \\
-				                        Mengembalikan sebuah \textit{boolean} yang menyatakan bahwa \textit{username} masih memiliki \textit{queue} dalam sebuah \textit{problem}.
+				                        Fungsi ini digunakan untuk mengembalikan sebuah \textit{boolean} yang menyatakan bahwa \textit{username} masih memiliki \textit{queue} dalam sebuah \textit{problem}.
 				                  \item \verb|get_queue()| \\
 				                        Mengambil semua \textit{submission queue}.
 				                  \item \verb|empty_queue()| \\
@@ -1341,7 +1360,7 @@ CMD ["apache2-foreground"]
 				                  \item \verb|add_to_queue($submit_info)| \\
 				                        Menambahkan sebuah \textit{submission} ke dalam \textit{queue}.
 				                  \item \verb|rejudge($assignment_id, $problem_id)| \\
-				                        Menambahkan seluruh \textit{submissions} dalam sebuah \textit{problem} ke dalam \textit{queue} untuk dinilai ulang.
+				                        Fungsi ini digunakan untuk menambahkan seluruh \textit{submissions} dalam sebuah \textit{problem} ke dalam \textit{queue} untuk dinilai ulang.
 				                  \item \verb|rejudge_single($submission)| \\
 				                        Menambahkan sebuah \textit{submission} ke dalam \textit{queue} untuk dinilai ulang.
 				                  \item \verb|get_first_item()| \\
@@ -1351,11 +1370,11 @@ CMD ["apache2-foreground"]
 				                  \item \verb|save_judge_result_in_db ($submission, $type)| \\
 				                        Menyimpan hasil penilaian \textit{judge} ke dalam \textit{database}.
 				                  \item \verb|add_to_queue_exec($submit_info)| \\
-				                        Menambahkan sebuah \textit{dummy submission} yang digunakan hanya untuk dijalankan ke dalam \textit{queue}.
+				                        Fungsi ini digunakan untuk menambahkan sebuah \textit{dummy submission} yang digunakan hanya untuk dijalankan ke dalam \textit{queue}.
 			                  \end{itemize}
 
 			            \item \verb|Scoreboard_model.php| \\
-			                  Model ini digunakan untuk mengelola tabel \verb|scoreboard|. Fungsi yang dimiliki adalah sebagai berikut:
+			                  Model ini digunakan untuk mengelola tabel \verb|scoreboard|. Fungsi yang dimiliki oleh \textit{model} \verb|Scoreboard_model.php| adalah sebagai berikut:
 
 			                  \begin{itemize}
 				                  \item \verb|_generate_scoreboard($assignment_id)| \\
@@ -1369,7 +1388,7 @@ CMD ["apache2-foreground"]
 			                  \end{itemize}
 
 			            \item \verb|Settings_model.php| \\
-			                  Model ini digunakan untuk mengelola tabel \verb|settings|. Fungsi yang dimiliki adalah sebagai berikut:
+			                  Model ini digunakan untuk mengelola tabel \verb|settings|. Fungsi yang dimiliki oleh \textit{model} \\\verb|Settings_model.php| adalah sebagai berikut:
 
 			                  \begin{itemize}
 				                  \item \verb|get_setting($key)| \\
@@ -1383,7 +1402,7 @@ CMD ["apache2-foreground"]
 			                  \end{itemize}
 
 			            \item \verb|Submit_model.php| \\
-			                  Model ini digunakan untuk mengelola tabel \verb|submission|. Fungsi yang dimiliki adalah sebagai berikut:
+			                  Model ini digunakan untuk mengelola tabel \verb|submission|. Fungsi yang dimiliki oleh \textit{model} \verb|Submit_model.php| adalah sebagai berikut:
 
 			                  \begin{itemize}
 				                  \item \verb|get_submission($username, $assignment, $problem, $submit_id)| \\
@@ -1403,7 +1422,7 @@ CMD ["apache2-foreground"]
 			                  \end{itemize}
 
 			            \item \verb|User.php| \\
-			                  Model ini digunakan untuk menyimpan \textit{settings} sebuah \textit{user}. Fungsi yang dimiliki adalah sebagai berikut:
+			                  Model ini digunakan untuk menyimpan \textit{settings} sebuah \textit{user}. Fungsi yang dimiliki oleh \textit{model} \verb|User.php| adalah sebagai berikut:
 
 			                  \begin{itemize}
 				                  \item \verb|select_assignment($assignment_id)| \\
@@ -1415,7 +1434,7 @@ CMD ["apache2-foreground"]
 			                  \end{itemize}
 
 			            \item \verb|User_model.php| \\
-			                  Model ini digunakan untuk mengelola tabel \verb|users|. Fungsi yang dimiliki adalah sebagai berikut:
+			                  Model \verb|User_model.php| digunakan untuk mengelola tabel \verb|users|. Fungsi yang dimiliki oleh \textit{model} \verb|User_model.php| adalah sebagai berikut:
 
 			                  \begin{itemize}
 				                  \item \verb|have_user($username)| \\
@@ -1460,11 +1479,11 @@ CMD ["apache2-foreground"]
 		      \item \textbf{View}
 		            \label{sub:3:1:1:view}
 
-		            \textit{View} merupakan tampilan yang menjadi perantara antara pengguna dan \textit{sistem}. Pada SharIF Judge, \textit{View} disimpan pada direktori \verb|application/views| dan dibagi menjadi 3 direktori terpisah yaitu:
+		            \textit{View} merupakan tampilan yang menjadi perantara antara pengguna dan \textit{sistem}. \textit{View} disimpan pada direktori \verb|application/views| dan dibagi menjadi 3 direktori terpisah yaitu:
 
 		            \begin{itemize}
 			            \item \verb|errors| \\
-			                  Pada direktori \textit{errors}, berisi tampilan halaman \textit{error} jika terjadi error pada pengunaan SharIF Judge. Berikut merupakan \textit{view} yang terdapat pada direktori \verb|errors|:
+			                  Pada direktori \textit{errors}, berisi tampilan halaman \textit{error} jika terjadi error pada pengunaan SharIF Judge. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|errors|:
 
 			                  \begin{itemize}
 				                  \item \verb|error_404|
@@ -1499,6 +1518,7 @@ CMD ["apache2-foreground"]
 					                        \item \verb|users.twig|
 				                        \end{itemize}
 
+				                        \vspace{0.25cm}
 				                  \item \verb|pages/authentication| \\
 				                        Direktori \textit{authentication} berisi tampilan halaman khusus untuk \textit{authentication} seperti halaman direktori \textit{Login}. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|admin|:
 
@@ -1522,8 +1542,10 @@ CMD ["apache2-foreground"]
 				                  \item \verb|submit.twig|
 			                  \end{itemize}
 
+			                  \vspace{0.25cm}
+
 			            \item \verb|templates| \\
-			                  Pada direktori \textit{templates}, berisikan tampilan yang digunakan berulang oleh halaman utama seperti \textit{header}, \textit{side bar}, dan \textit{base}. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|templates|:
+			                  Pada direktori \textit{templates}, berisikan tampilan yang digunakan berulang oleh halaman utama seperti \textit{header} dan \textit{side bar}. Berikut merupakan \textit{views} yang terdapat pada direktori \verb|templates|:
 
 			                  \begin{itemize}
 				                  \item \verb|base.twig|
@@ -1533,6 +1555,8 @@ CMD ["apache2-foreground"]
 			                  \end{itemize}
 
 		            \end{itemize}
+
+		            \newpage
 
 		      \item \textbf{Controller}
 		            \label{sub:3:1:1:controller}
@@ -1544,6 +1568,15 @@ CMD ["apache2-foreground"]
 			                  Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Assignments.php|:
 
 			                  \begin{itemize}
+				                  \item \verb|index()| \\
+				                        Mengambil data dari \verb|Assignment_model| dan menaruh data dan mengembalikan \textit{views} \verb|assignments.twig|. Gambar \ref{fig:3:1:1:assignments} menunjukkan hasil halaman Assignment.
+
+				                        \begin{figure}[H]
+					                        \centering
+					                        \includegraphics[width=0.8\textwidth]{views/assignments.png}
+					                        \caption{Halaman Assignments}
+					                        \label{fig:3:1:1:assignments}
+				                        \end{figure}
 				                  \item \verb|select()| \\
 				                        Memilih \textit{assignment} yang ditampilkan pada \textit{top bar} menggunakan \textit{ajax request}.
 				                  \item \verb|pdf($assignment_id, $problem_id, $no_download)| \\
@@ -1555,40 +1588,34 @@ CMD ["apache2-foreground"]
 				                  \item \verb|delete($assignment_id)| \\
 				                        Menghapus sebuah \textit{assignment}.
 				                  \item \verb|add()| \\
-				                        Mendapatkan \textit{input} dari pengguna untuk menambah atau memperbaharui sebuah \textit{assignment}.
+				                        Mendapatkan \textit{input} dari pengguna dan mengirimkan \textit{input} pada fungsi \verb|_add()|.
 				                  \item \verb|_add()| \\
 				                        Menambahkan atau memperbaharui sebuah \textit{assignment}.
 				                  \item \verb|edit($assignment_id)| \\
 				                        Menandai \textit{assignment} yang akan di \textit{edit} dan memanggil fungsi \verb|add|.
 				                  \item \verb|pdfCheck($assignment_id, $problem_id)| \\
 				                        Melakukan validasi ketersediaan pdf pada sebuah \textit{assignment} atau pada sebuah \textit{problem}.
-				                  \item \verb|index()| \\
-				                        Mengambil data dari \verb|Assignment_model| dan menaruh data dan mengembalikan \textit{views} \verb|assignments.twig|. Gambar \ref{fig:3:1:1:assignments} menunjukkan hasil halaman Assignment.
-
-				                        \begin{figure}[H]
-					                        \centering
-					                        \includegraphics[width=0.8\textwidth]{views/assignments.png}
-					                        \caption{Halaman Assignments}
-					                        \label{fig:3:1:1:assignments}
-				                        \end{figure}
 			                  \end{itemize}
 
 			            \item \verb|Dashboard.php| \\
 			                  Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Dashboard.php|:
 
 			                  \begin{itemize}
-				                  \item \verb|widget_positions()| \\
-				                        Mengunakan \textit{ajax request} untuk menyimpan posisi \textit{widget}.
-
 				                  \item \verb|index()| \\
 				                        Mendapatkan data dari beberapa model yaitu \verb|Assignment_model|, \verb|Settings_model|, \verb|User|, dan \verb|Notifications_model|. Data akan dimasukkan ke dalam \verb|dashboard.twig| yang akan dikembalikan ke pengguna. Gambar \ref{fig:3:1:1:dashboard} menunjukkan hasil halaman Dashboard yang dapat diakses oleh semua \textit{role}.
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.8\textwidth]{views/dashboard.png}
+					                        \includegraphics[width=0.75\textwidth]{views/dashboard.png}
 					                        \caption{Halaman Dashboard}
 					                        \label{fig:3:1:1:dashboard}
+					                        \vspace{-0.25cm}
 				                        \end{figure}
+
+
+				                  \item \verb|widget_positions()| \\
+				                        Mengunakan \textit{ajax request} untuk menyimpan posisi \textit{widget}.
+
 
 			                  \end{itemize}
 
@@ -1596,17 +1623,19 @@ CMD ["apache2-foreground"]
 			                  Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Halloffame.php|:
 
 			                  \begin{itemize}
-				                  \item \verb|hof_details()| \\
-				                        Menampilkan nilai akhir semua \textit{problem} dan \textit{assignments} pada sebuah \textit{user}.
 				                  \item \verb|index()| \\
 				                        Mendapatkan data dari \verb|Hof_model| dan mengembalikan \textit{view} \verb|halloffame.twig|. Gambar \ref{fig:3:1:1:hof} menunjukkan hasil halaman Hall of Fame yang dapat diakses oleh semua \textit{role}.
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.8\textwidth]{views/hof.png}
+					                        \includegraphics[width=0.75\textwidth]{views/hof.png}
 					                        \caption{Halaman Hall of Fame}
 					                        \label{fig:3:1:1:hof}
+					                        % \vspace{-1.1cm}
 				                        \end{figure}
+
+				                  \item \verb|hof_details()| \\
+				                        Menampilkan nilai akhir semua \textit{problem} dan \textit{assignments} pada sebuah \textit{user}.
 
 			                  \end{itemize}
 
@@ -1615,7 +1644,7 @@ CMD ["apache2-foreground"]
 
 			                  \begin{figure}[H]
 				                  \centering
-				                  \includegraphics[width=0.8\textwidth]{views/install.png}
+				                  \includegraphics[width=0.85\textwidth]{views/install.png}
 				                  \caption{Halaman Install}
 				                  \label{fig:3:1:1:install}
 			                  \end{figure}
@@ -1625,6 +1654,15 @@ CMD ["apache2-foreground"]
 			                  Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Login.php|:
 
 			                  \begin{itemize}
+				                  \item \verb|index()| \\
+				                        Mengembalikan \textit{view} \verb|login.twig| dan memeriksa username dan password pada \textit{form} saat di kirim. Gambar \ref{fig:3:1:1:login} menunjukkan hasil halaman Login.
+
+				                        \begin{figure}[H]
+					                        \centering
+					                        \includegraphics[width=0.85\textwidth]{views/login.png}
+					                        \caption{Halaman Login}
+					                        \label{fig:3:1:1:login}
+				                        \end{figure}
 				                  \item \verb|_registration_code($code)| \\
 				                        Melakukan validasi kode registrasi.
 				                  \item \verb|register()| \\
@@ -1635,15 +1673,6 @@ CMD ["apache2-foreground"]
 				                        Mengirimkan email \textit{reset password}.
 				                  \item \verb|reset($passchange_key)| \\
 				                        Melakukan \textit{reset password} dengan halaman \verb|reset_password.twig|.
-				                  \item \verb|index()| \\
-				                        Mengembalikan \textit{view} \verb|login.twig| dan memeriksa username dan password pada \textit{form} saat di kirim. Gambar \ref{fig:3:1:1:login} menunjukkan hasil halaman Login.
-
-				                        \begin{figure}[H]
-					                        \centering
-					                        \includegraphics[width=0.8\textwidth]{views/login.png}
-					                        \caption{Halaman Login}
-					                        \label{fig:3:1:1:login}
-				                        \end{figure}
 
 			                  \end{itemize}
 
@@ -1652,7 +1681,7 @@ CMD ["apache2-foreground"]
 
 			                  \begin{figure}[H]
 				                  \centering
-				                  \includegraphics[width=0.8\textwidth]{views/log.png}
+				                  \includegraphics[width=\textwidth]{views/log.png}
 				                  \caption{Halaman 24-Hour Log}
 				                  \label{fig:3:1:1:log}
 			                  \end{figure}
@@ -1724,14 +1753,6 @@ CMD ["apache2-foreground"]
 			                  Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Profile.php|:
 
 			                  \begin{itemize}
-				                  \item \verb|_password_check($str)| \\
-				                        Melakukan validasi \textit{input password}.
-				                  \item \verb|_password_again_check($str)| \\
-				                        Melakukan validasi \textit{input} tulisan pengulangan \textit{password}.
-				                  \item \verb|_email_check($str)| \\
-				                        Melakukan validasi ketersediaan email pada \textit{database}.
-				                  \item \verb|_role_check($str)| \\
-				                        Melakukan validasi \textit{role} pengguna saat ingin mengubah \textit{role user}.
 				                  \item \verb|index()| \\
 				                        Mendapatkan data dari berbagai \textit{model} terutama dari \textit{User} yang akan dimasukkan ke dalam \textit{view} \verb|profile.twig|. Fungsi ini juga menangani pengiriman \textit{form} pembaharuan data \textit{user} pengguna. Gambar \ref{fig:3:1:1:profile} menunjukkan hasil halaman Profile.
 
@@ -1741,7 +1762,14 @@ CMD ["apache2-foreground"]
 					                        \caption{Halaman Profile}
 					                        \label{fig:3:1:1:profile}
 				                        \end{figure}
-
+				                  \item \verb|_password_check($str)| \\
+				                        Melakukan validasi \textit{input password}.
+				                  \item \verb|_password_again_check($str)| \\
+				                        Melakukan validasi \textit{input} tulisan pengulangan \textit{password}.
+				                  \item \verb|_email_check($str)| \\
+				                        Melakukan validasi ketersediaan email pada \textit{database}.
+				                  \item \verb|_role_check($str)| \\
+				                        Melakukan validasi \textit{role} pengguna saat ingin mengubah \textit{role user}.
 			                  \end{itemize}
 
 			            \item \verb|Queue.php| \\
@@ -1822,6 +1850,14 @@ CMD ["apache2-foreground"]
 			                  Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Submissions.php|:
 
 			                  \begin{itemize}
+				                  \item \verb|the_final()| \\
+				                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}. Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions .
+				                        \begin{figure}[H]
+					                        \centering
+					                        \includegraphics[width=0.8\textwidth]{views/final_submissions.png}
+					                        \caption{Halaman Final Submissions}
+					                        \label{fig:3:1:1:final}
+				                        \end{figure}
 				                  \item \verb|_download_excel($view)| \\
 				                        Menggunakan \textit{library} PHPExcel untuk membuat sebuah \textit{file excel} dari \textit{submissions} yang akan diunduh pengguna.
 				                  \item \verb|final_excel()| \\
@@ -1836,14 +1872,6 @@ CMD ["apache2-foreground"]
 				                        Digunakan untuk melihat kode, melihat hasil kode, atau melihat \textit{log} sebuah \textit{submission}.
 				                  \item \verb|download_file()| \\
 				                        Mengunduh \textit{file} kode sebuah \textit{submission}.
-				                  \item \verb|the_final()| \\
-				                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}. Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions .
-				                        \begin{figure}[H]
-					                        \centering
-					                        \includegraphics[width=0.8\textwidth]{views/final_submissions.png}
-					                        \caption{Halaman Final Submissions}
-					                        \label{fig:3:1:1:final}
-				                        \end{figure}
 
 				                  \item \verb|all()| \\
 				                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan seluruh \textit{submission} dan menampilkan halaman \verb|submission.twig| berisi semua \textit{submission}. Gambar \ref{fig:3:1:1:all} menunjukkan halaman All Submissions .
@@ -1881,11 +1909,11 @@ CMD ["apache2-foreground"]
 				                  \item \verb|get_output($problem_id)| \\
 				                        Mendapatkan keluaran dari kode yang telah dijalankan sebagai hasil eksekusi.
 				                  \item \verb|index()| \\
-				                        Mendapatkan data dari \textit{model} \verb|Assignments_model| untuk mendapatkan \textit{problem} dan data lainnya. Semua data akan dimasukkan dalam \textit{view} \verb|submit.twig|. Gambar \ref{fig:3:1:1:submit} menunjukkan hasil halaman Submit. Halaman ini terdapat editor kode yang sudah di implementasikan~\cite{nicholas:sharif}.
+				                        Mendapatkan data dari \textit{model} \verb|Assignments_model| untuk mendapatkan \textit{problem} dan data lainnya. Semua data akan dimasukkan dalam \textit{view} \verb|submit.twig|. Gambar \ref{fig:3:1:1:submit} menunjukkan hasil halaman Submit. Halaman ini terdapat editor kode yang sudah di implementasikan oleh Nicholas Aditya Halim\footnote{Halim, N.~A. (2021) {Implementasi Editor Kode pada SharIF Judge}. Skripsi. Universitas Katolik Parahyangan,  Indonesia.}.
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.8\textwidth]{views/submit.png}
+					                        \includegraphics[width=0.75\textwidth]{views/submit.png}
 					                        \caption{Halaman Submit}
 					                        \label{fig:3:1:1:submit}
 				                        \end{figure}
@@ -1905,7 +1933,7 @@ CMD ["apache2-foreground"]
 				                  \item \verb|list_excel()| \\
 				                        Menggunakan \textit{library} PHPExcel untuk membuat sebuah file excel dari seluruh daftar \textit{user} yang akan diunduh pengguna.
 				                  \item \verb|index()| \\
-				                        Mendapatkan data dari \verb|User_model| dan menunjukkan \textit{view} \verb|users.twig|. Gambar \ref{fig:3:1:1:users} menunjukkan hasil halaman Users. Pada halaman ini terdapat daftar seluruh \textit{user} yang terdaftar pada SharIF Judge. Pengguna dapat membuat, memperbaharui, dan menghapus \textit{user}.
+				                        Fungsi ini digunakan akan mendapatkan data dari \verb|User_model| dan menunjukkan \textit{view} \verb|users.twig| dengan data tersebut. Gambar \ref{fig:3:1:1:users} menunjukkan hasil halaman Users. Pada halaman ini terdapat daftar seluruh \textit{user} yang terdaftar pada SharIF Judge. Pengguna dapat membuat, memperbaharui, dan menghapus \textit{user}.
 
 				                        \begin{figure}[H]
 					                        \centering
@@ -1934,7 +1962,7 @@ CMD ["apache2-foreground"]
 		      \item Variable pada PHP
 	      \end{itemize}
 
-	      Pada saat template dievaluasi, semua \textit{variable} atau \textit{expression} akan dibuah menjadi value dan \textit{tag} yang mengontrol logika template.
+	      Pada saat template dievaluasi, semua \textit{variable} atau \textit{expression} akan dibuah menjadi value dan \textit{tag} yang mengontrol logika template. Berikut contoh kode menggunakan \textit{twig}.
 
 	      \begin{lstlisting}[language={php}, caption={Contoh template Twig}, label={kode:2:twig}]
 {% extends "base.html" %}
@@ -1952,7 +1980,7 @@ CMD ["apache2-foreground"]
 {% endblock navigation %}
 			\end{lstlisting}
 
-	      Kode \ref{kode:2:twig} merupakan contoh sebuah template Twig. Terdapat dua jenis \textit{delimiter}, yaitu \verb|{% ... %}| dan \verb|{{ ... }}|. \textit{Delimiter} \verb|{% ... %}| digunakan untuk Menjalankan sebuah \textit{statement} seperti \textit{for-loops}, sedangkan \textit{delimiter} \verb|{{ ... }}| digunakan untuk mengubah sebuah \textit{variable} atau \textit{expression} menjadi nilai sesungguhnya.
+	      Kode \ref{kode:2:twig} merupakan contoh sebuah template Twig. Terdapat dua jenis \textit{delimiter}, yaitu \verb|{% ... %}| dan \verb|{{ ... }}|. \textit{Delimiter} \verb|{% ... %}| digunakan untuk Menjalankan sebuah \textit{statement} seperti \textit{for-loops}, sedangkan \textit{delimiter} \verb|{{ ... }}| digunakan untuk mengubah sebuah \textit{variable} atau \textit{expression} menjadi sebuah html biasa dengan nilai \textit{variable} atau \textit{expression} tersebut.
 
 
 	\item \textbf{Melakukan studi mengenai cara penyimpanan rekaman ketikan.} \\
@@ -1975,7 +2003,7 @@ CMD ["apache2-foreground"]
 
 	      Penyimpanan \textit{event} akan di lakukan oleh \textit{Controller} \verb|Submit| yang akan menyimpan \textit{file} pada saat kode disimpan. Maka fungsi yang akan dimodifikasi adalah fungsi \verb|save()|.
 
-	      Untuk tugas akhir 2 akan melakukan studi mengenai tipe file yang akan digunakan seperti JSON, BSON, atau Protocol Buffer. Hal ini tidak dapat diselesaikan pada tugas akhir ini karena pada tugas akhir 1 memfokuskan analisis mengenai cara kerja berbagai \textit{framework} yang terdapat SharIF Judge serta SharIF Judgenya juga.
+	      Untuk tugas akhir 2 akan melakukan studi mengenai tipe file yang akan digunakan seperti JSON, BSON, atau Protocol Buffer. Hal ini tidak dapat diselesaikan pada tugas akhir ini karena pada tugas akhir 1 memfokuskan analisis mengenai cara kerja berbagai \textit{framework} yang terdapat SharIF Judge dan juga mempelajari SharIF Judgenya juga.
 
 	\item \textbf{Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.} \\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
@@ -1998,24 +2026,27 @@ CMD ["apache2-foreground"]
 
 	      Pada SharIF Judge dibutuhkannya juga beberapa hal baru yaitu \textit{Controller} \verb|Recording.php|, \textit{View} \verb|recording.twig|, \textit{Model} \verb|Recording_model.php|, dan \textit{Javascript} \verb|shj_recording.js|.
 
+	      \vspace{0.15cm}
 	      \textit{Controller} \verb|Recording.php| akan memiliki beberapa fungsi utama yaitu:
 	      \begin{itemize}
 		      \item \verb|index()| \\
-		            fungsi ini akan mengambil list recording sesuai dengan \textit{assignment} \textit{problem} yang dipilih dan mengembalikan \textit{view} \verb|recording.twig|
+		            Fungsi \verb|index()| akan mengambil list recording sesuai dengan \textit{assignment} \textit{problem} yang dipilih dan mengembalikan \textit{view} \verb|recording.twig|
 		      \item \verb|load_recording()| \\
-		            fungsi ini akan digunakan untuk mengambil file yang sudah di simpan pada server dan mengembalikannya.
+		            Fungsi \verb|load_recording()| akan digunakan untuk mengambil file yang sudah di simpan pada server dan mengembalikannya.
 	      \end{itemize}
 
+	      \vspace{0.15cm}
 	      Untuk \textit{model} \verb|Recording_model.php| akan memiliki beberapa fungsi utama yaitu:
 	      \begin{itemize}
 		      \item \verb|save_recording()| \\
-		            fungsi ini akan digunakan untuk menyimpan file recoding pada \textit{database} \verb|recoding|.
+		            Fungsi ini akan digunakan untuk menyimpan file recoding pada \textit{database} \verb|recoding|.
 		      \item \verb|delete_recording()| \\
-		            fungsi ini akan digunakan untuk menghapus file recoding pada \textit{database} \verb|recoding|.
+		            Fungsi ini akan digunakan untuk menghapus file recoding pada \textit{database} \verb|recoding|.
 		      \item \verb|get_list_recording()| \\
-		            fungsi ini akan digunakan untuk mengembalikan \textit{list recoding} pada \textit{database}.
+		            Fungsi ini akan digunakan untuk mengembalikan \textit{list recoding} pada \textit{database}.
 	      \end{itemize}
 
+	      \vspace{0.15cm}
 	      \textit{Javasciprt} yang akan dibuat pada \verb|shj_recording.js| akan memiliki berbagai fungsi yaitu sebagai berikut:
 
 	      \begin{itemize}
@@ -2024,16 +2055,20 @@ CMD ["apache2-foreground"]
 		      \item Fungsi untuk menjalankan, memberhentikan \textit{recording} dari \textit{file} JSON.
 	      \end{itemize}
 
-	      Untuk tugas akhir 2 akan memodelkan perubahan pada SharIF Judge lebih lanjut. Hal ini tidak dapat diselesaikan pada tugas akhir ini karena pada tugas akhir 1 memfokuskan analisis mengenai cara kerja berbagai \textit{framework} yang terdapat SharIF Judge serta SharIF Judgenya juga.
+	      \vspace{0.15cm}
+	      Untuk tugas akhir 2 pekerjaan yang akan dilanjutkan adalah untuk memodelkan perubahan pada SharIF Judge lebih lanjut. Hal ini tidak dapat diselesaikan pada tugas akhir ini karena pada tugas akhir 1 memfokuskan analisis mengenai cara kerja berbagai \textit{framework} yang terdapat SharIF Judge dan juga mempelajari SharIF Judgenya juga.
 
+	      \vspace{0.5cm}
 	\item \textbf{Menulis dokumen skripsi}\\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :} Sudah menulis sebagian dokumen skripsi yaitu bab 1, 2, dan 3.
 
+	      \vspace{0.5cm}
 	\item \textbf{Implementasi sistem pemutaran ketikan ulang}\\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :} Akan dikerjakan pada tugas akhir 2.
 
+	      \vspace{0.5cm}
 	\item \textbf{Melakukan Pengujian dan eksperimen}\\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :} Akan dikerjakan pada tugas akhir 2.
@@ -2041,12 +2076,14 @@ CMD ["apache2-foreground"]
 
 \end{enumerate}
 
+\newpage
+
 \section{Pencapaian Rencana Kerja}
 Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah sebagai berikut:
 \begin{enumerate}
 	\item Mempelajari bahasa pemrograman PHP
-	\item Melakukan studi literatur mengenai \textit{CodeIgniter 3}, editor kode \textit{Ace}, SharIF Judge, cara penyimpanan rekaman ketikan.
-	      % \item Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.
+	\item Melakukan studi literatur mengenai \textit{CodeIgniter 3}, editor kode \textit{Ace}, SharIF Judge.
+	\item Merencanakan perubahan pada structur website dan database pada SharIF-Judge.
 	\item Menulis dokumen skripsi yaitu bab 1, 2, dan 3.
 \end{enumerate}
 
