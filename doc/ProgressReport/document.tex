@@ -138,7 +138,6 @@ Algoritma itu seperti resep makanan, dimana akan ada bahan-bahan yang dibutuhkan
 
 Sebagian besar program yang bersifat algoritmik hanyak perlu mengambil \textit{input} dari \textit{input} standar seperti angka, huruf, dan sebuah kata atau kalimat dengan format yang sudah ditentukan, seolah-olah \textit{input} ini merupakan \textit{output} dari program lain. Kemudian program algoritmik akan memproses \textit{input} tersebut dalam komputer dan mengeluarkan hasil komputasinya dalam format yang sudah ditentukan untuk dibaca oleh program lain dan memanfaatkan hasil komputasi tersebut. Singkatnya, program algoritmik itu seperti \textit{filter} antar program. Dengan ini, sistem penilaian secara otomatis dapat dibuat dengan membuat sebuah program yang mengambil kode program, memasukkan \textit{input} sesuai format ke dalam program tersebut, membaca hasil keluaran program, dan menilai hasil keluaran program tersebut\footnote{Kurnia, A., Lim, A., dan Cheang, B. (2001) Online judge. {\em Computers \& Education}.}. Sistem penilaian otomatis \mbox{ini diberikan nama \textit{Online Judge}}. Terlebih lagi sistem ini dapat dilakukan secara \textit{offline} maupun \textit{online}. Gambar \ref{fig:1:onlinejudge} menunjukkan bagaimana \textit{online judge} berintegrasi dengan sistem \mbox{pemberian tugas yang sudah ada.}
 
-
 Tugas pemrograman sudah menjadi keseharian dalam pembelajaran pada bidang informatika.
 Termasuk pada perguruan tinggi pada bidang informatika, maka \textit{online judge} menjadi sebuah kebutuhan termasuk pada Universitas Katolik Parahyangan atau yang biasa disebut UNPAR.
 \textit{Online Judge} yang digunakan oleh UNPAR dinamakan SharIF-Judge\footnote{Vallian, S. (2018) {Kustomisasi Sharif Judge Untuk Kebutuhan Program Studi Teknik Informatika}. Skripsi. Universitas Katolik Parahyangan, Indonesia.} yang merupakan hasil dimodifikasi oleh Stillmen Vallian terhadap Sharif-Judge\footnote{Version 1.4 (2014) {\em Sharif Judge Documentation}. Mohammad Javad Naderi. Tehran, Iran.} buatan Mohammad Javad Naderi yang dibuat menggunakan \textit{framework} CodeIgniter dan Bash. Gambar~\ref{fig:1:dashboardpng} merupakan halaman utama setelah masuk ke dalam SharIF-Judge.
@@ -411,7 +410,7 @@ $array = array(1, 'str');
 		            \end{comment}
 
 		      \item \textbf{Associative Arrays} \\ % array key string
-		            Dalam array biasa, index merupakan sebuah angka yang terus bertambah yang dimulai dari 0. Tetapi \textit{associative array} menggunakan index yang berbeda-beda seperti menggunakan string atau teks. Index pada \textit{associative array} dinamakan \textit{key}. Berikut contoh mendeklarasi sebuah \textit{associative array}:
+		            Dalam array biasa, index merupakan sebuah angka yang terus bertambah yang dimulai dari 0. Tetapi \textit{associative array} menggunakan index yang berbeda-beda seperti menggunakan string atau teks. Index pada \textit{associative array} dinamakan \textit{key}. Berikut contoh mendeklarasi sebuah \textit{associative~array}:
 
 		            \begin{lstlisting}[language={php}, caption={Contoh mendeklarasi associative array}, label={kode:5:aarrayex}]
 $list = ['first' => 'a', 'second' => 'b'];
@@ -476,9 +475,6 @@ switch (variabel) {
 	case nilai1:
 		// kode blok yang akan dijalankan hingga ditemukan break jika variabel sama dengan nilai1
 		break;
-	case nilai2:
-		// kode blok yang akan dijalankan hingga ditemukan break jika variabel sama dengan nilai2
-		break;
 	default:
 		// kode blok yang akan dijalankan jika tidak ada kasus yang sesuai
 }
@@ -529,7 +525,7 @@ do {
 								\end{lstlisting}
 
 			            \item \verb|for| \\
-			                  \verb|For| mirip dengan \verb|while|, tetapi untuk mendefinisikan variabel yang digunakan dalam kondisi sebelum perulangan, dan untuk menaikkan variabel kondisi tersebut secara manual, semuanya dilakukan pada baris dalam \verb|for|. Kode \ref{kode:5:for_notasi} merupakan notasi untuk menggunakan \verb|for| dalam PHP.
+			                  \verb|For| mirip dengan \verb|while|, tetapi untuk mendefinisikan variabel yang digunakan dalam kondisi sebelum perulangan, dan untuk menaikkan variabel kondisi tersebut secara manual, semuanya dilakukan pada baris dalam \verb|for|. Kode \ref{kode:5:for_notasi} merupakan notasi untuk menggunakan~\verb|for|~dalam~PHP.
 
 			                  \begin{lstlisting}[language={php}, caption={Notasi for}, label={kode:5:for_notasi}]
 for (initialization; condition; increment/decrement) {
@@ -572,7 +568,7 @@ function functionName($parameter1, $parameter2, ...) {
 }
 			  \end{lstlisting}
 
-		            Kode \ref{kode:5:fungsi_notasi} merupakan notasi untuk membuat fungsi dalam PHP. Dimulai dengan \textit{keyword function}, dilanjutkan dengan nama fungsinya, selanjutnya terdapat tanda kurung `()' yang didalamnya dapat diberikan parameter, dan terakhir diikuti oleh tanda kurung kurawal `{}'. Parameter dalam fungsi itu bersifat opsional, dan digunakan untuk menerima variable dari luar kedalam fungsi tersebut. Tetapi saat fungsi dipanggil kembali jika memiliki parameter maka pemberian paramater untuk fungsi itu bersifat wajib, jika tidak memiliki parameter yang tepat maka php \textit{interpreter} akan mengeluarkan error. Pada kode \ref{kode:5:fungsi_notasi} dalam blok kode, ada sebuah \textit{keyword} \verb|return| yang berarti fungsi akan mengembalikan nilai \verb|$nilai| (yang dapat diganti menjadi apapun) ke pemanggil fungsi tersebut.
+		            Kode \ref{kode:5:fungsi_notasi} merupakan notasi untuk membuat fungsi dalam PHP. Dimulai dengan \textit{keyword function}, dilanjutkan dengan nama fungsinya, selanjutnya terdapat kurung `()' yang didalamnya dapat diberikan parameter, dan terakhir diikuti oleh kurung kurawal `{}'. Parameter dalam fungsi itu bersifat opsional, dan digunakan untuk menerima variable dari luar kedalam fungsi tersebut. Tetapi saat fungsi dipanggil jika memiliki parameter maka pemberian paramater untuk fungsi itu bersifat wajib, jika tidak memiliki parameter yang tepat maka php \textit{interpreter} akan mengeluarkan error. Pada kode \ref{kode:5:fungsi_notasi} dalam blok kode, ada sebuah \textit{keyword} \verb|return| yang berarti fungsi akan mengembalikan nilai \verb|$nilai| (yang dapat diganti menjadi apapun) ke pemanggil fungsi tersebut.
 
 		            Untuk memanggil sebuah fungsi dalam PHP dapat menggunakan notasi seperti berikut.
 
@@ -598,7 +594,7 @@ $varGlobal = "global variabel";
 
 function myFunc() {
 	global $varGlobal;
-	echo $varGlobal;  // Keluaran: global variabel
+	echo $varGlobal; // Keluaran: global variabel
 }
 
 myFunc();
@@ -621,7 +617,6 @@ $namaFungsi();  // Keluaran: Hello, World!
 $myfunction = function() {
 	// Kode blok yang dijalankan
 };
-
 $myfunction();
 					\end{lstlisting}
 
@@ -630,13 +625,11 @@ $myfunction();
 
 		            \begin{lstlisting}[language={php}, caption={Contoh penggunaan use}, label={kode:5:fungsi_exuse}]
 $test = 'test';
-
 $myfunction = function() use ($test) {
 	echo $test;
 	return 'ok';
 };
-
-$myfunction();
+$myfunction(); // Keluaran : test
 					\end{lstlisting}
 
 		            Selanjutnya adalah fungsi bernama \textit{callback} yang merupakan fungsi yang diteruskan sebagai parameter ke dalam fungsi lain. \textit{Callback} sering digunakan dalam {event handling} atau manipulasi variable array. Contoh penggunaan \textit{callback} adalah sebagai berikut:
@@ -715,7 +708,7 @@ class Dog {
 		            Untuk memanggil \textit{attributes} atau \textit{methods} dalam variable tersebut, butuh sebuah tanda baca panah (\verb|->|) yang menandakan php \textit{interpreter} untuk mengakses ke dalam instance object tersebut. Untuk
 		            Seperti contoh menggunakan kode \ref{kode:5:class_ex} untuk membuat kelas baru dan mengakses data didalam kelas tersebut adalah sebegai berikut:
 
-		            \begin{lstlisting}[language={php}, caption={Contoh Kelas}, label={kode:5:class_call_ex}]
+		            \begin{lstlisting}[language={php}, caption={Contoh Pemanggilan Kelas}, label={kode:5:class_call_ex}]
 $robert = new Dog();
 $robert->name = 'Robert';
 $robert->bark(); // Keluaran: Robert barked!
@@ -817,7 +810,6 @@ try {
 
 			                  \textit{Model} mewakili struktur data pada sistem untuk mengambil, memasukkan, dan memperbaharui data pada \textit{database}. \textit{Model} dapat dibuat dengan membuat sebuah kelas yang mengekstensi \verb|CI_Model| dan diletakkan pada \verb|application/models/|.
 
-			                  % TODO: Masukkin ke dlm folder kode
 			                  \begin{lstlisting}[language=php, caption=Contoh \textit{model}, label=kode:2:2:1:model]
 class Blog_model extends CI_Model {
 
@@ -978,23 +970,35 @@ class Blog_controller extends CI_Controller {
 
 	      Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 
-	      % TODO: Butuh dilengkapi sesuai kebutuhan kode yang akan ditulis
-	      % TODO: Butuh tambahin kalo si ace bisa nangkep event apa aja?
-	      % TODO: Tambahin penjelasan tentang Session, Selector, Selection, Commands
-
 	      \begin{itemize}
 		      \item \verb|Ace| \\
 		            Merupakan kelas utama untuk menyiapkan editor kode Ace pada \textit{browser}
+		      \item \verb|Editor| \\
+		            Entri utama untuk fungsionalitas library Ace. Editor sendiri merepresentasikan editor kode yang dibuat pada web. Pada editor sendiri disediakannya \textit{event listener} yaitu sebagai berikut:
+
+		            \begin{enumerate}
+			            \item \verb|mouseup| : Mendengarkan saat melepaskan tombol pada tetikus atau \textit{mouse}.
+		            \end{enumerate}
+
+		      \item \verb|EditSession| \\
+		            Sebuah kelas yang menyimpan semua status dalam editor seperti isi editor, \textit{selection}, dan lain-lain. Kelas ini dinamakan \verb|EditSession|, tetapi untuk mengakses dari editor dinamakan \textit{session}. Pada kelas \textit{session} ada beberapa \textit{event listener} yaitu:
+
+		            \begin{enumerate}
+			            \item \verb|change| : Mendengarkan perubahan pada isi editor.
+			            \item \verb|changeCursor| : Mendengarkan perubahan pada kursor atau \textit{anchor} dalam editor.
+			            \item \verb|changeSelection| : Mendengarkan perubahan pemilihan isi kode dalam editor.
+		            \end{enumerate}
+
 		      \item \verb|Anchor| \\
-		            Menangani posisi \textit{pointer} pada dokumen.
+		            Menangani posisi \textit{pointer} pada dokumen. Saat teks dimasukkan atau dihapus, posisi \textit{anchor} akan diperbaharui.
 		      \item \verb|Document| \\
 		            Menyimpan teks dokumen.
-		      \item \verb|Editor| \\
-		            Entri utama untuk fungsionalitas library Ace.
-		      \item \verb|Session|
-		      \item \verb|Selector|
-		      \item \verb|Selection|
-		      \item \verb|Commands|
+		      \item \verb|Range| \\
+		            Kelas ini digunakan di berbagai tempat untuk mengindikasikan suatu wilayah di dalam editor. Kelas ini menyimpan posisi baris awal dan kolom awal, serta baris akhir dan kolom akhir.
+		      \item \verb|Selection| \\
+		            Kelas ini menyimpan posisi yang di pilih oleh pengguna dalam editor.
+		      \item \verb|Commands| \\
+		            Kelas ini digunakan untuk menjalankan perintah pada sebuah editor. Contoh perintah yang sudah ada dalam editor yaitu \textit{insert}, \textit{copy}, \textit{paste}. Pada kelas ini tersedia \textit{event listener} untuk mendengarkan segala \textit{event} yang sudah terjadi bernama \verb|afterExec|.
 	      \end{itemize}
 
 	      \begin{lstlisting}[language={php}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
@@ -1563,7 +1567,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/assignments.png}
+					                        \includegraphics[width=0.8\textwidth]{views/assignments.png}
 					                        \caption{Halaman Assignments}
 					                        \label{fig:3:1:1:assignments}
 				                        \end{figure}
@@ -1581,7 +1585,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/dashboard.png}
+					                        \includegraphics[width=0.8\textwidth]{views/dashboard.png}
 					                        \caption{Halaman Dashboard}
 					                        \label{fig:3:1:1:dashboard}
 				                        \end{figure}
@@ -1599,7 +1603,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/hof.png}
+					                        \includegraphics[width=0.8\textwidth]{views/hof.png}
 					                        \caption{Halaman Hall of Fame}
 					                        \label{fig:3:1:1:hof}
 				                        \end{figure}
@@ -1611,7 +1615,7 @@ CMD ["apache2-foreground"]
 
 			                  \begin{figure}[H]
 				                  \centering
-				                  \includegraphics[width=0.5\textwidth]{views/install.png}
+				                  \includegraphics[width=0.8\textwidth]{views/install.png}
 				                  \caption{Halaman Install}
 				                  \label{fig:3:1:1:install}
 			                  \end{figure}
@@ -1636,7 +1640,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/login.png}
+					                        \includegraphics[width=0.8\textwidth]{views/login.png}
 					                        \caption{Halaman Login}
 					                        \label{fig:3:1:1:login}
 				                        \end{figure}
@@ -1648,7 +1652,7 @@ CMD ["apache2-foreground"]
 
 			                  \begin{figure}[H]
 				                  \centering
-				                  \includegraphics[width=0.5\textwidth]{views/log.png}
+				                  \includegraphics[width=0.8\textwidth]{views/log.png}
 				                  \caption{Halaman 24-Hour Log}
 				                  \label{fig:3:1:1:log}
 			                  \end{figure}
@@ -1667,7 +1671,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/moss.png}
+					                        \includegraphics[width=0.8\textwidth]{views/moss.png}
 					                        \caption{Halaman Moss}
 					                        \label{fig:3:1:1:moss}
 				                        \end{figure}
@@ -1691,7 +1695,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/notifications.png}
+					                        \includegraphics[width=0.8\textwidth]{views/notifications.png}
 					                        \caption{Halaman Notifications}
 					                        \label{fig:3:1:1:notif}
 				                        \end{figure}
@@ -1709,7 +1713,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/problem.png}
+					                        \includegraphics[width=0.8\textwidth]{views/problem.png}
 					                        \caption{Halaman Problems}
 					                        \label{fig:3:1:1:problem}
 				                        \end{figure}
@@ -1733,7 +1737,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/profile.png}
+					                        \includegraphics[width=0.8\textwidth]{views/profile.png}
 					                        \caption{Halaman Profile}
 					                        \label{fig:3:1:1:profile}
 				                        \end{figure}
@@ -1755,7 +1759,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/queue.png}
+					                        \includegraphics[width=0.8\textwidth]{views/queue.png}
 					                        \caption{Halaman Queue}
 					                        \label{fig:3:1:1:queue}
 				                        \end{figure}
@@ -1776,7 +1780,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/rejudge.png}
+					                        \includegraphics[width=0.8\textwidth]{views/rejudge.png}
 					                        \caption{Halaman Rejudge}
 					                        \label{fig:3:1:1:rejudge}
 				                        \end{figure}
@@ -1788,7 +1792,7 @@ CMD ["apache2-foreground"]
 
 			                  \begin{figure}[H]
 				                  \centering
-				                  \includegraphics[width=0.5\textwidth]{views/scoreboard.png}
+				                  \includegraphics[width=0.8\textwidth]{views/scoreboard.png}
 				                  \caption{Halaman Scoreboard}
 				                  \label{fig:3:1:1:scoreboard}
 			                  \end{figure}
@@ -1807,7 +1811,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/settings.png}
+					                        \includegraphics[width=0.8\textwidth]{views/settings.png}
 					                        \caption{Halaman Settings}
 					                        \label{fig:3:1:1:settings}
 				                        \end{figure}
@@ -1836,7 +1840,7 @@ CMD ["apache2-foreground"]
 				                        Mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}. Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions .
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/final_submissions.png}
+					                        \includegraphics[width=0.8\textwidth]{views/final_submissions.png}
 					                        \caption{Halaman Final Submissions}
 					                        \label{fig:3:1:1:final}
 				                        \end{figure}
@@ -1846,7 +1850,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/all_submissions.png}
+					                        \includegraphics[width=0.8\textwidth]{views/all_submissions.png}
 					                        \caption{Halaman All Submissions}
 					                        \label{fig:3:1:1:all}
 				                        \end{figure}
@@ -1881,7 +1885,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/submit.png}
+					                        \includegraphics[width=0.8\textwidth]{views/submit.png}
 					                        \caption{Halaman Submit}
 					                        \label{fig:3:1:1:submit}
 				                        \end{figure}
@@ -1905,7 +1909,7 @@ CMD ["apache2-foreground"]
 
 				                        \begin{figure}[H]
 					                        \centering
-					                        \includegraphics[width=0.5\textwidth]{views/users.png}
+					                        \includegraphics[width=0.8\textwidth]{views/users.png}
 					                        \caption{Halaman Users}
 					                        \label{fig:3:1:1:users}
 				                        \end{figure}
@@ -1953,7 +1957,7 @@ CMD ["apache2-foreground"]
 
 	\item \textbf{Melakukan studi mengenai cara penyimpanan rekaman ketikan.} \\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :} Sudah dilakukan.
+	      {\bf Hasil :} Sudah melakukan sebagian studi mengenai penyimpanan rekaman ketikan.
 
 	      Berikut merupakan kesimpulan yang didapat dalam penyimpanan rekaman ketikan.
 
@@ -1971,9 +1975,11 @@ CMD ["apache2-foreground"]
 
 	      Penyimpanan \textit{event} akan di lakukan oleh \textit{Controller} \verb|Submit| yang akan menyimpan \textit{file} pada saat kode disimpan. Maka fungsi yang akan dimodifikasi adalah fungsi \verb|save()|.
 
+	      Untuk tugas akhir 2 akan melakukan studi mengenai tipe file yang akan digunakan seperti JSON, BSON, atau Protocol Buffer. Hal ini tidak dapat diselesaikan pada tugas akhir ini karena pada tugas akhir 1 memfokuskan analisis mengenai cara kerja berbagai \textit{framework} yang terdapat SharIF Judge serta SharIF Judgenya juga.
+
 	\item \textbf{Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.} \\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
-	      {\bf Hasil :} Sudah dilakukan perencaan perubahan.
+	      {\bf Hasil :} Sudah melakukan perencanaan perubahan pada structur website dan database.
 
 	      Berikut perencaan yang didapat:
 
@@ -2018,9 +2024,19 @@ CMD ["apache2-foreground"]
 		      \item Fungsi untuk menjalankan, memberhentikan \textit{recording} dari \textit{file} JSON.
 	      \end{itemize}
 
+	      Untuk tugas akhir 2 akan memodelkan perubahan pada SharIF Judge lebih lanjut. Hal ini tidak dapat diselesaikan pada tugas akhir ini karena pada tugas akhir 1 memfokuskan analisis mengenai cara kerja berbagai \textit{framework} yang terdapat SharIF Judge serta SharIF Judgenya juga.
+
 	\item \textbf{Menulis dokumen skripsi}\\
 	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
 	      {\bf Hasil :} Sudah menulis sebagian dokumen skripsi yaitu bab 1, 2, dan 3.
+
+	\item \textbf{Implementasi sistem pemutaran ketikan ulang}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :} Akan dikerjakan pada tugas akhir 2.
+
+	\item \textbf{Melakukan Pengujian dan eksperimen}\\
+	      {\bf Status :} Ada sejak rencana kerja skripsi.\\
+	      {\bf Hasil :} Akan dikerjakan pada tugas akhir 2.
 
 
 \end{enumerate}
@@ -2030,7 +2046,7 @@ Langkah-langkah kerja yang berhasil diselesaikan dalam Skripsi 1 ini adalah seba
 \begin{enumerate}
 	\item Mempelajari bahasa pemrograman PHP
 	\item Melakukan studi literatur mengenai \textit{CodeIgniter 3}, editor kode \textit{Ace}, SharIF Judge, cara penyimpanan rekaman ketikan.
-	\item Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.
+	      % \item Memodelkan dan merencanakan perubahan pada structur website dan database pada SharIF-Judge.
 	\item Menulis dokumen skripsi yaitu bab 1, 2, dan 3.
 \end{enumerate}
 

@@ -313,19 +313,35 @@ Ace merupakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah website y
 
 Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 
-% TODO: Butuh dilengkapi sesuai kebutuhan kode yang akan ditulis
-% TODO: Butuh tambahin kalo si ace bisa nangkep event apa aja?
-% TODO: Tambahin penjelasan tentang Session, Selector, Selection, Commands
-
 \begin{itemize}
 	\item \verb|Ace| \\
 	      Merupakan kelas utama untuk menyiapkan editor kode Ace pada \textit{browser}
+	\item \verb|Editor| \\
+	      Entri utama untuk fungsionalitas library Ace. Editor sendiri merepresentasikan editor kode yang dibuat pada web. Pada editor sendiri disediakannya \textit{event listener} yaitu sebagai berikut:
+
+	      \begin{enumerate}
+		      \item \verb|mouseup| : Mendengarkan saat melepaskan tombol pada tetikus atau \textit{mouse}.
+	      \end{enumerate}
+
+	\item \verb|EditSession| \\
+	      Sebuah kelas yang menyimpan semua status dalam editor seperti isi editor, \textit{selection}, dan lain-lain. Kelas ini dinamakan \verb|EditSession|, tetapi untuk mengakses dari editor dinamakan \textit{session}. Pada kelas \textit{session} ada beberapa \textit{event listener} yaitu:
+
+	      \begin{enumerate}
+		      \item \verb|change| : Mendengarkan perubahan pada isi editor.
+		      \item \verb|changeCursor| : Mendengarkan perubahan pada kursor atau \textit{anchor} dalam editor.
+		      \item \verb|changeSelection| : Mendengarkan perubahan pemilihan isi kode dalam editor.
+	      \end{enumerate}
+
 	\item \verb|Anchor| \\
-	      Menangani posisi \textit{pointer} pada dokumen.
+	      Menangani posisi \textit{pointer} pada dokumen. Saat teks dimasukkan atau dihapus, posisi \textit{anchor} akan diperbaharui.
 	\item \verb|Document| \\
 	      Menyimpan teks dokumen.
-	\item \verb|Editor| \\
-	      Entri utama untuk fungsionalitas library Ace.
+	\item \verb|Range| \\
+	      Kelas ini digunakan di berbagai tempat untuk mengindikasikan suatu wilayah di dalam editor. Kelas ini menyimpan posisi baris awal dan kolom awal, serta baris akhir dan kolom akhir.
+	\item \verb|Selection| \\
+	      Kelas ini menyimpan posisi yang di pilih oleh pengguna dalam editor.
+	\item \verb|Commands| \\
+	      Kelas ini digunakan untuk menjalankan perintah pada sebuah editor. Contoh perintah yang sudah ada dalam editor yaitu \textit{insert}, \textit{copy}, \textit{paste}. Pada kelas ini tersedia \textit{event listener} untuk mendengarkan segala \textit{event} yang sudah terjadi bernama \verb|afterExec|.
 \end{itemize}
 
 \begin{lstlisting}[language={php}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
