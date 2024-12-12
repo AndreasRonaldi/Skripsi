@@ -1,0 +1,36 @@
+@startuml seqdia_rekam
+actor       User       as user
+participant "Editor Kode" as ek
+database "Penyimpanan\nPada Browser" as bw
+
+user -> ek : Melakukan event\npada editor kode
+activate ek
+|||
+
+ek -> bw : Menyimpan event
+activate bw
+|||
+bw --> ek
+deactivate bw
+
+
+ek --> user :
+deactivate ek
+
+
+
+' participant Participant as Foo
+' boundary    Boundary    as Foo2
+' control     Control     as Foo3
+' entity      Entity      as Foo4
+' database    Database    as Foo5
+' collections Collections as Foo6
+' queue       Queue       as Foo7
+' Foo -> Foo1 : To actor 
+' Foo -> Foo2 : To boundary
+' Foo -> Foo3 : To control
+' Foo -> Foo4 : To entity
+' Foo -> Foo5 : To database
+' Foo -> Foo6 : To collections
+' Foo -> Foo7: To queue
+@enduml

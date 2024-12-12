@@ -1,0 +1,85 @@
+@startuml seqdia_save
+actor       User       as user
+participant Browser as bw
+database "Penyimpanan\nPada Browser" as pbw
+participant "SharIF Judge" as shj
+database Database as db
+
+user -> bw : Tindakan \nmenyimpan kode
+activate bw
+|||
+bw -> pbw : Mengambil rekaman
+activate pbw
+|||
+return
+
+bw -> shj : Mengirimkan kode \ndan rekaman
+activate shj
+
+shj -> db : Meyimpan\nkode program
+activate db
+|||
+return
+
+shj -> db : Meyimpan rekaman
+activate db
+|||
+return
+
+return Penyimpanan\nselesai
+
+return Kode berhasil\ndisimpan
+
+' participant "Controller\nSubmit" as cs
+' participant "Model\nRecording" as mr
+' database "Sistem File" as sf
+' database "Database" as db
+' ' database "shj_submission" as db
+
+' user -> cs : Kode Program
+' activate cs
+
+' cs -> sf : Mencatat Kode Program
+' activate sf
+' |||
+' sf --> cs
+' deactivate sf
+' |||
+
+' cs -> sf : Mencatat Rekaman\nKetikan
+' activate sf
+' |||
+' sf --> cs
+' deactivate sf
+' |||
+
+' cs -> mr : Metadata file rekaman
+' activate mr
+' mr -> db : Mencatat metadata
+' activate db
+' |||
+' db --> mr
+' deactivate db
+' |||
+' mr --> cs
+' deactivate mr
+
+' cs --> user : berhasil di save
+' deactivate cs
+
+
+' participant Participant as Foo
+' boundary    Boundary    as Foo2
+' control     Control     as Foo3
+' entity      Entity      as Foo4
+' database    Database    as Foo5
+' collections Collections as Foo6
+' queue       Queue       as Foo7
+' Foo -> Foo1 : To actor 
+' Foo -> Foo2 : To boundary
+' Foo -> Foo3 : To control
+' Foo -> Foo4 : To entity
+' Foo -> Foo5 : To database
+' Foo -> Foo6 : To collections
+' Foo -> Foo7: To queue
+@enduml

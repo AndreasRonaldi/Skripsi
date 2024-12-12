@@ -1,6 +1,6 @@
 \documentclass[a4paper,twoside]{article}
 \usepackage[T1]{fontenc}
-\usepackage[bahasa,ngerman]{babel}
+\usepackage[bahasa]{babel}
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{float}
@@ -157,6 +157,8 @@ Termasuk pada perguruan tinggi pada bidang informatika, maka \textit{online judg
 	\caption[Tampilan Awal SharIF Judge]{Tampilan Awal SharIF Judge}
 	\label{fig:1:dashboardpng}
 \end{figure}
+
+\vspace{-0.25cm}
 
 Ujian juga merupakan sebuah bentuk penilaian dari pengajar kepada pelajarnya. Tentunya pelajar maupun mahasiswa ingin memperoleh nilai yang memuaskan dalam ujiannya. Banyak cara yang dilakukan oleh pelajar maupun mahasiswa untuk memperoleh nilai tersebut, salah satunya adalah dengan melakukan kecurangan yaitu \textit{copy paste} atau menyalin jawaban teman atau rekan mereka\footnote{Prihatini, F.~N. dan Indudewi, D. (2016) {Kesadaran dan Perilaku Plagiarisme dikalangan Mahasiswa(Studi pada Mahasiswa Fakultas Ekonomi Jurusan Akuntansi Universitas Semarang)}. {\em Dinamika Sosial Budaya}.}. Praktek ini diperparah jika ujian dilakukan secara \textit{online}, dikarenakan pelajar dapat mengakses berbagai fasilitas di internet. Oleh karena itu, diperlukannya sebuah sistem pada sistem \textit{online judge} untuk mengawasi saat terjadinya ujian online.
 
@@ -966,7 +968,7 @@ class Blog_controller extends CI_Controller {
 
 	      Berikut ringkasan hasil studi mengenai editor kode Ace:
 
-	      Ace merupakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah website yang dibuah mengunakan bahasa \textit{Javasciprt}. Ace memiliki kemampuan dari editor pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
+	      Ace merupakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah website yang dibuah mengunakan bahasa \textit{Javascript}. Ace memiliki kemampuan dari editor pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
 
 	      \begin{itemize}
 		      \item \textit{Syntax highlighting} untuk bahasa pemrograman.
@@ -984,23 +986,13 @@ class Blog_controller extends CI_Controller {
 		      \item \verb|Ace| \\
 		            Merupakan kelas utama untuk menyiapkan editor kode Ace pada \textit{browser}
 		      \item \verb|Editor| \\
-		            Entri utama untuk fungsionalitas library Ace. Editor sendiri merepresentasikan editor kode yang dibuat pada web. Pada editor sendiri disediakannya \textit{event listener} yaitu sebagai berikut:
-
-		            \begin{enumerate}
-			            \item \verb|mouseup| : Mendengarkan saat melepaskan tombol pada tetikus atau \textit{mouse}.
-		            \end{enumerate}
+		            Entri utama untuk fungsionalitas library Ace. Editor sendiri merepresentasikan editor kode yang dibuat pada web. Editor juge menjadi kelas utama untuk mengakses kelas-kelas yang berhubungan dengan editor kode.
 
 		      \item \verb|EditSession| \\
-		            Sebuah kelas yang menyimpan semua status dalam editor seperti isi editor, \textit{selection}, dan lain-lain. Kelas ini dinamakan \verb|EditSession|, tetapi untuk mengakses dari editor dinamakan \textit{session}. Pada kelas \textit{session} ada beberapa \textit{event listener} yaitu:
-
-		            \begin{enumerate}
-			            \item \verb|change| : Mendengarkan perubahan pada isi editor.
-			            \item \verb|changeCursor| : Mendengarkan perubahan pada kursor atau \textit{anchor} dalam editor.
-			            \item \verb|changeSelection| : Mendengarkan perubahan pemilihan isi kode dalam editor.
-		            \end{enumerate}
+		            Sebuah kelas yang menyimpan semua status dalam editor seperti isi editor, \textit{selection}, dan lain-lain. Kelas ini dinamakan \verb|EditSession|, tetapi untuk mengakses dari editor dinamakan \textit{session}.
 
 		      \item \verb|Anchor| \\
-		            Menangani posisi \textit{pointer} pada dokumen. Saat teks diperbaharui, posisi \textit{anchor} akan diperbaharui.
+		            Menangani posisi \textit{pointer} pada dokumen. Saat teks dimasukkan atau dihapus, posisi \textit{anchor} akan diperbaharui.
 		      \item \verb|Document| \\
 		            Menyimpan teks dokumen.
 		      \item \verb|Range| \\
@@ -1008,45 +1000,91 @@ class Blog_controller extends CI_Controller {
 		      \item \verb|Selection| \\
 		            Kelas ini menyimpan posisi yang di pilih oleh pengguna dalam editor.
 		      \item \verb|Commands| \\
-		            Kelas ini digunakan untuk menjalankan perintah pada sebuah editor. Contoh perintah yang sudah ada dalam editor yaitu \textit{insert}, \textit{copy}, \textit{paste}. Pada kelas ini tersedia \textit{event listener} untuk mendengarkan segala \textit{event} yang sudah terjadi bernama \verb|afterExec|.
+		            Kelas ini digunakan untuk menjalankan perintah pada sebuah editor. Contoh perintah yang sudah ada dalam editor yaitu \textit{insert}, \textit{copy}, \textit{paste}.
 	      \end{itemize}
 
 	      \begin{lstlisting}[language={php}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<title>ACE in Action</title>
-	<style type="text/css" media="screen">
-		#editor { 
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-		}
-	</style>
+<title>ACE in Action</title>
+<style type="text/css" media="screen">
+	#editor { 
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+</style>
 </head>
-
 <body>
 
-	<div id="editor">function foo(items) {
-		var x = "All this is syntax highlighted";
-		return x;
-	}</div>
+<div id="editor">function foo(items) {
+	var x = "All this is syntax highlighted";
+	return x;
+}</div>
 	
-	<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
-	<script>
-		var editor = ace.edit("editor");
-		editor.setTheme("ace/theme/monokai");
-		editor.session.setMode("ace/mode/javascript");
-	</script>
+<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/monokai");
+	editor.session.setMode("ace/mode/javascript");
+</script>
 </body>
-
 </html>
-		  \end{lstlisting}
+\end{lstlisting}
 
 	      Kode \ref{kode:2:5:ace} merupakan cara pengunaan Ace pada sebuah \texttt{div} dengan id \texttt{editor}. Ace juga memiliki beberapa konfigurasi, seperti contoh ini yaitu mengunakan tema \textit{monokai} dan mengunakan \textit{syntax highlighting} untuk bahasa pemrograman JavaScript.
+
+	      \vspace{0.25cm}
+	      \textbf{\Large Perekaman Event}
+	      \vspace{0.1cm}
+
+	      Pada editor kode Ace, disediakannya fungsi \textit{event listener} atau pendengar \textit{event} atau kejadian yang berhubungan dengan sebuah kelas. Pada \textit{event listener} ini akan disediakannya sebuah fungsi \textit{callback} yang akan dipanggil saat \textit{event} tersebut terjadi. Berikut merupakan beberapa \textit{event listener} dalam sebuah kelas:
+
+	      \begin{itemize}
+		      \item \verb|Editor| \\
+		            Pada editor sendiri disediakannya satu \textit{event listener} yaitu \verb|mouseup| yang akan mendengarkan saat melepaskan tombol pada tetikus atau \textit{mouse}.
+
+		      \item \verb|EditSession| \\
+		            Pada kelas \textit{session} ada satu \textit{event listener} yaitu \verb|change| yang akan mendengarkan perubahan pada isi atau kode pada editor kode. Pada fungsi \textit{callback} yang akan dijalankan oleh \textit{event listener} ini akan diberikan parameter \verb|delta| yang menunjukkan perubahan apa yang terjadi pada editor kode.
+
+		      \item \verb|Selection| \\
+		            Pada kelas \textit{selection} ada beberapa \textit{event listener} yaitu sebagai berikut:
+
+		            \begin{itemize}
+			            \item \verb|changeCursor| : Mendengarkan perubahan pada kursor atau \textit{anchor} dalam editor kode.
+			            \item \verb|changeSelection| : Mendengarkan perubahan pemilihan isi kode dalam editor kode.
+		            \end{itemize}
+
+		      \item \verb|Commands| \\
+		            Pada kelas ini tersedia dua \textit{event listener} yaitu \verb|exec| dan \verb|afterExec|. \verb|exec| akan mendengarkan saat perintah akan dijalankan pada editor kode, sedangkan \verb|afterExec| akan mendengarkan perintah yang sudah selesai dijalankan pada editor kode. Pada fungsi \textit{callback} yang akan dijalankan oleh \textit{event listener} ini akan diberikan perintah yang dijalankan oleh kelas \verb|Commands|.
+	      \end{itemize}
+
+	      Untuk menggunakan fungsi \textit{event listener} pada kelas yang diinginkan, dibutuhkan fungsi \verb|on| pada kelas tersebut. Fungsi \verb|on| memiliki dua parameter yaitu nama \textit{event} ingin didengar (\verb|exec| atau \verb|change|) dan sebuah fungsi \textit{callback} yang akan dijalankan saat \textit{event} terjadi. Kode \ref{kode:2:5:1:eventlistener} merupakan perhubahan kode yang dilakukan dalam \textit{tag} \verb|<script>| pada Kode \ref{kode:2:5:ace} agar perubahan isi editor dapat didengar.
+
+	      \begin{lstlisting}[language={php}, caption={Contoh kode event listener}, label={kode:2:5:1:eventlistener}]
+<script>
+	var editor = ace.edit("editor");
+	editor.setTheme("ace/theme/monokai");
+	editor.session.setMode("ace/mode/javascript");
+
+	editor.session.on("change", (delta) => {
+        console.log(delta);
+		// Contoh Keluaran :
+		// {
+		// 		action: "insert"
+		// 		end: {row: 3, column: 5}
+		// 		id: 1
+		// 		lines: ['a']
+		// 		start: {row: 3, column: 4}
+		// }
+	});
+</script>
+\end{lstlisting}
+
+	      Kode \ref{kode:2:5:1:eventlistener} akan menggunakan \textit{event listener} \verb|change| dalam kelas \verb|EditSession|, dengan mengakses kelas \verb|EditSession| melalui \verb|editor| yang dinamakan \verb|session|. Pada kelas tersebut akan dijalankan fungsi \verb|on| dengan parameter ``change'' dan sebuah fungsi annonimus sebagai fungsi \textit{callback} yang akan memprint ke \textit{console} isi perubahan pada editor kode.
 
 	\item \textbf{Melakukan studi literatur mengenai SharIF Judge\footnote{Dokumentasi SharIF Judge https://github.com/ifunpar/SharIF-Judge/blob/docs/readme.md(10 Desember 2024)}.}\\
 	      {\bf Status :} baru ditambahkan pada semester ini\\
@@ -2047,7 +2085,7 @@ CMD ["apache2-foreground"]
 	      \end{itemize}
 
 	      \vspace{0.15cm}
-	      \textit{Javasciprt} yang akan dibuat pada \verb|shj_recording.js| akan memiliki berbagai fungsi yaitu sebagai berikut:
+	      \textit{Javascript} yang akan dibuat pada \verb|shj_recording.js| akan memiliki berbagai fungsi yaitu sebagai berikut:
 
 	      \begin{itemize}
 		      \item Fungsi untuk memilih \textit{user} dan \textit{problem} yang ditampilkan.

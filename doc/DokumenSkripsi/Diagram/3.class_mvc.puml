@@ -1,0 +1,15 @@
+@startuml class_mvc
+
+package Model {
+    
+}
+
+package View {
+
+}
+
+package Controller {
+
+}
+
+@enduml

@@ -917,7 +917,14 @@ Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada ant
 \section{Analisis Sistem Usulan}
 \label{sec:3:sistemusulan}
 
-Pembuatan sistem pemutaran ulang ketikan membutuhkan 2 fitur penting yaitu perekaman ketikan pada sebuah masukkan dan pemutaran ketikan pada masukkan tersebut. Masukkan yang dimaksud pada tugas akhir ini adalah IDE SharIF Judge. IDE SharIF Judge memiliki berbagai masukkan penting yaitu editor kode, \textit{input}, dan \textit{output}. Berikut merupakan fitur-fitur yang akan ditambahkan pada SharIF Judge untuk membangun sistem perekaman ketikan.
+Pembuatan sistem pemutaran ulang ketikan membutuhkan 4 fitur baru yaitu fitur perekaman perubahan, fitur penyimpanan rekaman perubahan, fitur melihat daftar rekaman yang ada, dan fitur untuk memutar ulang rekaman. Gambar \ref{fig:3:usecase} menunjukkan bagaimana fitur baru akan berinteraksi dengan sistem SharIF Judge dan \textit{user}. Berikut merupakan penjelasan mengenai fitur-fitur yang akan ditambahkan pada SharIF Judge untuk membangun sistem perekaman ketikan.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{analisis/usecase.png}
+	\caption{Usecase analisis sistem usulan}
+	\label{fig:3:usecase}
+\end{figure}
 
 % \subsubsection{Mengotomatiskan saving}
 % \label{sec:3:2:1:autosave}
@@ -926,6 +933,61 @@ Pembuatan sistem pemutaran ulang ketikan membutuhkan 2 fitur penting yaitu perek
 % Cara 1 kalau inactive selama 5 detik = autosave, dan kalau active selama 20 detik = autosave jg
 % Cara 2 pake web sockets, simpen di dalem servernya terus write?
 
+\subsection{Fitur perekaman perubahan atau event}
+\label{sub:3:2:rekam}
+Fitur perekaman perubahan pada editor kode bukan hanya perubahan text melainkan pada seluruh kejadian atau \textit{event} yang terjadi pada editor kode seperti contohnya adalah perubahan posisi kursor maupun pilihan pada kode. Fitur perekaman perubahan akan otomatis oleh browser dengan bantuan \textit{javascript} yang ada pada browser pengguna dan akan dijalankan saat sebuah \textit{event} terjadi pada editor kode.
+
+\subsubsection{Sequence Diagram}
+Gambar \ref{fig:3:2:seqdia_rekam} merupakan sebuah \textit{sequence} diagram yang menunjukkan bagaimana fitur perekaman perubahan atau event akan berintegrasi dengan sistem IDE akan bekerja pada SharIF Judge.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{analisis/seqdia_rekam.png}
+	\caption{Sequence Diagram Fitur Perekaman Perubahan}
+	\label{fig:3:2:seqdia_rekam}
+\end{figure}
+
+\subsection{Fitur penyimpanan rekaman perubahan}
+\label{sub:3:2:save}
+Fitur penyimpanan rekaman perubahan akan dilakukan secara otomatis saat pengguna melakukan tindakan menyimpan kode program. Fitur penyimpanan rekaman akan berintegrasi dengan fitur penyimpanan kode program yang sudah ada. Pada fitur ini daftar rekaman akan diperbaharui dengan adanya rekaman baru atau perubahan pada \textit{file} rekaman.
+
+\subsubsection{Sequence Diagram}
+Gambar \ref{fig:3:2:seqdia_save} merupakan sebuah \textit{sequence} diagram yang menunjukkan bagaimana fitur penyimpanan rekaman perubahan akan berintegrasi dengan sistem IDE akan bekerja pada SharIF Judge.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{analisis/seqdia_save.png}
+	\caption{Sequence Diagram Fitur Penyimpanan Rekaman}
+	\label{fig:3:2:seqdia_save}
+\end{figure}
+
+\subsection{Fitur melihat daftar rekaman}
+\label{sub:3:2:lookup}
+Pada sistem pemutaran ulang ketikan dibutuhkannya sebuah halaman baru yang akan dinamakan halaman rekaman. Pada halaman ini akan dimunculkannya daftar rekaman untuk \textit{assignment} yang dipilih pada halaman \textit{Assignment}. Fitur ini akan dijalankan pada saat halaman rekaman dimuat kedalam browser oleh SharIF Judge, dimana data yang dimasukkan ke dalam halaman rekaman adalah daftar rekaman tersebut dan beberapa data yang dibutuhkan.
+
+\subsubsection{Sequence Diagram}
+Gambar \ref{fig:3:2:seqdia_lookup} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem akan bekerja saat user akan membuka halaman rekaman pada SharIF Judge.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{analisis/seqdia_lookup.png}
+	\caption{Sequence Diagram Membuka Halaman Rekaman}
+	\label{fig:3:2:seqdia_lookup}
+\end{figure}
+
+\subsection{Fitur pemutaran ulang rekaman}
+\label{sub:3:2:seerecording}
+
+Fitur pemutaran ulang rekaman akan membuat satu buah rekaman dalam daftar rekaman dalam halaman rekaman dapat ditekan oleh pengguna untuk menandakan bahwa sebuah rekaman dipilih untuk dijalankan. Saat sebuah rekaman dipilih, browser akan meminta data rekaman kepada SharIF Judge dan dengan bantuan \textit{javascript} akan melakukan pemutaran ulang rekaman pada sebuah editor kode yan tidak dapat diubah dalam halaman rekaman.
+
+\subsubsection{Sequence Diagram}
+Gambar \ref{fig:3:2:seqdia_seerecording} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem SharIF Judge bekerja dari pemilihan rekaman hingga pemutaran ulang rekaman akan terjadi.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\textwidth]{analisis/seqdia_seerecording.png}
+	\caption{Sequence Diagram Membuka Halaman Rekaman}
+	\label{fig:3:2:seqdia_seerecording}
+\end{figure}
+
+
+\begin{comment}
 \subsection{Perekam event pada editor kode}
 \label{sub:3:2:rekam}
 
@@ -965,7 +1027,7 @@ Sebelum ketikan dapat di putar kembali, dibutuhkannya fitur untuk merekam segala
 
 Penyimpanan \textit{event} akan di lakukan oleh \textit{Controller} \verb|Submit| yang akan menyimpan \textit{file} pada saat kode disimpan. Maka fungsi yang akan dimodifikasi adalah fungsi \verb|save()|.
 
-\begin{comment}
+
 Rekam 3 event aja:
 - Mouseup dari editor
 - beforeEndOperation dari selection
@@ -978,7 +1040,6 @@ Penjelasan
 Rekam juga input + output yang dimasukkin tapi ga sampe cursor
 
 Simpen di tempat yg sama kaya penyimpanan kode, mungkin di pisah per submission juga. simpen kaya json aja biar gampang dibaca?. simpen timestart, event: [time: {action: ?, payload: ?}].
-\end{comment}
 
 \subsection{Pemutar ulang event}
 \label{sub:3:2:pemutarulang}
@@ -993,7 +1054,7 @@ Fitur kedua yang akan ditambahkan adalah pemutaran ulang \textit{event} pada Sha
 	      fungsi ini akan digunakan untuk mengambil file JSON yang sudah di simpan dan mengembalikannya.
 \end{itemize}
 
-\textit{Javasciprt} yang akan dibuat pada \verb|shj_recording.js| akan memiliki berbagai fungsi yaitu sebagai berikut:
+\textit{Javascript} yang akan dibuat pada \verb|shj_recording.js| akan memiliki berbagai fungsi yaitu sebagai berikut:
 
 \begin{itemize}
 	\item Fungsi untuk memilih \textit{user} dan \textit{problem} yang ditampilkan.

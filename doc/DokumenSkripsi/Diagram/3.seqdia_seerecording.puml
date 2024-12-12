@@ -1,0 +1,21 @@
+@startuml seqdia_seerecording
+actor       Pengajar       as user
+participant Browser as bw
+participant "SharIF Judge" as shj
+database Database as db
+
+user -> bw : Memilih\nrekaman
+activate bw
+
+bw -> shj : Meminta rekaman
+activate shj
+
+shj -> db : Mengambil\nrekaman
+activate db
+|||
+return
+
+return Mengambalikan\nRekaman
+
+return Menjalankan\nRekaman
+@enduml

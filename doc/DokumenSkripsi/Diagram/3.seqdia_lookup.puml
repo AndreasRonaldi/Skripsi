@@ -1,0 +1,44 @@
+@startuml seqdia_lookup
+actor       Pengajar       as user
+participant Browser as bw
+participant "SharIF Judge" as shj
+database Database as db
+
+user -> bw : Membuka halaman\nrekaman
+activate bw
+
+bw -> shj : Meminta halaman\nrekaman
+activate shj
+
+shj -> db : Mengambil\ndaftar rekaman
+activate db
+|||
+return
+
+' rnote over shj
+'     Memasukkan 
+'     data kedalam
+'     halaman rekaman
+' endnote
+
+shj -> shj : Memasukkan\ndata kedalam\nhalaman rekaman
+
+return Halaman rekaman
+
+return
+
+' participant Participant as Foo
+' boundary    Boundary    as Foo2
+' control     Control     as Foo3
+' entity      Entity      as Foo4
+' database    Database    as Foo5
+' collections Collections as Foo6
+' queue       Queue       as Foo7
+' Foo -> Foo1 : To actor 
+' Foo -> Foo2 : To boundary
+' Foo -> Foo3 : To control
+' Foo -> Foo4 : To entity
+' Foo -> Foo5 : To database
+' Foo -> Foo6 : To collections
+' Foo -> Foo7: To queue
+@enduml

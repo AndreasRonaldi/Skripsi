@@ -1,6 +1,7 @@
 Thumbs.db
 .DS_Store
 
+# Untuk auto pdflatex
 *.fls
 *.nlo
 *.synctex.gz
@@ -12,3 +13,8 @@ Thumbs.db
 *.bbl
 *.blg
 *.lof
+
+# untuk testing js
+Test/*
+# untuk plantuml
+out/* 
