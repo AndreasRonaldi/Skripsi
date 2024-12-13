@@ -1306,11 +1306,44 @@ CMD ["apache2-foreground"]
 
 	      Dikarenakan SharIF Judge menggunakan \textit{framework} CodeIgniter 3, maka SharIF memiliki arsitektur MVC juga. Berikutnya merupakan hasil pembelajaran Model-View-Controller pada SharIF Judge:
 
+	      Gambar \ref{fig:3:1:model}, Gambar \ref{fig:3:1:view}, dan Gambar \ref{fig:3:1:controller} merupakan kelas diagram struktur sederhana MVC pada SharIF Judge yang akan dijelaskan lebih detail pada bagian selanjutnya.
+
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.65\textwidth]{analisis/class/class_controller.png}
+		      \caption{Struktur Sederhana Controller pada SharIF Judge}
+		      \label{fig:3:1:controller}
+	      \end{figure}
+
+	      \begin{figure}[H]
+		      \centering
+		      \includegraphics[width=0.5\textwidth]{analisis/class/class_view.png}
+		      \caption{Struktur Sederhana View pada SharIF Judge}
+		      \label{fig:3:1:view}
+	      \end{figure}
+
+	      Berikut merupakan hasil eksplorasi dari struktur MVC pada SharIF Judge:
+
 	      \begin{itemize}
 		      \item \textbf{Model}
 		            \label{sub:3:1:1:model}
 
-		            Hasil pembelajaran MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb|application/mo|\\\verb|dels|. Direktori \textit{Model} berisi kelas-kelas yang digunakan untuk mengelola dan mengembalikan data dari \textit{database}. Berikut merupakan file \textit{model} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
+		            Hasil pembelajaran MVC akan dimulai dengan \textit{model} yang berada pada direktori \verb|application/mo|\\\verb|dels|. Direktori \textit{Model} berisi kelas-kelas yang digunakan untuk mengelola dan mengembalikan data dari \textit{database}. Gambar \ref{fig:3:1:1:model} merupakan struktur kelas \textit{model} dalam SharIF Judge.
+		            \begin{figure}[H]
+			            \centering
+			            \includegraphics[width=0.95\textwidth]{analisis/mvc/model.png}
+			            \caption{Struktur Kelas Model pada SharIF Judge}
+			            \label{fig:3:1:1:model}
+		            \end{figure}
+
+		            \begin{figure}[H]
+			            \centering
+			            \includegraphics[width=0.9\textwidth]{analisis/class/class_model.png}
+			            \caption{Struktur Sederhana Model pada SharIF Judge}
+			            \label{fig:3:1:model}
+		            \end{figure}
+
+		            Berikut merupakan penjelasan dari kelas \textit{model} dan fungsi-fungsinya yang terdapat pada SharIF Judge:
 
 		            \begin{itemize}
 			            \item \verb|Assignment_model.php| \\
@@ -1345,6 +1378,7 @@ CMD ["apache2-foreground"]
 				                        Memperbaharui koefisien dari sebuah \textit{assignment}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Hof_model.php| \\
 			                  Model ini digunakan untuk mengembalikan informasi yang digunakan dalam \textit{hall of fame} dari tabel \verb|submissions|. Fungsi yang dimiliki adalah sebagai berikut:
 
@@ -1355,6 +1389,7 @@ CMD ["apache2-foreground"]
 				                        Mengembalikan nilai \textit{final submission} pada semua problem untuk \textit{user} tertentu.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Logs_model.php| \\
 			                  Model ini berfungsi untuk mengelola tabel \verb|logins| dan mengembalikan catatan \textit{login}. Fungsi yang dimiliki adalah sebagai berikut:
 
@@ -1365,6 +1400,7 @@ CMD ["apache2-foreground"]
 				                        Mengembalikan semua catatan \textit{login}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Notifications_model.php| \\
 			                  Model ini digunakan untuk mengelola tabel \verb|notifications|. Fungsi yang dimiliki oleh \textit{model} \verb|Notifications_model.php| adalah sebagai berikut:
 
@@ -1385,6 +1421,7 @@ CMD ["apache2-foreground"]
 				                        Mengembalikan sebuah \textit{boolean} yang menyatakan bahwa terdapatnya \textit{notification} baru.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Queue_model.php| \\
 			                  Model ini digunakan untuk mengelola tabel \verb|queue| dan menampilkan data \verb|queue|. Fungsi yang dimiliki adalah sebagai berikut:
 
@@ -1411,6 +1448,7 @@ CMD ["apache2-foreground"]
 				                        Fungsi ini digunakan untuk menambahkan sebuah \textit{dummy submission} yang digunakan hanya untuk dijalankan ke dalam \textit{queue}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Scoreboard_model.php| \\
 			                  Model ini digunakan untuk mengelola tabel \verb|scoreboard|. Fungsi yang dimiliki oleh \textit{model} \verb|Scoreboard_model.php| adalah sebagai berikut:
 
@@ -1425,6 +1463,7 @@ CMD ["apache2-foreground"]
 				                        Mengembalikan \textit{scoreboard} pada sebuah \textit{assignment}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Settings_model.php| \\
 			                  Model ini digunakan untuk mengelola tabel \verb|settings|. Fungsi yang dimiliki oleh \textit{model} \\\verb|Settings_model.php| adalah sebagai berikut:
 
@@ -1439,6 +1478,7 @@ CMD ["apache2-foreground"]
 				                        Memperbaharui seluruh nilai perubahan \textit{settings}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|Submit_model.php| \\
 			                  Model ini digunakan untuk mengelola tabel \verb|submission|. Fungsi yang dimiliki oleh \textit{model} \verb|Submit_model.php| adalah sebagai berikut:
 
@@ -1459,6 +1499,7 @@ CMD ["apache2-foreground"]
 				                        Menyimpan hasil \textit{upload only problem} ke dalam tabel \textit{database}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|User.php| \\
 			                  Model ini digunakan untuk menyimpan \textit{settings} sebuah \textit{user}. Fungsi yang dimiliki oleh \textit{model} \verb|User.php| adalah sebagai berikut:
 
@@ -1471,6 +1512,7 @@ CMD ["apache2-foreground"]
 				                        Mendapatkan posisi \textit{widget} sebuah \textit{user}.
 			                  \end{itemize}
 
+			                  \vspace{0.5cm}
 			            \item \verb|User_model.php| \\
 			                  Model \verb|User_model.php| digunakan untuk mengelola tabel \verb|users|. Fungsi yang dimiliki oleh \textit{model} \verb|User_model.php| adalah sebagai berikut:
 
@@ -1517,7 +1559,15 @@ CMD ["apache2-foreground"]
 		      \item \textbf{View}
 		            \label{sub:3:1:1:view}
 
-		            \textit{View} merupakan tampilan yang menjadi perantara antara pengguna dan \textit{sistem}. \textit{View} disimpan pada direktori \verb|application/views| dan dibagi menjadi 3 direktori terpisah yaitu:
+		            \textit{View} merupakan tampilan yang menjadi perantara antara pengguna dan \textit{sistem}. Pada SharIF Judge, \textit{View} disimpan pada direktori \verb|application/views| dan dibagi menjadi 3 direktori terpisah yaitu errors, pages, dan template.
+		            Gambar \ref{fig:3:1:1:view} merupakan struktur direktori \textit{view} beserta \textit{view} yang terdapat pada direktorinya dalam SharIF Judge.
+		            \begin{figure}[H]
+			            \centering
+			            \includegraphics[width=0.65\textwidth]{analisis/mvc/view.png}
+			            \caption{Struktur Direktori View pada SharIF Judge}
+			            \label{fig:3:1:1:view}
+		            \end{figure}
+		            Berikut merupakan penjelasan mengenai direktori penyimpanan untuk \textit{view} pada SharIF Judge.
 
 		            \begin{itemize}
 			            \item \verb|errors| \\
@@ -1599,7 +1649,15 @@ CMD ["apache2-foreground"]
 		      \item \textbf{Controller}
 		            \label{sub:3:1:1:controller}
 
-		            Pada bagian MVC terakhir, terdapat \textit{controller} yang berada pada direktori \verb|application/| \\ \verb|controller|. Seperti yang dijelaskan pada bagian \ref{sub:2:2:3:Controller}, \textit{Controller} digunakan sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan saat membuat sebuah web page. Direktori controller berisi kelas-kelas yang akan mengolah data yang didapat pada \textit{model} dan menyatukan data tersebut ke dalam \textit{views} yang akan ditampilkan kepada pengguna. Pada setiap kelas \textit{controller}, terdapat fungsi \verb|index()| yang menjadi fungsi utama saat kelas di akses oleh pengguna. Berikut merupakan file \textit{controller} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
+		            Pada bagian MVC terakhir, terdapat \textit{controller} yang berada pada direktori \verb|application/| \\ \verb|controller|. Seperti yang dijelaskan pada bagian \ref{sub:2:2:3:Controller}, \textit{Controller} digunakan sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan saat membuat sebuah web page. Direktori controller berisi kelas-kelas yang akan mengolah data yang didapat pada \textit{model} dan menyatukan data tersebut ke dalam \textit{views} yang akan ditampilkan kepada pengguna. Pada setiap kelas \textit{controller}, terdapat fungsi \verb|index()| yang menjadi fungsi utama saat kelas di akses oleh pengguna.
+		            Gambar \ref{fig:3:1:1:controller} merupakan struktur kelas \textit{controller} yang terdapat pada SharIF Judge.
+		            \begin{figure}[H]
+			            \centering
+			            \includegraphics[width=0.65\textwidth]{analisis/mvc/controller.png}
+			            \caption{Struktur Kelas Controller pada SharIF Judge}
+			            \label{fig:3:1:1:controller}
+		            \end{figure}
+		            Berikut merupakan file \textit{controller} dan penjelasan fungsi-fungsinya yang terdapat pada SharIF Judge:
 
 		            \begin{itemize}
 			            \item \verb|Assignments.php| \\

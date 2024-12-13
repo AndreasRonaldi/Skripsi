@@ -1,15 +1,134 @@
-@startuml class_mvc
+@startuml class_model
+!pragma layout smetana
+left to right direction
 
-package Model {
+namespace Model {
+    class Assignment_model {
+
+    }
+
+    class Hof_model {
+
+    }
+
+    class Logs_model {
+
+    }
+
+    class Notifications_model {
+
+    }
+
+    class Queue_model {
+
+    }
+
+    class Scoreboard_model {
+    }
+
+    class Settings_model {
+
+    }
+
+    class Submit_model {
+
+    }
+
+    class User {
+
+    }
+
+    class User_model {
+
+    }
+}
+
+@enduml 
+
+@startuml class_view
+!pragma layout smetana
+
+namespace View {
+
+    package errors {
+
+    }
+
+    package pages {
+        package admin {
+        }
+
+        package authentication {
+        }
+    }
+
+    package templates {
+    }
+}
+
+@enduml
+
+@startuml class_controller
+!pragma layout smetana
+left to right direction
+
+namespace Controller {
+    class Assignments {
+    }
+
+    class Dashboard {
+    }
+
+    class Halloffame {
+    }
+
+    class Install {
+    }
+
+    class Login {
+    }
+
+    class Logs {
+    }
+
+    class Moss {
+    }
+
+    class Notifications {
+    }
+
+    class Problems {
+    }
     
-}
+    class Profile {
+    }
 
-package View {
+    class Queue {
+    }
 
-}
+    class Queueprocess {
+    }
 
-package Controller {
+    class Rejudge {
+    }
 
+    class Scoreboard {
+    }
+
+    class Server_time {
+    }
+
+    class Settings {
+    }
+
+    class Submissions {
+    }
+
+    class Submit {
+    }
+
+    class User {
+    }
 }
 
 @enduml

@@ -1,0 +1,306 @@
+@startuml model
+!pragma layout smetana
+left to right direction
+
+package Model {
+    class Assignment_model {
+        add_assignment()
+        delete_assignment()
+        all_assignments()
+        new_assigment()
+        all_problems()
+        problem_info()
+        assignment_info()
+        is_participant()
+        increase_total()
+        set_moss_time()
+        get_moss_time()
+        save_problem_description()
+        _update_coefficients()
+    }
+
+    class Hof_model {
+        get_all_final_submission()
+        get_all_user_assignments()
+    }
+
+    class Logs_model {
+        insert_to_logs()
+        get_all_logs()
+    }
+
+    class Notifications_model {
+        get_all_notifications()
+        get_latest_notifications()
+        add_notification()
+        update_notification()
+        delete_notification()
+        get_notification()
+        have_new_notification()
+    }
+
+    class Queue_model {
+        in_queue()
+        get_queue()
+        empty_queue()
+        add_to_queue()
+        rejudge()
+        rejudge_single()
+        get_first_item()
+        remove_item()
+        save_judgge_result_in_db()
+        add_to_queue_exec()
+    }
+
+    class Scoreboard_model {
+        _generate_scoreboard()
+        update_scoreboards()
+        update_scoreboard()
+        get_scoreboard()
+    }
+
+    class Settings_model {
+        get_setting()
+        set_setting()
+        get_all_settings()
+        set_settings()
+    }
+
+    class Submit_model {
+        get_submission()
+        get_final_submissions()
+        get_all_submissions()
+        count_final_submissions()
+        count_all_submissions()
+        set_final_submissions()
+        add_upload_only()
+    }
+
+    class User {
+        select_assignment()
+        save_widget_positions()
+        get_widget_positions()
+    }
+
+    class User_model {
+        have_user()
+        user_id_to_username()
+        username_to_user_id()
+        have_email()
+        add_user()
+        add_users()
+        delete_user()
+        delete_submissions()
+        validate_user()
+        selected_assignment()
+        get_names()
+        update_profile()
+        send_password_reset_mail()
+        passchange_is_valid()
+        reset_password()
+        get_all_users()
+        get_user()
+        update_login_time()
+    }
+}
+@enduml
+
+@startuml view
+!pragma layout smetana
+left to right direction
+
+package View {
+    package errors {
+        object error_404
+        object error_db
+        object error_expection
+        object error_general
+        object error_php
+    }
+
+    package pages {
+        package admin {
+            object add_assignment
+            object add_notification
+            object add_user
+            object add_user_result
+            object delete_assignment
+            object edit_problem_html
+            object edit_problem_md
+            object edit_problem_plain
+            object install
+            object logs
+            object moss
+            object queue
+            object rejudge
+            object settings
+            object users
+        }
+
+        package authentication {
+            object login
+            object lost
+            object register
+            object register_success
+            object reset_password
+        }
+
+        object assignments
+        object dashboard
+        object halloffame
+        object notification
+        object problems
+        object profile
+        object scoreboard
+        object scoreboard_tabel
+        object submissions
+        object submit
+    }
+
+    package templates {
+        object base
+        object side_bar
+        object simple_header
+        object top_bar
+    }
+}
+@enduml
+
+@startuml controller
+!pragma layout smetana
+' left to right direction
+
+package Controller {
+    class Assignments {
+        index()
+        select()
+        pdf()
+        downloadtestdesc()
+        download_submissions()
+        delete()
+        add()
+        _add()
+        edit()
+        pdfCheck()
+    }
+
+    class Dashboard {
+        index()
+        widget_positions()
+    }
+
+    class Halloffame {
+        index()
+        hof_details()
+    }
+
+    class Install {
+        index()
+    }
+
+    class Login {
+        index()
+        _registration_code()
+        register()
+        logout()
+        lost()
+        reset()
+    }
+
+    class Logs {
+        index()
+    }
+
+    class Moss {
+        index()
+        update()
+        _detect()
+    }
+
+    class Notifications {
+        index()
+        add()
+        edit()
+        delete()
+        check()
+    }
+
+    class Problems {
+        index()
+        edit()
+    }
+    
+    class Profile {
+        index()
+        _password_check()
+        _password_again_check()
+        _email_check()
+        _role_check()
+    }
+
+    class Queue {
+        index()
+        pause()
+        resume()
+        empty_queue()
+    }
+
+    class Queueprocess {
+        run()
+    }
+
+    class Rejudge {
+        rejudge_single()
+        index()
+    }
+
+    class Scoreboard {
+        index()
+    }
+
+    class Server_time {
+        index()
+    }
+
+    class Settings {
+        index()
+        update()
+    }
+
+    class Submissions {
+        the_final()
+        all()
+        _download_excel()
+        final_excel()
+        all_excel()
+        select()
+        _check_type()
+        view_code()
+        download_file()
+    }
+
+    class Submit {
+        index()
+        _language_to_type()
+        _language_to_ext()
+        _match()
+        _check_language()
+        _upload()
+        load()
+        save()
+        _submit()
+        _execute()
+        get_output()
+    }
+
+    class User {
+        index()
+        add()
+        delete()
+        delete_submissions()
+        list_excel()
+    }
+    
+}
+
+@enduml
