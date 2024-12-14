@@ -11,7 +11,6 @@ Seperti yang sudah dibahas pada subbab \ref{sec:2:sharifjudge}, SharIF Judge mer
 \subsection{Model, View, Controller}
 \label{sub:3:1:modelviewcontroller}
 
-% TODO: Bikin class dia for MVC??
 SharIF Judge menggunakan \textit{framework} CodeIgniter 3 yang berbesis arsitektur Model-View-Controller seperti yang dijelaskan pada subbab \ref{sub:2:2:modelviewcontroller}. Gambar \ref{fig:3:1:mvc} gambar kelas diagram struktur MVC pada SharIF Judge.
 
 \begin{figure}[H]
@@ -511,7 +510,7 @@ Berikut merupakan penjelasan mengenai direktori penyimpanan untuk \textit{view} 
 \subsubsection{Controller}
 \label{sub:3:1:1:controller}
 
-Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada direktori \\ \verb|application/controller|. Seperti yang dijelaskan pada bab \ref{sub:2:2:3:Controller}, \textit{Controller} digunakan sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan saat membuat sebuah web page. Direktori controller berisi kelas-kelas yang akan mengolah data yang didapat pada \textit{model} dan menyatukan data tersebut ke dalam \textit{views} yang akan ditampilkan kepada pengguna. Pada setiap kelas \textit{controller}, terdapat fungsi \verb|index()| yang menjadi fungsi utama saat kelas di akses oleh pengguna.
+Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada direktori \\ \verb|application/controller|. Seperti yang dijelaskan pada subbab \ref{sub:2:2:3:Controller}, \textit{Controller} digunakan sebagai perantara antara \textit{model}, \textit{view}, dan \textit{resources} lainnya yang dibutuhkan saat membuat sebuah web page. Direktori controller berisi kelas-kelas yang akan mengolah data yang didapat pada \textit{model} dan menyatukan data tersebut ke dalam \textit{views} yang akan ditampilkan kepada pengguna. Pada setiap kelas \textit{controller}, terdapat fungsi \verb|index()| yang menjadi fungsi utama saat kelas di akses oleh pengguna.
 Gambar \ref{fig:3:1:1:controller} merupakan struktur kelas \textit{controller} yang terdapat pada SharIF Judge.
 \begin{figure}[H]
 	\centering
@@ -938,7 +937,7 @@ Sebagai contoh, pengguna bernama \verb|kenzhi| mengumpulkan kode dengan nama fil
 Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada antrean menggunakan \verb|bash|. Berikut merupakan cara SharIF Judge menilai kode dari awal pengumpulan pada sistem:
 
 \begin{enumerate}
-	\item \textit{Controller} \verb|Submit| akan menyimpan kode ke dalam file pada folder sesuai pada \ref{sub:3:1:penyimpanankode}.
+	\item \textit{Controller} \verb|Submit| akan menyimpan kode ke dalam file pada folder sesuai pada subbab \ref{sub:3:1:penyimpanankode}.
 	\item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} kedalam \textit{model} \verb|Queue_model|.
 	\item \textit{Model} \verb|Queue_model| akan menyimpan data \textit{submission} pada \textit{database} \verb|submission| dan menambahkan data \verb|queue|.
 	\item Selanjutnya \textit{Controller} \verb|Submit| akan memanggil fungsi \verb|process_the_queue()| yang akan menjalankan fungsi \verb|run()| pada \textit{controller} \verb|Queueprocess|.
@@ -949,7 +948,6 @@ Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada ant
 
 % \subsection{Editor Kode}
 
-% TODO: selesain analisis sistem usulan
 \section{Analisis Sistem Usulan}
 \label{sec:3:sistemusulan}
 
@@ -1031,7 +1029,6 @@ Sebelum ketikan dapat di putar kembali, dibutuhkannya fitur untuk merekam segala
 
 \begin{itemize}
 	\item \verb|Editor Kode| \\
-	      % FIXME: Udh di jelasin di atas, tp ulang aja kah?
 	      Editor Kode pada SharIF Judge dibuat dengan \textit{framework} \verb|Ace|. Pada \textit{framework} \verb|Ace| sudah menyediakan fitur untuk penangkapan \textit{event} seperti yang sudah dijelaskan pada subbab \ref{sec:2:ace}. Berikut \textit{event} pada \verb|Ace| yang akan ditanggap oleh sistem:
 
 	      \begin{itemize}
