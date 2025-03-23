@@ -938,7 +938,7 @@ Pada SharIF Judge, Kode yang dikumpulkan akan di jalankan satu per satu pada ant
 
 \begin{enumerate}
 	\item \textit{Controller} \verb|Submit| akan menyimpan kode ke dalam file pada folder sesuai pada subbab \ref{sub:3:1:penyimpanankode}.
-	\item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} kedalam \textit{model} \verb|Queue_model|.
+	\item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} ke dalam \textit{model} \verb|Queue_model|.
 	\item \textit{Model} \verb|Queue_model| akan menyimpan data \textit{submission} pada \textit{database} \verb|submission| dan menambahkan data \verb|queue|.
 	\item Selanjutnya \textit{Controller} \verb|Submit| akan memanggil fungsi \verb|process_the_queue()| yang akan menjalankan fungsi \verb|run()| pada \textit{controller} \verb|Queueprocess|.
 	\item \textit{Controller} \verb|Queueprocess| akan menjalankan \verb|tester.sh| pada folder \verb|tester| dengan data dari \verb|queue|.
@@ -995,7 +995,7 @@ Gambar \ref{fig:3:2:seqdia_save} merupakan sebuah \textit{sequence} diagram yang
 
 \subsection{Fitur melihat daftar rekaman}
 \label{sub:3:2:lookup}
-Pada sistem pemutaran ulang ketikan dibutuhkannya sebuah halaman baru yang akan dinamakan halaman rekaman. Pada halaman ini akan dimunculkannya daftar rekaman untuk \textit{assignment} yang dipilih pada halaman \textit{Assignment}. Fitur ini akan dijalankan pada saat halaman rekaman dimuat kedalam browser oleh SharIF Judge, dimana data yang dimasukkan ke dalam halaman rekaman adalah daftar rekaman tersebut dan beberapa data yang dibutuhkan.
+Pada sistem pemutaran ulang ketikan dibutuhkannya sebuah halaman baru yang akan dinamakan halaman rekaman. Pada halaman ini akan dimunculkannya daftar rekaman untuk \textit{assignment} yang dipilih pada halaman \textit{Assignment}. Fitur ini akan dijalankan pada saat halaman rekaman dimuat ke dalam browser oleh SharIF Judge, dimana data yang dimasukkan ke dalam halaman rekaman adalah daftar rekaman tersebut dan beberapa data yang dibutuhkan.
 
 \subsubsection{Sequence Diagram}
 Gambar \ref{fig:3:2:seqdia_lookup} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem akan bekerja saat user akan membuka halaman rekaman pada SharIF Judge.
