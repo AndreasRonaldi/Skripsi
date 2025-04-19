@@ -9,23 +9,41 @@ Bab ini membahas mengenai implementasi dan pengujian sistem perekaman ulang dala
 Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah lingkungan. Lingkungan pertama digunakan untuk membangun perangkat lunak sedangkan lingkungan kedua digunakan untuk melakukan pengujian. Berikut merupakan spesifikasi lingkungan implementasi dan pengujian yang digunakan:
 
 \begin{itemize}
-    \item Lingkungan Pembangunan
-    \centering
-        \begin{tabular}{|l|l|}
-        \hline
-            \textbf{Parameter} & \textbf{Nilai} \\ \hline
-            Perangkat Keras & Macbook Pro M1 \\ \hline
-            \textit{Processor} & \textit{M1 Pro} \\ \hline
-            \textit{Random Access Memory (RAM)} & 16 GB \\ \hline
-            \textit{Storage} & 512 GB \textit{SSD} \\ \hline
-        \end{tabular}
-    \end{table}
-    Tabel \ref{tab:devsoft} menunjukan spesifikasi perangkat lunak lingkungan pembangunan.
-    \begin{table}[H]
-    \caption{Perangkat Lunak Lingkungan Pembangunan}
-    \label{tab:devsoft}
-    \centering
+    \item Lingkungan Pembangunan \\
+          Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yang digunakan saat pembangunan.
+          \begin{table}[H]
+              \caption{Perangkat Keras Lingkungan Pembangunan}
+              \label{tab:5:1:keraspembangunan}
+              \centering
+              \begin{tabular}{|l|l|}
+                  \hline
+                  \textbf{Parameter}                  & \textbf{Nilai}        \\ \hline
+                  Perangkat Keras                     & Asus ROG Zephyrus M16 \\ \hline
+                  \textit{Processor}                  & \textit{i9-6950H}     \\ \hline
+                  \textit{Random Access Memory (RAM)} & 16 GB                 \\ \hline
+                  \textit{Storage}                    & 1 TB \textit{SSD}     \\ \hline
+              \end{tabular}
+          \end{table}
 
+          Tabel \ref{tab:5:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang digunakan saat pembangunan.
+
+          \begin{table}[H]
+              \caption{Perangkat Lunak Lingkungan Pembangunan}
+              \label{tab:5:1:lunakpembangunan}
+              \centering
+              \begin{tabular}{|l|l|}
+                  \hline
+                  \textbf{Parameter}        & \textbf{Nilai}                                            \\ \hline
+                  Sistem Operasi            & \textit{Windows 11 Version} ???                           \\ \hline
+                  Bahasa Pemrograman        & PHP, \textit{JavaScript}, \textit{CSS}, dan \textit{HTML} \\ \hline
+                  \textit{Framework}        & \textit{CodeIgniter} 3.1.13                               \\ \hline
+                  \textit{Code Editor}      & \textit{Visual Studio Code} 1.99.3 (Universal)            \\ \hline
+                  Perangkat Lunak Pendukung & \textit{Docker Version} ???                               \\ & \textit{Debian} 11-slim \\ & \textit{Google Chrome Version} ??? (Official Build) (arm64)\\ & \textit{MariaDB} ??? \\ & \textit{phpMyAdmin} ??? \\ & PHP 7.?\\ \hline
+              \end{tabular}
+          \end{table}
+
+    \item Lingkungan Eksperimental
+          %   TODO: Catat lingkungan yang dipakai saat eksperimen
 \end{itemize}
 
 \section{Implementasi}
