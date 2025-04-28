@@ -17,11 +17,11 @@ Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah ling
               \centering
               \begin{tabular}{|l|l|}
                   \hline
-                  \textbf{Parameter}                  & \textbf{Nilai}        \\ \hline
-                  Perangkat Keras                     & Asus ROG Zephyrus M16 \\ \hline
-                  \textit{Processor}                  & \textit{i9-6950H}     \\ \hline
-                  \textit{Random Access Memory (RAM)} & 16 GB                 \\ \hline
-                  \textit{Storage}                    & 1 TB \textit{SSD}     \\ \hline
+                  \textbf{Parameter}                  & \textbf{Nilai}              \\ \hline
+                  Perangkat Keras                     & Asus ROG Zephyrus G15       \\ \hline
+                  \textit{Processor}                  & \textit{AMD Ryzen 9 6900HS} \\ \hline
+                  \textit{Random Access Memory (RAM)} & 16 GB                       \\ \hline
+                  \textit{Storage}                    & 1 TB \textit{SSD}           \\ \hline
               \end{tabular}
           \end{table}
 
@@ -34,11 +34,11 @@ Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah ling
               \begin{tabular}{|l|l|}
                   \hline
                   \textbf{Parameter}        & \textbf{Nilai}                                            \\ \hline
-                  Sistem Operasi            & \textit{Windows 11 Version} ???                           \\ \hline
+                  Sistem Operasi            & \textit{Microsoft Windows 11 Home Version} 10.0.26100     \\ \hline
                   Bahasa Pemrograman        & PHP, \textit{JavaScript}, \textit{CSS}, dan \textit{HTML} \\ \hline
                   \textit{Framework}        & \textit{CodeIgniter} 3.1.13                               \\ \hline
-                  \textit{Code Editor}      & \textit{Visual Studio Code} 1.99.3 (Universal)            \\ \hline
-                  Perangkat Lunak Pendukung & \textit{Docker Version} ???                               \\ & \textit{Debian} 11-slim \\ & \textit{Google Chrome Version} ??? (Official Build) (arm64)\\ & \textit{MariaDB} ??? \\ & \textit{phpMyAdmin} ??? \\ & PHP 7.?\\ \hline
+                  \textit{Code Editor}      & \textit{Visual Studio Code} 1.99.3                        \\ \hline
+                  Perangkat Lunak Pendukung & \textit{Docker Version} 25.0.3                            \\ & \textit{Debian} 11-slim \\ & \textit{Arc Browser Version} 1.50.0 (62004)\\ & \textit{MySQL} 5.7 \\ & \textit{phpMyAdmin} 5.2.1 \\ & PHP 7.3.33\\ \hline
               \end{tabular}
           \end{table}
 
@@ -48,6 +48,192 @@ Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah ling
 
 \section{Implementasi}
 \label{sec:5:implementasi}
+
+Bagian ini menjelaskan hasil implementasi sistem pemutaran ulang pada SharIF-Judge berdasarkan perancangan pada Bab \ref{chap:analisis}. Pada saat implementasi juga dilakukan penyesuaian pada peracangan yang sudah dibuat untuk mengatasi kendala yang dialami pada saat implementasi. 
+
+\subsection{Merekam Ketikan pada Editor Kode}
+\label{sub:5:2:merekam}
+
+Fitur merekam ketikan pada editor kode diimplementasikan untuk menangkap seluruh interaksi pengguna terhadap IDE dan SharIF-Judge pada saat pengguna menyelesaikan sebuah masalah dalam \textit{assignment}. Data yang direkam akan digunakan untuk memutar ulang penyelesaian yang dilakukan oleh pengguna. Fitur ini diimplementasikan dengan memanfaatkan \textit{Library Ace}, \textit{event hooks} pada javascript. Implementasi ini akan memerlukan penyesuian pada bagian \textit{javascript} yaitu file \verb|assets/js/shj_submit.js| yang dimuat pada halaman \textit{Submit}.
+
+Berikut merupakan alur sistem perekaman ketikan:
+\begin{enumerate}
+    \item Inisialisasi Perekam \\
+    Pada alur ini, semua perekaman akan diinisialisasi dengan menjalankan sebuah fungsi dinamakan \verb|recordStart|. Fungsi ini akan memanggil seluruh \textit{event hooks} dan \textit{event listener} dalam \textit{Library ace} agar dinyalakan. 
+    
+    Dalam menjalankan sebuah fungsi \textit{event listener} dibutuhkannya dua argumen yaitu event yang akan di panggil dan sebuah \textit{callback function} yang akan dipanggil pada saat terjadinya sebuah event tersebut. 
+    
+    Dalam implementasi akan dibuat 2 buah \textit{object javascript} yang menjadi fungsi \textit{event listener} yaitu \textit{object} pemanggilan \textit{event listener} dan \textit{object} menyimpan \textit{callback function} yang dipakai oleh \textit{event listener} masing-masing. Kode \ref{kode:5:1:objcallback} merupakan \textit{object callback function} yang diimplementasikan.
+    \begin{lstlisting}[caption={\textit{object callback function}}, label={kode:5:1:objcallback}]
+const handlers = {
+    editor_change: (e) =>
+        recordEvent(e.action, {
+            data: e.lines,
+            start: e.start,
+            end: e.end,
+        }),
+}
+    \end{lstlisting}
+    
+    Kode \ref{kode:5:1:objeventlist} merupakan \textit{object} pemanggilan \textit{event listener} yang dipanggil pada saat inisialisasi dan mendapatkan fungsi \textit{callback function} dari \textit{object handlers} pada Kode \ref{kode:5:1:objcallback}.
+    \begin{lstlisting}[caption={\textit{object event listener}}, label={kode:5:1:objeventlist}]
+const addListener = {
+    editor_change: () => editor.session.on("change", handlers.editor_change),
+}
+    \end{lstlisting}
+
+    Setelah itu \textit{object addListener} akan dipanggil oleh fungsi \verb|recordStart|. Kode \ref{kode:5:1:eventlistener} menunjukan fungsi yang dipanggil saat inisialisasi. 
+    
+    
+    \begin{lstlisting}[caption={Beberapa \textit{event listener} yang dipanggil}, label={kode:5:1:eventlistener}]
+addListener.editor_change();
+    \end{lstlisting}
+    
+    Fungsi \verb|recordStart| akan dilakukan pada saat pengguna mengubah \textit{problem} yang dipilih dalam halaman Submit.
+
+    % TODO: di bab 3, harus explore \assets\js\shj_submit.js biar ngerti fungsi yang di panggil
+
+    \item Penyimpan sebuah rekaman \\
+    Untuk setiap perekaman yang dibutuhkan, dijalankan sebuah fungsi yang mendeteksi perubahan tersebut dan menjalankan sebuah \textit{callback function} saat terjadi perubahan tersebut. Fungsi ini dipnaggil pada saat inisialisasi. \textit{Callback function} tersebut akan mendapatkan argumen sesuai dengan perubahan yang dideteksi. Pada contohnya untuk perubahan teks pada editor kode yaitu fungsi \verb|onchange|, argumen yang diberikan merupakan teks yang dimasukan yaitu contohnya adalah `A', dan juga posisi dimana teks tersebut dimasukkan dalam editor kode. Kode \ref{kode:5:1:argonchange} merupakan contoh argumen yang diberikan.
+    \begin{lstlisting}[caption={Contoh argumen yang diberikan oleh fungsi onchange}, label={kode:5:1:argonchange}]
+{
+    data: ["A"], 
+    start: {row: 0, column: 1}, 
+    end:{ row: 0, column: 2}
+}
+    \end{lstlisting}
+    Setelah itu data akan disimpan dalam sebuah \textit{object javascript}
+    seperti yang sudah dijelaskan pada Bagian \ref{sec:4:2:storerekaman}. data argumen akan disimpan mengunakan key `args' atau `payload'.
+    
+    \item Penyimpanan data rekaman \\
+    Selanjutnya sebuah \textit{event} atau rekaman yang sudah dicatat dan menjadi sebuah \textit{object javascript} bernama \verb|recording|. seluruh event rekaman akan simpan dalam sebuah \textit{array} dalam \verb|recording| dengan key `events' seperti yang sudah dijelaskan pada Bagian \ref{sec:4:2:storerekaman}. \verb|recording| juga memiliki waktu dimulainya rekaman, isi awal editor kode, posisi awal cursor dalam editor kode. \verb|recording| juga memiliki fungsi \verb|init| untuk meninisialisasi seluruh \textit{object} \verb|recording|.
+
+    \begin{lstlisting}[caption={Contoh argumen yang diberikan oleh fungsi onchange}, label={kode:5:1:recordingobj}]
+const recording = {
+    events: [],
+    startTime: -1,
+    startValue: "",
+    startSelection: [],
+
+    init: () => {
+        recording.events = [];
+        recording.startTime = Date.now();
+        recording.startValue = editor.getValue();
+        recording.startSelection = getSelection(editor);
+    },
+};
+    \end{lstlisting}
+
+    Kode \ref{kode:5:1:recordingobj} merupakan \verb|recording| pada saat keadaan kosong. Pada \textit{object} \verb|recording|, \verb|events| merupakan sebuah array dengan isi sebuah rekaman event, \verb|startTime| merupakan waktu awal rekaman dimulai, \verb|startValue| merupakan isi awal dalam editor kode, dan \verb|startSelection| merupakan posisi awal cursor dalam editor kode.
+\end{enumerate}
+
+Seluruh alur sistem perekaman ketikan dalam SharIF-Judge akan ditambahkan ke dalam file \verb|assets/js/|\verb|shj_submit.js|. Kode perubahan terdapat pada Lampiran ??.
+% TODO: Add lampiran perubahan shj_submit
+
+\subsubsection{Perbaikan Implementasi}
+
+Pada saat mengujian fungsi penyimpanan rekaman, dalam tahap alur penyimpanan data rekaman dan juga bagaimana inisialisasi perekaman akan diubah dari perancangan Bagian \ref{sub:4:3:merekam}. Hal ini dikarenakan saat pengguna memilih ulang masalah atau memuat ulang halaman Submit, maka semua events yang sudah direkam akan hilang. Maka dari itu berikut merupakan perubahan pada alur fitur sistem perekaman ketikan:
+
+\begin{enumerate}
+    \item Inisialisasi Perekam \\
+    Alur inisialisasi akan diubah agar dapat memuat events yang sebelumnya sudah disimpan dalam \textit{object javascript} bernama \verb|befRecording|. Oleh karena itu, dibutuhkannya penambahan fungsi pada \textit{Controller} \verb|Submit.php| yaitu fungsi untuk mengambil data rekaman sebelumnya bernama \verb|load_rec| yang mengambil argumen pengenal masalah yang dipilih oleh pengguna. Kode penambahan terdapat di Lampiran ??.
+    % TODO: Add lampiran perubahan Submit.php
+    \item Penyimpan data rekaman \\
+    Pada \textit{object} \verb|recording|, \verb|startValue| dan \verb|startSelection| tidak dibutuhkan karena isi awal dari editor kode dan juga posisi awal cursor dalam editor kode akan selalu berisi dengan nilai kosong yaitu teks kosong dan posisi di baris dan kolom pertama.
+\end{enumerate}
+
+\subsection{Menyimpan Rekaman pada Sistem}
+\label{sub:5:2:storerekaman}
+
+Fitur penyimpanan rekaman pada sistem bertujuan untuk menyimpan data secara permanen ke dalam database dan \textit{server} agar dapat diputar kembali di lain waktu. Berikut merupakan alur fitur penyimpanan rekaman pada sistem:
+
+\begin{enumerate}
+    \item Mengirimkan Data ke \textit{Server} \\
+    Dalam halaman Submit, pengguna memiliki 3 aksi penting dalam IDE SharIF-Judge yaitu: \textit{save}, \textit{execute}, dan \textit{submit}. Alur ini akan mengirimkan data rekaman pada saat pengguna melakukan aksi tersebut. Data yang dikirim merupakan \textit{object} \verb|recording| yang sudah jadikan sebagai teks JSON dengan menggunakan fungsi \verb|JSON.stringify|.
+
+    \item Menyimpan Data Dalam File Sistem \\
+    File akan disimpan dalam \textit{folder} yang sama dengan penyimpanan kode \textit{submission} yang dijelaskan pada Bagian \ref{sub:3:1:penyimpanankode}. File akan diisi secara langsung oleh data rekaman dan tidak diubah oleh \textit{server}. Penamaan file dapat dibagi berdasarkan aksi yang membuat pengguna mengirimkan data rekaman. Untuk aksi \textit{save} dan \textit{execute}, file dengan data rekaman akan disimpan dengan nama \verb|recording|. Untuk aksi \textit{submit}, file akan disimpan dengan nama \verb|recording| dilanjutkan dengan sebuah `-' dan \textit{submit id} yang dibuat. File tersebut akan memiliki tipe data yang sama yaitu JSON dikarenakan itu extensi file yang digunakan adalah \verb|.json|.
+ 
+    \item Menyimpan Data Dalam Database \\
+    Saat penyimpanan data ke dalam file sistem berhasil, maka penyimpanan kedalam database juga akan dilakukan. Data yang akan disimpan kedalam database akan digunakan untuk mendaftar rekaman yang ada dalam sistem, maka data yang akan disimpan bukan data rekaman melainkan data statistik. Berikut merupakan data yang akan disimpan ke dalam Database:
+    \begin{itemize}
+        \item \verb|rec_id|: pengenal rekaman yang sama dengan \textit{submit id}.  
+        \item \verb|username|: nama pengguna yang mengirimkan data rekaman.
+        \item \verb|problem_id|: pengenal masalah yang pengguna kerjakan.
+        \item \verb|assignment_id|: pengenal tugas yang pengguna kerjakan.
+        \item \verb|upload_at|: waktu sistem penyimpan data rekaman.
+    \end{itemize}
+    Untuk membuat databasenya sendiri, dibutuhkan penambahan tabel bernama tabel \verb|recording| yang memiliki lima atribut diatas. Kode \ref{kode:5:2:adddatabasetable} menunjukkan pembuatan tabel baru menggunakan \textit{CodeIgniter} dalam SharIF-Judge.
+
+    \begin{lstlisting}[caption={Kode membuat database pada SharIF-Judge}, label={kode:5:2:adddatabasetable}]
+// create table 'recording'
+$fields = array(
+    'rec_id' 	    => array('type' => 'INT', 'constraint' => 11, 'unsigned' => TRUE),	
+    'upload_at'		=> array('type' => $DATETIME),
+    'assignment' 	=> array('type' => 'SMALLINT', 'constraint' => 4, 'unsigned' => TRUE),
+    'problem'       => array('type' => 'SMALLINT', 'constraint' => 4, 'unsigned' => TRUE),
+    'username'      => array('type' => 'VARCHAR', 'constraint' => 20),
+);
+$this->dbforge->add_field($fields);
+if (! $this->dbforge->create_table('recording', TRUE))
+    show_error("Error creating database table " . $this->db->dbprefix('recording'));
+// ADD Unique constraint
+$this->db->query(
+    "ALTER TABLE {$this->db->dbprefix('recording')}
+        ADD CONSTRAINT {$this->db->dbprefix('sruap_unique')} UNIQUE (rec_id, username, assignment, problem);"
+);
+    \end{lstlisting}
+
+    Mengikuti arsitektural \textit{CodeIgniter}, untuk menambahkan sebuah data ke dalam database perlu menggunakan sebuah \textit{Model}. Oleh karena itu, dibutuhkannya \textit{model} baru bernama \verb|Recording_model.php| yang ditambahkan fungsi \verb|add_recording()| yang memiliki argumen yaitu seluruh data yang ingin disimpan dalam database.
+
+    Untuk aksi \textit{save} dan \textit{execute} dimana tidak adanya \textit{submit id} maka akan dibuat menjadi angka nol (`0') pada pengenal rekamannya atau \verb|rec_id|.
+\end{enumerate}
+
+Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke dalam \verb|assets/js/|\\\verb|shj_submit.js|. Kode pembahan terdapat pada Lampiran ??. Agar dapat menyimpan dibutuhkannya perubahan dalam kode \textit{Controller} \verb|Submit.php| pada fungsi \verb|save($type)| dan fungsi \verb|_submit()|. Kode perubahan \verb|Submit.php| terdapat pada Lampiran ??.
+% TODO: ref Lampirkan kode perubahan shj_submit dan Submit.php controller
+
+\subsubsection{Perbaikan Implementasi}
+
+Pada saat pengujian yang sama dengan Bagian \ref{sub:5:2:merekam}, dibutuhkannya perubahan pada alur pengirimkan data ke server. Dikarenakan \textit{events} yang sudah di save dapat terhapus karena pengguna memilih ulang masalah dan memuat ulang halaman Submit, yang membuat rekaman inisialisasi dan menghapus rekaman lama. Maka dari itu pada saat mengirimkan data \verb|recording|, akan disertakan juga data \verb|befRecording| yang sudah diambil pada saat inisialisasi. Format pengiriman data juga akan berubah dikarenakan adanya rekaman yang lama menjadi sebuah \textit{key} dan \textit{value} karena hanya dua value yang harus disimpan yaitu \textit{events} sebagai \textit{value} dan \textit{startTime} sebagai \textit{key}. Maka format ini menjadi format keseluruhan events yang terjadi dan dapat disatukan dengan format yang sama menggunakan \textit{spread operator} agar seluruh rekaman lama digabungkan. Kode \ref{kode:5:2:mergedata} merupakan kode untuk mengirimkan teks JSON dengan mengabungkan kedua rekaman menggunakan \textit{spread operator}.
+
+\begin{lstlisting}[caption={\textit{object callback function}}, label={kode:5:2:mergedata}]
+JSON.stringify({
+    ...befRecording,
+    [recording.startTime]: recording.events
+}),
+\end{lstlisting}
+
+\subsection{Melihat Daftar Rekaman}
+
+Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam sistem, pengguna juga dapat melihat isi rekaman yang terdapat dalam daftar rekaman tersebut. Fitur ini dibutuhkan dua tahap untuk diimplementasikan yaitu implementasi pengambilan data dan implementasi menampilkan data dan antarmuka.
+
+\subsubsection{Pengambilan Data Rekaman}
+
+Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran ??.
+% TODO: Add lampiran kode model recording
+
+Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recording.php|:
+\begin{enumerate}
+    \item \verb|__construct()| \\
+    Fungsi ini akan memuat seluruh kebutuhan \textit{Model} dan \textit{Helper} ke dalam \verb|Recording.php|, fungsi \textit{construct} juga akan membatasi akses oleh pengguna dibawah \textit{instructor}. Fungsi ini juga mendapatkan \textit{params url} yang dikirim oleh pengguna. 
+
+    \item \verb|all()| \\
+    Fungsi ini akan mengambil beberapa data yang dibutuhkan oleh antarmuka SharIF-Judge yaitu \textit{assignment} yang dipilih oleh pengguna menggunakan \verb|assignment_model|, \textit{problem} yang ada dalam \textit{assignment} tersebut menggunakan \verb|assignment_model|, dan daftar \textit{recording} yang tersimpan dalam sistem menggunakan \verb|recording_model|. Setelah itu, server akan menempatkan seluruh data tersebut ke dalam \textit{view} baru bernama \verb|recording_list.twig|.
+\end{enumerate}
+
+Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \textit{Controller} \verb|Recording.php| terdapat dalam Lampiran ??.
+% TODO: Add lampiran kode controller recording
+
+\subsubsection{Antarmuka dan Tampilan Data}
+
+Antarmuka yang akan dibuat serupa dengan perancangan pada Bagian \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar ?? menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran ??.
+% TODO: Add Gambar antarmuka halam recording_list.twig
+% TODO: Add lampiran kode recording_list.twig
+
+\subsection{Pemutaran Ulang Rekaman}
+
+\subsection{Menampilkan Histogram Event yang Terjadi}
+
 
 \section{Pengujian Fungsional}
 \label{sec:5:fungsional}
