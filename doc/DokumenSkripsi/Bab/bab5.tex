@@ -103,10 +103,10 @@ addListener.editor_change();
 }
     \end{lstlisting}
     Setelah itu data akan disimpan dalam sebuah \textit{object javascript}
-    seperti yang sudah dijelaskan pada Bagian \ref{sec:4:2:storerekaman}. data argumen akan disimpan mengunakan key `args' atau `payload'.
+    seperti yang sudah dijelaskan pada Bab \ref{sec:4:2:storerekaman}. data argumen akan disimpan mengunakan key `args' atau `payload'.
     
     \item Penyimpanan data rekaman \\
-    Selanjutnya sebuah \textit{event} atau rekaman yang sudah dicatat dan menjadi sebuah \textit{object javascript} bernama \verb|recording|. seluruh event rekaman akan simpan dalam sebuah \textit{array} dalam \verb|recording| dengan key `events' seperti yang sudah dijelaskan pada Bagian \ref{sec:4:2:storerekaman}. \verb|recording| juga memiliki waktu dimulainya rekaman, isi awal editor kode, posisi awal cursor dalam editor kode. \verb|recording| juga memiliki fungsi \verb|init| untuk meninisialisasi seluruh \textit{object} \verb|recording|.
+    Selanjutnya sebuah \textit{event} atau rekaman yang sudah dicatat dan menjadi sebuah \textit{object javascript} bernama \verb|recording|. seluruh event rekaman akan simpan dalam sebuah \textit{array} dalam \verb|recording| dengan key `events' seperti yang sudah dijelaskan pada Bab \ref{sec:4:2:storerekaman}. \verb|recording| juga memiliki waktu dimulainya rekaman, isi awal editor kode, posisi awal cursor dalam editor kode. \verb|recording| juga memiliki fungsi \verb|init| untuk meninisialisasi seluruh \textit{object} \verb|recording|.
 
     \begin{lstlisting}[caption={Contoh argumen yang diberikan oleh fungsi onchange}, label={kode:5:1:recordingobj}]
 const recording = {
@@ -132,7 +132,7 @@ Seluruh alur sistem perekaman ketikan dalam SharIF-Judge akan ditambahkan ke dal
 
 \subsubsection{Perbaikan Implementasi}
 
-Pada saat mengujian fungsi penyimpanan rekaman, dalam tahap alur penyimpanan data rekaman dan juga bagaimana inisialisasi perekaman akan diubah dari perancangan Bagian \ref{sub:4:3:merekam}. Hal ini dikarenakan saat pengguna memilih ulang masalah atau memuat ulang halaman Submit, maka semua events yang sudah direkam akan hilang. Maka dari itu berikut merupakan perubahan pada alur fitur sistem perekaman ketikan:
+Pada saat mengujian fungsi penyimpanan rekaman, dalam tahap alur penyimpanan data rekaman dan juga bagaimana inisialisasi perekaman akan diubah dari perancangan Bab \ref{sub:4:3:merekam}. Hal ini dikarenakan saat pengguna memilih ulang masalah atau memuat ulang halaman Submit, maka semua events yang sudah direkam akan hilang. Maka dari itu berikut merupakan perubahan pada alur fitur sistem perekaman ketikan:
 
 \begin{enumerate}
     \item Inisialisasi Perekam \\
@@ -152,7 +152,7 @@ Fitur penyimpanan rekaman pada sistem bertujuan untuk menyimpan data secara perm
     Dalam halaman Submit, pengguna memiliki 3 aksi penting dalam IDE SharIF-Judge yaitu: \textit{save}, \textit{execute}, dan \textit{submit}. Alur ini akan mengirimkan data rekaman pada saat pengguna melakukan aksi tersebut. Data yang dikirim merupakan \textit{object} \verb|recording| yang sudah jadikan sebagai teks JSON dengan menggunakan fungsi \verb|JSON.stringify|.
 
     \item Menyimpan Data Dalam File Sistem \\
-    File akan disimpan dalam \textit{folder} yang sama dengan penyimpanan kode \textit{submission} yang dijelaskan pada Bagian \ref{sub:3:1:penyimpanankode}. File akan diisi secara langsung oleh data rekaman dan tidak diubah oleh \textit{server}. Penamaan file dapat dibagi berdasarkan aksi yang membuat pengguna mengirimkan data rekaman. Untuk aksi \textit{save} dan \textit{execute}, file dengan data rekaman akan disimpan dengan nama \verb|recording|. Untuk aksi \textit{submit}, file akan disimpan dengan nama \verb|recording| dilanjutkan dengan sebuah `-' dan \textit{submit id} yang dibuat. File tersebut akan memiliki tipe data yang sama yaitu JSON dikarenakan itu extensi file yang digunakan adalah \verb|.json|.
+    File akan disimpan dalam \textit{folder} yang sama dengan penyimpanan kode \textit{submission} yang dijelaskan pada Bab \ref{sub:3:1:penyimpanankode}. File akan diisi secara langsung oleh data rekaman dan tidak diubah oleh \textit{server}. Penamaan file dapat dibagi berdasarkan aksi yang membuat pengguna mengirimkan data rekaman. Untuk aksi \textit{save} dan \textit{execute}, file dengan data rekaman akan disimpan dengan nama \verb|recording|. Untuk aksi \textit{submit}, file akan disimpan dengan nama \verb|recording| dilanjutkan dengan sebuah `-' dan \textit{submit id} yang dibuat. File tersebut akan memiliki tipe data yang sama yaitu JSON dikarenakan itu extensi file yang digunakan adalah \verb|.json|.
  
     \item Menyimpan Data Dalam Database \\
     Saat penyimpanan data ke dalam file sistem berhasil, maka penyimpanan kedalam database juga akan dilakukan. Data yang akan disimpan kedalam database akan digunakan untuk mendaftar rekaman yang ada dalam sistem, maka data yang akan disimpan bukan data rekaman melainkan data statistik. Berikut merupakan data yang akan disimpan ke dalam Database:
@@ -194,7 +194,7 @@ Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke 
 
 \subsubsection{Perbaikan Implementasi}
 
-Pada saat pengujian yang sama dengan Bagian \ref{sub:5:2:merekam}, dibutuhkannya perubahan pada alur pengirimkan data ke server. Dikarenakan \textit{events} yang sudah di save dapat terhapus karena pengguna memilih ulang masalah dan memuat ulang halaman Submit, yang membuat rekaman inisialisasi dan menghapus rekaman lama. Maka dari itu pada saat mengirimkan data \verb|recording|, akan disertakan juga data \verb|befRecording| yang sudah diambil pada saat inisialisasi. Format pengiriman data juga akan berubah dikarenakan adanya rekaman yang lama menjadi sebuah \textit{key} dan \textit{value} karena hanya dua value yang harus disimpan yaitu \textit{events} sebagai \textit{value} dan \textit{startTime} sebagai \textit{key}. Maka format ini menjadi format keseluruhan events yang terjadi dan dapat disatukan dengan format yang sama menggunakan \textit{spread operator} agar seluruh rekaman lama digabungkan. Kode \ref{kode:5:2:mergedata} merupakan kode untuk mengirimkan teks JSON dengan mengabungkan kedua rekaman menggunakan \textit{spread operator}.
+Pada saat pengujian yang sama dengan Bab \ref{sub:5:2:merekam}, dibutuhkannya perubahan pada alur pengirimkan data ke server. Dikarenakan \textit{events} yang sudah di save dapat terhapus karena pengguna memilih ulang masalah dan memuat ulang halaman Submit, yang membuat rekaman inisialisasi dan menghapus rekaman lama. Maka dari itu pada saat mengirimkan data \verb|recording|, akan disertakan juga data \verb|befRecording| yang sudah diambil pada saat inisialisasi. Format pengiriman data juga akan berubah dikarenakan adanya rekaman yang lama menjadi sebuah \textit{key} dan \textit{value} karena hanya dua value yang harus disimpan yaitu \textit{events} sebagai \textit{value} dan \textit{startTime} sebagai \textit{key}. Maka format ini menjadi format keseluruhan events yang terjadi dan dapat disatukan dengan format yang sama menggunakan \textit{spread operator} agar seluruh rekaman lama digabungkan. Kode \ref{kode:5:2:mergedata} merupakan kode untuk mengirimkan teks JSON dengan mengabungkan kedua rekaman menggunakan \textit{spread operator}.
 
 \begin{lstlisting}[caption={\textit{object callback function}}, label={kode:5:2:mergedata}]
 JSON.stringify({
@@ -209,7 +209,7 @@ Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam 
 
 \subsubsection{Pengambilan Data Rekaman}
 
-Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran ??.
+Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran ??.
 % TODO: Add lampiran kode model recording
 
 Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recording.php|:
@@ -226,13 +226,52 @@ Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \tex
 
 \subsubsection{Antarmuka dan Tampilan Data}
 
-Antarmuka yang akan dibuat serupa dengan perancangan pada Bagian \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar ?? menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran ??.
+Antarmuka yang akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar ?? menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran ??.
 % TODO: Add Gambar antarmuka halam recording_list.twig
 % TODO: Add lampiran kode recording_list.twig
 
 \subsection{Pemutaran Ulang Rekaman}
 
-\subsection{Menampilkan Histogram Event yang Terjadi}
+Fungsi pemutaran ulang rekaman mengunakan data rekaman yang sudah disimpan dalam sistem untuk menvisualisasikan proses penyelesaian masalah pengguna secara kronologis. Fitur pemutaran ulang ini membutuhkan tiga implementasi antarmuka, implementasi memuat data rekaman, dan implementasi menjalankan rekaman. 
+
+\subsubsection{Implementasi Antarmuka}
+
+Untuk menambahkan sebuah halaman baru dalam SharIF-Judge dibutuhkannya juga fungsi baru pada \textit{Controller} \verb|Recording.php|. Fungsi baru akan dinamakan \verb|index| untuk menampilkan sebuah \textit{view} baru bernama \verb|recording.twig|. Fungsi \verb|index| akan menampilkan halaman baru itu melalui rute \verb|/recording/|. Penamaan \textit{index} itu agar rute tidak memerlukan \verb|/index| pada akhir rute karena jika rute \textit{function} (Bab \ref{sub:2:2:codeigniterurls}) akan otomatis mengarah pada fungsi \verb|index| dalam kelas tersebut.
+
+Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama.
+
+Gambar ?? merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
+
+% TODO: Tambah Gambar antarmuka recording.twig
+
+\subsubsection{Implementasi Memuat Data Rekaman}
+
+Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem mengunakan \textit{Controller}. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan mengunakan AJAX pada halaman \textit{recording}. Maka dari itu, butuh fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{javascript} baru bernama \verb|shj_function.js|.
+
+Fungsi baru dalam \textit{Controller} \verb|Recording.php| akan dinamakan \verb|download_record| yang memiliki argumen \verb|assignment_id|, \verb|problem_id|, dan \verb|rec_id|. Fungsi tersebut akan mengambil file rekaman dalam file sistem dengan mengunakan argumen untuk mendapatkan lokasi dan nama file rekaman (Bab \ref{sec:4:2:storerekaman}) SharIF-Judge dan mengirimkan file tersebut secara langsung. File juga akan dirikim dengan header \verb|Content-Type: application/json| dan \verb|Content-Disposition: attachment; filename=|\\\verb|"rec.json"|.
+
+Fungsi \verb|download_record| akan dipanggil pada saat halaman \textit{recording} dimuat oleh \textit{javascript} \verb|shj_function.js| mengunakan fungsi baru yaitu \verb|getRecording|. Fungsi \verb|getRecording| akan meninisialisasi editor kode dalam antarmuka dan menformat data rekaman agar lebih mudah untuk di putar ulang. Berikut merupakan format data tambahan yang akan diubah oleh fungsi \verb|getRecording|:
+
+\begin{itemize}
+    \item \verb|events|: Data rekaman
+    \item \verb|eventsIndex|: sebuah map dengan \textit{key} waktu saat sebuah \textit{events} terjadi dan \textit{value index} waktu saat sebuah \textit{events} terjadi.
+    \item \verb|indexEvents|: sebuah map dengan \textit{key index} waktu saat sebuah \textit{events} terjadi dan \textit{value} waktu saat sebuah \textit{events} terjadi.
+    \item \verb|presumIndexDuration|: menkalkulasikan panjang rekaman sebelum rekaman selesai.
+    \item \verb|length|: panjang data rekaman
+    \item \verb|duration|: durasi dari seluruh rekaman yang ada pada data rekaman
+\end{itemize}
+
+Data tersebut akan disimpan dalam sebuah \textit{object javascript} yang dinamakan \verb|recording| dan akan dipakai pada saat menjalankan rekaman dan untuk menampilkan histogram \textit{events} yang terjadi.
+
+\subsubsection{Implementasi Menjalankan Rekaman}
+
+% TODO: create this part?
+
+\subsubsection{Menampilkan Histogram Events yang Terjadi}
+
+Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data rekaman tersebut, fungsi \verb|setUpChart| akan dipanggil dan membuat data grafik histogram. Data histogram akan dimuat menggunakan \textit{Library} \verb|Chart.js|.
+
+
 
 
 \section{Pengujian Fungsional}
