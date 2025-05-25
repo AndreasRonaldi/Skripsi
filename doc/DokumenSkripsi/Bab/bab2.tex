@@ -251,6 +251,17 @@ Struktur URL pada CodeIgniter juga mengikuti pendekatan MVC (Referensi \ref{sub:
 	\item Segmen ketiga dan selanjutnya mewakili \textit{identifier} atau pengenal dan variable-variable lain yang akan di kirimkan ke \textit{controller}.
 \end{enumerate}
 
+\subsection{\textit{Helpers}}
+\label{sub:2:2:helpers}
+
+\textit{Helpers} merupakan sebuah kumpulan fungsi untuk membantu dalam sebuah kategori tertentu. \textit{File helpers} terdapat pada direktori \verb|system\helpers| atau \verb|application\helpers|. Penggunaan \textit{helpers} dalam \textit{CodeIgniter} adalah dengan memuat file helpers dalam fungsi atau kelas \textit{Controller} dengan cara seperti berikut ini:
+
+\begin{center}
+	\verb|$this->load->helper(`name')|
+\end{center}
+
+Setelah \textit{helper} dimuat dalam fungsi, maka kumpulan fungsi dalam \textit{file helper} dapat langsung dipanggil.
+
 \section{Twig}
 \label{sec:2:twig}
 
@@ -299,7 +310,7 @@ Intergrated Development Environment (IDE) merupakan sebuah aplikasi yang menyedi
 \section{Ace}
 \label{sec:2:ace}
 
-Ace merupakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah website yang dibuah mengunakan bahasa \textit{Javascript}. Ace memiliki kemampuan dari editor pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
+Ace merupakan \textit{library} yang menyediakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah web page dan dikembangkan mengunakan bahasa \textit{Javascript}. Ace memiliki kemampuan yang sama seperti editor kode pada umumnya. Berikut merupakan beberapa fitur utama yang dimiliki oleh Ace:
 
 \begin{itemize}
 	\item \textit{Syntax highlighting} untuk bahasa pemrograman.
@@ -310,6 +321,12 @@ Ace merupakan sebuah editor kode yang dapat dimasukkan ke dalam sebuah website y
 	\item \textit{Line wrapping}
 	\item \textit{Code folding}
 \end{itemize}
+
+Untuk mengintegrasikan \textit{library} Ace dalam sebuah web page, Ace perlu ditanam dalam sebuah web page. Salah satu cara untuk menanam Ace ke dalam sebuah web page adalah dengan mem-\textit{build library} dan menaruhnya dalam direktori lokal dan dipanggil dalam web page yang diinginkan dengan cara seperti berikut:
+
+\begin{center}
+	\verb|<script src="/ace-builds/ace.js" type="text/javascript"></script>|
+\end{center}
 
 Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 
