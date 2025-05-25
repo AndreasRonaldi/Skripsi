@@ -6,17 +6,20 @@ Bab ini membahas tentang perancangan untuk implementasi sistem perekaman ulang d
 \section{Rancangan Antarmuka}
 
 \subsection{Sistem Rekaman}
+\label{sub:4:1:rekaman}
 
 % TODO: Add gambar halaman submit dengan kotak merah nunjukkin kode editor
 Seluruh sistem rekaman akan diimplementasikan dalam halaman Submit tidak memerlukan perubahan pada antarmuka. Gambar XX menunjukkan halaman Submit dan IDE yang sudah di implementasikan oleh Nicholas Aditya Halim~\cite{nicholas:sharif}.
 
 \subsection{Sistem Pemutaran ulang}
+\label{sub:4:1:pemutaranulang}
 
 Pada sistem pemutaran ulang dibutuhkan dua halaman baru yaitu halaman untuk menunjukkan daftar rekaman dalam sistem dan halaman untuk sistem pemutaran ulang sebuah rekaman. Gambar XX merupakan rancangan antarmuka untuk halaman daftar rekaman dan Gambar XX merupakan rancangan antarmuka untuk halaman pemutaran ulang.
 
 % TODO: Add gambar low fidel dua halaman diatas
 
 \section{Rancangan Penyimpanan Rekaman}
+\label{sec:4:2:storerekaman}
 
 Rekaman yang akan disimpan akan berupa sebuah daftar \textit{event} yang terjadi. Dalam javascript, daftar tersebut akan menjadi sebuah \textit{array} yang berisi \textit{event-event} yang terjadi. Rekaman juga akan menyimpan waktu dimana rekaman dimulai, awal kode yang ada dalam editor kode dan juga awal posisi cursor dalam IDE. Maka dari itu, Rekaman akan menjadi sebuah \textit{object} javascript yang berisi sebagai berikut:
 
@@ -60,9 +63,11 @@ Untuk mengimplementasikan fitur yang diusulkan pada Bagian \ref{sec:3:sistemusul
 \subsection{Merekam perubahan atau event}
 \label{sub:4:3:merekam}
 
+% TODO: tambahin apa aja yang bakal di rekam
 Untuk menambahakan fitur ini, diperlukannya perubahan pada bagian javascript yaitu \verb|assets/js/|\\\verb|shj_submit.js| dalam halaman Submit. Dimana javascript tersebut akan menjalankan perekaman secara otomatis saat pengguna memilih \textit{problem} yang ada dalam \textit{assignment} yang dipilih.
 
 \subsection{Menyimpan rekaman}
+\label{sub:4:3:menyimpanrekaman}
 
 Untuk setiap aksi menyimpan kode, menjalankan kode dengan tes kasus, dan mengumpulkan kode melalui IDE, rekaman juga akan disimpan ke dalam sistem.
 
