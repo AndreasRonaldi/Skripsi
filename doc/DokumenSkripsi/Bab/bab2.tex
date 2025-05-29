@@ -322,23 +322,21 @@ Ace merupakan \textit{library} yang menyediakan sebuah editor kode yang dapat di
 	\item \textit{Code folding}
 \end{itemize}
 
-Untuk mengintegrasikan \textit{library} Ace dalam sebuah web page, Ace perlu ditanam dalam sebuah web page. Salah satu cara untuk menanam Ace ke dalam sebuah web page adalah dengan mem-\textit{build library} dan menaruhnya dalam direktori lokal dan dipanggil dalam web page yang diinginkan dengan cara seperti berikut:
+Untuk mengintegrasikan \textit{library} Ace dalam sebuah web page, Ace perlu ditanam dalam sebuah web page. Salah satu cara untuk menanam Ace ke dalam sebuah web page adalah dengan mem-\textit{build library} atau menngunduh hasil dari \textit{build} folder bernama \textit{src} versi \textit{pre-packaged} yang disediakan oleh Ace. Hasil dari \textit{building library} Ace adalah sebuah folder yang dapat ditaruh dalam direktori lokal. Dalam folder tersebut, terdapat file \textit{javascript} bernama \verb|ace.js| yang dapat dipanggil dalam web page untuk menanam \textit{library} Ace dalam web page. Cara untuk menanamkan file tersebut sama dengan cara untuk memasukkan file \textit{javascript} pada umumnya yaitu dengan cara seperti berikut:
 
 \begin{center}
 	\verb|<script src="/ace-builds/ace.js" type="text/javascript"></script>|
 \end{center}
 
-Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
+Setelah \textit{library} Ace ditanam untuk mengakses berbagai macam fitur yang disediakan, maka kelas yang disediakan Ace dapat dipanggil. Berikut merupakan beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 
 \begin{itemize}
 	\item \verb|Ace| \\
-	      Merupakan kelas utama untuk menyiapkan editor kode Ace pada \textit{browser}
+	      Kelas \verb|Ace| merupakan kelas utama untuk menyiapkan editor kode Ace pada \textit{browser}. Ace memiliki fungsi utama yang penting yaitu fungsi \verb|edit| yang akan membuat sebuah editor dalam web page pada element beridentitas argumen yang diberikan saat dipanggil. Fungsi \verb|edit| akan mengembalikan kelas \verb|Editor|.
 	\item \verb|Editor| \\
-	      Entri utama untuk fungsionalitas library Ace. Editor sendiri merepresentasikan editor kode yang dibuat pada web. Editor juge menjadi kelas utama untuk mengakses kelas-kelas yang berhubungan dengan editor kode.
-
+	      Entri utama untuk fungsionalitas library Ace. Editor sendiri merepresentasikan editor kode yang dibuat pada web page. Editor juge menjadi kelas utama untuk mengakses kelas-kelas yang berhubungan dengan editor kode dengan mengakses kelas variable \verb|Editor| seperti \verb|session| dalam editor kode. Kelas \verb|Editor| sendiri dapat dikonfigurasikan sesuai dengan fungsi yang disediakan seperti \verb|setTheme| yang mengubah warna editor kode sesuai dengan \textit{theme} yang di pasang. 
 	\item \verb|EditSession| \\
-	      Sebuah kelas yang menyimpan semua status dalam editor seperti isi editor, \textit{selection}, dan lain-lain. Kelas ini dinamakan \verb|EditSession|, tetapi untuk mengakses dari editor dinamakan \textit{session}.
-
+	      Sebuah kelas yang menyimpan semua status dalam editor seperti isi editor, \textit{selection}, dan lain-lain. Kelas ini dinamakan \verb|EditSession|, tetapi untuk mengakses dari kelas \verb|Editor|, variable \verb|EditSession| dinamakan \textit{session}.
 	\item \verb|Anchor| \\
 	      Menangani posisi \textit{pointer} pada dokumen. Saat teks dimasukkan atau dihapus, posisi \textit{anchor} akan diperbaharui.
 	\item \verb|Document| \\
@@ -351,7 +349,7 @@ Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 	      Kelas ini digunakan untuk menjalankan perintah pada sebuah editor. Contoh perintah yang sudah ada dalam editor yaitu \textit{insert}, \textit{copy}, \textit{paste}.
 \end{itemize}
 
-\begin{lstlisting}[language={php}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
+\begin{lstlisting}[language={html}, caption={Contoh kode pengunaan Ace}, label={kode:2:5:ace}]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -373,7 +371,7 @@ Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 	return x;
 }</div>
 	
-<script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="/ace-builds/ace.js" type="text/javascript"></script>
 <script>
 	var editor = ace.edit("editor");
 	editor.setTheme("ace/theme/monokai");
@@ -383,7 +381,14 @@ Beberapa kelas penting yang terdapat pada library Ace adalah sebagai berikut:
 </html>
 \end{lstlisting}
 
-Kode \ref{kode:2:5:ace} merupakan cara pengunaan Ace pada sebuah \texttt{div} dengan id \texttt{editor}. Ace juga memiliki beberapa konfigurasi, seperti contoh ini yaitu mengunakan tema \textit{monokai} dan mengunakan \textit{syntax highlighting} untuk bahasa pemrograman JavaScript.
+Kode \ref{kode:2:5:ace} merupakan cara pengunaan Ace pada sebuah \texttt{div} dengan id \texttt{editor}. Ace juga memiliki beberapa konfigurasi, seperti contoh ini yaitu mengunakan tema \textit{monokai} dan mengunakan \textit{syntax highlighting} untuk bahasa pemrograman JavaScript. Gambar \ref{fig:2:5:ace} menunjukkan hasil web page yang dibuka dalam \textit{browser} menggunakan Kode \ref{kode:2:5:ace}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{ace.png}
+	\caption{Hasil Web Page \textit{Library} Ace}
+	\label{fig:2:5:ace}
+\end{figure}
 
 \subsection{Perekaman Event}
 
@@ -410,7 +415,8 @@ Pada editor kode Ace, disediakannya fungsi \textit{event listener} atau pendenga
 
 Untuk menggunakan fungsi \textit{event listener} pada kelas yang diinginkan, dibutuhkan fungsi \verb|on| pada kelas tersebut. Fungsi \verb|on| memiliki dua parameter yaitu nama \textit{event} ingin didengar (\verb|exec| atau \verb|change|) dan sebuah fungsi \textit{callback} yang akan dijalankan saat \textit{event} terjadi. Kode \ref{kode:2:5:1:eventlistener} merupakan perhubahan kode yang dilakukan dalam \textit{tag} \verb|<script>| pada Kode \ref{kode:2:5:ace} agar perubahan isi editor dapat didengar.
 
-\begin{lstlisting}[language={php}, caption={Contoh kode event listener}, label={kode:2:5:1:eventlistener}]
+\begin{lstlisting}[language={html}, caption={Contoh kode event listener}, label={kode:2:5:1:eventlistener}]
+<script src="/ace-builds/ace.js" type="text/javascript"></script>
 <script>
 	var editor = ace.edit("editor");
 	editor.setTheme("ace/theme/monokai");
@@ -431,3 +437,83 @@ Untuk menggunakan fungsi \textit{event listener} pada kelas yang diinginkan, dib
 \end{lstlisting}
 
 Kode \ref{kode:2:5:1:eventlistener} akan menggunakan \textit{event listener} \verb|change| dalam kelas \verb|EditSession|, dengan mengakses kelas \verb|EditSession| melalui \verb|editor| yang dinamakan \verb|session|. Pada kelas tersebut akan dijalankan fungsi \verb|on| dengan parameter ``change'' dan sebuah fungsi annonimus sebagai fungsi \textit{callback} yang akan memprint ke \textit{console} isi perubahan pada editor kode.
+
+\section{Chart.js}
+
+Chart.js merupakan sebuah \textit{library javascript open-source} untuk membuat visualisasi data bagan interaktif berbasis \verb|canvas| dalam web page~\cite{chartjs}. Chart.js memiliki fitur-fitur yang dapat digunakan untuk mendukung dan mempermudah visualisasi data dalam web page. Berikut merupakan beberapa fitur yang dimiliki oleh Chart.js:
+
+\begin{itemize}
+	\item Chart.js menyediakan berbagai tipe bagan yang dapat digunakan dan juga memiliki opsi penyesuaian yang sering digunakan.
+	\item Chart.js memiliki konfigusari bawaan yang bagus dan mudah untuk diintegrasikan dalam sebuah web page.
+	\item Chart.js mengunakan \textit{canvas HTML5 rendering} yang membuat sangat cepat terutama untuk data yang besar.
+\end{itemize}
+ 
+Identik dengan \textit{library} Ace untuk menintegrasikan \textit{library} Chart.js dalam sebuah web page, \textit{library} Chart.js dapat di\textit{build} dan dimasukkan ke dalam folder projek dan menambahkan file \textit{javascript} bernama \verb|chart.js| dalam folder \textit{dist} ke dalam web page menggunakan cara yang identik dengan cara memasukkan file \textit{javascript} pada umumnya yaitu dengan cara sebagai berikut:
+
+\begin{center}
+	\verb|<script src="/chartjs/dist/chart.js" type="text/javascript"></script>|
+\end{center}
+
+Setelah itu \textit{library} Chart.js dapat digunakan dengan membuat sebuah kelas \textit{javascript} baru bernama \verb|Chart|. Untuk membuat kelas \verb|Chart| dibutuhkan 2 argumen yaitu elemen \textit{canvas} dalam HTML web page dan sebuah objek \textit{javascript} yang dapat di isi dengan opsi-opsi yang diinginkan dengan menspesifikan \textit{key} dan \textit{value} yang sesuai dengan opsi yang diinginkan. Berikut merupakan beberapa \textit{key} dan \textit{value} yang dapat digunakan ada dalam opsi \textit{library} Chart.js:
+
+\begin{itemize}
+	\item \verb|type| \\
+	\verb|type| hanya menerima sebuah kata yang menjadi tipe utama bagan yang dibuat oleh \textit{library} Chart.js, tetapi tipe ini dapat berubah mengikuti data yang diberikan. Berikut merupakan beberapa tipe-tipe yang ada dalam \textit{library} Chart.js:
+	\begin{itemize}
+		\item \verb|bar| \\
+		Bagan \verb|bar| menyediakan cara untuk menvisualisasikan data sebagai batang vertikal. Bagan ini biasanya digunakan untuk menunjukkan data tren dan perbandingan beberapa set data secara berdampingan.
+		\item \verb|line| \\
+		Bagan \verb|line| adalah cara menvisualisasikan data sebagai titik data yang disambungkan dengan garis. Identik dengan Bagan \verb|bar|, Bagan \verb|line| juga digunakan untuk menunjukkan data tren dan perbandingan beberapa set data secara berdampingan.
+	\end{itemize}
+
+	\item \verb|data| \\
+	\verb|data| sendiri menerima \textit{value} objek \textit{javascript} dengan isi \verb|labels| dan \verb|dataset|. Kedua \textit{key} menerima sebuah \textit{array} dengan isi yang berbeda. \verb|labels| hanya menerima sebuah \textit{array} berisi teks untuk label data horizontal atau vertikal. \verb|dataset| menerima \textit{array} primitive type, \textit{array} dengan isi \textit{array}, dan \textit{array objek}. \textit{objek} dalam \verb|dataset| menerima \textit{key} \verb|data| dan juga memiliki beberapa \textit{key} opsi yaitu \verb|label| untuk melabelkan data dalam horizontal maupun vertikal. \textit{Key} \verb|data| menerima array dengan isi \textit{array objek} dengan data yang ingin divisualisasikan.
+
+	\item \verb|options| \\
+	\textit{Key} \verb|options| merupakan fitur utama dari kelas \verb|Chart| dan hanyak menerima sebuah objek \textit{javascript} yang memiliki banyak \textit{key} untuk menyesuaikan bagan yang dibuat oleh \textit{library} Chart.js. Salah satu \textit{key} dalam \verb|options| adalah \verb|scales| yang digunakan untuk mengatur data yang ditampilakn untuk aksis X dan Y. Salah satu pengaturannya adalah untuk menumpuk data dengan data yang sama di aksis yang sama yaitu dengan mengunakan \textit{key} \verb|stacked| dalam aksis X atau Y.
+\end{itemize}
+
+\begin{lstlisting}[language={html}, caption={Contoh kode pengunaan Chart.js}, label={kode:2:6:chartjs}]
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [{
+        label: '# of Votes',
+        data: [12, 19, 3, 5, 2, 3],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
+\end{lstlisting}
+
+Kode \ref{kode:2:6:chartjs} merupakan contoh penggunaan \textit{library} Chart.js pada sebuah \textit{canvas} dengan id \verb|myChart|. \textit{Key} \verb|options| pada contoh ini mengunakan \verb|beginAtZero| yang membuat data dimulai dari nol. Gambar \ref{fig:2:6:chartjs} merupakan hasil web page yang dibuka dalam \textit{browser} dengan Kode \ref{kode:2:6:chartjs}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\textwidth]{chartjs.png}
+	\caption{Hasil Web Page \textit{Library} Chart.js}
+	\label{fig:2:6:chartjs}
+\end{figure}

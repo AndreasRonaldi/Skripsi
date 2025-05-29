@@ -245,6 +245,7 @@ Gambar ?? merupakan antarmuka yang diimplementasikan serupa dengan perancangan p
 % TODO: Tambah Gambar antarmuka recording.twig
 
 \subsubsection{Implementasi Memuat Data Rekaman}
+\label{ssub:5:2:4:memuatdata}
 
 Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem mengunakan \textit{Controller}. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan mengunakan AJAX pada halaman \textit{recording}. Maka dari itu, butuh fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{javascript} baru bernama \verb|shj_function.js|.
 
@@ -264,14 +265,15 @@ Fungsi \verb|download_record| akan dipanggil pada saat halaman \textit{recording
 Data tersebut akan disimpan dalam sebuah \textit{object javascript} yang dinamakan \verb|recording| dan akan dipakai pada saat menjalankan rekaman dan untuk menampilkan histogram \textit{events} yang terjadi.
 
 \subsubsection{Implementasi Menjalankan Rekaman}
+ 
+Fitur menjalankan rekaman akan menggunakan data bedasarkan data yang didapatkan oleh AJAX yang dijelaskan pada bagian \ref{ssub:5:2:4:memuatdata}. Fitur menjalankan rekaman akan membutuhkan penambahan kode pada \textit{javascript} \verb|shj_function.js| yang akan menjalankan fungsi \verb|play| atau \verb|stop| untuk menjalankan atau memberhentikan rekaman oleh pengguna. 
 
-% TODO: create this part?
+Fungsi menjalankan atau mematikan rekaman dibagi menjadi dua yaitu fungsi rekaman dalam IDE dengan data rekaman dinamakan \verb|Recording| dan fungsi timer yang digunakan untuk memberitahu kepada pengguna progress waktu pemutaran rekaman dinamakan \verb|Timer|.
+Fungsi \verb|Recording| menggunakan fungsi dalam \textit{Library Ace} dan fungsi \textit{javascript} untuk memperbaharui IDE antarmuka berdasarkan \textit{event} yang dipanggil, fungsi \verb|setTimeout| dalam \textit{javascript} akan digunakan untuk menjalankan \textit{event} selanjutnya bedasarkan perbedaan waktu antara event sekarang dan event selanjutnya dengan memanggil fungsi \verb|playRecording| dengan \textit{event} selanjutnya. Sedangkan fungsi \verb|Timer| menggunakan fungsi \verb|setInterval| yang akan dijalankan berulang untuk setiap detiknya dan memperbaharui progress waktu dalam antarmuka berdasarkan waktu yang sudah lewat.
 
 \subsubsection{Menampilkan Histogram Events yang Terjadi}
 
 Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data rekaman tersebut, fungsi \verb|setUpChart| akan dipanggil dan membuat data grafik histogram. Data histogram akan dimuat menggunakan \textit{Library} \verb|Chart.js|.
-
-
 
 
 \section{Pengujian Fungsional}
