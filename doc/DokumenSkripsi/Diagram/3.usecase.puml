@@ -1,6 +1,6 @@
 @startuml usecase
 left to right direction
-skinparam actorStyle awesome 
+' skinparam actorStyle awesome 
 
 actor User as u
 actor Admin as a

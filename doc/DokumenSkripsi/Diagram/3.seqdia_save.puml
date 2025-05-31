@@ -1,19 +1,26 @@
 @startuml seqdia_save
-actor       User       as user
-participant Browser as bw
-database "Penyimpanan\nPada Browser" as pbw
-participant "SharIF Judge" as shj
+
+hide footbox
+
+actor       Pengguna       as user
+boundary "Halaman\nSubmit" as bw
+control "shj_submit.js" as js
+control "Controller\nSubmit" as shj
+database "JavaScript Object\n(in memory)" as pbw
 database Database as db
 
 user -> bw : Tindakan \nmenyimpan kode
 activate bw
-|||
-bw -> pbw : Mengambil rekaman
+
+bw -> js : Aksi menyimpan
+activate js
+
+js -> pbw : Mengambil rekaman
 activate pbw
 |||
 return
 
-bw -> shj : Mengirimkan kode \ndan rekaman
+js -> shj : Mengirimkan kode \ndan rekaman
 activate shj
 
 shj -> db : Meyimpan\nkode program
@@ -24,6 +31,8 @@ return
 shj -> db : Meyimpan rekaman
 activate db
 |||
+return
+
 return
 
 return Penyimpanan\nselesai

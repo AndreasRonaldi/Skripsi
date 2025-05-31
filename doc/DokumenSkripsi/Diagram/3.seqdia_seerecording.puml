@@ -1,7 +1,10 @@
 @startuml seqdia_seerecording
+
+hide footbox
+
 actor       Pengajar       as user
-participant Browser as bw
-participant "SharIF Judge" as shj
+boundary "Halaman\nRekaman" as bw
+control "Controller\nRekaman" as shj
 database Database as db
 
 user -> bw : Memilih\nrekaman

@@ -900,12 +900,52 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsi-fungsinya yang 
 
 \end{itemize}
 
+\subsection{Assets}
+Pada SharIF Judge terdapat direktori bernama \textit{Assets} yang menjadi tempat untuk menyimpan seluruh kebutuhan dari sisi pengguna seperti gambar logo dan \textit{library javascript}. Berikut merupakan isi dari direktori \textit{assets} beserta dengan kegunaannya dalah aplikasi SharIF Judge:
+
+\begin{itemize}
+	\item Direktori \verb|ace| \\
+	Direktori ini berisikan hasil \textit{build library} Ace, menghasilkan file \textit{javascript} yang berfungsi untuk menambahkan editor kode pada aplikasi.
+	\item Direktori \verb|font| \\
+	Direktori ini berisikan font khusus dan juga memiliki \textit{library javascript} bernama font-awesome yang digunakan untuk menaruh icon berformat svg dalam tampilan SharIF Judge. 
+	\item Direktori \verb|fullcalendar| \\
+	Direktori ini berisikan hasil \textit{build library} FullCalendar, menghasilkan file \textit{javascript} dan \textit{css} yang berfungsi untuk memasukkan kalendar dalam tampilan SharIF Judge.
+	\item Direktori \verb|gridster| \\
+	Direktori ini berisikan hasil \textit{build plugin} Gridster untuk \textit{library} jQuery, menghasilkan file \textit{javascript} dan \textit{css} yang berfungsi untuk memasukkan \textit{layout} grid yang dapat di ubah dengan menggunakan sifat mouse \textit{drag and drop}. 
+	\item Direktori \verb|images| \\
+	Direktori ini berisikan gambar kustom yang digunakan oleh SharIF Judge seperti logo dan banner. 
+	\item Direktori \verb|js| \\
+	Direktori ini berisikan hasil \textit{build library} jQuery, taboverride, moment, \textit{plugins} jQuery berfungsi untuk membantu membangun \textit{javascript} khusus yang dipakai dalam SharIF Judge. Direktori ini juga memiliki file \textit{javascript} khusus yang dipakai dalam halaman SharIF Judge yaitu sebagai berikut:
+	\begin{itemize}
+		\item \verb|shj_functions.js| \\
+		File \textit{javascript} \verb|shj_functions| digunakan untuk seluruh sistem umum dalam SharIF Judge seperti waktu server, sidebar toogle, loading dan berbagai macam fungsi yang digunakan dalam SharIF Judge.
+		\item \verb|shj_submissions.js| \\
+		File \textit{javascript} \verb|shj_submissions| digunakan untuk menangani berbagai fitur untuk halaman all submissions dan final submissions seperti menampilkan kode program dan memeriksa ulang hasil kode dalam judge.
+		\item \verb|shj_submit.js| \\
+		File \textit{javascript} \verb|shj_submit| digunakan untuk menangani berbagai fitur untuk halaman submit terutama fungsi aksi pada IDE yaitu aksi \textit{save}, \textit{execute}, \textit{submit}, dan memuat kode lama ke dalam editor kode.
+	\end{itemize}
+	\item Direktori \verb|nano_scroller| \\
+	Direktori ini berisikan hasil \textit{build plugin} nanoScrollerJS untuk \textit{library} jQuery, menghasilkan file \textit{javascript} dan \textit{css} yang berfungsi untuk membangun \textit{scrollbar} pada SharIF Judge.
+	\item Direktori \verb|noty| \\
+	Direktori ini berisikan hasil \textit{build plugin} noty untuk \textit{library} jQuery, menghasilkan file \textit{javascript} dan \textit{css} yang berfungsi untuk menampilkan pesan atau notifikasi kepada pengguna pada SharIF Judge.
+	\item Direktori \verb|pdfjs| \\
+	Direktori ini berisikan hasil \textit{build library} pdfjs, menghasilkan file \textit{javascript} yang berfungsi untuk menampilkan file pdf pada SharIF Judge.
+	\item Direktori \verb|reveal| \\
+	Direktori ini berisikan hasil \textit{build plugin} Reveal yang sudah dimodifikasi untuk \textit{library} jQuery, menghasilkan file \textit{javascript} dan \textit{css} yang berfungsi untuk menampilkan \textit{modal} konfirmasi. 
+	\item Direktori \verb|snippet| \\
+	Direktori ini berisikan hasil \textit{build plugin} Snippet yang sudah dimodifikasi untuk \textit{library} jQuery, berfungsi untuk sebagai \textit{Syntax Highlighter} untuk teks kode dalam halaman Hall of Fame, Problems, dan Submissions.
+	\item Direktori \verb|styles| \\
+	Direktori ini berisikan css khusus yang digunakan untuk memperindah halaman dalam SharIF Judge.
+	\item Direktori \verb|tinymce| \\
+	Direktori ini berisikan hasil \textit{build library} tinymce, berfungsi untuk memasukkan editor teks dalam SharIF Judge.
+\end{itemize}
+
 \subsection{Penyimpanan Kode Submission}
 \label{sub:3:1:penyimpanankode}
 Pada SharIF Judge, Kode akan disimpan pada lokasi \verb|Assignment| yang dapat di ubah pada halaman \verb|Settings|. Berikut merupakan format penyimpanan sebuah kode:
 
 \begin{center}
-	\verb|assignment_<a_id>/p_<p_id>/<nama user>/<nama file>-<s_id>.<file ext>|
+	\verb|assignment_<a_id>/p<p_id>/<nama user>/<nama file>-<s_id>.<file ext>|
 \end{center}
 
 Penjelasan untuk format di atas adalah sebagai berikut:
@@ -928,7 +968,7 @@ Penjelasan untuk format di atas adalah sebagai berikut:
 Sebagai contoh, pengguna bernama \verb|kenzhi| mengumpulkan kode dengan nama file \verb|probA.java| ke dalam \textit{problem} pertama dari \textit{assignment} dengan id 5. \verb|kenzhi| sudah melakukan pengumpulan pada \textit{problem} yang sama sebanyak 5 kali dan \textit{submission} kali ini akan menjadi nomor 6, sehingga \verb|submission id| adalah 6. Maka kode pengguna akan disimpan pada alamat:
 
 \begin{center}
-	\verb|assignment_5/p_1/kenzhi/probA-6.java|
+	\verb|assignment_5/p1/kenzhi/probA-6.java|
 \end{center}
 
 \subsection{Antrean Penilaian Kode}
@@ -959,13 +999,6 @@ Pembuatan sistem pemutaran ulang ketikan membutuhkan 4 fitur baru yaitu fitur pe
 	\caption{Usecase analisis sistem usulan}
 	\label{fig:3:usecase}
 \end{figure}
-
-% \subsubsection{Mengotomatiskan saving}
-% \label{sec:3:2:1:autosave}
-% ga ush ini mah, kan ga perlu, mungkin jadi ide buat skripsi lain aja wkwkw
-% ada dua cara?
-% Cara 1 kalau inactive selama 5 detik = autosave, dan kalau active selama 20 detik = autosave jg
-% Cara 2 pake web sockets, simpen di dalem servernya terus write?
 
 \subsection{Fitur perekaman perubahan atau event}
 \label{sub:3:2:rekam}

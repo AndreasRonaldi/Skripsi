@@ -1,10 +1,13 @@
 @startuml seqdia_lookup
+
+hide footbox
+
 actor       Pengajar       as user
-participant Browser as bw
-participant "SharIF Judge" as shj
+boundary "Halaman\ndaftar rekaman" as bw
+control "Controller\nRekaman" as shj
 database Database as db
 
-user -> bw : Membuka halaman\nrekaman
+user -> bw : Membuka halaman
 activate bw
 
 bw -> shj : Meminta halaman\nrekaman
@@ -21,24 +24,10 @@ return
 '     halaman rekaman
 ' endnote
 
-shj -> shj : Memasukkan\ndata kedalam\nhalaman rekaman
+shj -> shj : Memasukkan\ndaftar rekaman ke\ndalam halaman
 
-return Halaman rekaman
+return Halaman daftar\nrekaman
 
-return
+return Tampilkan
 
-' participant Participant as Foo
-' boundary    Boundary    as Foo2
-' control     Control     as Foo3
-' entity      Entity      as Foo4
-' database    Database    as Foo5
-' collections Collections as Foo6
-' queue       Queue       as Foo7
-' Foo -> Foo1 : To actor 
-' Foo -> Foo2 : To boundary
-' Foo -> Foo3 : To control
-' Foo -> Foo4 : To entity
-' Foo -> Foo5 : To database
-' Foo -> Foo6 : To collections
-' Foo -> Foo7: To queue
 @enduml

@@ -1,21 +1,29 @@
 @startuml seqdia_rekam
-actor       User       as user
-participant "Editor Kode" as ek
-database "Penyimpanan\nPada Browser" as bw
 
-user -> ek : Melakukan event\npada editor kode
-activate ek
+hide footbox
+
+actor       Pengguna       as user
+boundary "Halaman\nSubmit" as front
+control "Assets\nshj_submit.js" as js
+database "JavaScript Object\n(in memory)" as db
+
+user -> front : Melakukan event
+activate front
+
+front -> js : Menangkap event
+activate js
+
+js -> db : Menyimpan event
+activate db
 |||
+db --> js
+deactivate db
 
-ek -> bw : Menyimpan event
-activate bw
-|||
-bw --> ek
-deactivate bw
+return
+return
 
-
-ek --> user :
-deactivate ek
+' front --> user :
+' deactivate front
 
 
 
