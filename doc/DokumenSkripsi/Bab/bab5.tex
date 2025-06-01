@@ -3,49 +3,6 @@
 
 Bab ini membahas mengenai implementasi dan pengujian sistem perekaman ulang dalam SharIF-Judge.
 
-\section{Lingkungan Implementasi dan Pengujian}
-\label{sec:5:lingkungan}
-
-Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah lingkungan. Lingkungan pertama digunakan untuk membangun perangkat lunak sedangkan lingkungan kedua digunakan untuk melakukan pengujian. Berikut merupakan spesifikasi lingkungan implementasi dan pengujian yang digunakan:
-
-\begin{itemize}
-    \item Lingkungan Pembangunan \\
-          Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yang digunakan saat pembangunan.
-          \begin{table}[H]
-              \caption{Perangkat Keras Lingkungan Pembangunan}
-              \label{tab:5:1:keraspembangunan}
-              \centering
-              \begin{tabular}{|l|l|}
-                  \hline
-                  \textbf{Parameter}                  & \textbf{Nilai}              \\ \hline
-                  Perangkat Keras                     & Asus ROG Zephyrus G15       \\ \hline
-                  \textit{Processor}                  & \textit{AMD Ryzen 9 6900HS} \\ \hline
-                  \textit{Random Access Memory (RAM)} & 16 GB                       \\ \hline
-                  \textit{Storage}                    & 1 TB \textit{SSD}           \\ \hline
-              \end{tabular}
-          \end{table}
-
-          Tabel \ref{tab:5:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang digunakan saat pembangunan.
-
-          \begin{table}[H]
-              \caption{Perangkat Lunak Lingkungan Pembangunan}
-              \label{tab:5:1:lunakpembangunan}
-              \centering
-              \begin{tabular}{|l|l|}
-                  \hline
-                  \textbf{Parameter}        & \textbf{Nilai}                                            \\ \hline
-                  Sistem Operasi            & \textit{Microsoft Windows 11 Home Version} 10.0.26100     \\ \hline
-                  Bahasa Pemrograman        & PHP, \textit{JavaScript}, \textit{CSS}, dan \textit{HTML} \\ \hline
-                  \textit{Framework}        & \textit{CodeIgniter} 3.1.13                               \\ \hline
-                  \textit{Code Editor}      & \textit{Visual Studio Code} 1.99.3                        \\ \hline
-                  Perangkat Lunak Pendukung & \textit{Docker Version} 25.0.3                            \\ & \textit{Debian} 11-slim \\ & \textit{Arc Browser Version} 1.50.0 (62004)\\ & \textit{MySQL} 5.7 \\ & \textit{phpMyAdmin} 5.2.1 \\ & PHP 7.3.33\\ \hline
-              \end{tabular}
-          \end{table}
-
-    \item Lingkungan Eksperimental
-          %   TODO: Catat lingkungan yang dipakai saat eksperimen
-\end{itemize}
-
 \section{Implementasi}
 \label{sec:5:implementasi}
 
@@ -281,3 +238,37 @@ Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data r
 
 \section{Pengujian Eksperimental}
 \label{sec:5:eksperimental}
+
+\subsection{Lingkungan pengujian}
+Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah lingkungan. Lingkungan pertama digunakan untuk membangun perangkat lunak sedangkan lingkungan kedua digunakan untuk melakukan pengujian. Berikut merupakan spesifikasi lingkungan implementasi dan pengujian yang digunakan:
+
+Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yang digunakan saat pembangunan.
+\begin{table}[H]
+    \caption{Perangkat Keras Lingkungan Pembangunan}
+    \label{tab:5:1:keraspembangunan}
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Parameter}                  & \textbf{Nilai}              \\ \hline
+        \textit{Processor}                  & \textit{AMD EPYC 9354P 2 vCPU} \\ \hline
+        \textit{Random Access Memory (RAM)} & 8 GB                       \\ \hline
+        \textit{Storage}                    & 100 GB \textit{SSD}           \\ \hline
+    \end{tabular}
+\end{table}
+
+Tabel \ref{tab:5:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang digunakan saat pembangunan.
+
+\begin{table}[H]
+    \caption{Perangkat Lunak Lingkungan Pembangunan}
+    \label{tab:5:1:lunakpembangunan}
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{Parameter}        & \textbf{Nilai}                                            \\ \hline
+        Sistem Operasi            & \textit{Debian Version} 12     \\ \hline
+        Bahasa Pemrograman        & PHP, \textit{JavaScript}, \textit{CSS}, dan \textit{HTML} \\ \hline
+        \textit{Framework}        & \textit{CodeIgniter} 3.1.13                               \\ \hline
+        \textit{Code Editor}      & \textit{Visual Studio Code} 1.99.3                        \\ \hline
+        Perangkat Lunak Pendukung & \textit{Docker Version} 20.10.24+dfsg1                            \\ & \textit{Debian} 11-slim \\ & \textit{MySQL} 5.7 \\ & \textit{phpMyAdmin} 5.2.1 \\ & PHP 7.3.33\\ \hline
+    \end{tabular}
+\end{table}
