@@ -8,12 +8,12 @@ Bab ini membahas mengenai implementasi dan pengujian sistem perekaman ulang dala
 
 Bagian ini menjelaskan hasil implementasi sistem pemutaran ulang pada SharIF-Judge berdasarkan perancangan pada Bab \ref{chap:analisis}. Pada saat implementasi juga dilakukan penyesuaian pada peracangan yang sudah dibuat untuk mengatasi kendala yang dialami pada saat implementasi. 
 
-\subsection{Merekam Ketikan pada Editor Kode}
+\subsection{Merekam Peristiwa pada IDE}
 \label{sub:5:2:merekam}
 
-Fitur merekam ketikan pada editor kode diimplementasikan untuk menangkap seluruh interaksi pengguna terhadap IDE dan SharIF-Judge pada saat pengguna menyelesaikan sebuah masalah dalam \textit{assignment}. Data yang direkam akan digunakan untuk memutar ulang penyelesaian yang dilakukan oleh pengguna. Fitur ini diimplementasikan dengan memanfaatkan \textit{Library Ace}, \textit{event hooks} pada javascript. Implementasi ini akan memerlukan penyesuian pada bagian \textit{javascript} yaitu file \verb|assets/js/shj_submit.js| yang dimuat pada halaman \textit{Submit}.
+Fitur merekam peristiwa pada editor kode diimplementasikan untuk menangkap seluruh interaksi pengguna terhadap IDE dan SharIF-Judge pada saat pengguna menyelesaikan sebuah masalah dalam \textit{assignment}. Data yang direkam akan digunakan untuk memutar ulang penyelesaian yang dilakukan oleh pengguna. Fitur ini diimplementasikan dengan memanfaatkan \textit{Library Ace}, \textit{event hooks} pada javascript. Implementasi ini akan memerlukan penyesuian pada bagian \textit{javascript} yaitu file \verb|assets/js/shj_submit.js| yang dimuat pada halaman \textit{Submit}.
 
-Berikut merupakan alur sistem perekaman ketikan:
+Berikut merupakan alur sistem perekaman peristiwa:
 \begin{enumerate}
     \item Inisialisasi Perekam \\
     Pada alur ini, semua perekaman akan diinisialisasi dengan menjalankan sebuah fungsi dinamakan \verb|recordStart|. Fungsi ini akan memanggil seluruh \textit{event hooks} dan \textit{event listener} dalam \textit{Library ace} agar dinyalakan. 
@@ -41,14 +41,11 @@ const addListener = {
 
     Setelah itu \textit{object addListener} akan dipanggil oleh fungsi \verb|recordStart|. Kode \ref{kode:5:1:eventlistener} menunjukan fungsi yang dipanggil saat inisialisasi. 
     
-    
     \begin{lstlisting}[caption={Beberapa \textit{event listener} yang dipanggil}, label={kode:5:1:eventlistener}]
 addListener.editor_change();
     \end{lstlisting}
     
     Fungsi \verb|recordStart| akan dilakukan pada saat pengguna mengubah \textit{problem} yang dipilih dalam halaman Submit.
-
-    % TODO: di bab 3, harus explore \assets\js\shj_submit.js biar ngerti fungsi yang di panggil
 
     \item Penyimpan sebuah rekaman \\
     Untuk setiap perekaman yang dibutuhkan, dijalankan sebuah fungsi yang mendeteksi perubahan tersebut dan menjalankan sebuah \textit{callback function} saat terjadi perubahan tersebut. Fungsi ini dipnaggil pada saat inisialisasi. \textit{Callback function} tersebut akan mendapatkan argumen sesuai dengan perubahan yang dideteksi. Pada contohnya untuk perubahan teks pada editor kode yaitu fungsi \verb|onchange|, argumen yang diberikan merupakan teks yang dimasukan yaitu contohnya adalah `A', dan juga posisi dimana teks tersebut dimasukkan dalam editor kode. Kode \ref{kode:5:1:argonchange} merupakan contoh argumen yang diberikan.
@@ -84,7 +81,24 @@ const recording = {
     Kode \ref{kode:5:1:recordingobj} merupakan \verb|recording| pada saat keadaan kosong. Pada \textit{object} \verb|recording|, \verb|events| merupakan sebuah array dengan isi sebuah rekaman event, \verb|startTime| merupakan waktu awal rekaman dimulai, \verb|startValue| merupakan isi awal dalam editor kode, dan \verb|startSelection| merupakan posisi awal cursor dalam editor kode.
 \end{enumerate}
 
-Seluruh alur sistem perekaman ketikan dalam SharIF-Judge akan ditambahkan ke dalam file \verb|assets/js/|\verb|shj_submit.js|. Kode perubahan terdapat pada Lampiran ??.
+Berikut merupakan peristiwa yang akan direkam oleh sistem perekaman:
+\begin{itemize}
+    \item \verb|editor.change|: Peristiwa ini akan menangkap perubahan isi teks dalam editor kode.
+    \item \verb|editor.changeCursor|: Peristiwa ini akan menangkap perubahan cursor dalam editor kode. 
+    \item \verb|editor.changeSelection|: Peristiwa ini akan menangkap perubahan selection cursor dalam editor kode.
+    \item \verb|window.focus|: Peristiwa ini akan menangkap pengguna pada saat pengguna \textit{focus} pada SharIF Judge web page. 
+    \item \verb|window.blur|: Peristiwa ini akan menangkap pengguna pada saat pengguna tidak \textit{focus} pada SharIF Judge web page atau \textit{focus} pada aplikasi lain atau web page lain.
+    \item \verb|window.visibilitychange|: Peristiwa ini akan menangkap pengguna yang mengubah \textit{tab} dari SharIF Judge ke \textit{tab} lain dalam browser.
+    \item \verb|pdf_viewer.focusin|: Peristiwa ini akan menangkap pengguna pada saat pengguna \textit{focus} pada PDF Viewer dalam IDE.
+    \item \verb|pdf_viewer.focusout|: Peristiwa ini akan menangkap pengguna pada saat pengguna tidak \textit{focus} pada PDF Viewer dalam IDE.
+    \item \verb|editor_input.input|: Peristiwa ini akan menangkap perubahan isi editor input dalam IDE. 
+    \item \verb|editor_output.change|: Peristiwa ini akan menangkap hasil output saat terjadinya aksi \textit{Save \& Execute} dalam IDE.
+    \item \verb|save.click|: Peristiwa ini akan menangkap aksi \textit{Save} yang dilakukan pengguna.
+    \item \verb|execute.click|: Peristiwa ini akan menangkap aksi \textit{Save \& Execute} yang dilakukan pengguna.
+    \item \verb|submit.click|: Peristiwa ini akan menangkap aksi \textit{Save \& Submit} yang dilakukan pengguna.
+\end{itemize}
+
+Seluruh alur sistem perekaman peristiwa dalam SharIF-Judge akan ditambahkan ke dalam file \verb|assets/js/|\verb|shj_submit.js|. Kode perubahan terdapat pada Lampiran ??.
 % TODO: Add lampiran perubahan shj_submit
 
 \subsubsection{Perbaikan Implementasi}
@@ -143,7 +157,7 @@ $this->db->query(
 
     Mengikuti arsitektural \textit{CodeIgniter}, untuk menambahkan sebuah data ke dalam database perlu menggunakan sebuah \textit{Model}. Oleh karena itu, dibutuhkannya \textit{model} baru bernama \verb|Recording_model.php| yang ditambahkan fungsi \verb|add_recording()| yang memiliki argumen yaitu seluruh data yang ingin disimpan dalam database.
 
-    Untuk aksi \textit{save} dan \textit{execute} dimana tidak adanya \textit{submit id} maka akan dibuat menjadi angka nol (`0') pada pengenal rekamannya atau \verb|rec_id|.
+    Untuk aksi \textit{save} dan \textit{execute} dimana tidak adanya \textit{submit id} maka akan dibuat menjadi angka nol (`0') pada pengenal rekamannya atau \verb|rec_id| jika aksinya merupakan \textit{submit}.
 \end{enumerate}
 
 Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke dalam \verb|assets/js/|\\\verb|shj_submit.js|. Kode pembahan terdapat pada Lampiran ??. Agar dapat menyimpan dibutuhkannya perubahan dalam kode \textit{Controller} \verb|Submit.php| pada fungsi \verb|save($type)| dan fungsi \verb|_submit()|. Kode perubahan \verb|Submit.php| terdapat pada Lampiran ??.
@@ -239,10 +253,107 @@ Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data r
 \section{Pengujian Eksperimental}
 \label{sec:5:eksperimental}
 
-\subsection{Lingkungan pengujian}
-Implementasi perangkat lunak sistem perekaman ulang dilakuka npada dua buah lingkungan. Lingkungan pertama digunakan untuk membangun perangkat lunak sedangkan lingkungan kedua digunakan untuk melakukan pengujian. Berikut merupakan spesifikasi lingkungan implementasi dan pengujian yang digunakan:
+Pada Bagian ini dilakukannya pengujian terhadap sistem Perekaman Ulang pada SharIF Judge.
 
-Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yang digunakan saat pembangunan.
+\subsection{Lingkungan pengujian}
+Pengujian sistem perekaman ulang akan dilakukan pada sebuah server VPS atau \textit{Virtual Private Server}. Pada server akan dijalankannya \textit{docker} agar sistem aplikasi akan identik dengan pada saat sistem sedang diimplementasikan. Kode \ref{kode:5:3:1:dockercompose} dan Kode \ref{kode:5:3:1:dockerfile} merupakan file \textit{docker-compose} dan \textit{Dockerfile} yang digunakan membangun sistem SharIF Judge dalam server VPS.
+
+\begin{lstlisting}[caption=File \textit{docker-compose} yang digunakan, label=kode:5:3:1:dockercompose]
+version: "3"
+services:
+  codeigniter-3:
+    build: .
+    ports:
+      - "81:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_TABLE: judge
+      MYSQL_USER: sharif
+      MYSQL_PASSWORD: judge
+      MYSQL_ROOT_PASSWORD: root
+    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: freehost
+    depends_on:
+      - db
+\end{lstlisting}
+
+\begin{lstlisting}[caption=File \textit{Dockerfile} yang digunakan, label=kode:5:3:1:dockerfile]
+# Menggunakan image PHP 7.3 sebagai base image
+FROM php:7.3-apache
+
+# Install dependensi dan ekstensi PHP yang dibutuhkan untuk CodeIgniter
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+	libldap2-dev \
+	libcurl4 \
+    libcurl4-openssl-dev \
+	libzip-dev \
+    libfreetype6-dev \
+    zip \
+    unzip \
+	default-jdk \
+	g++ \
+	python2 \
+	python3
+
+# Install ekstensi GD dan mysqli
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd mysqli
+	
+RUN docker-php-ext-install curl
+
+RUN  docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+	&& docker-php-ext-install ldap
+
+RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install zip
+
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *max_input_vars.*/max_input_vars = 3000000/g" /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *post_max_size.*/post_max_size = 50M/g" /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *upload_max_filesize.*/upload_max_filesize = 50M/g" /usr/local/etc/php/php.ini
+
+# Aktifkan mod_rewrite untuk Apache
+RUN a2enmod rewrite
+
+# Copy kode CodeIgniter ke dalam container
+COPY . /var/www/html/
+
+# Set direktori kerja
+WORKDIR /var/www/html/
+
+# Make Folder tester writeable by PHP
+RUN chmod 777 /var/www/html/restricted/tester
+RUN chmod 777 /var/www/html/application/cache/Twig
+
+# Expose port 80
+EXPOSE 80
+
+# Jalankan Apache server
+CMD ["apache2-foreground"]
+\end{lstlisting}
+
+Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yang digunakan saat pengujian.
 \begin{table}[H]
     \caption{Perangkat Keras Lingkungan Pembangunan}
     \label{tab:5:1:keraspembangunan}
@@ -256,11 +367,11 @@ Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yan
     \end{tabular}
 \end{table}
 
-Tabel \ref{tab:5:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang digunakan saat pembangunan.
+Tabel \ref{tab:5:2:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang digunakan saat pengujian.
 
 \begin{table}[H]
     \caption{Perangkat Lunak Lingkungan Pembangunan}
-    \label{tab:5:1:lunakpembangunan}
+    \label{tab:5:2:1:lunakpembangunan}
     \centering
     \begin{tabular}{|l|l|}
         \hline
@@ -272,3 +383,79 @@ Tabel \ref{tab:5:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang
         Perangkat Lunak Pendukung & \textit{Docker Version} 20.10.24+dfsg1                            \\ & \textit{Debian} 11-slim \\ & \textit{MySQL} 5.7 \\ & \textit{phpMyAdmin} 5.2.1 \\ & PHP 7.3.33\\ \hline
     \end{tabular}
 \end{table}
+
+\subsection{Pengujian}
+
+Pengujian dilakukan untuk mengetahui permasalah yang terjadi jika IDE dalam SharIF Judge dimasukkan sistem perekaman. Hasil Pengujian juga akan dianalisis secara sederhana agar dapat dibuatnya sebuah sistem untuk mendeteksi tindakan kecurangan.
+
+Pengujian pada sistem pemutaran ulang dilakukan dengan cara mengajak beberapa peserta yang masih menempuh kuliah maupun yang sudah lulus dengan mengerjakan tiga permasalahan dengan tingkat kesusahan mudah, sedang, dan sulit dalam waktu tempuh satu hari. Para peserta dianjurkan mengerjakan 2 soal yang sudah disediakan dan dapat melihat \textit{syntax} bahasa pemrograman. Pada pengujian peserta juga dapat melakukan kecurangan pada satu buah nomor dengan cara apapun. Kecurangan akan dianggap terjadi pada saat peserta melihat cara pengerjaan permasalah dengan cara apapun.
+
+Berikut merupakan masalah yang ditemukan pada saat pengujian sistem pemutaran ulang:
+
+\begin{itemize}
+    \item Fitur menampilkan soal pada IDE \\
+    Fitur ini tidak dapat dilakukan karena permasalahan dengan \textit{networking} dalam server VPS yang menjadikan tidak bisanya mengakses PDF permasalah dalam SharIF Judge dan menghasilkan \textit{status} 404. Fitur ini diabaikan karena fitur ini tidak mengganggu pengujian yang sedang berjalan, tetapi untuk peserta melihat soal dengan cara mendownload soal dan melihatnya pada aplikasi lain. 
+    \item Fitur Menyimpan Rekaman pada Sistem \\
+    Fitur ini tidak mengubah database pada saat pengguna melakukan aksi \textit{submit}. Pada saat aksi \textit{submit} dilakukan file rekaman dibuah menjadi file rekaman yang sudah di-\textit{submit} tetapi pada daftar rekaman dalam database itu sendiri belum dihapus dan pada saat rekaman di ambil, tidak ditemukannya rekaman tersebut dan mengembalikan error pada pengguna. Untuk menyelesaikan masalah ini, diperlukannya sebuah fungsi baru dalam \textit{Model} \verb|Recording_model|. Kode \ref{kode:5:2:2:recording_model} merupakan fungsi yang ditambahkan pada \textit{Model} \verb|Recording_model|. 
+
+    \begin{lstlisting}[language=php, caption={Fungsi tambahan pada \textit{Recording model}}, label=kode:5:2:2:recording_model]
+public function remove_saveonly_recording($assignment_id, $problem_id, $username) {
+    $this->db->delete('recording', array(
+        'assignment' => $assignment_id, 
+        'problem'=>$problem_id, 
+        'username'=>$username, 
+        'rec_id'=>0)
+    );
+}
+    \end{lstlisting}
+
+    Penambahan fungsi ini akan digunakan pada \textit{Controller} \verb|Recording| pada saat fungsi \verb|_submit()| dipanggil.
+
+\end{itemize}
+
+Setelah pengujian berakhir, peserta diminta untuk mengisi beberapa pertanyaan mengenai permasalahan yang dikerjakan dan juga beberapa pertanyaan mengenai pengalaman mengerjakan permasalah pemrograman. 
+
+\subsubsection{Analisa Hasil Pengujian}
+Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan menjadi bagan histogram dalam sistem dan bagan lainnya yang dibutuhkan pada proses analisa. Ada beberapa pola yang dapat dilihat pada saat melihat histogram hasil rekaman peserta pengujian. Berikut merupakan pola yang dapat dilihat pada:
+
+\begin{itemize}
+    \item Pola Pembuatan Kode
+    \item Pola \textit{Debugging} \\
+    Pola ini dapat dilihat pada \textit{events} \verb|editor.change|, \verb|editor.changeCursor|, \verb|editor.change|\\\verb|Selection|, \verb|editor_input.input|, dan \verb|editor_output.change|. Pengguna yang \textit{debugging} akan mengubah kode pada lokasi yang sama. Gambar \ref{fig:5:2:3:heatmapchange} menunjukkan bahwa frekuensi lebih tinggi akan berwarna lebih merah dan menandakan pola debugging yang dapat dilihat karena terjadinya banyak perubahan pada posisi yang sama dibandingkan dengan Gambar \ref{fig:5:2:3:heatmapchangenodebug} yang memiliki frekuensi maksimum 12 pada warna termerahnya.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{experiment/change-heatmap.png}
+        \caption{Bagan Heatmap Perubahan Saat \textit{Debugging}}
+        \label{fig:5:2:3:heatmapchange}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{experiment/change-heatmap-nodebug.png}
+        \caption{Bagan Heatmap Perubahan Tanpa \textit{Debugging}}
+        \label{fig:5:2:3:heatmapchangenodebug}
+    \end{figure}
+    
+    Peserta yang \textit{debugging} juga akan mencoba untuk mengubah input dan melakukan aksi \textit{Execute} lebih banyak dibandingkan dengan peserta yang tidak melakukan \textit{debugging}. Gambar \ref{fig:5:2:3:debugmany} menunjukkan warna kuning sebagai perubahan input dan warna biru sebagai aksi \textit{Execute} yang dilakukan sedangkan Gambar \ref{fig:5:2:3:debugless} menunjukkan warna biru sebagai perubahan input dan warna merah sebagai aksi \textit{Execute} yang dilakukan. Perbedaan kedua bagan adalah frekuensi dimana aksi \textit{Execute} dilakukan dan juga perubahan input. Maka pola \textit{debugging} juga dapat dilihat melalui frekuensi aksi \textit{Execute} dan juga frekuensi perubahan input.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{experiment/debugging-many-io.png}
+        \caption{Bagan Histogram Perubahan Saat \textit{Debugging}}
+        \label{fig:5:2:3:debugmany}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{experiment/debugging-less-io.png}
+        \caption{Bagan Histogram Perubahan Tanpa \textit{Debugging}}
+        \label{fig:5:2:3:debugless}
+    \end{figure}
+
+    \item Pola Distraksi
+    \item Pola Perubahan Navigasi
+    \item Pola Berpikir
+    \item Pola \textit{Copy-Paste}
+    \item Pola Perubahan Cursor dalam Editor Kode
+\end{itemize}
