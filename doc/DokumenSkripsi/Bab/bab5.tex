@@ -98,8 +98,7 @@ Berikut merupakan peristiwa yang akan direkam oleh sistem perekaman:
     \item \verb|submit.click|: Peristiwa ini akan menangkap aksi \textit{Save \& Submit} yang dilakukan pengguna.
 \end{itemize}
 
-Seluruh alur sistem perekaman peristiwa dalam SharIF-Judge akan ditambahkan ke dalam file \verb|assets/js/|\verb|shj_submit.js|. Kode perubahan terdapat pada Lampiran ??.
-% TODO: Add lampiran perubahan shj_submit
+Seluruh alur sistem perekaman peristiwa dalam SharIF-Judge akan ditambahkan ke dalam file \verb|assets/js/|\verb|shj_submit.js|. Kode perubahan terdapat pada Lampiran \ref{lamp:A}.
 
 \subsubsection{Perbaikan Implementasi}
 
@@ -107,8 +106,8 @@ Pada saat mengujian fungsi penyimpanan rekaman, dalam tahap alur penyimpanan dat
 
 \begin{enumerate}
     \item Inisialisasi Perekam \\
-    Alur inisialisasi akan diubah agar dapat memuat events yang sebelumnya sudah disimpan dalam \textit{object javascript} bernama \verb|befRecording|. Oleh karena itu, dibutuhkannya penambahan fungsi pada \textit{Controller} \verb|Submit.php| yaitu fungsi untuk mengambil data rekaman sebelumnya bernama \verb|load_rec| yang mengambil argumen pengenal masalah yang dipilih oleh pengguna. Kode penambahan terdapat di Lampiran ??.
-    % TODO: Add lampiran perubahan Submit.php
+    Alur inisialisasi akan diubah agar dapat memuat events yang sebelumnya sudah disimpan dalam \textit{object javascript} bernama \verb|befRecording|. Oleh karena itu, dibutuhkannya penambahan fungsi pada \textit{Controller} \verb|Submit.php| yaitu fungsi untuk mengambil data rekaman sebelumnya bernama \verb|load_rec| yang mengambil argumen pengenal masalah yang dipilih oleh pengguna. Kode penambahan terdapat di Lampiran \ref{lamp:A}
+
     \item Penyimpan data rekaman \\
     Pada \textit{object} \verb|recording|, \verb|startValue| dan \verb|startSelection| tidak dibutuhkan karena isi awal dari editor kode dan juga posisi awal cursor dalam editor kode akan selalu berisi dengan nilai kosong yaitu teks kosong dan posisi di baris dan kolom pertama.
 \end{enumerate}
@@ -160,8 +159,7 @@ $this->db->query(
     Untuk aksi \textit{save} dan \textit{execute} dimana tidak adanya \textit{submit id} maka akan dibuat menjadi angka nol (`0') pada pengenal rekamannya atau \verb|rec_id| jika aksinya merupakan \textit{submit}.
 \end{enumerate}
 
-Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke dalam \verb|assets/js/|\\\verb|shj_submit.js|. Kode pembahan terdapat pada Lampiran ??. Agar dapat menyimpan dibutuhkannya perubahan dalam kode \textit{Controller} \verb|Submit.php| pada fungsi \verb|save($type)| dan fungsi \verb|_submit()|. Kode perubahan \verb|Submit.php| terdapat pada Lampiran ??.
-% TODO: ref Lampirkan kode perubahan shj_submit dan Submit.php controller
+Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke dalam \verb|assets/js/|\\\verb|shj_submit.js|. Agar dapat menyimpan dibutuhkannya perubahan dalam kode \textit{Controller} \verb|Submit| pada fungsi \verb|save($type)| dan fungsi \verb|_submit()|. Kode pembahan terdapat pada Lampiran \ref{lamp:A}.
 
 \subsubsection{Perbaikan Implementasi}
 
@@ -180,8 +178,7 @@ Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam 
 
 \subsubsection{Pengambilan Data Rekaman}
 
-Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran ??.
-% TODO: Add lampiran kode model recording
+Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran \ref{lamp:A}.
 
 Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recording.php|:
 \begin{enumerate}
@@ -192,14 +189,11 @@ Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recor
     Fungsi ini akan mengambil beberapa data yang dibutuhkan oleh antarmuka SharIF-Judge yaitu \textit{assignment} yang dipilih oleh pengguna menggunakan \verb|assignment_model|, \textit{problem} yang ada dalam \textit{assignment} tersebut menggunakan \verb|assignment_model|, dan daftar \textit{recording} yang tersimpan dalam sistem menggunakan \verb|recording_model|. Setelah itu, server akan menempatkan seluruh data tersebut ke dalam \textit{view} baru bernama \verb|recording_list.twig|.
 \end{enumerate}
 
-Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \textit{Controller} \verb|Recording.php| terdapat dalam Lampiran ??.
-% TODO: Add lampiran kode controller recording
+Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \textit{Controller} \verb|Recording.php| terdapat dalam Lampiran \ref{lamp:A}.
 
 \subsubsection{Antarmuka dan Tampilan Data}
 
-Antarmuka yang akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar ?? menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran ??.
-% TODO: Add Gambar antarmuka halam recording_list.twig
-% TODO: Add lampiran kode recording_list.twig
+Antarmuka yang akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar \ref{fig:hasil:recording_list} menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran \ref{lamp:A}.
 
 \subsection{Pemutaran Ulang Rekaman}
 
@@ -211,9 +205,7 @@ Untuk menambahkan sebuah halaman baru dalam SharIF-Judge dibutuhkannya juga fung
 
 Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama.
 
-Gambar ?? merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
-
-% TODO: Tambah Gambar antarmuka recording.twig
+Gambar \ref{fig:hasil:recording} merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
 
 \subsubsection{Implementasi Memuat Data Rekaman}
 \label{ssub:5:2:4:memuatdata}
@@ -250,6 +242,30 @@ Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data r
 \section{Pengujian Fungsional}
 \label{sec:5:fungsional}
 
+Pengujian fungsional dilakukan secara lokal. Berikut merupakan pengujian terhadap fitur-fitur sistem pemutaran ulang dalam SharIF Judge:
+
+\begin{table}[H]
+	\centering
+	\caption{Tabel Pengujian Fungsional}
+	\begin{tabular}{|p{0.5cm}| p{5.5cm}| p{6cm}| p{2.5cm}|} \hline
+	No.	& Aksi Pengguna	& Reaksi yang diharapkan & Reaksi \\ \hline
+	1 	& Memilih masalah dalam Halam Submit & Sistem memulai rekaman &	sesuai	\\ \hline
+	2 	& Melakukan Aksi \textit{Save} & Menyimpan rekaman sesi dalam sistem & sesuai	\\ \hline
+	3 	& Melakukan Aksi \textit{Save \& Execute} & Menyimpan rekaman sesi dalam sistem & sesuai	\\ \hline
+	4 	& Melakukan Aksi \textit{Save \& Submit} & Menyimpan rekaman sesi dalam sistem & sesuai	\\ \hline
+	5 	& Membuka Halaman Daftar Rekaman & Daftar Rekaman ditampilkan & sesuai	\\ \hline
+	6 	& Memilih Rekaman dalam Halaman Rekaman & Memuka halaman Rekaman & sesuai	\\ \hline
+	7 	& Menyaring Daftar Rekaman dengan User & Daftar rekaman menampilkan hanya daftar rekaman user & sesuai	\\ \hline
+	8 	& Menyaring Daftar Rekaman dengan Problem & Daftar rekaman menampilkan hanya daftar rekaman untuk problem saringan & sesuai	\\ \hline
+	9 	& Menyaring Daftar Rekaman dengan User dan Problem & Daftar rekaman menampilkan hanya daftar rekaman user pada problem saringan & sesuai	\\ \hline
+	10 	& Membuka Halaman Rekaman & Rekaman ditampilkan & sesuai	\\ \hline
+	11 	& Menjalankan Rekaman & Rekaman diputar ulang & sesuai	\\ \hline
+	12 	& Memberhetikan Rekaman yang berjalan & Putaran ulang rekaman berhenti & sesuai	\\ \hline
+
+	\end{tabular}
+	\label{table:fungsional}
+\end{table}
+
 \section{Pengujian Eksperimental}
 \label{sec:5:eksperimental}
 
@@ -257,101 +273,6 @@ Pada Bagian ini dilakukannya pengujian terhadap sistem Perekaman Ulang pada Shar
 
 \subsection{Lingkungan pengujian}
 Pengujian sistem perekaman ulang akan dilakukan pada sebuah server VPS atau \textit{Virtual Private Server}. Pada server akan dijalankannya \textit{docker} agar sistem aplikasi akan identik dengan pada saat sistem sedang diimplementasikan. Kode \ref{kode:5:3:1:dockercompose} dan Kode \ref{kode:5:3:1:dockerfile} merupakan file \textit{docker-compose} dan \textit{Dockerfile} yang digunakan membangun sistem SharIF Judge dalam server VPS.
-
-\begin{lstlisting}[caption=File \textit{docker-compose} yang digunakan, label=kode:5:3:1:dockercompose]
-version: "3"
-services:
-  codeigniter-3:
-    build: .
-    ports:
-      - "81:80"
-    volumes:
-      - .:/var/www/html
-    depends_on:
-      - db
-
-  db:
-    image: mysql:5.7
-    ports:
-      - "3306:3306"
-    environment:
-      MYSQL_TABLE: judge
-      MYSQL_USER: sharif
-      MYSQL_PASSWORD: judge
-      MYSQL_ROOT_PASSWORD: root
-    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
-    volumes:
-      - ./mysql:/var/lib/mysql
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8080:80"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: freehost
-    depends_on:
-      - db
-\end{lstlisting}
-
-\begin{lstlisting}[caption=File \textit{Dockerfile} yang digunakan, label=kode:5:3:1:dockerfile]
-# Menggunakan image PHP 7.3 sebagai base image
-FROM php:7.3-apache
-
-# Install dependensi dan ekstensi PHP yang dibutuhkan untuk CodeIgniter
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-	libldap2-dev \
-	libcurl4 \
-    libcurl4-openssl-dev \
-	libzip-dev \
-    libfreetype6-dev \
-    zip \
-    unzip \
-	default-jdk \
-	g++ \
-	python2 \
-	python3
-
-# Install ekstensi GD dan mysqli
-RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd mysqli
-	
-RUN docker-php-ext-install curl
-
-RUN  docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
-	&& docker-php-ext-install ldap
-
-RUN docker-php-ext-install fileinfo
-RUN docker-php-ext-install mbstring
-RUN docker-php-ext-install zip
-
-RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
-        sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini && \
-        sed -i -e "s/^ *max_input_vars.*/max_input_vars = 3000000/g" /usr/local/etc/php/php.ini && \
-        sed -i -e "s/^ *post_max_size.*/post_max_size = 50M/g" /usr/local/etc/php/php.ini && \
-        sed -i -e "s/^ *upload_max_filesize.*/upload_max_filesize = 50M/g" /usr/local/etc/php/php.ini
-
-# Aktifkan mod_rewrite untuk Apache
-RUN a2enmod rewrite
-
-# Copy kode CodeIgniter ke dalam container
-COPY . /var/www/html/
-
-# Set direktori kerja
-WORKDIR /var/www/html/
-
-# Make Folder tester writeable by PHP
-RUN chmod 777 /var/www/html/restricted/tester
-RUN chmod 777 /var/www/html/application/cache/Twig
-
-# Expose port 80
-EXPOSE 80
-
-# Jalankan Apache server
-CMD ["apache2-foreground"]
-\end{lstlisting}
 
 Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yang digunakan saat pengujian.
 \begin{table}[H]
@@ -384,7 +305,7 @@ Tabel \ref{tab:5:2:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak ya
     \end{tabular}
 \end{table}
 
-\subsection{Pengujian}
+\subsection{Eksperimen}
 
 Pengujian dilakukan untuk mengetahui permasalah yang terjadi jika IDE dalam SharIF Judge dimasukkan sistem perekaman. Hasil Pengujian juga akan dianalisis secara sederhana agar dapat dibuatnya sebuah sistem untuk mendeteksi tindakan kecurangan.
 
@@ -430,61 +351,79 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{experiment/insert-many-rework.png}
-        \caption{Bagan Histogram Banyak Perubahan}
-        \label{fig:5:2:3:manyrework}
+        \includegraphics[width=0.49\textwidth]{experiment/insert-many-rework.png}
+        \includegraphics[width=0.49\textwidth]{experiment/insert-copy-ai.png}
+        \caption{Bagan Histogram Perubahan Kode Program}
+        \label{fig:5:2:3:rework}
     \end{figure}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.75\textwidth]{experiment/insert-copy-ai.png}
-        \caption{Bagan Histogram Men-\textit{copy} Kode}
-        \label{fig:5:2:3:copy}
-    \end{figure}
-
-    Pada Gambar \ref{fig:5:2:3:manyrework} peserta mengerjakan dengan tidak melakukan kecurangan. Terjadi 1436 karakter yang dimasukkan dan 2240 karakter yang dihapus pada editor dengan total kode akhir memiliki panjang 362 karakter. Maka menggunakan rumus di atas, \textit{Code Churn Rate} pada peserta ini menjadi 10.15. Dengan nilai \textit{Code Churn Rate} yang tinggi maka peserta ini banyak mengubah kode program.
+    Pada Gambar \ref{fig:5:2:3:rework} sebelah kiri peserta mengerjakan dengan tidak melakukan kecurangan. Terjadi 1436 karakter yang dimasukkan dan 2240 karakter yang dihapus pada editor dengan total kode akhir memiliki panjang 362 karakter. Maka menggunakan rumus di atas, \textit{Code Churn Rate} pada peserta ini menjadi 10.15. Dengan nilai \textit{Code Churn Rate} yang tinggi maka peserta ini banyak mengubah kode program.
     
-    Sebaliknya pada Gambar \ref{fig:5:2:3:copy} peserta menggunakan AI untuk mengerjakan dengan men-\textit{copy} hasil kode AI ke dalam editor. Terjadi 1723 karakter yang dimasukkan dan 28 karakter yang dihapus pada editor dengan total kode akhir memiliki panjang 1771 karakter. Maka menggunakan rumus di atas, \textit{Code Churn Rate} pada peserta ini menjadi 0.99. Dengan nilai \textit{Code Churn Rate} yang rendah maka peserta ini tidak banyak mengubah kode program.
+    Sebaliknya pada Gambar \ref{fig:5:2:3:rework} sebelah kanan peserta menggunakan AI untuk mengerjakan dengan men-\textit{copy} hasil kode AI ke dalam editor. Terjadi 1723 karakter yang dimasukkan dan 28 karakter yang dihapus pada editor dengan total kode akhir memiliki panjang 1771 karakter. Maka menggunakan rumus di atas, \textit{Code Churn Rate} pada peserta ini menjadi 0.99. Dengan nilai \textit{Code Churn Rate} yang rendah maka peserta ini tidak banyak mengubah kode program.
 
-    Maka Pola Pembuatan Kode ini dinilai dengan \textit{Code Churn Rate}, semakin tinggi nilai tersebut maka semakin tinggi juga perubahan kode yang terjadi. Jika banyak kode perubahan maka dimungkinkan bahwa kode program tidak melakukan kecurangan pada saat pengerjaan.
+    Maka Pola Pembuatan Kode ini dinilai dengan \textit{Code Churn Rate}, semakin tinggi nilai tersebut maka semakin tinggi juga perubahan kode yang terjadi. Jika banyak perubahan kode maka dimungkinkan bahwa peserta tidak melakukan kecurangan pada saat pengerjaan.
 
     \item Pola \textit{Debugging} \\
-    Pola ini dapat dilihat pada \textit{events} \verb|editor.change|, \verb|editor.changeCursor|, \verb|editor.change|\\\verb|Selection|, \verb|editor_input.input|, dan \verb|editor_output.change|. Pengguna yang \textit{debugging} akan mengubah kode pada lokasi yang sama. Gambar \ref{fig:5:2:3:heatmapchange} menunjukkan bahwa frekuensi lebih tinggi akan berwarna lebih merah dan menandakan pola debugging yang dapat dilihat karena terjadinya banyak perubahan pada posisi yang sama dibandingkan dengan Gambar \ref{fig:5:2:3:heatmapchangenodebug} yang memiliki frekuensi maksimum 12 pada warna termerahnya.
+    Pola ini dapat dilihat pada \textit{events} \verb|editor.change|, \verb|editor.changeCursor|, \verb|editor.change|\\\verb|Selection|, \verb|editor_input.input|, dan \verb|editor_output.change|. Pengguna yang \textit{debugging} akan mengubah kode pada lokasi yang sama. Gambar \ref{fig:5:2:3:heatmapchange} sebelah kiri menunjukkan bahwa frekuensi lebih tinggi akan berwarna lebih merah dan menandakan pola debugging pada posisi tertentu yang dapat dilihat karena terjadinya banyak perubahan pada posisi yang sama dibandingkan dengan Gambar \ref{fig:5:2:3:heatmapchange} sebelah kanan yang memiliki frekuensi maksimum 12 pada warna termerahnya.
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{experiment/change-heatmap.png}
-        \caption{Bagan Heatmap Perubahan Saat \textit{Debugging}}
+        \includegraphics[width=0.49\textwidth]{experiment/change-heatmap.png}
+        \includegraphics[width=0.49\textwidth]{experiment/change-heatmap-nodebug.png}
+        \caption{Bagan Heatmap Perubahan Lokasi Kode Program}
         \label{fig:5:2:3:heatmapchange}
     \end{figure}
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.75\textwidth]{experiment/change-heatmap-nodebug.png}
-        \caption{Bagan Heatmap Perubahan Tanpa \textit{Debugging}}
-        \label{fig:5:2:3:heatmapchangenodebug}
-    \end{figure}
     
-    Peserta yang \textit{debugging} juga akan mencoba untuk mengubah input dan melakukan aksi \textit{Execute} lebih banyak dibandingkan dengan peserta yang tidak melakukan \textit{debugging}. Gambar \ref{fig:5:2:3:debugmany} menunjukkan warna kuning sebagai perubahan input dan warna biru sebagai aksi \textit{Execute} yang dilakukan sedangkan Gambar \ref{fig:5:2:3:debugless} menunjukkan warna biru sebagai perubahan input dan warna merah sebagai aksi \textit{Execute} yang dilakukan. Perbedaan kedua bagan adalah frekuensi dimana aksi \textit{Execute} dilakukan dan juga perubahan input. Maka pola \textit{debugging} juga dapat dilihat melalui frekuensi aksi \textit{Execute} dan juga frekuensi perubahan input.
+    Peserta yang \textit{debugging} juga akan mencoba untuk mengubah input dan melakukan aksi \textit{Execute} lebih banyak dibandingkan dengan peserta yang tidak melakukan \textit{debugging}. Gambar \ref{fig:5:2:3:debug} sebelah kiri menunjukkan warna kuning sebagai perubahan input dan warna biru sebagai aksi \textit{Execute} yang dilakukan sedangkan Gambar \ref{fig:5:2:3:debug} sebelah kanan menunjukkan warna biru sebagai perubahan input dan warna merah sebagai aksi \textit{Execute} yang dilakukan. Perbedaan kedua bagan adalah frekuensi dimana aksi \textit{Execute} dilakukan dan juga perubahan input. Maka pola \textit{debugging} juga dapat dilihat melalui frekuensi aksi \textit{Execute} dan juga frekuensi perubahan input.
 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=0.75\textwidth]{experiment/debugging-many-io.png}
-        \caption{Bagan Histogram Perubahan Saat \textit{Debugging}}
-        \label{fig:5:2:3:debugmany}
+        \includegraphics[width=0.49\textwidth]{experiment/debugging-many-io.png}
+        \includegraphics[width=0.49\textwidth]{experiment/debugging-less-io.png}
+        \caption{Bagan Histogram Perubahan Input dan Aksi \textit{Execute}}
+        \label{fig:5:2:3:debug}
     \end{figure}
 
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=0.75\textwidth]{experiment/debugging-less-io.png}
-        \caption{Bagan Histogram Perubahan Tanpa \textit{Debugging}}
-        \label{fig:5:2:3:debugless}
-    \end{figure}
-
-    Pola \textit{Debugging} ini akan mendukung Pola Pembuatan Kode untuk mengetahui apakah peserta melakukan kecurangan.
+    Pola \textit{Debugging} ini akan mendukung Pola Pembuatan Kode untuk mengetahui apakah peserta melakukan kecurangan. Tetapi pola ini tidak dapat mengetahui pasti peserta yang melakukan kecurangan.
 
     \item Pola Perubahan Navigasi \\
-    \item Pola Berpikir
-    \item Pola \textit{Copy-Paste}
-    \item Pola Perubahan Cursor dalam Editor Kode
+    Pola ini dapat dilihat pada \textit{events} \verb|window.focus|, \verb|window.blur|, dan \verb|window.visibility|\\\verb|change|. Pola ini dilihat dengan membandingkan seberapa sering pengguna mengubah navigasi dalam sesi mengerjakan kode program. 
+    Gambar \ref{fig:5:2:3:navigation} menunjukkan perbedaan bagan histrogram \textit{event} \verb|window.focus|, \verb|window.blur|, dan \verb|window.visibilitychange| pada peserta yang men-\textit{copy} kode program dari jawaban \textit{online} dan peserta yang mengerjakannya hanya pada website SharIF Judge.  
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.49\textwidth]{experiment/less-navigation.png}
+        \includegraphics[width=0.49\textwidth]{experiment/many-navigation.png}
+        \caption{Bagan Histogram Perubahan Navigasi}
+        \label{fig:5:2:3:navigation}
+    \end{figure}
+
+    Pola Perubahan Navigasi ini dapat diukur dengan membatasi perubahan \textit{tab} atau fokus web page untuk waktu tertentu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
+
+    \item Pola Berpikir \\
+    Pola ini dapat dilihat pada keseluruhan \textit{events} yang terjadi. Pada Pola ini dapat dilihat dari saat pemberhentiannya peserta sebelum melakukan perubahan yang kompleks terhadap kode program dan juga keseringannya terjadinya pemberhentian.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{experiment/berpikir-2.png}
+        \caption{Bagan Histogram Perubahan}
+        \label{fig:5:2:3:berpikir}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{experiment/non-berpikir.png}
+        \caption{Bagan Histogram Perubahan}
+        \label{fig:5:2:3:tidakberpikir}
+    \end{figure}
+
+    Gambar \ref{fig:5:2:3:berpikir} memiliki histogram yang dipisah setiap sepuluh detik dan memiliki waktu yang cukup lama sebelum melakukan perubahan yang cukup besar. Sebaliknya Gambar \ref{fig:5:2:3:tidakberpikir} menunjukkan peserta yang men-\textit{copy} kode dari sumber jawaban \textit{online}. Bagan ini menunjukkan lebih seringnya berhenti untuk melihat jawaban terlebih dahulu dan durasi pemberhentiannya lebih kecil dibandingkan bagan histogram pertama.
+
+    Pola ini dinilai dengan memberikan batas frekuensi berpikir dan lamanya berpikir dalam suatu waktu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
+    
+    \item Pola \textit{Copy-Paste} \\
+    Pola ini merupakan pola sederhana dimana jika terjadinya penambahan kode yang panjang tetapi tidak melakukan penghapusan yang panjang terlebih dahulu, maka akan diduga melakukan kecurangan.
+
 \end{itemize}
+
+Tetapi pola-pola tersebut dapat juga mendapatkan \textit{false positive} karena banyaknya \textit{variable} yang harus diperhatikan dalam menentukan tidakan kecurangan itu sendiri. \textit{Variable} yang dimaksudkan antara lain adalah kesulitan masalah dan pengalaman programing. Jika kesulitan masalah mudah maka peserta dapat mengerjakan dengan mudah dan tidak memerlukannya \textit{debugging}, begitu juga jika pengalaman programing yang tinggi.

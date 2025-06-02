@@ -1,0 +1,249 @@
+diff --git a/application/controllers/Submit.php b/application/controllers/Submit.php
+index 8517271..d40750a 100644
+--- a/application/controllers/Submit.php
++++ b/application/controllers/Submit.php
+@@ -270,16 +270,42 @@ class Submit extends CI_Controller
+ 		if(!write_file($input_path, ' ')){}
+ 		if(!write_file($output_path, ' ')){}
+ 		if (!file_exists($file_path)){
+-			$response = json_encode(array(content=>'', message=>'No saved file'));
++			$response = json_encode(array('content'=>'', 'message'=>'No saved file'));
+ 		}
+ 		else{
+ 			$file_content = file_get_contents($file_path);
+ 			if ($file_content === FALSE){
+-				$response = json_encode(array(content=>'', message=>'Unable to load'));
++				$response = json_encode(array('content'=>'', 'message'=>'Unable to load'));
+ 			}
+ 			else{
+ 				addslashes($file_content);
+-				$response = json_encode(array(content=>$file_content, message=>'Loaded'));
++				$response = json_encode(array('content'=>$file_content, 'message'=>'Loaded'));
++			}
++		}
++		echo $response;
++	}
++
++	// ------------------------------------------------------------------------
++
++	/**
++	 * Load recording in files from recording file
++	 */
++	public function load_rec($problem_id) {
++		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
++		$file_path = $user_dir.'/'.RECORD_FILE_NAME.'.'.RECORD_FILE_EXT;
++		
++		$this->load->helper('file');
++		if (!file_exists($file_path)){
++			$response = json_encode(array('content'=>'', 'message'=>'No recording file'));
++		}
++		else{
++			$file_content = file_get_contents($file_path);
++			if ($file_content === FALSE){
++				$response = json_encode(array('content'=>'', 'message'=>'Unable to load'));
++			}
++			else{
++				addslashes($file_content);
++				$response = json_encode(array('content'=>$file_content, 'message'=>'Loaded'));
+ 			}
+ 		}
+ 		echo $response;
+@@ -295,6 +321,10 @@ class Submit extends CI_Controller
+ 		$data = $_POST['code_editor'];
+ 		$problem_id = $_POST['problem_id'];
+ 		$language = $_POST['language'];
++		$rec = $_POST['rec_data'];
+ 		
+ 		$user_dir = rtrim($this->assignment_root, '/').'/assignment_'.$this->user->selected_assignment['id'].'/p'.$problem_id.'/'.$this->user->username;
+ 		if (!file_exists($user_dir)){
+@@ -302,47 +332,76 @@ class Submit extends CI_Controller
+ 		}
+ 		$file_path = $user_dir.'/'.EDITOR_FILE_NAME.'.'.EDITOR_FILE_EXT;
+ 		$input_path = $user_dir.'/'.EDITOR_IN_NAME.'.'.EDITOR_FILE_EXT;
++		
++		$rec_path = $user_dir.'/'.RECORD_FILE_NAME.'.'.RECORD_FILE_EXT;
+ 
+ 		$this->load->helper('file');
+-		if (!write_file($file_path, $data)){
+-			$response = json_encode(array(status=>FALSE, message=>'Unable to save'));
++		if (!(write_file($file_path, $data) && write_file($rec_path, $rec))){
++			$response = json_encode(array('status'=>FALSE, 'message'=>'Unable to save'));
+ 			echo $response;
+ 		}
+ 		else{
+-			$response = json_encode(array(status=>TRUE, message=>'Saved'));
+-			if($type === FALSE){
++
++			$response = json_encode(array('status'=>TRUE, 'message'=>'Saved'));
++
++			$this->load->model('recording_model');
++			$this->recording_model->add_recording(array(
++				'rec_id' 		=> 0,
++				'username' 		=> $this->user->username,
++				'assignment' 	=> $this->user->selected_assignment['id'],
++				'problem' 		=> $problem_id,
++				'upload_at'		=> shj_now_str(),
++			));
++
++			if($type === FALSE){ // If only saved
+ 				echo $response;
+ 			}
+-			else{
++			else{ // If want to execute/submit
+ 				$now = shj_now();
+ 				if ( $this->queue_model->in_queue($this->user->username,$this->user->selected_assignment['id'], $this->problem['id'])){
+-					$response = json_encode(array(status=>FALSE, message=>'You have already submitted for this problem. Your last submission is still in queue.'));
++					$response = json_encode(array('status'=>FALSE, 'message'=>'You have already submitted for this problem. Your last submission is still in queue.'));
+ 					echo $response;
+ 				}
+ 				else if ($this->user->level==0 && !$this->user->selected_assignment['open']){
+-					$response = json_encode(array(status=>FALSE, message=>'Selected assignment has been closed.'));
++					$response = json_encode(array('status'=>FALSE, 'message'=>'Selected assignment has been closed.'));
+ 					echo $response;
+ 				}
+ 				else if ($now < strtotime($this->user->selected_assignment['start_time'])){
+-					$response = json_encode(array(status=>FALSE, message=>'Selected assignment has not started.'));
++					$response = json_encode(array('status'=>FALSE, 'message'=>'Selected assignment has not started.'));
+ 					echo $response;
+ 				}
+ 				else if ($now > strtotime($this->user->selected_assignment['finish_time'])+$this->user->selected_assignment['extra_time']){
+-					$response = json_encode(array(status=>FALSE, message=>'Selected assignment has finished.'));
++					$response = json_encode(array('status'=>FALSE, 'message'=>'Selected assignment has finished.'));
+ 					echo $response;
+ 				}
+ 				else if ( ! $this->assignment_model->is_participant($this->user->selected_assignment['participants'],$this->user->username)){
+-					$response = json_encode(array(status=>FALSE, message=>'You are not registered for submitting.'));
++					$response = json_encode(array('status'=>FALSE, 'message'=>'You are not registered for submitting.'));
+ 					echo $response;
+ 				}
+ 				else{
+ 					if($type === 'submit'){
+-						$this->_submit($data, $problem_id, $language, $user_dir);
++						$this->_submit($data, $problem_id, $language, $user_dir, $rec);
+ 					}
+ 					else if($type === 'execute'){
+ 						$editor_input =  $_POST['editor_input'];
+ 						if (!write_file($input_path, $editor_input)){
+-							$response = json_encode(array(status=>FALSE, message=>'Unable to write input file'));
++							$response = json_encode(array('status'=>FALSE, 'message'=>'Unable to write input file'));
+ 							echo $response;
+ 						}
+ 						else{
+@@ -362,13 +421,19 @@ class Submit extends CI_Controller
+ 	/**
+ 	 * Add code to queue for judging
+ 	 */
+-	private function _submit($data, $problem_id, $language, $user_dir){
++	private function _submit($data, $problem_id, $language, $user_dir, $rec){
+ 		$file_type = $this->_language_to_type(strtolower(trim($language)));
+ 		$file_ext = $this->_language_to_ext(strtolower(trim($language)));
+ 		$file_name = EDITOR_FILE_NAME;
+ 		$file_fname = $file_name.'-'.($this->user->selected_assignment['total_submits']+1);
+ 		$file_path = $user_dir.'/'.$file_fname.'.'.$file_ext;
+ 
++		$rec_file_name = RECORD_FILE_NAME;
++		$rec_file_fname = $rec_file_name.'-'.($this->user->selected_assignment['total_submits']+1);
++		$rec_file_path = $user_dir.'/'.$rec_file_fname.'.'.RECORD_FILE_EXT;
++
++		$old_file_path = $user_dir.'/'.RECORD_FILE_NAME.'.'.RECORD_FILE_EXT;
++
+ 		foreach($this->problems as $item)
+ 			if ($item['id'] == $problem_id)
+ 			{
+@@ -376,8 +441,8 @@ class Submit extends CI_Controller
+ 				break;
+ 			}
+ 
+-		if (!write_file($file_path, $data)){
+-			$response = json_encode(array(status=>FALSE, message=>'Unable to submit'));
++		if (!(write_file($file_path, $data) && rename($old_file_path, $rec_file_path))){
++			$response = json_encode(array('status'=>FALSE, 'message'=>'Unable to submit'));
+ 		}
+ 		else{
+ 			$this->load->model('submit_model');
+@@ -394,6 +459,17 @@ class Submit extends CI_Controller
+ 				'pre_score' => 0,
+ 				'time' => shj_now_str(),
+ 			);
++
++			$this->load->model('recording_model');
++			$this->recording_model->add_recording(array(
++				'rec_id' 		=> $submit_info['submit_id'],
++				'username' 		=> $submit_info['username'],
++				'assignment' 	=> $submit_info['assignment'],
++				'problem' 		=> $submit_info['problem'],
++				'upload_at'		=> shj_now_str(),
++			));
++			$this->recording_model->remove_saveonly_recording($submit_info['assignment'], $submit_info['problem'], $submit_info['username']);
++
+ 			if ($this->problem['is_upload_only'] == 0)
+ 			{
+ 				$this->queue_model->add_to_queue($submit_info);
+@@ -404,12 +480,11 @@ class Submit extends CI_Controller
+ 				$this->submit_model->add_upload_only($submit_info);
+ 			}
+ 
+-			$response = json_encode(array(status=>TRUE, message=>"Submitted"));
++			$response = json_encode(array('status'=>TRUE, 'message'=>"Submitted"));
+ 		}
+ 		echo $response;
+ 	}
+ 
+-
+ 	// ------------------------------------------------------------------------
+ 
+ 	/**
+@@ -424,7 +499,7 @@ class Submit extends CI_Controller
+ 		$output_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
+ 
+ 		if (!write_file($file_path, $data)){
+-			$response = json_encode(array(status=>FALSE, message=>'Unable to execute', debug=>$file_path));
++			$response = json_encode(array('status'=>FALSE, 'message'=>'Unable to execute', 'debug'=>$file_path));
+ 		}
+ 		else{
+ 			$submit_info = array(
+@@ -442,15 +517,15 @@ class Submit extends CI_Controller
+ 
+ 			if($this->queue_model->add_to_queue_exec($submit_info)){
+ 				if (!write_file($output_path, 'Queueing...')){
+-					$response = json_encode(array(status=>FALSE, message=>'Unable to write output file'));
++					$response = json_encode(array('status'=>FALSE, 'message'=>'Unable to write output file'));
+ 				}
+ 				else{
+ 					process_the_queue();
+-					$response = json_encode(array(status=>TRUE, message=>'Executing'));
++					$response = json_encode(array('status'=>TRUE, 'message'=>'Executing'));
+ 				}
+ 			}
+ 			else{
+-				$response = json_encode(array(status=>FALSE, message=>'Still in queue'));
++				$response = json_encode(array('status'=>FALSE, 'message'=>'Still in queue'));
+ 			}
+ 		}
+ 		echo $response;
+@@ -467,21 +542,21 @@ class Submit extends CI_Controller
+ 		$file_path = $user_dir.'/'.EDITOR_OUT_NAME.'.'.EDITOR_FILE_EXT;
+ 
+ 		if (!file_exists($file_path)){
+-			$response = json_encode(array(status=>FALSE, content=>''));
++			$response = json_encode(array('status'=>FALSE, 'content'=>''));
+ 		}
+ 		else{
+ 			$this->load->helper('file');
+ 			$file_content = file_get_contents($file_path);
+ 			if ($file_content === FALSE){
+-				$response = json_encode(array(status=>FALSE, content=>''));
++				$response = json_encode(array('status'=>FALSE, 'content'=>''));
+ 			}
+ 			else{
+ 				$complete_status = strpos($file_content, 'Total Execution Time');
+ 				if($complete_status === FALSE){
+-					$response = json_encode(array(status=>FALSE, content=>$file_content));
++					$response = json_encode(array('status'=>FALSE, 'content'=>$file_content));
+ 				}
+ 				else{
+-					$response = json_encode(array(status=>TRUE, content=>$file_content));
++					$response = json_encode(array('status'=>TRUE, 'content'=>$file_content));
+ 				}
+ 			}
+ 		}

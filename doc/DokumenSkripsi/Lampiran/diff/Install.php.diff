@@ -1,0 +1,41 @@
+diff --git a/application/controllers/Install.php b/application/controllers/Install.php
+index 2d87d1f..389e195 100644
+--- a/application/controllers/Install.php
++++ b/application/controllers/Install.php
+@@ -45,7 +45,7 @@ class Install extends CI_Controller
+ 
+ 			// Use InnoDB engine for MySql database
+ 			if ($this->db->dbdriver === 'mysql' || $this->db->dbdriver === 'mysqli')
+-				$this->db->query('SET storage_engine=InnoDB;');
++				$this->db->query('SET default_storage_engine=InnoDB;');
+ 
+ 			// Creating Tables:
+ 			// sessions, submissions, assignments, notifications, problems, queue, scoreboard, settings, users
+@@ -86,9 +86,30 @@ class Install extends CI_Controller
+ 			$this->dbforge->add_key(array('assignment', 'submit_id'));
+ 			if ( ! $this->dbforge->create_table('submissions', TRUE))
+ 				show_error("Error creating database table ".$this->db->dbprefix('submissions'));
+-
+-
+-
++				
++			// create table 'recording'
++			$fields = array(
++				'rec_id' 	=> array('type' => 'INT', 'constraint' => 11, 'unsigned' => TRUE),
++				'upload_at'		=> array('type' => $DATETIME),
++				'assignment' 	=> array('type' => 'SMALLINT', 'constraint' => 4, 'unsigned' => TRUE),
++				'problem'       => array('type' => 'SMALLINT', 'constraint' => 4, 'unsigned' => TRUE),
++				'username'      => array('type' => 'VARCHAR', 'constraint' => 20),
++			);
++			$this->dbforge->add_field($fields);
++			if (! $this->dbforge->create_table('recording', TRUE))
++				show_error("Error creating database table " . $this->db->dbprefix('recording'));
++			// ADD Unique constraint
++			$this->db->query(
++				"ALTER TABLE {$this->db->dbprefix('recording')}
++				 ADD CONSTRAINT {$this->db->dbprefix('sruap_unique')} UNIQUE (rec_id, username, assignment, problem);"
++			);
++		
+ 			// create table 'assignments'
+ 			$fields = array(
+ 				'id'            => array('type' => 'INT', 'constraint' => 11, 'unsigned' => TRUE, 'auto_increment' => TRUE),

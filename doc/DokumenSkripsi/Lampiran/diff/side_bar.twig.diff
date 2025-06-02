@@ -1,0 +1,93 @@
+diff --git a/application/views/templates/side_bar.twig b/application/views/templates/side_bar.twig
+index ce5a0e2..857c6d3 100644
+--- a/application/views/templates/side_bar.twig
++++ b/application/views/templates/side_bar.twig
+@@ -12,18 +12,18 @@
+ 			</a>
+ 		</li>
+ 		{% if user.level == 3 %}
+-		<li class="color-settings{{ selected=='settings' ? ' selected' }}">
+-			<a href="{{ site_url('settings') }}" aria-labelledby="settings-label">
+-				<i class="fa fa-gear fa-lg"></i>
+-				<span class="sidebar_text" id="settings-label">Settings</span>
+-			</a>
+-		</li>
+-		<li class="color-users{{ selected=='users' ? ' selected' }}">
+-			<a href="{{ site_url('users') }}" aria-labelledby="users-label">
+-				<i class="fa fa-users fa-lg"></i>
+-				<span class="sidebar_text" id="users-label">Users</span>
+-			</a>
+-		</li>
++			<li class="color-settings{{ selected=='settings' ? ' selected' }}">
++				<a href="{{ site_url('settings') }}" aria-labelledby="settings-label">
++					<i class="fa fa-gear fa-lg"></i>
++					<span class="sidebar_text" id="settings-label">Settings</span>
++				</a>
++			</li>
++			<li class="color-users{{ selected=='users' ? ' selected' }}">
++				<a href="{{ site_url('users') }}" aria-labelledby="users-label">
++					<i class="fa fa-users fa-lg"></i>
++					<span class="sidebar_text" id="users-label">Users</span>
++				</a>
++			</li>
+ 		{% endif %}
+ 		<li class="color-notifications{{ selected=='notifications' ? ' selected' }}">
+ 			<a href="{{ site_url('notifications') }}" aria-labelledby="notifications-label">
+@@ -49,6 +49,14 @@
+ 				<span class="sidebar_text" id="submit-label">Submit</span>
+ 			</a>
+ 		</li>
++		{% if user.level > 1 %}
++			<li class="color-recording{{ selected=='recording' ? ' selected' }}">
++				<a href="{{ site_url('recording/all') }}" aria-labelledby="recording-label">
++					<i class="fa fa-video-camera fa-lg"></i>
++					<span class="sidebar_text" id="recording-label">Recording</span>
++				</a>
++			</li>
++		{% endif %}
+ 		<li class="color-final_submissions{{ selected=='final_submissions' ? ' selected' }}">
+ 			<a href="{{ site_url('submissions/final') }}" aria-labelledby="final-submission-label">
+ 				<i class="fa fa-map-marker fa-lg"></i>
+@@ -67,29 +75,31 @@
+ 				<span class="sidebar_text" id="scoreboard-label">Scoreboard</span>
+ 			</a>
+ 		</li>
+-    <li class="color-halloffame{{ selected=='halloffame' ? ' selected' }}">
++		<li class="color-halloffame{{ selected=='halloffame' ? ' selected' }}">
+ 			<a href="{{ site_url('halloffame') }}" aria-labelledby="hall-of-fame-label">
+ 				<i class="fa fa-list-alt fa-lg"></i>
+ 				<span class="sidebar_text" id="hall-of-fame-label">Hall of Fame</span>
+ 			</a>
+ 		</li>
+-    {% if user.level == 3 %}
+-    <li class="color-logs{{ selected=='logs' ? ' selected' }}">
+-			<a href="{{ site_url('logs') }}" aria-labelledby="24-hour-log-label">
+-				<i class="fa fa-book fa-lg"></i>
+-				<span class="sidebar_text" id="24-hour-log-label">24-hour Log</span>
+-			</a>
+-		</li>
+-    {% endif %}
++		{% if user.level == 3 %}
++			<li class="color-logs{{ selected=='logs' ? ' selected' }}">
++				<a href="{{ site_url('logs') }}" aria-labelledby="24-hour-log-label">
++					<i class="fa fa-book fa-lg"></i>
++					<span class="sidebar_text" id="24-hour-log-label">24-hour Log</span>
++				</a>
++			</li>
++		{% endif %}
+ 	</ul>
+ 	<div id="sidebar_bottom">
+ 		<p>
+-			<a href="https://github.com/ifunpar/Sharif-Judge" target="_blank">&copy; SharIF Judge {{ SHJ_VERSION }}</a>
++			<a href="https://github.com/ifunpar/Sharif-Judge" target="_blank">&copy; SharIF Judge
++				{{ SHJ_VERSION }}</a>
+ 			<a href="https://github.com/ifunpar/Sharif-Judge/tree/docs" target="_blank">Docs</a>
+ 		</p>
+ 		<p class="timer"></p>
+ 		<div id="shj_collapse" class="pointer">
+-			<i id="collapse" class="fa fa-caret-square-o-left fa-lg"></i><span class="sidebar_text">Collapse Menu</span>
++			<i id="collapse" class="fa fa-caret-square-o-left fa-lg"></i>
++			<span class="sidebar_text">Collapse Menu</span>
+ 		</div>
+ 	</div>
+ </div>

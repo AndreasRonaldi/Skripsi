@@ -1,0 +1,825 @@
+diff --git a/assets/js/shj_submit.js b/assets/js/shj_submit.js
+index 7a70670..babaf43 100644
+--- a/assets/js/shj_submit.js
++++ b/assets/js/shj_submit.js
+@@ -5,181 +5,747 @@
+  *     Javascript codes for "Submit" page
+  */
+ 
+-$(document).ready(function(){
+-    var editor = ace.edit("code_editor");
+-    editor.setOptions({
+-        theme: "ace/theme/monokai",
+-        fontSize: "11pt"
+-    });
+-
+-    function disableEditor(bool) {
+-        $("#editor_save").prop("disabled", bool);
+-        $("#editor_execute").prop("disabled", bool);
+-        $("#editor_submit").prop("disabled", bool);
+-        $("#editor_input").prop("disabled", bool);
+-        editor.setReadOnly(bool);
+-    }
+-
+-    function loadCode(problem_id){
+-        $("#editor_input").val("");
+-        $("#editor_output").val("");
+-
+-        if(problem_id == 0){
+-            disableEditor(true);
+-            editor.setValue("");
+-            $("#ajax_status").html("Select problem and language");
+-        }
+-        else{
+-            disableEditor(true);
+-            $.ajax({
+-                url: shj.site_url + 'submit/load/' + problem_id,
+-                cache: false,
+-                success: function (data){
+-                    data = JSON.parse(data);
+-                    editor.setValue(data.content);
+-                    $("#ajax_status").html(data.message);
+-                },
+-                error: function (error){
+-                    console.error(error);
+-                },
+-            });
+-        }
+-    }
+-
+-    $("select#problems").change(function(){
+-        var v = $(this).val();
+-        loadCode(v);
+-        $('select#languages').empty();
+-        $('<option value="0" selected="selected">-- Select Language --</option>').appendTo('select#languages');
+-        for (var i=0;i<shj.p[v].length;i++)
+-            $('<option value="'+shj.p[v][i]+'">'+shj.p[v][i]+'</option>').appendTo('select#languages');
+-    });
+-
+-    $("select#languages").change(function(){
+-        if(this.value.toLowerCase().includes("java")){
+-            editor.session.setMode("ace/mode/java");
+-            disableEditor(false);
+-        }
+-        else if(this.value.toLowerCase().includes("python")){
+-            editor.session.setMode("ace/mode/python");
+-            disableEditor(false);
+-        }
+-        else if(this.value.toLowerCase().includes("c")){
+-            editor.session.setMode("ace/mode/c_cpp");
+-            disableEditor(false);
+-        }
+-        else if(this.value.toLowerCase().includes("txt")){
+-            editor.session.setMode("ace/mode/plain_text");
+-            disableEditor(false);
+-            $("#editor_execute").prop("disabled", true);
+-            $("#editor_input").prop("disabled", true);
+-        }
+-        else{
+-            editor.session.setMode("ace/mode/plain_text");
+-            disableEditor(true);
+-        }
+-    });
+-
+-    $("#editor_save").click(function(){
+-        disableEditor(true);
+-        $.ajax({
+-            type: "POST",
+-            url: shj.site_url + 'submit/save', 
+-            data: {
+-                shj_csrf_token: shj.csrf_token,
+-                code_editor: editor.getValue(),
+-                problem_id: $("select#problems").val(),
+-                language: $("select#languages").val(),
+-            },
+-            cache: false,
+-            success: function(data){
+-                data = JSON.parse(data);
+-                $("#ajax_status").html(data.message);
+-                disableEditor(false);
+-            },
+-            error: function (error){
+-                console.error(error);
+-                disableEditor(false);
+-            },
+-        });
+-     });
+-
+-    $("#editor_submit").click(function(){
+-        disableEditor(true);
+-        $.ajax({
+-            type: "POST",
+-            url: shj.site_url + 'submit/save/submit', 
+-            data: {
+-                shj_csrf_token: shj.csrf_token,
+-                code_editor: editor.getValue(),
+-                problem_id: $("select#problems").val(),
+-                language: $("select#languages").val(),
+-            },
+-            cache: false,
+-            success: function(data){
+-                data = JSON.parse(data);
+-                $("#ajax_status").html(data.message);
+-                disableEditor(false);
+-                if(data.status){	
+-                    window.location.href = shj.site_url + 'submissions/all';
+-                }
+-            },
+-            error: function (error){
+-                console.error(error);
+-                disableEditor(false);
+-            },
+-        });
+-     });
+-
+-    $("#editor_execute").click(function(){
+-        disableEditor(true);
+-        $.ajax({
+-            type: "POST",
+-            url: shj.site_url + 'submit/save/execute', 
+-            data: {
+-                shj_csrf_token: shj.csrf_token,
+-                code_editor: editor.getValue(),
+-                editor_input: $('textarea#editor_input').val(),
+-                problem_id: $("select#problems").val(),
+-                language: $("select#languages").val(),
+-            },
+-            cache: false,
+-            success: function(data){
+-                data = JSON.parse(data);
+-                $("#ajax_status").html(data.message);
+-                if(data.status){
+-                    (function update() {
+-                        $.ajax({
+-                            url: shj.site_url + 'submit/get_output/' + $("select#problems").val(),
+-                            cache: false,
+-                            success: function (data){
+-                                data = JSON.parse(data);
+-                                $('textarea#editor_output').val(data.content);
+-                                if(!data.status){
+-                                    setTimeout(update, 1000);
+-                                }
+-                                else{
+-                                    $("#ajax_status").html("Completed");
+-                                    disableEditor(false);
+-                                }
+-                            },
+-                            error: function (error){
+-                                console.error(error);
+-                                disableEditor(false);
+-                            },
+-                        })
+-                    })();
+-                }
+-                else{
+-                    disableEditor(false);
+-                }
+-            },
+-            error: function (error){
+-                console.error(error);
+-                disableEditor(false);
+-            },
+-        });
+-     });
+-
+-    loadCode($("select#problems").val()); 
+-});
+\ No newline at end of file
++$(document).ready(function () {
++	var editor = ace.edit("code_editor");
++
++	editor.setOptions({
++		theme: "ace/theme/monokai",
++		fontSize: "11pt",
++		enableLiveAutocompletion: true,
++		enableBasicAutocompletion: true,
++		enableSnippets: true,
++	});
++
++	function disableEditor(bool) {
++		$("#editor_save").prop("disabled", bool);
++		$("#editor_execute").prop("disabled", bool);
++		$("#editor_submit").prop("disabled", bool);
++		$("#editor_input").prop("disabled", bool);
++		editor.setReadOnly(bool);
++	}
++
++	function loadCode(problem_id) {
++		$("#editor_input").val("");
++		$("#editor_output").val("");
++
++		if (problem_id == 0) {
++			disableEditor(true);
++			editor.setValue("");
++			$("#ajax_status").html("Select problem and language");
++		} else {
++			disableEditor(true);
++			$.ajax({
++				url: shj.site_url + "submit/load/" + problem_id,
++				cache: false,
++				success: function (data) {
++					data = JSON.parse(data);
++					// console.log(data);
++					editor.setValue(data.content);
++					$("#ajax_status").html(data.message);
++				},
++				error: function (error) {
++					console.error(error);
++				},
++			});
++		}
++	}
++
++	const canItBeDisabled = () => {
++		if (!isRetrived) {
++			isRetrived = true;
++		} else {
++			disableEditor(false);
++		}
++	}
++
++	const loadBeforeRec = async (problem_id) => {
++
++		const funcLoad = async (data) => {
++			data = JSON.parse(data);
++			// console.log(data);
++
++			if (data.content.trim() === "") {
++				canItBeDisabled();
++				return;
++			}
++
++			befRecording = await JSON.parse(data.content);
++			canItBeDisabled();
++		}
++
++		if (problem_id == 0) {
++			disableEditor(true);
++			editor.setValue("");
++		} else {
++			disableEditor(true);
++			await $.ajax({
++				url: shj.site_url + "submit/load_rec/" + problem_id,
++				cache: false,
++				success: function (data) {
++					funcLoad(data);
++				},
++				error: function (error) {
++					console.error(error);
++					canItBeDisabled();
++				},
++			});
++		}
++	}
++
++	$("select#problems").change(function () {
++		var v = $(this).val();
++		loadCode(v);
++		recordStart();
++		loadBeforeRec(v);
++		$("select#languages").empty();
++		$(
++			'<option value="0" selected="selected">-- Select Language --</option>'
++		).appendTo("select#languages");
++		for (var i = 0; i < shj.p[v].length; i++)
++			$(
++				'<option value="' + shj.p[v][i] + '">' + shj.p[v][i] + "</option>"
++			).appendTo("select#languages");
++
++	});
++
++	$("select#languages").change(function () {
++		if (this.value.toLowerCase().includes("java")) {
++			editor.session.setMode("ace/mode/java");
++		} else if (this.value.toLowerCase().includes("python")) {
++			editor.session.setMode("ace/mode/python");
++		} else if (this.value.toLowerCase().includes("c")) {
++			editor.session.setMode("ace/mode/c_cpp");
++		} else if (this.value.toLowerCase().includes("txt")) {
++			editor.session.setMode("ace/mode/plain_text");
++			$("#editor_execute").prop("disabled", true);
++			$("#editor_input").prop("disabled", true);
++		} else {
++			editor.session.setMode("ace/mode/plain_text");
++		}
++		
++		canItBeDisabled();
++	});
++
++	$("#editor_save").click(function () {
++		disableEditor(true);
++		handlers.save();
++		// let rec = { ...recording };
++		// rec.reset = "";
++
++		console.log(getCurrentTime());
++
++		// let fd = new FormData();
++		// fd.append("shj_csrf_token", shj.csrf_token);
++		// fd.append("code_editor", editor.getValue());
++		// fd.append("problem_id", $("select#problems").val());
++		// fd.append("language", $("select#languages").val());
++		// fd.append("rec", JSON.stringify(rec));
++		// fd.append('buffer', blob, 'rec.bin');
++
++		$.ajax({
++			type: "POST",
++			url: shj.site_url + "submit/save",
++			data: {
++				shj_csrf_token: shj.csrf_token,
++				code_editor: editor.getValue(),
++				problem_id: $("select#problems").val(),
++				language: $("select#languages").val(),
++				rec_data: JSON.stringify({
++					...befRecording,
++					[recording.startTime]: recording.events
++				}),
++				// rec_start: convTimeToEpoch(recording.startTime),
++				// rec_end: convTimeToEpoch(recording.startTime + recording.events[recording.events.length - 1].time),
++			},
++			// processData: false,
++			// contentType: false,
++			cache: false,
++			success: function (data) {
++				data = JSON.parse(data);
++
++				// console.log(JSON.parse(data["test"]));
++				// console.log(getCurrentTime());
++				// console.log(data['test']);
++
++				$("#ajax_status").html(data.message);
++				disableEditor(false);
++			},
++			error: function (error) {
++				console.error(error);
++				disableEditor(false);
++			},
++		});
++	});
++
++	$("#editor_submit").click(function () {
++		disableEditor(true);
++		handlers.submit();
++		// let rec = { ...recording };
++
++		$.ajax({
++			type: "POST",
++			url: shj.site_url + "submit/save/submit",
++			data: {
++				shj_csrf_token: shj.csrf_token,
++				code_editor: editor.getValue(),
++				problem_id: $("select#problems").val(),
++				language: $("select#languages").val(),
++				rec_data: JSON.stringify({
++					...befRecording,
++					[recording.startTime]: recording.events
++				}),
++				// rec_data: JSON.stringify(rec),
++				// rec_start: convTimeToEpoch(rec.startTime),
++				// rec_end: convTimeToEpoch(rec.startTime + rec.events[rec.events.length - 1].time),
++			},
++			cache: false,
++			success: function (data) {
++				data = JSON.parse(data);
++				$("#ajax_status").html(data.message);
++				disableEditor(false);
++				if (data.status) {
++					window.location.href = shj.site_url + "submissions/all";
++				}
++			},
++			error: function (error) {
++				console.error(error);
++				disableEditor(false);
++			},
++		});
++
++		recordStop();
++	});
++
++	$("#editor_execute").click(function () {
++		disableEditor(true);
++		handlers.execute();
++		// let rec = { ...recording };
++
++		$.ajax({
++			type: "POST",
++			url: shj.site_url + "submit/save/execute",
++			data: {
++				shj_csrf_token: shj.csrf_token,
++				code_editor: editor.getValue(),
++				editor_input: $("textarea#editor_input").val(),
++				problem_id: $("select#problems").val(),
++				language: $("select#languages").val(),
++				rec_data: JSON.stringify({
++					...befRecording,
++					[recording.startTime]: recording.events
++				}),
++				// rec_data: JSON.stringify(rec),
++				// rec_start: convTimeToEpoch(rec.startTime),
++				// rec_end: convTimeToEpoch(rec.startTime + rec.events[rec.events.length - 1].time),
++			},
++			cache: false,
++			success: function (data) {
++				data = JSON.parse(data);
++				$("#ajax_status").html(data.message);
++				if (data.status) {
++					(function update() {
++						$.ajax({
++							url:
++								shj.site_url +
++								"submit/get_output/" +
++								$("select#problems").val(),
++							cache: false,
++							success: function (data) {
++								data = JSON.parse(data);
++								$("textarea#editor_output").val(data.content);
++								// ----
++								$("textarea#editor_output").trigger(
++									"output_change",
++									data.content
++								);
++								// ----
++								if (!data.status) {
++									setTimeout(update, 1000);
++								} else {
++									$("#ajax_status").html("Completed");
++									disableEditor(false);
++								}
++							},
++							error: function (error) {
++								console.error(error);
++								disableEditor(false);
++							},
++						});
++					})();
++				} else {
++					disableEditor(false);
++				}
++			},
++			error: function (error) {
++				console.error(error);
++				disableEditor(false);
++			},
++		});
++	});
++
++	loadCode($("select#problems").val());
++
++	// ######################################################
++	// ############          Recording           ############
++	// ######################################################
++
++	// Local Variable
++	const Range = ace.Range;
++
++	let hidden = "hidden";
++	let visibilityChange = "visibilitychange";
++	let isRetrived = false;
++
++	// Saved Recording from before...
++	let befRecording = {}
++
++	// Saved Event
++	const recording = {
++		events: [],
++		startTime: -1,
++		// startValue: "",
++		// startSelection: [],
++
++		init: () => {
++			recording.events = [];
++			recording.startTime = Date.now();
++			// recording.startValue = editor.getValue();
++			// recording.startSelection = getSelection(editor);
++		},
++	};
++
++	// What's recording does the system will record
++	const include = {
++		editor: true,
++		web: true,
++		pdf: true,
++		input: true,
++		output: true,
++		// action: true, // always true
++		others: false, // default value for other recording
++	};
++
++	// ######################################################
++	// ############           Listener            ###########
++	// ######################################################
++
++	const handlers = {
++		// ######### Editor Event #########
++		// Detected Every Command that executed in editor
++		editor_change: (e) =>
++			recordEvent(e.action, {
++				data: e.lines,
++				start: e.start,
++				end: e.end,
++			}),
++		// Detected on cursor change
++		editor_cursor: () => recordEvent("cursor_selection", getSelection(editor)),
++		// Detected on selection
++		editor_selection: () => recordEvent("sel_selection", getSelection(editor)),
++
++		// ######### Windows Event #########
++		// Detected Leaving Focus in almost all browser (still active page, but on different windows or on iFrame PDF viewer)
++		focus: () => {
++			removeListener.focus();
++			addListener.blur();
++
++			recordEvent("focus");
++		},
++		// Detected on Focus in almost all browser (active page)
++		blur: () => {
++			removeListener.blur();
++			addListener.focus();
++
++			recordEvent("blur");
++		},
++		// Detected Leaving Page in almost all browser (page not visible anymore)
++		visibility: (evt) => {
++			let v = true; // page is visible
++			let h = false; // ppage is hidden
++
++			let evtMap = {
++				focus: v,
++				focusin: v,
++				pageshow: v,
++				blur: h,
++				focusout: h,
++				pagehide: h,
++			};
++
++			let isVisible = true;
++
++			evt = evt || window.event;
++
++			if (evt.type in evtMap) isVisible = evtMap[evt.type];
++			else isVisible = document[hidden] ? h : v;
++
++			if (isVisible) {
++				// detect focus or blur if visible again
++				addListener.focus();
++				addListener.pdf_focus();
++			} else {
++				// no need to detect focus or blur if not visible
++				removeListener.focus();
++				removeListener.blur();
++				removeListener.pdf_focus();
++				removeListener.pdf_blur();
++			}
++
++			// console.log("change visibility:", !document[hidden], getCurrentTime());
++			recordEvent("visibility", isVisible);
++		},
++
++		// ######### PDF Viewer ##########
++		// Detected when user click/focus on the pdf viewer IDE
++		pdf_focus: () => {
++			removeListener.pdf_focus();
++			addListener.pdf_blur();
++
++			recordEvent("pdf_focus");
++		},
++		// Detected when user click outside/blur of the pdf viewer IDE
++		pdf_blur: () => {
++			removeListener.pdf_blur();
++			addListener.pdf_focus();
++
++			recordEvent("pdf_blur");
++		},
++
++		// ######### Input Event #########
++		input_change: (e) => recordEvent("input_change", e.currentTarget.value),
++
++		// ######### Output Event #########
++		output_change: (_, data) => recordEvent("output_change", data),
++
++		// ######### Action Event #########
++		save: () => recordEvent("save"),
++		submit: () => recordEvent("submit"),
++		execute: () => recordEvent("execute"),
++	};
++
++	const addListener = {
++		editor_change: () => editor.session.on("change", handlers.editor_change),
++		editor_cursor: () =>
++			editor.session.selection.on("changeCursor", handlers.editor_cursor),
++		editor_selection: () =>
++			editor.session.selection.on("changeSelection", handlers.editor_selection),
++		focus: () => addEvent(window, "focus", handlers.focus),
++		blur: () => addEvent(window, "blur", handlers.blur),
++		visibility: () => addEvent(document, visibilityChange, handlers.visibility),
++		pdf_focus: () =>
++			addEvent(
++				$("#pdf_viewer")[0].contentWindow,
++				"focusin",
++				handlers.pdf_focus
++			),
++		pdf_blur: () =>
++			addEvent(
++				$("#pdf_viewer")[0].contentWindow,
++				"focusout",
++				handlers.pdf_blur
++			),
++		input_change: () => $("#editor_input").on("input", handlers.input_change),
++		output_change: () =>
++			$("textarea#editor_output").on("output_change", handlers.output_change),
++		// save: () => $("#editor_save").on("click", handlers.save),
++		// submit: () => $("#editor_submit").on("click", handlers.submit),
++		// execute: () => $("#editor_execute").on("click", handlers.execute),
++	};
++
++	const removeListener = {
++		editor_change: () => editor.commands.off("afterExec", handlers.editor_change),
++		editor_cursor: () =>
++			editor.selection.off("changeCursor", handlers.editor_cursor),
++		editor_selection: () =>
++			editor.selection.off("changeSelection", handlers.editor_selection),
++		focus: () => removeEvent(window, "focus", handlers.focus),
++		blur: () => removeEvent(window, "blur", handlers.blur),
++		visibility: () =>
++			removeEvent(document, visibilityChange, handlers.visibility),
++		pdf_focus: () =>
++			removeEvent(
++				$("#pdf_viewer")[0].contentWindow,
++				"focusin",
++				handlers.pdf_focus
++			),
++		pdf_blur: () =>
++			removeEvent(
++				$("#pdf_viewer")[0].contentWindow,
++				"focusout",
++				handlers.pdf_blur
++			),
++		input_change: () => $("#editor_input").off("input", handlers.input_change),
++		output_change: () =>
++			$("textarea#editor_output").off("output_change", handlers.output_change),
++		// save: () => $("#editor_save").off("click", handlers.save),
++		// submit: () => $("#editor_submit").off("click", handlers.submit),
++		// execute: () => $("#editor_execute").off("click", handlers.execute),
++	};
++
++	// ######################################################
++	// ############           Methods            ############
++	// ######################################################
++
++	const record = {
++		// Code Editor
++		editor: () => {
++			// ####### Editor #######
++			recording.startValue = editor.getValue();
++			recording.startSelection = getSelection(editor);
++
++			// Exec command
++			addListener.editor_change();
++
++			// For Cursor
++			addListener.editor_cursor();
++			addListener.editor_selection();
++		},
++		// Overall page/tabs
++		web: () => {
++			// ####### Web Page #######
++			// Get from https://stackoverflow.com/questions/1060008/is-there-a-way-to-detect-if-a-browser-window-is-not-currently-active
++
++			// for every type of browser.
++			if (hidden in document) {
++				visibilityChange = "visibilitychange";
++			} else if ((hidden = "mozHidden") in document) {
++				visibilityChange = "mozvisibilitychange";
++			} else if ((hidden = "webkitHidden") in document) {
++				visibilityChange = "webkitvisibilitychange";
++			} else if ((hidden = "msHidden") in document) {
++				visibilityChange = "msvisibilitychange";
++			}
++
++			if (visibilityChange != null) {
++				// addListener.focus();
++				addListener.blur();
++				addListener.visibility();
++			} else if ("onfocusin" in document) {
++				// IE 9 and lower:
++				document.onfocusin = document.onfocusout = handlers.visibility;
++			} else {
++				// All others:
++				window.onpageshow =
++					window.onpagehide =
++					window.onfocus =
++					window.onblur =
++						handlers.visibility;
++			}
++		},
++		// PDF Viewer
++		pdf: () => {
++			let el = document.getElementById("pdf_viewer");
++
++			var observer = new IntersectionObserver(function () {
++				if (el.src != "") {
++					// addListener.pdf_blur();
++					addListener.pdf_focus();
++				}
++			});
++
++			observer.observe(el, { attributes: true, childList: true });
++		},
++		// Input field
++		input: () => {
++			addListener.input_change();
++		},
++		// Output field
++		output: () => {
++			addListener.output_change();
++		},
++		// Action Button added in the onclick event listener.
++	};
++
++	// Methods to start recording.
++	const recordStart = () => {
++		recording.init();
++
++		Object.keys(record).forEach((evtName) => {
++			const inInclude = evtName in include;
++			if (include[evtName] || (!inInclude && include["others"])) {
++				record[evtName]();
++			}
++		});
++	};
++
++	const recordStop = () => {
++		Object.values(removeListener).forEach((func) => {
++			func();
++		});
++	};
++
++	// ######################################################
++	// ############            Misc             #############
++	// ######################################################
++
++	// Method to record listener.
++	const recordEvent = (event, args) => {
++		let curTime = getCurrentTime();
++
++		recording.events.push({
++			time: curTime,
++			event,
++			args,
++		});
++
++		console.log(curTime + "ms", event, args);
++	};
++
++	const addEvent = (obj, evType, fn, isCapturing) => {
++		if (isCapturing == null) isCapturing = false;
++		if (obj.addEventListener) {
++			// Firefox
++			obj.addEventListener(evType, fn, isCapturing);
++			return true;
++		} else if (obj.attachEvent) {
++			// MSIE
++			var r = obj.attachEvent("on" + evType, fn);
++			return r;
++		} else {
++			return false;
++		}
++	};
++
++	const removeEvent = (obj, evType, fn, isCapturing) => {
++		if (isCapturing == null) isCapturing = false;
++		if (obj.removeEventListener) {
++			// Firefox
++			obj.removeEventListener(evType, fn, isCapturing);
++			return true;
++		} else if (obj.detachEvent) {
++			// MSIE
++			var r = obj.detachEvent("on" + evType, fn);
++			return r;
++		} else {
++			return false;
++		}
++	};
++
++	const getSelection = (editor) => {
++		var data = editor.multiSelect.toJSON();
++		if (!data.length) data = [data];
++		data = data.map(function (x) {
++			var a, c;
++			if (x.isBackwards) {
++				a = x.end;
++				c = x.start;
++			} else {
++				c = x.end;
++				a = x.start;
++			}
++			return Range.comparePoints(a, c)
++				? [a.row, a.column, c.row, c.column]
++				: [a.row, a.column];
++		});
++		return data.length > 1 ? data : data[0];
++	};
++
++	const getCurrentTime = () => {
++		return Date.now() - recording.startTime;
++	};

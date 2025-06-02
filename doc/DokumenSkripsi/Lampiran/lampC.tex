@@ -1,0 +1,114 @@
+%versi 3 (18-12-2016)
+\chapter{File Docker Eksperimen}
+\label{lamp:C}
+
+%terdapat 2 cara untuk memasukkan kode program
+% 1. menggunakan perintah \lstinputlisting (kode program ditempatkan di folder yang sama dengan file ini)
+% 2. menggunakan environment lstlisting (kode program dituliskan di dalam file ini)
+% Perhatikan contoh yang diberikan!!
+%
+% untuk keduanya, ada parameter yang harus diisi:
+% - language: bahasa dari kode program (pilihan: Java, C, C++, PHP, Matlab, C#, HTML, R, Python, SQL, dll)
+% - caption: nama file dari kode program yang akan ditampilkan di dokumen akhir
+%
+% Perhatian: Abaikan warning tentang textasteriskcentered!!
+%
+
+
+\begin{lstlisting}[language=docker-compose,caption=File \textit{docker-compose} yang digunakan untuk Experiment, label=kode:5:3:1:dockercompose]
+version: "3"
+services:
+  codeigniter-3:
+    build: .
+    ports:
+      - "81:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_TABLE: judge
+      MYSQL_USER: sharif
+      MYSQL_PASSWORD: judge
+      MYSQL_ROOT_PASSWORD: root
+    command: --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: freehost
+    depends_on:
+      - db
+\end{lstlisting}
+
+\begin{lstlisting}[language=docker, caption=File \textit{Dockerfile} yang digunakan untuk Experiment, label=kode:5:3:1:dockerfile]
+# Menggunakan image PHP 7.3 sebagai base image
+FROM php:7.3-apache
+
+# Install dependensi dan ekstensi PHP yang dibutuhkan untuk CodeIgniter
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg-dev \
+	libldap2-dev \
+	libcurl4 \
+    libcurl4-openssl-dev \
+	libzip-dev \
+    libfreetype6-dev \
+    zip \
+    unzip \
+	default-jdk \
+	g++ \
+	python2 \
+	python3
+
+# Install ekstensi GD dan mysqli
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install gd mysqli
+	
+RUN docker-php-ext-install curl
+
+RUN  docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+	&& docker-php-ext-install ldap
+
+RUN docker-php-ext-install fileinfo
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install zip
+
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *memory_limit.*/memory_limit = 4G/g" /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *max_input_vars.*/max_input_vars = 3000000/g" /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *post_max_size.*/post_max_size = 50M/g" /usr/local/etc/php/php.ini && \
+        sed -i -e "s/^ *upload_max_filesize.*/upload_max_filesize = 50M/g" /usr/local/etc/php/php.ini
+
+# Aktifkan mod_rewrite untuk Apache
+RUN a2enmod rewrite
+
+# Copy kode CodeIgniter ke dalam container
+COPY . /var/www/html/
+
+# Set direktori kerja
+WORKDIR /var/www/html/
+
+# Make Folder tester writeable by PHP
+RUN chmod 777 /var/www/html/restricted/tester
+RUN chmod 777 /var/www/html/application/cache/Twig
+
+# Expose port 80
+EXPOSE 80
+
+# Jalankan Apache server
+CMD ["apache2-foreground"]
+\end{lstlisting}
+
+% \lstinputlisting[language=Java, caption=MyCode.java]{./Lampiran/MyCode.java} 
+

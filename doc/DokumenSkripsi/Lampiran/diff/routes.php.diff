@@ -1,0 +1,26 @@
+diff --git a/application/config/routes.php b/application/config/routes.php
+index 060bcb8..a6c2d54 100644
+--- a/application/config/routes.php
++++ b/application/config/routes.php
+@@ -1,5 +1,5 @@
+ <?php
+-defined('BASEPATH') OR exit('No direct script access allowed');
++defined('BASEPATH') or exit('No direct script access allowed');
+ 
+ /*
+ | -------------------------------------------------------------------------
+@@ -52,15 +52,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
+ $route['default_controller'] = 'dashboard';
+ $route['register'] = "login/register";
+ $route['logout'] = "login/logout";
+ $route['submissions/final']="submissions/the_final";
+ $route['submissions/final/(.*)']="submissions/the_final/$1";
+ $route['profile/(:num)'] = "profile/index/$1";
+ $route['moss/(:num)'] = "moss/index/$1";
+ $route['problems/(:num)'] = "problems/index/$1";
+ $route['problems/(:num)/(:num)'] = "problems/index/$1/$2";
+ $route['rejudge/(:num)'] = "rejudge/index/$1";
++$route['recording/(:num)/(:num)/(:any)'] = "recording/index/$1/$2/$3";
++$route['recording/(:num)/(:num)/(:any)/(:num)'] = "recording/index/$1/$2/$3/$4";
+ $route['404_override'] = '';
+ $route['translate_uri_dashes'] = FALSE;

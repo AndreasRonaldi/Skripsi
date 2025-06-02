@@ -8,15 +8,33 @@ Bab ini membahas tentang perancangan untuk implementasi sistem perekaman ulang d
 \subsection{Sistem Rekaman}
 \label{sub:4:1:rekaman}
 
-% TODO: Add gambar halaman submit dengan kotak merah nunjukkin kode editor
-Seluruh sistem rekaman akan diimplementasikan dalam halaman Submit tidak memerlukan perubahan pada antarmuka. Gambar XX menunjukkan halaman Submit dan IDE yang sudah di implementasikan oleh Nicholas Aditya Halim~\cite{nicholas:sharif}.
+Seluruh sistem rekaman akan diimplementasikan dalam halaman Submit tidak memerlukan perubahan pada antarmuka. Gambar \ref{fig:4:1:submit} menunjukkan halaman Submit dan IDE yang sudah di implementasikan oleh Nicholas Aditya Halim~\cite{nicholas:sharif}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{views/submit.png}
+    \caption{Halaman}
+    \label{fig:4:1:submit}
+\end{figure}
 
 \subsection{Sistem Pemutaran ulang}
 \label{sub:4:1:pemutaranulang}
 
-Pada sistem pemutaran ulang dibutuhkan dua halaman baru yaitu halaman untuk menunjukkan daftar rekaman dalam sistem dan halaman untuk sistem pemutaran ulang sebuah rekaman. Gambar XX merupakan rancangan antarmuka untuk halaman daftar rekaman dan Gambar XX merupakan rancangan antarmuka untuk halaman pemutaran ulang.
+Pada sistem pemutaran ulang dibutuhkan dua halaman baru yaitu halaman untuk menunjukkan daftar rekaman dalam sistem dan halaman untuk sistem pemutaran ulang sebuah rekaman. Gambar \ref{fig:4:1:listrec} merupakan rancangan antarmuka untuk halaman daftar rekaman dan Gambar \ref{fig:4:1:rec} merupakan rancangan antarmuka untuk halaman pemutaran ulang.
 
-% TODO: Add gambar low fidel dua halaman diatas
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{design-recording-list.jpg}
+    \caption{Rancangan Antarmuka Halaman Daftar Rekaman}
+    \label{fig:4:1:listrec}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{design-recording.jpg}
+    \caption{Rancangan Antarmuka Halaman Pemutaran Ulang}
+    \label{fig:4:1:rec}
+\end{figure}
 
 \section{Rancangan Penyimpanan Rekaman}
 \label{sec:4:2:storerekaman}
@@ -58,12 +76,9 @@ Penyimpanan rekaman juga akan disimpan pada folder yang sama dengan penyimpanan 
 
 Untuk mengimplementasikan fitur yang diusulkan pada Bagian \ref{sec:3:sistemusulan}, diperlukannya perubahan kode berikut ini pada SharIF-Judge.
 
-% TODO: Add Diagram class of change?
-
 \subsection{Merekam perubahan atau event}
 \label{sub:4:3:merekam}
 
-% TODO: tambahin apa aja yang bakal di rekam
 Untuk menambahakan fitur ini, diperlukannya perubahan pada bagian javascript yaitu \verb|assets/js/|\\\verb|shj_submit.js| dalam halaman Submit. Dimana javascript tersebut akan menjalankan perekaman secara otomatis saat pengguna memilih \textit{problem} yang ada dalam \textit{assignment} yang dipilih. Berikut merupakan \textit{event} yang akan ditangkap oleh \textit{javascript} dalam halaman Submit:
 
 \begin{itemize}

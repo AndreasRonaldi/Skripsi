@@ -51,6 +51,7 @@
 \usepackage{enumitem}
 \usepackage{pifont}
 %\overfullrule=3mm % memperlihatkan overfull 
+
 %=============================================================================
 
 %_____________________________________________________________________________
@@ -81,7 +82,7 @@
 %\mode{sidangakhir} 	% untuk sidang 2 / sidang pada Skripsi 2(IF)
 %\mode{final} 			% untuk mencetak buku skripsi 
 %=============================================================================
-\mode{sidang}
+\mode{final}
 
 %_____________________________________________________________________________
 %=============================================================================
@@ -205,7 +206,7 @@
 %=============================================================================
 \namanpm{Andreas Ronaldi}{6182101026}
 \tanggal{<<tanggal>>}{<<bulan>>}{2025}         %isi bulan dengan angka
-\pembimbing{\pembimbing{\PAN}}{}
+\pembimbing{\PAN}{}
 \penguji{<<penguji 1>>}{<<penguji 2>>}
 %=============================================================================
 
@@ -235,8 +236,12 @@
 % - hilangkan tanda << & >>, dan isi sesuai dengan data anda
 % - langsung mulai setelah '{' awal, jangan mulai menulis di baris bawahnya
 %=============================================================================
-\abstrakINA{<<Tuliskan abstrak anda di sini, dalam bahasa Indonesia>>}
-\abstrakENG{<<Tuliskan abstrak anda di sini, dalam bahasa Inggris>>}
+\abstrakINA{Pada Universitas Katolik Parahyangan, digunakan SharIF Judge sebagai Online Judge yang telah dimodifikasi untuk mendukung kebutuhan pembelajaran. Namun, sistem ini masih memiliki keterbatasan dalam pengawasan, terutama saat ujian online, di mana potensi kecurangan seperti \textit{copy-paste} meningkat. Untuk mempermudah pengawasan, tugas akhir sebelumnya telah mengintegrasikan Integrated Development Environment atau IDE ke dalam SharIF Judge, memungkinkan seluruh proses pengerjaan tugas dilakukan dalam satu platform.
+
+Meskipun demikian, IDE tersebut tidak dapat mengawasi aktivitas pengguna jika terjadinya kecurangan. Oleh karena itu, dalam tugas akhir ini, dikembangkan fitur perekaman ketikan dan pemutaran ulang ketikan pada IDE SharIF Judge. Fitur ini bertujuan memudahkan pengawasan, mendeteksi kecurangan, dan memberikan bukti jika terjadi pelanggaran.}
+\abstrakENG{At Parahyangan Catholic University, SharIF Judge is used as an Online Judge that has been modified to support learning needs. However, this system still has limitations in monitoring, especially during online exams, where the potential for cheating, such as copy-pasting, increases. To facilitate supervision, the previous final project integrated an Integrated Development Environment or IDE into SharIF Judge, allowing the entire task completion process to be conducted within a single platform.
+
+Nevertheless, the IDE could not monitor user activity in cases of cheating. Therefore, in this final project, a keystroke recording and playback feature was developed for the SharIF Judge IDE. This feature aims to simplify monitoring, detect cheating, and provide evidence in case of violations.}
 %=============================================================================
 
 %_____________________________________________________________________________
@@ -248,8 +253,8 @@
 % - kunciENG: keywords in english
 % Petunjuk: hilangkan tanda << & >>, dan isi sesuai dengan data anda.
 %=============================================================================
-\kunciINA{<<Tuliskan di sini kata-kata kunci yang anda gunakan, dalam bahasa Indonesia>>}
-\kunciENG{<<Tuliskan di sini kata-kata kunci yang anda gunakan, dalam bahasa Inggris>>}
+\kunciINA{\textit{Online Judge}, \textit{Integrated Development Environment}, Perekaman Penekanan Tombol}
+\kunciENG{Online Judge, Integrated Development Environment, Keystroke Logging}
 %=============================================================================
 
 %_____________________________________________________________________________
@@ -259,7 +264,7 @@
 % Persembahan : kepada siapa anda mempersembahkan skripsi ini ...
 % Petunjuk: hilangkan tanda << & >>, dan isi sesuai dengan data anda.
 %=============================================================================
-\untuk{<<kepada siapa anda mempersembahkan skripsi ini\ldots?>>}
+\untuk{Tugas akhir ini dipersembahkan kepada Tuhan Yang Maha Esa, Keluarga, dan rekan-rekan sesama mahasiswa}
 %=============================================================================
 
 %_____________________________________________________________________________
@@ -270,7 +275,16 @@
 % kasih kepada yang telah membantu anda bla bla bla ....  
 % Petunjuk: hilangkan tanda << & >>, dan isi sesuai dengan data anda.
 %=============================================================================
-\prakata{<<Tuliskan kata pengantar dari anda di sini \ldots>>}
+\prakata{Puji syukur kepada Tuhan Yang Maha Esa atas berkat dan penyertaan-Nya, penulis dapat menyelesaikan tugas akhir ini dengan judul "Pemutaran Ulang Ketikan Mahasiswa Pada SharIF Judge". Penulis juga ingin menyampaikan rasa terima kasih yang sebesar-besarnya kepada berbagai pihak yang telah memberikan dukungan, bimbingan, dan bantuan selama proses pengerjaan. Secara khusus, penulis berterima kasih kepada:
+
+\begin{enumerate}
+\item Kedua orang tua dan keluarga tercinta yang senantiasa memberikan doa, dukungan, dan motivasi tanpa henti.
+\item Bapak \PAN, selaku dosen pembimbing yang telah meluangkan waktu, memberikan bimbingan, saran, dan arahan berharga selama penyusunan skripsi ini.
+\item Kepada seluruh teman-teman yang telah menemani, membantu, dan memberi dukungan selama pengerjaan tugas akhir ini.
+\item Semua pihak yang tidak dapat disebutkan satu per satu, yang telah berkontribusi baik secara langsung maupun tidak langsung.
+\end{enumerate}
+
+Akhir kata, penulis ingin mengucapkan permohonan maaf atas kekurangan-kekurangan yang terdapat pada tugas akhir ini. Penulis berharap agar tugas akhir ini dapat bermanfaat bagi pembaca yang hendak melakukan penelitian serupa.}
 %=============================================================================
 
 %_____________________________________________________________________________
@@ -337,4 +351,109 @@
 \renewcommand{\vtemplateauthor}{lionov}
 \pgfplotsset{compat=newest}
 \setlist{nosep}
+
+
+\definecolor{diffstart}{RGB}{169,169,169}
+\definecolor{diffincl}{RGB}{0,128,0}
+\definecolor{diffrem}{RGB}{255,0,0}
+
+\lstdefinelanguage{diff}{
+	morecomment=[f][\color{diffstart}]{@@},
+	morecomment=[f][\color{diffrem}]{- },
+	morecomment=[f][\color{diffincl}]{+ },
+}
+
+\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+    new, return, this, typeof, var, void, while, with},
+  % Literals, primitive types, and reference types.
+  morekeywords=[2]{false, null, true, boolean, number, undefined,
+    Array, Boolean, Date, Math, Number, String, Object},
+  % Built-ins.
+  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
+
+\lstdefinelanguage{CSS}{
+  morekeywords={accelerator,azimuth,background,background-attachment,
+    background-color,background-image,background-position,
+    background-position-x,background-position-y,background-repeat,
+    behavior,border,border-bottom,border-bottom-color,
+    border-bottom-style,border-bottom-width,border-collapse,
+    border-color,border-left,border-left-color,border-left-style,
+    border-left-width,border-right,border-right-color,
+    border-right-style,border-right-width,border-spacing,
+    border-style,border-top,border-top-color,border-top-style,
+    border-top-width,border-width,bottom,caption-side,clear,
+    clip,color,content,counter-increment,counter-reset,cue,
+    cue-after,cue-before,cursor,direction,display,elevation,
+    empty-cells,filter,float,font,font-family,font-size,
+    font-size-adjust,font-stretch,font-style,font-variant,
+    font-weight,height,ime-mode,include-source,
+    layer-background-color,layer-background-image,layout-flow,
+    layout-grid,layout-grid-char,layout-grid-char-spacing,
+    layout-grid-line,layout-grid-mode,layout-grid-type,left,
+    letter-spacing,line-break,line-height,list-style,
+    list-style-image,list-style-position,list-style-type,margin,
+    margin-bottom,margin-left,margin-right,margin-top,
+    marker-offset,marks,max-height,max-width,min-height,
+    min-width,-moz-binding,-moz-border-radius,
+    -moz-border-radius-topleft,-moz-border-radius-topright,
+    -moz-border-radius-bottomright,-moz-border-radius-bottomleft,
+    -moz-border-top-colors,-moz-border-right-colors,
+    -moz-border-bottom-colors,-moz-border-left-colors,-moz-opacity,
+    -moz-outline,-moz-outline-color,-moz-outline-style,
+    -moz-outline-width,-moz-user-focus,-moz-user-input,
+    -moz-user-modify,-moz-user-select,orphans,outline,
+    outline-color,outline-style,outline-width,overflow,
+    overflow-X,overflow-Y,padding,padding-bottom,padding-left,
+    padding-right,padding-top,page,page-break-after,
+    page-break-before,page-break-inside,pause,pause-after,
+    pause-before,pitch,pitch-range,play-during,position,quotes,
+    -replace,richness,right,ruby-align,ruby-overhang,
+    ruby-position,-set-link-source,size,speak,speak-header,
+    speak-numeral,speak-punctuation,speech-rate,stress,
+    scrollbar-arrow-color,scrollbar-base-color,
+    scrollbar-dark-shadow-color,scrollbar-face-color,
+    scrollbar-highlight-color,scrollbar-shadow-color,
+    scrollbar-3d-light-color,scrollbar-track-color,table-layout,
+    text-align,text-align-last,text-decoration,text-indent,
+    text-justify,text-overflow,text-shadow,text-transform,
+    text-autospace,text-kashida-space,text-underline-position,top,
+    unicode-bidi,-use-link-source,vertical-align,visibility,
+    voice-family,volume,white-space,widows,width,word-break,
+    word-spacing,word-wrap,writing-mode,z-index,zoom},
+  morestring=[s]{:}{;},
+  sensitive,
+  morecomment=[s]{/*}{*/}
+}
+
+\lstdefinelanguage{docker}{
+  keywords={FROM, RUN, COPY, ADD, ENTRYPOINT, CMD,  ENV, ARG, WORKDIR, EXPOSE, LABEL, USER, VOLUME, STOPSIGNAL, ONBUILD, MAINTAINER, HEALTHCHECK},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstdefinelanguage{docker-compose}{
+  keywords={image, environment, ports, container_name, ports, volumes, links, depends_on, build, services, version, command},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{\#},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
 %=============================================================================
