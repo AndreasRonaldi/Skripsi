@@ -419,7 +419,35 @@ Setelah pengujian berakhir, peserta diminta untuk mengisi beberapa pertanyaan me
 Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan menjadi bagan histogram dalam sistem dan bagan lainnya yang dibutuhkan pada proses analisa. Ada beberapa pola yang dapat dilihat pada saat melihat histogram hasil rekaman peserta pengujian. Berikut merupakan pola yang dapat dilihat pada:
 
 \begin{itemize}
-    \item Pola Pembuatan Kode
+    \item Pola Pembuatan Kode \\
+    Pola ini dapat dilihat pada \textit{events} \verb|editor.change| dan hasil kode yang dibuat. Pola ini didasari dengan adanya \textit{Code Churn} atau bisa disebut dengan pengerjaan ulang kode. \textit{Code Churn} ini terjadi pada saat peserta atau mahasiswa manghapus atau menulis ulang kode program~\cite{hatica:churn}. Pada \textit{Code Churn} ada yang dinamakan \textit{Code Churn Rate} adalah sebuah tingkat pergantian kode selama sedang mengerjakan kode program tersebut. \textit{Code Churn Rate} dapat menilai seberapa banyak kode berubah dalam suatu tim, module, file maupun fungsi. Pada pola ini digunakannya \textit{Code Churn Rate} dalam tingkat file sebagai sebuah penilaian yang dapat dilakukan dengan mengunakan rumus sebagai berikut:
+    
+    \begin{center}
+        \verb|(inserted_kode + removed_kode) / total_kode|
+    \end{center}
+
+    \verb|inserted_kode| dihutung dengan menjumlahkan total karakter yang di masukkan dalam editor. Begitu juga dengan \verb|removed_kode| dihitung dengan menjumlahkan total karakter yang dihapus dalam editor. \verb|total_kode| dihitung dengan menjumlahkan jumlah total karkater pada hasil kode program akhir. Berikut merupakan contoh perhitungan untuk \textit{Code Churn Rate}:
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{experiment/insert-many-rework.png}
+        \caption{Bagan Histogram Banyak Perubahan}
+        \label{fig:5:2:3:manyrework}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.75\textwidth]{experiment/insert-copy-ai.png}
+        \caption{Bagan Histogram Men-\textit{copy} Kode}
+        \label{fig:5:2:3:copy}
+    \end{figure}
+
+    Pada Gambar \ref{fig:5:2:3:manyrework} peserta mengerjakan dengan tidak melakukan kecurangan. Terjadi 1436 karakter yang dimasukkan dan 2240 karakter yang dihapus pada editor dengan total kode akhir memiliki panjang 362 karakter. Maka menggunakan rumus di atas, \textit{Code Churn Rate} pada peserta ini menjadi 10.15. Dengan nilai \textit{Code Churn Rate} yang tinggi maka peserta ini banyak mengubah kode program.
+    
+    Sebaliknya pada Gambar \ref{fig:5:2:3:copy} peserta menggunakan AI untuk mengerjakan dengan men-\textit{copy} hasil kode AI ke dalam editor. Terjadi 1723 karakter yang dimasukkan dan 28 karakter yang dihapus pada editor dengan total kode akhir memiliki panjang 1771 karakter. Maka menggunakan rumus di atas, \textit{Code Churn Rate} pada peserta ini menjadi 0.99. Dengan nilai \textit{Code Churn Rate} yang rendah maka peserta ini tidak banyak mengubah kode program.
+
+    Maka Pola Pembuatan Kode ini dinilai dengan \textit{Code Churn Rate}, semakin tinggi nilai tersebut maka semakin tinggi juga perubahan kode yang terjadi. Jika banyak kode perubahan maka dimungkinkan bahwa kode program tidak melakukan kecurangan pada saat pengerjaan.
+
     \item Pola \textit{Debugging} \\
     Pola ini dapat dilihat pada \textit{events} \verb|editor.change|, \verb|editor.changeCursor|, \verb|editor.change|\\\verb|Selection|, \verb|editor_input.input|, dan \verb|editor_output.change|. Pengguna yang \textit{debugging} akan mengubah kode pada lokasi yang sama. Gambar \ref{fig:5:2:3:heatmapchange} menunjukkan bahwa frekuensi lebih tinggi akan berwarna lebih merah dan menandakan pola debugging yang dapat dilihat karena terjadinya banyak perubahan pada posisi yang sama dibandingkan dengan Gambar \ref{fig:5:2:3:heatmapchangenodebug} yang memiliki frekuensi maksimum 12 pada warna termerahnya.
 
@@ -453,8 +481,9 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
         \label{fig:5:2:3:debugless}
     \end{figure}
 
-    \item Pola Distraksi
-    \item Pola Perubahan Navigasi
+    Pola \textit{Debugging} ini akan mendukung Pola Pembuatan Kode untuk mengetahui apakah peserta melakukan kecurangan.
+
+    \item Pola Perubahan Navigasi \\
     \item Pola Berpikir
     \item Pola \textit{Copy-Paste}
     \item Pola Perubahan Cursor dalam Editor Kode
