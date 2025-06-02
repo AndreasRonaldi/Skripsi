@@ -174,70 +174,78 @@ JSON.stringify({
 
 \subsection{Melihat Daftar Rekaman}
 
-Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam sistem, pengguna juga dapat melihat isi rekaman yang terdapat dalam daftar rekaman tersebut. Fitur ini dibutuhkan dua tahap untuk diimplementasikan yaitu implementasi pengambilan data dan implementasi menampilkan data dan antarmuka.
+Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam sistem, pengguna juga dapat melihat isi rekaman yang terdapat dalam daftar rekaman tersebut. Fitur ini dibutuhkan dua tahap untuk diimplementasikan yaitu sebagai berikut:
 
-\subsubsection{Pengambilan Data Rekaman}
+\begin{itemize}
+    \item Pengambilan Data Rekaman \\
+    Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran \ref{lamp:A}.
 
-Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran \ref{lamp:A}.
+    Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recording.php|:
+    \begin{enumerate}
+        \item \verb|__construct()| \\
+        Fungsi ini akan memuat seluruh kebutuhan \textit{Model} dan \textit{Helper} ke dalam \verb|Recording.php|, fungsi \textit{construct} juga akan membatasi akses oleh pengguna dibawah \textit{instructor}. Fungsi ini juga mendapatkan \textit{params url} yang dikirim oleh pengguna. 
 
-Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recording.php|:
-\begin{enumerate}
-    \item \verb|__construct()| \\
-    Fungsi ini akan memuat seluruh kebutuhan \textit{Model} dan \textit{Helper} ke dalam \verb|Recording.php|, fungsi \textit{construct} juga akan membatasi akses oleh pengguna dibawah \textit{instructor}. Fungsi ini juga mendapatkan \textit{params url} yang dikirim oleh pengguna. 
+        \item \verb|all()| \\
+        Fungsi ini akan mengambil beberapa data yang dibutuhkan oleh antarmuka SharIF-Judge yaitu \textit{assignment} yang dipilih oleh pengguna menggunakan \verb|assignment_model|, \textit{problem} yang ada dalam \textit{assignment} tersebut menggunakan \verb|assignment_model|, dan daftar \textit{recording} yang tersimpan dalam sistem menggunakan \verb|recording_model|. Setelah itu, server akan menempatkan seluruh data tersebut ke dalam \textit{view} baru bernama \verb|recording_list.twig|.
+    \end{enumerate}
 
-    \item \verb|all()| \\
-    Fungsi ini akan mengambil beberapa data yang dibutuhkan oleh antarmuka SharIF-Judge yaitu \textit{assignment} yang dipilih oleh pengguna menggunakan \verb|assignment_model|, \textit{problem} yang ada dalam \textit{assignment} tersebut menggunakan \verb|assignment_model|, dan daftar \textit{recording} yang tersimpan dalam sistem menggunakan \verb|recording_model|. Setelah itu, server akan menempatkan seluruh data tersebut ke dalam \textit{view} baru bernama \verb|recording_list.twig|.
-\end{enumerate}
+    Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \textit{Controller} \verb|Recording.php| terdapat dalam Lampiran \ref{lamp:A}.
 
-Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \textit{Controller} \verb|Recording.php| terdapat dalam Lampiran \ref{lamp:A}.
+    \item Antarmuka dan Tampilan Data \\
+    Antarmuka yang akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar \ref{fig:hasil:recording_list} menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran \ref{lamp:A}.
+\end{itemize}
 
-\subsubsection{Antarmuka dan Tampilan Data}
 
-Antarmuka yang akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar \ref{fig:hasil:recording_list} menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran \ref{lamp:A}.
+\subsubsection{Perbaikan Implementasi}
+
+Untuk fitur ini, tidak dilakukan perubahan pada implementasi yang sudah ada karena dianggap sudah memenuhi kebutuhan pengguna.
 
 \subsection{Pemutaran Ulang Rekaman}
 
-Fungsi pemutaran ulang rekaman mengunakan data rekaman yang sudah disimpan dalam sistem untuk menvisualisasikan proses penyelesaian masalah pengguna secara kronologis. Fitur pemutaran ulang ini membutuhkan tiga implementasi antarmuka, implementasi memuat data rekaman, dan implementasi menjalankan rekaman. 
-
-\subsubsection{Implementasi Antarmuka}
-
-Untuk menambahkan sebuah halaman baru dalam SharIF-Judge dibutuhkannya juga fungsi baru pada \textit{Controller} \verb|Recording.php|. Fungsi baru akan dinamakan \verb|index| untuk menampilkan sebuah \textit{view} baru bernama \verb|recording.twig|. Fungsi \verb|index| akan menampilkan halaman baru itu melalui rute \verb|/recording/|. Penamaan \textit{index} itu agar rute tidak memerlukan \verb|/index| pada akhir rute karena jika rute \textit{function} (Bab \ref{sub:2:2:codeigniterurls}) akan otomatis mengarah pada fungsi \verb|index| dalam kelas tersebut.
-
-Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama.
-
-Gambar \ref{fig:hasil:recording} merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
-
-\subsubsection{Implementasi Memuat Data Rekaman}
-\label{ssub:5:2:4:memuatdata}
-
-Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem mengunakan \textit{Controller}. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan mengunakan AJAX pada halaman \textit{recording}. Maka dari itu, butuh fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{javascript} baru bernama \verb|shj_function.js|.
-
-Fungsi baru dalam \textit{Controller} \verb|Recording.php| akan dinamakan \verb|download_record| yang memiliki argumen \verb|assignment_id|, \verb|problem_id|, dan \verb|rec_id|. Fungsi tersebut akan mengambil file rekaman dalam file sistem dengan mengunakan argumen untuk mendapatkan lokasi dan nama file rekaman (Bab \ref{sec:4:2:storerekaman}) SharIF-Judge dan mengirimkan file tersebut secara langsung. File juga akan dirikim dengan header \verb|Content-Type: application/json| dan \verb|Content-Disposition: attachment; filename=|\\\verb|"rec.json"|.
-
-Fungsi \verb|download_record| akan dipanggil pada saat halaman \textit{recording} dimuat oleh \textit{javascript} \verb|shj_function.js| mengunakan fungsi baru yaitu \verb|getRecording|. Fungsi \verb|getRecording| akan meninisialisasi editor kode dalam antarmuka dan menformat data rekaman agar lebih mudah untuk di putar ulang. Berikut merupakan format data tambahan yang akan diubah oleh fungsi \verb|getRecording|:
+Fungsi pemutaran ulang rekaman mengunakan data rekaman yang sudah disimpan dalam sistem untuk menvisualisasikan proses penyelesaian masalah pengguna secara kronologis. Fitur pemutaran ulang ini membutuhkan yaitu sebagai berikut:
 
 \begin{itemize}
-    \item \verb|events|: Data rekaman
-    \item \verb|eventsIndex|: sebuah map dengan \textit{key} waktu saat sebuah \textit{events} terjadi dan \textit{value index} waktu saat sebuah \textit{events} terjadi.
-    \item \verb|indexEvents|: sebuah map dengan \textit{key index} waktu saat sebuah \textit{events} terjadi dan \textit{value} waktu saat sebuah \textit{events} terjadi.
-    \item \verb|presumIndexDuration|: menkalkulasikan panjang rekaman sebelum rekaman selesai.
-    \item \verb|length|: panjang data rekaman
-    \item \verb|duration|: durasi dari seluruh rekaman yang ada pada data rekaman
+    \item {Implementasi Antarmuka} \\
+    Untuk menambahkan sebuah halaman baru dalam SharIF-Judge dibutuhkannya juga fungsi baru pada \textit{Controller} \verb|Recording.php|. Fungsi baru akan dinamakan \verb|index| untuk menampilkan sebuah \textit{view} baru bernama \verb|recording.twig|. Fungsi \verb|index| akan menampilkan halaman baru itu melalui rute \verb|/recording/|. Penamaan \textit{index} itu agar rute tidak memerlukan \verb|/index| pada akhir rute karena jika rute \textit{function} (Bab \ref{sub:2:2:codeigniterurls}) akan otomatis mengarah pada fungsi \verb|index| dalam kelas tersebut.
+
+    Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama.
+
+    Gambar \ref{fig:hasil:recording} merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
+
+    \item Implementasi Memuat Data Rekaman \\
+    \label{ssub:5:2:4:memuatdata}
+
+    Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem mengunakan \textit{Controller}. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan mengunakan AJAX pada halaman \textit{recording}. Maka dari itu, butuh fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{javascript} baru bernama \verb|shj_function.js|.
+
+    Fungsi baru dalam \textit{Controller} \verb|Recording.php| akan dinamakan \verb|download_record| yang memiliki argumen \verb|assignment_id|, \verb|problem_id|, dan \verb|rec_id|. Fungsi tersebut akan mengambil file rekaman dalam file sistem dengan mengunakan argumen untuk mendapatkan lokasi dan nama file rekaman (Bab \ref{sec:4:2:storerekaman}) SharIF-Judge dan mengirimkan file tersebut secara langsung. File juga akan dirikim dengan header \verb|Content-Type: application/json| dan \verb|Content-Disposition: attachment; filename=|\\\verb|"rec.json"|.
+
+    Fungsi \verb|download_record| akan dipanggil pada saat halaman \textit{recording} dimuat oleh \textit{javascript} \verb|shj_function.js| mengunakan fungsi baru yaitu \verb|getRecording|. Fungsi \verb|getRecording| akan meninisialisasi editor kode dalam antarmuka dan menformat data rekaman agar lebih mudah untuk di putar ulang. Berikut merupakan format data tambahan yang akan diubah oleh fungsi \verb|getRecording|:
+
+    \begin{itemize}
+        \item \verb|events|: Data rekaman
+        \item \verb|eventsIndex|: sebuah map dengan \textit{key} waktu saat sebuah \textit{events} terjadi dan \textit{value index} waktu saat sebuah \textit{events} terjadi.
+        \item \verb|indexEvents|: sebuah map dengan \textit{key index} waktu saat sebuah \textit{events} terjadi dan \textit{value} waktu saat sebuah \textit{events} terjadi.
+        \item \verb|presumIndexDuration|: menkalkulasikan panjang rekaman sebelum rekaman selesai.
+        \item \verb|length|: panjang data rekaman
+        \item \verb|duration|: durasi dari seluruh rekaman yang ada pada data rekaman
+    \end{itemize}
+
+    Data tersebut akan disimpan dalam sebuah \textit{object javascript} yang dinamakan \verb|recording| dan akan dipakai pada saat menjalankan rekaman dan untuk menampilkan histogram \textit{events} yang terjadi.
+
+    \item Implementasi Menjalankan Rekaman \\
+    Fitur menjalankan rekaman akan menggunakan data bedasarkan data yang didapatkan oleh AJAX yang dijelaskan pada bagian \ref{ssub:5:2:4:memuatdata}. Fitur menjalankan rekaman akan membutuhkan penambahan kode pada \textit{javascript} \verb|shj_function.js| yang akan menjalankan fungsi \verb|play| atau \verb|stop| untuk menjalankan atau memberhentikan rekaman oleh pengguna. 
+
+    Fungsi menjalankan atau mematikan rekaman dibagi menjadi dua yaitu fungsi rekaman dalam IDE dengan data rekaman dinamakan \verb|Recording| dan fungsi timer yang digunakan untuk memberitahu kepada pengguna progress waktu pemutaran rekaman dinamakan \verb|Timer|.
+    Fungsi \verb|Recording| menggunakan fungsi dalam \textit{Library Ace} dan fungsi \textit{javascript} untuk memperbaharui IDE antarmuka berdasarkan \textit{event} yang dipanggil, fungsi \verb|setTimeout| dalam \textit{javascript} akan digunakan untuk menjalankan \textit{event} selanjutnya bedasarkan perbedaan waktu antara event sekarang dan event selanjutnya dengan memanggil fungsi \verb|playRecording| dengan \textit{event} selanjutnya. Sedangkan fungsi \verb|Timer| menggunakan fungsi \verb|setInterval| yang akan dijalankan berulang untuk setiap detiknya dan memperbaharui progress waktu dalam antarmuka berdasarkan waktu yang sudah lewat.
+
+    \item Menampilkan Histogram Events yang Terjadi \\
+    Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data rekaman tersebut, fungsi \verb|setUpChart| akan dipanggil dan membuat data grafik histogram. Data histogram akan dimuat menggunakan \textit{Library} \verb|Chart.js|.
+
 \end{itemize}
 
-Data tersebut akan disimpan dalam sebuah \textit{object javascript} yang dinamakan \verb|recording| dan akan dipakai pada saat menjalankan rekaman dan untuk menampilkan histogram \textit{events} yang terjadi.
+\subsubsection{Perbaikan Implementasi}
 
-\subsubsection{Implementasi Menjalankan Rekaman}
- 
-Fitur menjalankan rekaman akan menggunakan data bedasarkan data yang didapatkan oleh AJAX yang dijelaskan pada bagian \ref{ssub:5:2:4:memuatdata}. Fitur menjalankan rekaman akan membutuhkan penambahan kode pada \textit{javascript} \verb|shj_function.js| yang akan menjalankan fungsi \verb|play| atau \verb|stop| untuk menjalankan atau memberhentikan rekaman oleh pengguna. 
-
-Fungsi menjalankan atau mematikan rekaman dibagi menjadi dua yaitu fungsi rekaman dalam IDE dengan data rekaman dinamakan \verb|Recording| dan fungsi timer yang digunakan untuk memberitahu kepada pengguna progress waktu pemutaran rekaman dinamakan \verb|Timer|.
-Fungsi \verb|Recording| menggunakan fungsi dalam \textit{Library Ace} dan fungsi \textit{javascript} untuk memperbaharui IDE antarmuka berdasarkan \textit{event} yang dipanggil, fungsi \verb|setTimeout| dalam \textit{javascript} akan digunakan untuk menjalankan \textit{event} selanjutnya bedasarkan perbedaan waktu antara event sekarang dan event selanjutnya dengan memanggil fungsi \verb|playRecording| dengan \textit{event} selanjutnya. Sedangkan fungsi \verb|Timer| menggunakan fungsi \verb|setInterval| yang akan dijalankan berulang untuk setiap detiknya dan memperbaharui progress waktu dalam antarmuka berdasarkan waktu yang sudah lewat.
-
-\subsubsection{Menampilkan Histogram Events yang Terjadi}
-
-Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data rekaman tersebut, fungsi \verb|setUpChart| akan dipanggil dan membuat data grafik histogram. Data histogram akan dimuat menggunakan \textit{Library} \verb|Chart.js|.
-
+Untuk fitur ini, tidak dilakukan perubahan pada implementasi yang sudah ada karena dianggap sudah memenuhi kebutuhan pengguna.
 
 \section{Pengujian Fungsional}
 \label{sec:5:fungsional}
