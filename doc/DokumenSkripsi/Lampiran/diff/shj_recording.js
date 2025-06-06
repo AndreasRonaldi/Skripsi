@@ -184,14 +184,11 @@ $(document).ready(() => {
 		recording.reset();
 		emptyEditor();
 
-		console.log("GETTING recording/download_record/" + rec_path);
-
 		$.ajax({
 			type: "GET",
 			url: shj.site_url + "recording/download_record/" + rec_path,
 			cache: false,
 			success: (data) => {
-				console.log(data);
 				recording.events = data;
 
 				$("select#rec_selection").empty();
@@ -239,6 +236,7 @@ $(document).ready(() => {
 			},
 			error: function (error) {
 				console.error(error);
+				setTitle("Error")
 			},
 		});
 	};
@@ -324,8 +322,6 @@ $(document).ready(() => {
 		});
 
 		startTimer();
-
-		console.log(timeEvent, eventsIndex, events[eventsIndex]);
 
 		// Start after time to eventsIndex
 		if (events[eventsIndex].time < timeEvent)

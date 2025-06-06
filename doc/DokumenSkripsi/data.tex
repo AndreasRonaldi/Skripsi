@@ -207,7 +207,7 @@
 \namanpm{Andreas Ronaldi}{6182101026}
 \tanggal{<<tanggal>>}{<<bulan>>}{2025}         %isi bulan dengan angka
 \pembimbing{\PAN}{}
-\penguji{<<penguji 1>>}{<<penguji 2>>}
+\penguji{\VSM}{<<penguji 2>>}
 %=============================================================================
 
 %_____________________________________________________________________________
@@ -224,7 +224,7 @@
 % - judul TIDAK ditulis dengan menggunakan huruf besar seluruhnya !!
 %=============================================================================
 \judulINA{Pemutaran Ulang Ketikan Mahasiswa pada SharIF Judge}
-\judulENG{Typing Replay on SharIF Judge}
+\judulENG{Student Keystroke Replay on SharIF Judge}
 %_____________________________________________________________________________
 %=============================================================================
 % 								BAGIAN X
@@ -238,10 +238,18 @@
 %=============================================================================
 \abstrakINA{Pada Universitas Katolik Parahyangan, digunakan SharIF Judge sebagai Online Judge yang telah dimodifikasi untuk mendukung kebutuhan pembelajaran. Namun, sistem ini masih memiliki keterbatasan dalam pengawasan, terutama saat ujian online, di mana potensi kecurangan seperti \textit{copy-paste} meningkat. Untuk mempermudah pengawasan, tugas akhir sebelumnya telah mengintegrasikan Integrated Development Environment atau IDE ke dalam SharIF Judge, memungkinkan seluruh proses pengerjaan tugas dilakukan dalam satu platform.
 
-Meskipun demikian, IDE tersebut tidak dapat mengawasi aktivitas pengguna jika terjadinya kecurangan. Oleh karena itu, dalam tugas akhir ini, dikembangkan fitur perekaman ketikan dan pemutaran ulang ketikan pada IDE SharIF Judge. Fitur ini bertujuan memudahkan pengawasan, mendeteksi kecurangan, dan memberikan bukti jika terjadi pelanggaran.}
+Meskipun demikian, IDE tersebut tidak dapat mengawasi aktivitas pengguna jika terjadinya kecurangan. Oleh karena itu, dalam tugas akhir ini, dikembangkan fitur perekaman ketikan dan pemutaran ulang ketikan pada IDE SharIF Judge. Fitur ini bertujuan memudahkan pengawasan, mendeteksi kecurangan, dan memberikan bukti jika terjadi pelanggaran.
+
+Fitur ini akan dirancang untuk merekam seluruh aktivitas mahasiswa yaitu perubahan kode, navigasi keluar \textit{web page}, dan aksi pada IDE seperti menyimpan kode program. Setelah itu, data akan disimpan dalam format JSON agar dapat divisualisasikan kembali kepada dosen atau pengajar. 
+
+Fitur ini juga dilakukan eksperimen dan akan membahas analisa sederhana mengenai pola yang dapat dilihat pada data rekaman mahasiswa seperti pola pergantian kode, pola \textit{debugging} dan pola berpikir.}
 \abstrakENG{At Parahyangan Catholic University, SharIF Judge is used as an Online Judge that has been modified to support learning needs. However, this system still has limitations in monitoring, especially during online exams, where the potential for cheating, such as copy-pasting, increases. To facilitate supervision, the previous final project integrated an Integrated Development Environment or IDE into SharIF Judge, allowing the entire task completion process to be conducted within a single platform.
 
-Nevertheless, the IDE could not monitor user activity in cases of cheating. Therefore, in this final project, a keystroke recording and playback feature was developed for the SharIF Judge IDE. This feature aims to simplify monitoring, detect cheating, and provide evidence in case of violations.}
+Nevertheless, the IDE could not monitor user activity in cases of cheating. Therefore, in this final project, a keystroke recording and playback feature was developed for the SharIF Judge IDE. This feature aims to simplify monitoring, detect cheating, and provide evidence in case of violations.
+
+The feature is designed to record all student activities, including code changes, navigation away from the web page, and actions within the IDE such as saving program code. The data is then stored in JSON format so it can be visualized for instructors.
+
+Additionally, experiments were conducted with this feature, and a simple analysis will be discussed regarding patterns observable in the recorded student data, such as code churn patterns, debugging patterns, and thought processes patterns.}
 %=============================================================================
 
 %_____________________________________________________________________________

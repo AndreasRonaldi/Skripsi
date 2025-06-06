@@ -412,7 +412,7 @@ Pada editor kode Ace, disediakannya fungsi \textit{event listener} atau pendenga
 	      Pada kelas ini tersedia dua \textit{event listener} yaitu \verb|exec| dan \verb|afterExec|. \verb|exec| akan mendengarkan saat perintah akan dijalankan pada editor kode, sedangkan \verb|afterExec| akan mendengarkan perintah yang sudah selesai dijalankan pada editor kode. Pada fungsi \textit{callback} yang akan dijalankan oleh \textit{event listener} ini akan diberikan perintah yang dijalankan oleh kelas \verb|Commands|.
 \end{itemize}
 
-Untuk menggunakan fungsi \textit{event listener} pada kelas yang diinginkan, dibutuhkan fungsi \verb|on| pada kelas tersebut. Fungsi \verb|on| memiliki dua parameter yaitu nama \textit{event} ingin didengar (\verb|exec| atau \verb|change|) dan sebuah fungsi \textit{callback} yang akan dijalankan saat \textit{event} terjadi. Kode \ref{kode:2:5:1:eventlistener} merupakan perhubahan kode yang dilakukan dalam \textit{tag} \verb|<script>| pada Kode \ref{kode:2:5:ace} agar perubahan isi editor dapat didengar.
+Untuk menggunakan fungsi \textit{event listener} pada kelas yang diinginkan, dibutuhkan fungsi \verb|on| pada kelas tersebut. Fungsi \verb|on| memiliki dua parameter yaitu nama \textit{event} ingin didengar (\verb|exec| atau \verb|change|) dan sebuah fungsi \textit{callback} yang akan dijalankan saat \textit{event} terjadi. Kode \ref{kode:2:5:1:eventlistener} merupakan perubahan kode yang dilakukan dalam \textit{tag} \verb|<script>| pada Kode \ref{kode:2:5:ace} agar perubahan isi editor dapat didengar.
 
 \begin{lstlisting}[language={html}, caption={Contoh kode event listener}, label={kode:2:5:1:eventlistener}]
 <script src="/ace-builds/ace.js" type="text/javascript"></script>
@@ -435,7 +435,7 @@ Untuk menggunakan fungsi \textit{event listener} pada kelas yang diinginkan, dib
 </script>
 \end{lstlisting}
 
-Kode \ref{kode:2:5:1:eventlistener} akan menggunakan \textit{event listener} \verb|change| dalam kelas \verb|EditSession|, dengan mengakses kelas \verb|EditSession| melalui \verb|editor| yang dinamakan \verb|session|. Pada kelas tersebut akan dijalankan fungsi \verb|on| dengan parameter ``change'' dan sebuah fungsi annonimus sebagai fungsi \textit{callback} yang akan memprint ke \textit{console} isi perubahan pada editor kode.
+Kode \ref{kode:2:5:1:eventlistener} akan menggunakan \textit{event listener} \verb|change| dalam kelas \verb|EditSession|, dengan mengakses kelas \verb|EditSession| melalui \verb|editor| yang dinamakan \verb|session|. Pada kelas tersebut akan dijalankan fungsi \verb|on| dengan parameter ``change'' dan sebuah fungsi annonimus sebagai fungsi \textit{callback} yang akan dicetak ke \textit{console} isi perubahan pada editor kode.
 
 \section{Chart.js}
 
@@ -453,7 +453,7 @@ Identik dengan \textit{library} Ace untuk menintegrasikan \textit{library} Chart
 	\verb|<script src="/chartjs/dist/chart.js" type="text/javascript"></script>|
 \end{center}
 
-Setelah itu \textit{library} Chart.js dapat digunakan dengan membuat sebuah kelas \textit{javascript} baru bernama \verb|Chart|. Untuk membuat kelas \verb|Chart| dibutuhkan 2 argumen yaitu elemen \textit{canvas} dalam HTML web page dan sebuah objek \textit{javascript} yang dapat di isi dengan opsi-opsi yang diinginkan dengan menspesifikan \textit{key} dan \textit{value} yang sesuai dengan opsi yang diinginkan. Berikut merupakan beberapa \textit{key} dan \textit{value} yang dapat digunakan ada dalam opsi \textit{library} Chart.js:
+Setelah itu \textit{library} Chart.js dapat digunakan dengan membuat sebuah kelas \textit{javascript} baru bernama \verb|Chart|. Untuk membuat kelas \verb|Chart| dibutuhkan 2 argumen yaitu elemen \textit{canvas} dalam HTML web page dan sebuah objek \textit{javascript} yang dapat diisi dengan opsi-opsi yang diinginkan dengan menspesifikan \textit{key} dan \textit{value} yang sesuai dengan opsi yang diinginkan. Berikut merupakan beberapa \textit{key} dan \textit{value} yang dapat digunakan ada dalam opsi \textit{library} Chart.js:
 
 \begin{itemize}
 	\item \verb|type| \\
