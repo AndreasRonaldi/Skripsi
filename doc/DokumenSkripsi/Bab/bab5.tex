@@ -1,7 +1,7 @@
 \chapter{Implementasi dan Pengujian}
 \label{chap:implementasidanpengujian}
 
-Bab ini membahas mengenai implementasi dan pengujian sistem perekaman ulang dalam SharIF-Judge.
+Bab ini akan membahas mengenai implementasi serta pengujian sistem perekaman ulang yang diterapkan dalam SharIF-Judge.
 
 \section{Implementasi}
 \label{sec:5:implementasi}
@@ -11,17 +11,17 @@ Bagian ini menjelaskan hasil implementasi sistem pemutaran ulang pada SharIF-Jud
 \subsection{Merekam Peristiwa pada IDE}
 \label{sub:5:2:merekam}
 
-Fitur merekam peristiwa pada editor kode diimplementasikan untuk menangkap seluruh interaksi pengguna terhadap IDE dan SharIF-Judge pada saat pengguna menyelesaikan sebuah masalah dalam \textit{assignment}. Data yang direkam akan digunakan untuk memutar ulang penyelesaian yang dilakukan oleh pengguna. Fitur ini diimplementasikan dengan memanfaatkan \textit{Library Ace}, \textit{event hooks} pada javascript. Implementasi ini akan memerlukan penyesuian pada bagian \textit{javascript} yaitu file \verb|assets/js/shj_submit.js| yang dimuat pada halaman \textit{Submit}.
+Fitur merekam peristiwa pada editor kode diimplementasikan untuk menangkap seluruh interaksi pengguna terhadap IDE dan SharIF-Judge pada saat pengguna menyelesaikan sebuah masalah dalam \textit{assignment}. Data yang direkam akan digunakan untuk memutar ulang penyelesaian yang dilakukan oleh pengguna. Fitur ini diimplementasikan dengan memanfaatkan \textit{Library Ace}, \textit{event hooks} pada \textit{JavaScript}. Implementasi ini akan memerlukan penyesuian pada bagian \textit{JavaScript} yaitu file \verb|assets/js/shj_submit.js| yang dimuat pada halaman \textit{Submit}.
 
 Berikut merupakan alur sistem perekaman peristiwa:
 \begin{enumerate}
     \item Inisialisasi Perekam \\
     Pada alur ini, semua perekaman akan diinisialisasi dengan menjalankan sebuah fungsi dinamakan \verb|recordStart|. Fungsi ini akan memanggil seluruh \textit{event hooks} dan \textit{event listener} dalam \textit{Library ace} agar dinyalakan. 
     
-    Dalam menjalankan sebuah fungsi \textit{event listener} dibutuhkannya dua argumen yaitu event yang akan di panggil dan sebuah \textit{callback function} yang akan dipanggil pada saat terjadinya sebuah event tersebut. 
+    Dalam menjalankan fungsi \textit{event listener}, dibutuhkan dua argumen yaitu event yang akan di panggil dan sebuah \textit{callback function} yang akan dieksekusi ketika \textit{event} tersebut terjadi. 
     
-    Dalam implementasi akan dibuat 2 buah \textit{object javascript} yang menjadi fungsi \textit{event listener} yaitu \textit{object} pemanggilan \textit{event listener} dan \textit{object} menyimpan \textit{callback function} yang dipakai oleh \textit{event listener} masing-masing. Kode \ref{kode:5:1:objcallback} merupakan \textit{object callback function} yang diimplementasikan.
-    \begin{lstlisting}[caption={\textit{object callback function}}, label={kode:5:1:objcallback}]
+    Implementasi akan dibuat 2 objek \textit{JavaScript} yang menjadi fungsi \textit{event listener} yaitu objek pemanggilan \textit{event listener} dan objek menyimpan \textit{callback function} yang dipakai oleh \textit{event listener} masing-masing. Kode \ref{kode:5:1:objcallback} merupakan objek \textit{callback function} yang diimplementasikan.
+    \begin{lstlisting}[caption={objek \textit{callback function}}, label={kode:5:1:objcallback}]
 const handlers = {
     editor_change: (e) =>
         recordEvent(e.action, {
@@ -29,23 +29,25 @@ const handlers = {
             start: e.start,
             end: e.end,
         }),
+        ...
 }
     \end{lstlisting}
     
-    Kode \ref{kode:5:1:objeventlist} merupakan \textit{object} pemanggilan \textit{event listener} yang dipanggil pada saat inisialisasi dan mendapatkan fungsi \textit{callback function} dari \textit{object handlers} pada Kode \ref{kode:5:1:objcallback}.
-    \begin{lstlisting}[caption={\textit{object event listener}}, label={kode:5:1:objeventlist}]
+    Kode \ref{kode:5:1:objeventlist} merupakan objek pemanggilan \textit{event listener} yang dipanggil pada saat inisialisasi dan mendapatkan fungsi \textit{callback function} dari objek \textit{handlers} pada Kode \ref{kode:5:1:objcallback}.
+    \begin{lstlisting}[caption={objek \textit{event listener}}, label={kode:5:1:objeventlist}]
 const addListener = {
     editor_change: () => editor.session.on("change", handlers.editor_change),
+    ...
 }
     \end{lstlisting}
 
-    Setelah itu \textit{object addListener} akan dipanggil oleh fungsi \verb|recordStart|. Kode \ref{kode:5:1:eventlistener} menunjukan fungsi yang dipanggil saat inisialisasi. 
+    Setelah itu objek \textit{addListener} akan dipanggil oleh fungsi \verb|recordStart|. Kode \ref{kode:5:1:eventlistener} menunjukkan fungsi yang dipanggil saat inisialisasi. 
     
     \begin{lstlisting}[caption={Beberapa \textit{event listener} yang dipanggil}, label={kode:5:1:eventlistener}]
 addListener.editor_change();
     \end{lstlisting}
     
-    Fungsi \verb|recordStart| akan dilakukan pada saat pengguna mengubah \textit{problem} yang dipilih dalam halaman Submit.
+    Fungsi \verb|recordStart| akan dijalankan setiap kali pengguna mengubah \textit{problem} yang dipilih dalam halaman Submit untuk memulai rekaman peristiwa.
 
     \item Penyimpan sebuah rekaman \\
     Untuk setiap perekaman yang dibutuhkan, dijalankan sebuah fungsi yang mendeteksi perubahan tersebut dan menjalankan sebuah \textit{callback function} saat terjadi perubahan tersebut. Fungsi ini dipnaggil pada saat inisialisasi. \textit{Callback function} tersebut akan mendapatkan argumen sesuai dengan perubahan yang dideteksi. Pada contohnya untuk perubahan teks pada editor kode yaitu fungsi \verb|onchange|, argumen yang diberikan merupakan teks yang dimasukan yaitu contohnya adalah `A', dan juga posisi dimana teks tersebut dimasukkan dalam editor kode. Kode \ref{kode:5:1:argonchange} merupakan contoh argumen yang diberikan.
@@ -56,11 +58,11 @@ addListener.editor_change();
     end:{ row: 0, column: 2}
 }
     \end{lstlisting}
-    Setelah itu data akan disimpan dalam sebuah \textit{object javascript}
-    seperti yang sudah dijelaskan pada Bab \ref{sec:4:2:storerekaman}. data argumen akan disimpan mengunakan key `args' atau `payload'.
+    Setelah itu data akan disimpan dalam sebuah objek \textit{JavaScript}
+    seperti yang sudah dijelaskan pada Bab \ref{sec:4:2:storerekaman}. data argumen akan disimpan menggunakan key `args' atau `payload'.
     
     \item Penyimpanan data rekaman \\
-    Selanjutnya sebuah \textit{event} atau rekaman yang sudah dicatat dan menjadi sebuah \textit{object javascript} bernama \verb|recording|. seluruh event rekaman akan simpan dalam sebuah \textit{array} dalam \verb|recording| dengan key `events' seperti yang sudah dijelaskan pada Bab \ref{sec:4:2:storerekaman}. \verb|recording| juga memiliki waktu dimulainya rekaman, isi awal editor kode, posisi awal cursor dalam editor kode. \verb|recording| juga memiliki fungsi \verb|init| untuk meninisialisasi seluruh \textit{object} \verb|recording|.
+    Selanjutnya sebuah \textit{event} atau rekaman yang sudah dicatat dan menjadi sebuah objek \textit{JavaScript} bernama \verb|recording|. seluruh event rekaman akan simpan dalam sebuah \textit{array} dalam \verb|recording| dengan key `events' seperti yang sudah dijelaskan pada Bab \ref{sec:4:2:storerekaman}. \verb|recording| juga memiliki waktu dimulainya rekaman, isi awal editor kode, posisi awal kursor dalam editor kode. \verb|recording| juga memiliki fungsi \verb|init| untuk meninisialisasi seluruh objek \verb|recording|.
 
     \begin{lstlisting}[caption={Contoh argumen yang diberikan oleh fungsi onchange}, label={kode:5:1:recordingobj}]
 const recording = {
@@ -78,21 +80,21 @@ const recording = {
 };
     \end{lstlisting}
 
-    Kode \ref{kode:5:1:recordingobj} merupakan \verb|recording| pada saat keadaan kosong. Pada \textit{object} \verb|recording|, \verb|events| merupakan sebuah array dengan isi sebuah rekaman event, \verb|startTime| merupakan waktu awal rekaman dimulai, \verb|startValue| merupakan isi awal dalam editor kode, dan \verb|startSelection| merupakan posisi awal cursor dalam editor kode.
+    Kode \ref{kode:5:1:recordingobj} merupakan \verb|recording| pada saat keadaan kosong. Pada objek \verb|recording|, \verb|events| merupakan sebuah array dengan isi sebuah rekaman event, \verb|startTime| merupakan waktu awal rekaman dimulai, \verb|startValue| merupakan isi awal dalam editor kode, dan \verb|startSelection| merupakan posisi awal kursor dalam editor kode.
 \end{enumerate}
 
 Berikut merupakan peristiwa yang akan direkam oleh sistem perekaman:
 \begin{itemize}
     \item \verb|editor.change|: Peristiwa ini akan menangkap perubahan isi teks dalam editor kode.
-    \item \verb|editor.changeCursor|: Peristiwa ini akan menangkap perubahan cursor dalam editor kode. 
-    \item \verb|editor.changeSelection|: Peristiwa ini akan menangkap perubahan selection cursor dalam editor kode.
-    \item \verb|window.focus|: Peristiwa ini akan menangkap pengguna pada saat pengguna \textit{focus} pada SharIF Judge web page. 
+    \item \verb|editor.changeCursor|: Peristiwa ini akan menangkap perubahan kursor dalam editor kode. 
+    \item \verb|editor.changeSelection|: Peristiwa ini akan menangkap setiap perubahan yang terjadi pada \textit{selection} kursor dalam editor kode.
+    \item \verb|window.focus|: Peristiwa ini akan menangkap pengguna \textit{focus} pada SharIF Judge web page. 
     \item \verb|window.blur|: Peristiwa ini akan menangkap pengguna pada saat pengguna tidak \textit{focus} pada SharIF Judge web page atau \textit{focus} pada aplikasi lain atau web page lain.
     \item \verb|window.visibilitychange|: Peristiwa ini akan menangkap pengguna yang mengubah \textit{tab} dari SharIF Judge ke \textit{tab} lain dalam browser.
     \item \verb|pdf_viewer.focusin|: Peristiwa ini akan menangkap pengguna pada saat pengguna \textit{focus} pada PDF Viewer dalam IDE.
     \item \verb|pdf_viewer.focusout|: Peristiwa ini akan menangkap pengguna pada saat pengguna tidak \textit{focus} pada PDF Viewer dalam IDE.
     \item \verb|editor_input.input|: Peristiwa ini akan menangkap perubahan isi editor input dalam IDE. 
-    \item \verb|editor_output.change|: Peristiwa ini akan menangkap hasil output saat terjadinya aksi \textit{Save \& Execute} dalam IDE.
+    \item \verb|editor_output.change|: Peristiwa akan menangkap \textit{output} saat terjadinya aksi \textit{Execute}.
     \item \verb|save.click|: Peristiwa ini akan menangkap aksi \textit{Save} yang dilakukan pengguna.
     \item \verb|execute.click|: Peristiwa ini akan menangkap aksi \textit{Save \& Execute} yang dilakukan pengguna.
     \item \verb|submit.click|: Peristiwa ini akan menangkap aksi \textit{Save \& Submit} yang dilakukan pengguna.
@@ -106,10 +108,10 @@ Pada saat mengujian fungsi penyimpanan rekaman, dalam tahap alur penyimpanan dat
 
 \begin{enumerate}
     \item Inisialisasi Perekam \\
-    Alur inisialisasi akan diubah agar dapat memuat events yang sebelumnya sudah disimpan dalam \textit{object javascript} bernama \verb|befRecording|. Oleh karena itu, dibutuhkannya penambahan fungsi pada \textit{Controller} \verb|Submit.php| yaitu fungsi untuk mengambil data rekaman sebelumnya bernama \verb|load_rec| yang mengambil argumen pengenal masalah yang dipilih oleh pengguna. Kode penambahan terdapat di Lampiran \ref{lamp:A}
+    Alur inisialisasi akan diubah agar dapat memuat events yang sebelumnya sudah disimpan dalam objek \textit{JavaScript} bernama \verb|befRecording|. Oleh karena itu, dibutuhkannya penambahan fungsi pada \textit{Controller} \verb|Submit.php| yaitu fungsi untuk mengambil data rekaman sebelumnya bernama \verb|load_rec| yang mengambil argumen pengenal masalah yang dipilih oleh pengguna. Kode penambahan terdapat di Lampiran \ref{lamp:A}
 
     \item Penyimpan data rekaman \\
-    Pada \textit{object} \verb|recording|, \verb|startValue| dan \verb|startSelection| tidak dibutuhkan karena isi awal dari editor kode dan juga posisi awal cursor dalam editor kode akan selalu berisi dengan nilai kosong yaitu teks kosong dan posisi di baris dan kolom pertama.
+    Pada objek \verb|recording|, \verb|startValue| dan \verb|startSelection| tidak dibutuhkan karena isi awal dari editor kode dan juga posisi awal kursor dalam editor kode akan selalu berisi dengan nilai kosong yaitu teks kosong dan posisi di baris dan kolom pertama.
 \end{enumerate}
 
 \subsection{Menyimpan Rekaman pada Sistem}
@@ -119,10 +121,10 @@ Fitur penyimpanan rekaman pada sistem bertujuan untuk menyimpan data secara perm
 
 \begin{enumerate}
     \item Mengirimkan Data ke \textit{Server} \\
-    Dalam halaman Submit, pengguna memiliki 3 aksi penting dalam IDE SharIF-Judge yaitu: \textit{save}, \textit{execute}, dan \textit{submit}. Alur ini akan mengirimkan data rekaman pada saat pengguna melakukan aksi tersebut. Data yang dikirim merupakan \textit{object} \verb|recording| yang sudah jadikan sebagai teks JSON dengan menggunakan fungsi \verb|JSON.stringify|.
+    Dalam halaman Submit, pengguna memiliki 3 aksi penting dalam IDE SharIF-Judge yaitu: \textit{save}, \textit{execute}, dan \textit{submit}. Alur ini akan mengirimkan data rekaman pada saat pengguna melakukan aksi tersebut. Data yang dikirim merupakan objek \verb|recording| yang sudah jadikan sebagai teks JSON dengan menggunakan fungsi \verb|JSON.stringify|.
 
     \item Menyimpan Data Dalam File Sistem \\
-    File akan disimpan dalam \textit{folder} yang sama dengan penyimpanan kode \textit{submission} yang dijelaskan pada Bab \ref{sub:3:1:penyimpanankode}. File akan diisi secara langsung oleh data rekaman dan tidak diubah oleh \textit{server}. Penamaan file dapat dibagi berdasarkan aksi yang membuat pengguna mengirimkan data rekaman. Untuk aksi \textit{save} dan \textit{execute}, file dengan data rekaman akan disimpan dengan nama \verb|recording|. Untuk aksi \textit{submit}, file akan disimpan dengan nama \verb|recording| dilanjutkan dengan sebuah `-' dan \textit{submit id} yang dibuat. File tersebut akan memiliki tipe data yang sama yaitu JSON dikarenakan itu extensi file yang digunakan adalah \verb|.json|.
+    File akan disimpan dalam direktori yang sama dengan penyimpanan kode \textit{submission} yang dijelaskan pada Bagian \ref{sub:3:1:penyimpanankode}. File akan diisi secara langsung oleh data rekaman dan tidak diubah oleh \textit{server}. Penamaan file dapat dibagi berdasarkan aksi yang membuat pengguna mengirimkan data rekaman. Untuk aksi \textit{save} dan \textit{execute}, file dengan data rekaman akan disimpan dengan nama \verb|recording|. Untuk aksi \textit{submit}, file akan disimpan dengan nama \verb|recording| dilanjutkan dengan sebuah `-' dan \textit{submit id} yang dibuat. File tersebut memiliki tipe data yang sama yaitu JSON karena itu extensi file yang digunakan adalah \verb|.json|.
  
     \item Menyimpan Data Dalam Database \\
     Saat penyimpanan data ke dalam file sistem berhasil, maka penyimpanan kedalam database juga akan dilakukan. Data yang akan disimpan kedalam database akan digunakan untuk mendaftar rekaman yang ada dalam sistem, maka data yang akan disimpan bukan data rekaman melainkan data statistik. Berikut merupakan data yang akan disimpan ke dalam Database:
@@ -163,9 +165,9 @@ Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke 
 
 \subsubsection{Perbaikan Implementasi}
 
-Pada saat pengujian yang sama dengan Bab \ref{sub:5:2:merekam}, dibutuhkannya perubahan pada alur pengirimkan data ke server. Dikarenakan \textit{events} yang sudah di save dapat terhapus karena pengguna memilih ulang masalah dan memuat ulang halaman Submit, yang membuat rekaman inisialisasi dan menghapus rekaman lama. Maka dari itu pada saat mengirimkan data \verb|recording|, akan disertakan juga data \verb|befRecording| yang sudah diambil pada saat inisialisasi. Format pengiriman data juga akan berubah dikarenakan adanya rekaman yang lama menjadi sebuah \textit{key} dan \textit{value} karena hanya dua value yang harus disimpan yaitu \textit{events} sebagai \textit{value} dan \textit{startTime} sebagai \textit{key}. Maka format ini menjadi format keseluruhan events yang terjadi dan dapat disatukan dengan format yang sama menggunakan \textit{spread operator} agar seluruh rekaman lama digabungkan. Kode \ref{kode:5:2:mergedata} merupakan kode untuk mengirimkan teks JSON dengan mengabungkan kedua rekaman menggunakan \textit{spread operator}.
+Pada pengujian yang sama dengan Bab \ref{sub:5:2:merekam}, dibutuhkannya perubahan pada alur pengirimkan data ke server. Karena \textit{events} yang sudah di save dapat terhapus karena pengguna memilih ulang masalah dan memuat ulang halaman Submit, yang membuat rekaman inisialisasi dan menghapus rekaman lama. Maka pada saat mengirimkan data \verb|recording|, akan disertakan juga data \verb|befRecording| yang sudah diambil pada saat inisialisasi. Format pengiriman data juga akan berubah dikarenakan adanya rekaman yang lama menjadi sebuah \textit{key} dan \textit{value} karena hanya dua value yang harus disimpan yaitu \textit{events} sebagai \textit{value} dan \textit{startTime} sebagai \textit{key}. Maka format ini menjadi format keseluruhan events yang terjadi dan dapat disatukan dengan format yang sama menggunakan \textit{spread operator} agar seluruh rekaman lama digabungkan. Kode \ref{kode:5:2:mergedata} merupakan kode untuk mengirimkan teks JSON dengan mengabungkan kedua rekaman menggunakan \textit{spread operator}.
 
-\begin{lstlisting}[caption={\textit{object callback function}}, label={kode:5:2:mergedata}]
+\begin{lstlisting}[caption={objek \textit{callback function}}, label={kode:5:2:mergedata}]
 JSON.stringify({
     ...befRecording,
     [recording.startTime]: recording.events
@@ -178,7 +180,7 @@ Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam 
 
 \begin{itemize}
     \item Pengambilan Data Rekaman \\
-    Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang mengunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran \ref{lamp:A}.
+    Fitur pengambilan data rekaman digunakan agar bagian depan SharIF-Judge dapat meminta daftar rekaman yang ada pada bagian belakang SharIF-Judge. Oleh karena ini merupakan sebuah halaman baru dalam SharIF-Judge, maka dibutuhkannya sebuah \textit{Controller} baru bernama \verb|Recording.php| yang menampilkan sebuah halaman baru yang dapat diakses melalui rute \verb|/recording/all/| yang menggunakan fungsi baru dalam \verb|Recording_model.php| yaitu fungsi untuk mendapatkan daftar rekaman dinamakan \verb|all_user_recordings|. Kode pertambahan pada \textit{Model} \verb|Recording.php| berada pada Lampiran \ref{lamp:A}.
 
     Berikut fungsi yang akan diimplementasikan dalam \textit{Controller} \verb|Recording.php|:
     \begin{enumerate}
@@ -186,13 +188,13 @@ Fitur ini digunakan untuk melihat daftar rekaman mahasiswa yang tersimpan dalam 
         Fungsi ini akan memuat seluruh kebutuhan \textit{Model} dan \textit{Helper} ke dalam \verb|Recording.php|, fungsi \textit{construct} juga akan membatasi akses oleh pengguna dibawah \textit{instructor}. Fungsi ini juga mendapatkan \textit{params url} yang dikirim oleh pengguna. 
 
         \item \verb|all()| \\
-        Fungsi ini akan mengambil beberapa data yang dibutuhkan oleh antarmuka SharIF-Judge yaitu \textit{assignment} yang dipilih oleh pengguna menggunakan \verb|assignment_model|, \textit{problem} yang ada dalam \textit{assignment} tersebut menggunakan \verb|assignment_model|, dan daftar \textit{recording} yang tersimpan dalam sistem menggunakan \verb|recording_model|. Setelah itu, server akan menempatkan seluruh data tersebut ke dalam \textit{view} baru bernama \verb|recording_list.twig|.
+        Fungsi ini akan mengambil beberapa data yang dibutuhkan oleh antarmuka SharIF-Judge yaitu \textit{assignment} yang dipilih oleh pengguna menggunakan \verb|assignment_model|, \textit{problem} yang ada dalam \textit{assignment} tersebut menggunakan \verb|assignment_model|, dan daftar \textit{recording} yang tersimpan dalam sistem menggunakan \verb|recording_model|. Setelah itu, server akan menempatkan seluruh data tersebut ke dalam \textit{view} baru bernama \verb|recording_list.twig| untuk ditampilkan kepada pengguna.
     \end{enumerate}
 
     Seluruh alur untuk mengimplementasikan fitur pengambilan data rekaman dalam \textit{Controller} \verb|Recording.php| terdapat dalam Lampiran \ref{lamp:A}.
 
     \item Antarmuka dan Tampilan Data \\
-    Antarmuka yang akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{javascript} maupun \textit{php} dalam antarmukanya. Gambar \ref{fig:hasil:recording_list} menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran \ref{lamp:A}.
+    Antarmuka yang diimplementasikan akan dibuat serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang} yang diimplementasikan ke dalam SharIF-Judge. Data yang dikirim oleh \textit{Controller} \verb|Recording.php| juga dapat ditampilkan menggunakan \textit{Library twig} tanpa menbutuhkan \textit{JavaScript} maupun \textit{php} dalam antarmukanya. Gambar \ref{fig:hasil:recording_list} menunjukkan implementasi antarmuka beserta data yang terdapat dalam sistem. Untuk kode keseluruhan antarmuka menggunakan \textit{Library twig} dapat dilihat pada Lampiran \ref{lamp:A}.
 \end{itemize}
 
 
@@ -202,24 +204,20 @@ Untuk fitur ini, tidak dilakukan perubahan pada implementasi yang sudah ada kare
 
 \subsection{Pemutaran Ulang Rekaman}
 
-Fungsi pemutaran ulang rekaman mengunakan data rekaman yang sudah disimpan dalam sistem untuk menvisualisasikan proses penyelesaian masalah pengguna secara kronologis. Fitur pemutaran ulang ini membutuhkan yaitu sebagai berikut:
+Fungsi pemutaran ulang rekaman menggunakan data rekaman yang sudah disimpan dalam sistem untuk memvisualisasikan proses penyelesaian masalah pengguna secara kronologis. Fitur pemutaran ulang ini membutuhkan yaitu sebagai berikut:
 
 \begin{itemize}
     \item {Implementasi Antarmuka} \\
     Untuk menambahkan sebuah halaman baru dalam SharIF-Judge dibutuhkannya juga fungsi baru pada \textit{Controller} \verb|Recording.php|. Fungsi baru akan dinamakan \verb|index| untuk menampilkan sebuah \textit{view} baru bernama \verb|recording.twig|. Fungsi \verb|index| akan menampilkan halaman baru itu melalui rute \verb|/recording/|. Penamaan \textit{index} itu agar rute tidak memerlukan \verb|/index| pada akhir rute karena jika rute \textit{function} (Bab \ref{sub:2:2:codeigniterurls}) akan otomatis mengarah pada fungsi \verb|index| dalam kelas tersebut.
 
-    Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama.
-
-    Gambar \ref{fig:hasil:recording} merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
+    Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama. Gambar \ref{fig:hasil:recording} merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
 
     \item Implementasi Memuat Data Rekaman \\
-    \label{ssub:5:2:4:memuatdata}
+    \label{ssub:5:2:4:memuatdata}Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan menggunakan AJAX pada halaman \textit{recording}. Maka dibutuhkannya fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{JavaScript} baru bernama \verb|shj_function.js|.
 
-    Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem mengunakan \textit{Controller}. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan mengunakan AJAX pada halaman \textit{recording}. Maka dari itu, butuh fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{javascript} baru bernama \verb|shj_function.js|.
+    Fungsi baru dalam \textit{Controller} \verb|Recording.php| akan dinamakan \verb|download_record| yang memiliki argumen \verb|assignment_id|, \verb|problem_id|, dan \verb|rec_id|. Fungsi tersebut akan mengambil \textit{file} rekaman dalam file sistem dengan menggunakan argumen untuk mendapatkan lokasi dan nama \textit{file} rekaman (Bab \ref{sec:4:2:storerekaman}) SharIF-Judge dan mengirimkan file tersebut secara langsung. File juga akan dirikim dengan header \verb|Content-Type: application/json| dan \verb|Content-Disposition: attachment; filename=|\verb|"rec.json"|.
 
-    Fungsi baru dalam \textit{Controller} \verb|Recording.php| akan dinamakan \verb|download_record| yang memiliki argumen \verb|assignment_id|, \verb|problem_id|, dan \verb|rec_id|. Fungsi tersebut akan mengambil file rekaman dalam file sistem dengan mengunakan argumen untuk mendapatkan lokasi dan nama file rekaman (Bab \ref{sec:4:2:storerekaman}) SharIF-Judge dan mengirimkan file tersebut secara langsung. File juga akan dirikim dengan header \verb|Content-Type: application/json| dan \verb|Content-Disposition: attachment; filename=|\\\verb|"rec.json"|.
-
-    Fungsi \verb|download_record| akan dipanggil pada saat halaman \textit{recording} dimuat oleh \textit{javascript} \verb|shj_function.js| mengunakan fungsi baru yaitu \verb|getRecording|. Fungsi \verb|getRecording| akan meninisialisasi editor kode dalam antarmuka dan menformat data rekaman agar lebih mudah untuk di putar ulang. Berikut merupakan format data tambahan yang akan diubah oleh fungsi \verb|getRecording|:
+    Fungsi \verb|download_record| dipanggil pada saat halaman \textit{recording} dimuat dan \textit{JavaScript} \verb|shj_function.js| dengan fungsi baru yaitu \verb|getRecording|. Fungsi \verb|getRecording| akan meninisialisasi editor kode dalam antarmuka, mendapatkan data rekaman melalui fungsi \verb|download_record|, dan menformat data rekaman agar lebih mudah untuk di putar ulang. Berikut merupakan format data tambahan yang akan diubah oleh fungsi \verb|getRecording|:
 
     \begin{itemize}
         \item \verb|events|: Data rekaman
@@ -230,13 +228,13 @@ Fungsi pemutaran ulang rekaman mengunakan data rekaman yang sudah disimpan dalam
         \item \verb|duration|: durasi dari seluruh rekaman yang ada pada data rekaman
     \end{itemize}
 
-    Data tersebut akan disimpan dalam sebuah \textit{object javascript} yang dinamakan \verb|recording| dan akan dipakai pada saat menjalankan rekaman dan untuk menampilkan histogram \textit{events} yang terjadi.
+    Data akan disimpan dalam sebuah objek \textit{JavaScript} dinamakan \verb|recording| dan akan dipakai pada saat menjalankan rekaman dan untuk menampilkan histogram \textit{events} yang terjadi.
 
     \item Implementasi Menjalankan Rekaman \\
-    Fitur menjalankan rekaman akan menggunakan data bedasarkan data yang didapatkan oleh AJAX yang dijelaskan pada bagian \ref{ssub:5:2:4:memuatdata}. Fitur menjalankan rekaman akan membutuhkan penambahan kode pada \textit{javascript} \verb|shj_function.js| yang akan menjalankan fungsi \verb|play| atau \verb|stop| untuk menjalankan atau memberhentikan rekaman oleh pengguna. 
+    Fitur menjalankan rekaman akan menggunakan data bedasarkan data yang didapatkan oleh AJAX yang dijelaskan pada bagian \ref{ssub:5:2:4:memuatdata}. Fitur menjalankan rekaman akan membutuhkan penambahan kode pada \textit{JavaScript} \verb|shj_function.js| yang akan menjalankan fungsi \verb|play| atau \verb|stop| untuk menjalankan atau memberhentikan rekaman oleh pengguna. 
 
     Fungsi menjalankan atau mematikan rekaman dibagi menjadi dua yaitu fungsi rekaman dalam IDE dengan data rekaman dinamakan \verb|Recording| dan fungsi timer yang digunakan untuk memberitahu kepada pengguna progress waktu pemutaran rekaman dinamakan \verb|Timer|.
-    Fungsi \verb|Recording| menggunakan fungsi dalam \textit{Library Ace} dan fungsi \textit{javascript} untuk memperbaharui IDE antarmuka berdasarkan \textit{event} yang dipanggil, fungsi \verb|setTimeout| dalam \textit{javascript} akan digunakan untuk menjalankan \textit{event} selanjutnya bedasarkan perbedaan waktu antara event sekarang dan event selanjutnya dengan memanggil fungsi \verb|playRecording| dengan \textit{event} selanjutnya. Sedangkan fungsi \verb|Timer| menggunakan fungsi \verb|setInterval| yang akan dijalankan berulang untuk setiap detiknya dan memperbaharui progress waktu dalam antarmuka berdasarkan waktu yang sudah lewat.
+    Fungsi \verb|Recording| menggunakan fungsi dalam \textit{Library Ace} dan fungsi \textit{JavaScript} untuk memperbaharui IDE antarmuka berdasarkan \textit{event} yang dipanggil, fungsi \verb|setTimeout| dalam \textit{JavaScript} akan digunakan untuk menjalankan \textit{event} selanjutnya bedasarkan perbedaan waktu antara event sekarang dan event selanjutnya dengan memanggil fungsi \verb|playRecording| dengan \textit{event} selanjutnya. Sedangkan fungsi \verb|Timer| menggunakan fungsi \verb|setInterval| yang akan dijalankan berulang untuk setiap detiknya dan memperbaharui progress waktu dalam antarmuka berdasarkan waktu yang sudah lewat.
 
     \item Menampilkan Histogram Events yang Terjadi \\
     Pada fungsi \verb|getRecording| setelah memuat data rekaman dan menformat data rekaman tersebut, fungsi \verb|setUpChart| akan dipanggil dan membuat data grafik histogram. Data histogram akan dimuat menggunakan \textit{Library} \verb|Chart.js|.
@@ -296,7 +294,7 @@ Tabel \ref{tab:5:1:keraspembangunan} menunjukkan spesifikasi perangkat keras yan
     \end{tabular}
 \end{table}
 
-Tabel \ref{tab:5:2:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak yang digunakan saat pengujian.
+Tabel \ref{tab:5:2:1:lunakpembangunan} menunjukkan spesifikasi perangkat lunak yang digunakan saat pengujian.
 
 \begin{table}[H]
     \caption{Perangkat Lunak Lingkungan Pembangunan}
@@ -317,15 +315,15 @@ Tabel \ref{tab:5:2:1:lunakpembangunan} menunjukan spesifikasi perangkat lunak ya
 
 Pengujian dilakukan untuk mengetahui permasalah yang terjadi jika IDE dalam SharIF Judge dimasukkan sistem perekaman. Hasil Pengujian juga akan dianalisis secara sederhana agar dapat dibuatnya sebuah sistem untuk mendeteksi tindakan kecurangan.
 
-Pengujian pada sistem pemutaran ulang dilakukan dengan cara mengajak beberapa peserta yang masih menempuh kuliah maupun yang sudah lulus dengan mengerjakan tiga permasalahan dengan tingkat kesusahan mudah, sedang, dan sulit dalam waktu tempuh satu hari. Para peserta dianjurkan mengerjakan 2 soal yang sudah disediakan dan dapat melihat \textit{syntax} bahasa pemrograman. Pada pengujian peserta juga dapat melakukan kecurangan pada satu buah nomor dengan cara apapun. Kecurangan akan dianggap terjadi pada saat peserta melihat cara pengerjaan permasalah dengan cara apapun.
+Pengujian pada sistem pemutaran ulang dilakukan dengan mengajak beberapa peserta yang masih menempuh kuliah dan sudah lulus kuliah dengan mengerjakan tiga permasalahan dengan tingkat kesusahan mudah, sedang, dan sulit dalam waktu satu hari. Para peserta dianjurkan mengerjakan 2 soal yang sudah disediakan dan dapat melihat \textit{syntax} bahasa pemrograman. Pada pengujian peserta juga dapat melakukan kecurangan pada satu nomor dengan cara apapun. Kecurangan akan dianggap terjadi pada saat peserta melihat cara pengerjaan permasalah.
 
 Berikut merupakan masalah yang ditemukan pada saat pengujian sistem pemutaran ulang:
 
 \begin{itemize}
     \item Fitur menampilkan soal pada IDE \\
-    Fitur ini tidak dapat dilakukan karena permasalahan dengan \textit{networking} dalam server VPS yang menjadikan tidak bisanya mengakses PDF permasalah dalam SharIF Judge dan menghasilkan \textit{status} 404. Fitur ini diabaikan karena fitur ini tidak mengganggu pengujian yang sedang berjalan, tetapi untuk peserta melihat soal dengan cara mendownload soal dan melihatnya pada aplikasi lain. 
+    Fitur ini tidak dapat dilakukan karena permasalahan dengan \textit{networking} dalam server VPS yang menjadikan tidak bisanya mengakses PDF permasalah dalam SharIF Judge dan menghasilkan \textit{status} 404. Fitur ini diabaikan karena fitur ini tidak mengganggu pengujian yang sedang berjalan, tetapi untuk peserta melihat soal dengan cara mendownload soal dan melihatnya pada aplikasi lain yang akan berdampak pada analisis hasil eksperimen.
     \item Fitur Menyimpan Rekaman pada Sistem \\
-    Fitur ini tidak mengubah database pada saat pengguna melakukan aksi \textit{submit}. Pada saat aksi \textit{submit} dilakukan file rekaman dibuah menjadi file rekaman yang sudah di-\textit{submit} tetapi pada daftar rekaman dalam database itu sendiri belum dihapus dan pada saat rekaman di ambil, tidak ditemukannya rekaman tersebut dan mengembalikan error pada pengguna. Untuk menyelesaikan masalah ini, diperlukannya sebuah fungsi baru dalam \textit{Model} \verb|Recording_model|. Kode \ref{kode:5:2:2:recording_model} merupakan fungsi yang ditambahkan pada \textit{Model} \verb|Recording_model|. 
+    Fitur ini tidak mengubah database pada saat pengguna melakukan aksi \textit{submit}. Pada saat aksi \textit{submit} dilakukan \textit{file} rekaman dibuah menjadi \textit{file} rekaman yang sudah di-\textit{submit} tetapi pada daftar rekaman dalam database itu sendiri belum dihapus dan pada saat rekaman di ambil, tidak ditemukannya rekaman tersebut dan mengembalikan error pada pengguna. Untuk menyelesaikan masalah ini, diperlukan sebuah fungsi baru dalam \textit{Model} \verb|Recording_model|. Kode \ref{kode:5:2:2:recording_model} merupakan fungsi yang ditambahkan pada \textit{Model} \verb|Recording_model|. 
 
     \begin{lstlisting}[language=php, caption={Fungsi tambahan pada \textit{Recording model}}, label=kode:5:2:2:recording_model]
 public function remove_saveonly_recording($assignment_id, $problem_id, $username) {
@@ -338,24 +336,24 @@ public function remove_saveonly_recording($assignment_id, $problem_id, $username
 }
     \end{lstlisting}
 
-    Penambahan fungsi ini akan digunakan pada \textit{Controller} \verb|Recording| pada saat fungsi \verb|_submit()| dipanggil.
+    Fungsi ini akan digunakan pada \textit{Controller} \verb|Recording| pada saat fungsi \verb|_submit()| dipanggil.
 
 \end{itemize}
 
-Setelah pengujian berakhir, peserta diminta untuk mengisi beberapa pertanyaan mengenai permasalahan yang dikerjakan dan juga beberapa pertanyaan mengenai pengalaman mengerjakan permasalah pemrograman. 
+Setelah pengujian berakhir, peserta diminta untuk mengisi beberapa pertanyaan mengenai permasalahan yang dikerjakan dan juga beberapa pertanyaan mengenai pengalaman mengerjakan permasalah pemrograman. Tetapi karena tidak ada eksperimen untuk fitur melihat perekaman, tidak ada umpan balik untuk fitur melihat rekaman. 
 
-\subsubsection{Analisa Hasil Pengujian}
-Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan menjadi bagan histogram dalam sistem dan bagan lainnya yang dibutuhkan pada proses analisa. Ada beberapa pola yang dapat dilihat pada saat melihat histogram hasil rekaman peserta pengujian. Berikut merupakan pola yang dapat dilihat pada:
+\subsubsection{analisis Hasil Pengujian}
+analisis ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan menjadi bagan histogram dalam sistem dan bagan lainnya yang dibutuhkan pada proses analisis. Ada beberapa pola yang dapat dilihat pada saat melihat histogram hasil rekaman peserta pengujian. Berikut merupakan pola yang dapat dilihat pada:
 
 \begin{itemize}
     \item Pola Pergantian Kode \\
-    Pola ini dapat dilihat pada \textit{events} \verb|editor.change| dan hasil kode yang dibuat. Pola ini didasari dengan adanya \textit{Code Churn} atau bisa disebut dengan pengerjaan ulang kode. \textit{Code Churn} ini terjadi pada saat peserta atau mahasiswa menghapus atau menulis ulang kode program~\cite{hatica:churn}. Pada \textit{Code Churn} ada yang dinamakan \textit{Code Churn Rate} adalah sebuah tingkat pergantian kode selama sedang mengerjakan kode program tersebut. \textit{Code Churn Rate} dapat menilai seberapa banyak kode berubah dalam suatu tim, module, file maupun fungsi. Pada pola ini digunakannya \textit{Code Churn Rate} dalam tingkat file sebagai sebuah penilaian yang dapat dilakukan dengan mengunakan rumus sebagai berikut:
+    Pola ini dapat dilihat pada \textit{events} \verb|editor.change| dan hasil kode yang dibuat. Pola ini didasari dengan adanya \textit{Code Churn} atau bisa disebut dengan pengerjaan ulang kode. \textit{Code Churn} ini terjadi pada saat peserta atau mahasiswa menghapus atau menulis ulang kode program~\cite{hatica:churn}. Pada \textit{Code Churn} ada yang dinamakan \textit{Code Churn Rate} adalah sebuah tingkat pergantian kode selama sedang mengerjakan kode program tersebut. \textit{Code Churn Rate} dapat menilai seberapa banyak kode berubah dalam suatu tim, module, file maupun fungsi. Pada pola ini digunakannya \textit{Code Churn Rate} dalam tingkat file sebagai sebuah penilaian yang dapat dilakukan dengan menggunakan rumus sebagai berikut:
     
     \begin{center}
         \verb|(inserted_kode + removed_kode) / total_kode|
     \end{center}
 
-    \verb|inserted_kode| dihutung dengan menjumlahkan total karakter yang di masukkan dalam editor. Begitu juga dengan \verb|removed_kode| dihitung dengan menjumlahkan total karakter yang dihapus dalam editor. \verb|total_kode| dihitung dengan menjumlahkan jumlah total karkater pada hasil kode program akhir. Berikut merupakan contoh perhitungan untuk \textit{Code Churn Rate}:
+    \verb|inserted_kode| dihutung dengan menjumlahkan total karakter yang di masukkan dalam editor. Begitu juga dengan \verb|removed_kode| dihitung dengan menjumlahkan total karakter yang dihapus dalam editor. \verb|total_kode| dihitung dengan menjumlahkan jumlah total karkater pada hasil kode program akhir. Berikut contoh perhitungan untuk \textit{Code Churn Rate}:
 
     \begin{figure}[H]
         \centering
@@ -372,7 +370,7 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
     Maka Pola Pergantian Kode ini dinilai dengan \textit{Code Churn Rate}, semakin tinggi nilai tersebut maka semakin tinggi juga perubahan kode yang terjadi. Jika banyak perubahan kode maka dimungkinkan bahwa peserta tidak melakukan kecurangan pada saat pengerjaan.
 
     \item Pola \textit{Debugging} \\
-    Pola ini dapat dilihat pada \textit{events} \verb|editor.change|, \verb|editor.changeCursor|, \verb|editor.change|\\\verb|Selection|, \verb|editor_input.input|, dan \verb|editor_output.change|. Pengguna yang \textit{debugging} akan mengubah kode pada lokasi yang sama. Gambar \ref{fig:5:2:3:heatmapchange} sebelah kiri menunjukkan bahwa frekuensi lebih tinggi akan berwarna lebih merah dan menandakan pola debugging pada posisi tertentu yang dapat dilihat karena terjadinya banyak perubahan pada posisi yang sama dibandingkan dengan Gambar \ref{fig:5:2:3:heatmapchange} sebelah kanan yang memiliki frekuensi maksimum 12 pada warna yang paling merah.
+    Pola ini dapat dilihat pada \textit{events} \verb|editor.change|, \verb|editor.changeCursor|, \verb|editor.change|\\\verb|Selection|, \verb|editor_input.input|, dan \verb|editor_output.change|. Pengguna yang melakukan \textit{debugging} pada saat mengerjakan akan lebih sering mengubah kode pada lokasi yang sama. Gambar \ref{fig:5:2:3:heatmapchange} sebelah kiri menunjukkan bahwa frekuensi lebih tinggi akan berwarna lebih merah dan menandakan pola debugging pada posisi tertentu yang dapat dilihat karena terjadinya banyak perubahan pada posisi yang sama dibandingkan dengan Gambar \ref{fig:5:2:3:heatmapchange} sebelah kanan yang memiliki frekuensi maksimum 12 pada warna yang paling merah.
 
     \begin{figure}[H]
         \centering
@@ -382,7 +380,7 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
         \label{fig:5:2:3:heatmapchange}
     \end{figure}
     
-    Peserta yang \textit{debugging} juga akan mencoba untuk mengubah input dan melakukan aksi \textit{Execute} lebih banyak dibandingkan dengan peserta yang tidak melakukan \textit{debugging}. Gambar \ref{fig:5:2:3:debug} sebelah kiri menunjukkan warna kuning sebagai perubahan input dan warna biru sebagai aksi \textit{Execute} yang dilakukan sedangkan Gambar \ref{fig:5:2:3:debug} sebelah kanan menunjukkan warna biru sebagai perubahan input dan warna merah sebagai aksi \textit{Execute} yang dilakukan. Perbedaan kedua bagan adalah frekuensi dimana aksi \textit{Execute} dilakukan dan juga perubahan input. Maka pola \textit{debugging} juga dapat dilihat melalui frekuensi aksi \textit{Execute} dan juga frekuensi perubahan input.
+    Peserta yang \textit{debugging} juga akan mencoba untuk mengubah input dan melakukan aksi \textit{Execute} lebih banyak dibandingkan dengan peserta yang tidak melakukan \textit{debugging} pada saat mengerjakan soal. Gambar \ref{fig:5:2:3:debug} sebelah kiri menunjukkan warna kuning sebagai perubahan input dan warna biru sebagai aksi \textit{Execute} yang dilakukan sedangkan Gambar \ref{fig:5:2:3:debug} sebelah kanan menunjukkan warna biru sebagai perubahan input dan warna merah sebagai aksi \textit{Execute} yang dilakukan. Perbedaan kedua bagan adalah frekuensi dimana aksi \textit{Execute} dilakukan dan juga perubahan input. Maka pola \textit{debugging} juga dapat dilihat melalui frekuensi aksi \textit{Execute} dan juga frekuensi perubahan input.
 
     \begin{figure}[H]
         \centering
@@ -392,11 +390,11 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
         \label{fig:5:2:3:debug}
     \end{figure}
 
-    Pola \textit{Debugging} ini akan mendukung Pola Pembuatan Kode untuk mengetahui apakah peserta melakukan kecurangan. Tetapi pola ini tidak dapat mengetahui pasti peserta yang melakukan kecurangan.
+    Pola \textit{Debugging} ini mendukung Pola Pergantian Kode untuk mengetahui apakah peserta melakukan kecurangan. Tetapi tidak dapat mengetahui pasti peserta yang melakukan kecurangan.
 
     \item Pola Perubahan Navigasi \\
-    Pola ini dapat dilihat pada \textit{events} \verb|window.focus|, \verb|window.blur|, dan \verb|window.visibility|\\\verb|change|. Pola ini dilihat dengan membandingkan seberapa sering pengguna mengubah navigasi dalam sesi mengerjakan kode program. 
-    Gambar \ref{fig:5:2:3:navigation} menunjukkan perbedaan bagan histrogram \textit{event} \verb|window.focus|, \verb|window.blur|, dan \verb|window.visibilitychange| pada peserta yang men-\textit{copy} kode program dari jawaban \textit{online} dan peserta yang mengerjakannya hanya pada website SharIF Judge.  
+    Pola ini dapat terlihat pada \textit{events} \verb|window.focus|, \verb|window.blur|, dan \verb|window.visibility|\\\verb|change|. Pola ini dilihat dengan membandingkan seberapa sering pengguna mengubah navigasi dalam sesi mengerjakan kode program. 
+    Gambar \ref{fig:5:2:3:navigation} menunjukkan perbedaan bagan histrogram \textit{event} \verb|window.focus|, \verb|window.blur|, dan \verb|window.visibilitychange| pada peserta yang men-\textit{copy} kode program dari jawaban \textit{online} pada saat mengerjakan soal dan peserta yang mengerjakan soal hanya pada website SharIF Judge.  
 
     \begin{figure}[H]
         \centering
@@ -406,21 +404,21 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
         \label{fig:5:2:3:navigation}
     \end{figure}
 
-    Pola Perubahan Navigasi ini dapat diukur dengan membatasi perubahan \textit{tab} atau fokus web page untuk waktu tertentu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
+    Pola Perubahan Navigasi dapat diukur dengan membatasi perubahan \textit{event} tersebut dalam waktu tertentu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
 
     \item Pola Berpikir \\
     Pola ini dapat dilihat pada keseluruhan \textit{events} yang terjadi. Pada Pola ini dapat dilihat dari saat pemberhentian peserta sebelum melakukan perubahan yang kompleks terhadap kode program dan juga keseringannya terjadinya pemberhentian.
     
-    \begin{figure}[H]
+    \begin{figure}
         \centering
-        \includegraphics[width=0.85\textwidth]{experiment/berpikir-2.png}
+        \includegraphics[width=\textwidth]{experiment/berpikir-2.png}
         \caption{Bagan Histogram Perubahan}
         \label{fig:5:2:3:berpikir}
     \end{figure}
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
-        \includegraphics[width=0.85\textwidth]{experiment/non-berpikir.png}
+        \includegraphics[width=\textwidth]{experiment/non-berpikir.png}
         \caption{Bagan Histogram Perubahan}
         \label{fig:5:2:3:tidakberpikir}
     \end{figure}
@@ -428,9 +426,11 @@ Analisa ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan 
     Gambar \ref{fig:5:2:3:berpikir} memiliki histogram yang dipisah setiap sepuluh detik dan memiliki waktu yang cukup lama sebelum melakukan perubahan yang cukup besar. Sebaliknya Gambar \ref{fig:5:2:3:tidakberpikir} menunjukkan peserta yang men-\textit{copy} kode dari sumber jawaban \textit{online}. Bagan ini menunjukkan lebih seringnya berhenti untuk melihat jawaban terlebih dahulu dan durasi pemberhentiannya lebih kecil dibandingkan bagan histogram pertama.
 
     Pola ini dinilai dengan memberikan batas frekuensi berpikir dan lamanya berpikir dalam suatu waktu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
+
+    \newpage
     
     \item Pola \textit{Copy-Paste} \\
-    Pola ini merupakan pola sederhana dimana jika terjadinya penambahan kode yang panjang tetapi tidak melakukan penghapusan yang panjang terlebih dahulu, maka akan diduga melakukan kecurangan.
+    Pola ini merupakan pola sederhana dimana jika terjadinya penambahan kode yang panjang atau besar tetapi tidak melakukan penghapusan yang panjang atau besar terlebih dahulu, maka akan diduga melakukan kecurangan.
 
 \end{itemize}
 

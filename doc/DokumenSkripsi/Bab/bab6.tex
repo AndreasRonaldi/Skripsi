@@ -4,20 +4,34 @@
 Bab ini akan membahas kesimpulan dari hasil analisis, perancangan, implementasi, pengujian, dan saran-saran untuk pengembangan yang dapat dipertimbangkan.
 
 \section{Kesimpulan}
-Berdasarkan proses dan hasil analisis, perancagan, implementasi, dan pengujian perangkat lunak yang telah dibuat, maka diperoleh kesimpulan sebagai berikut:
+Berdasarkan proses dan hasil analisis, perancangan, implementasi, dan pengujian perangkat lunak yang telah dibuat, maka diperoleh kesimpulan sebagai berikut:
 
 \begin{enumerate}
-	\item Implementasi fitur merekam dan memutar ulang ketikan pada SharIF judge berhasil dikembangkan dengan memanfaatkan fitur \textit{Library ace}, dan fitur pada javascript.
+	\item Implementasi fitur merekam dan memutar ulang ketikan pada SharIF judge berhasil dikembangkan dengan memanfaatkan fitur dalam \textit{CodeIgniter}, \textit{library twig} sebagai tampilan, \textit{library ace} sebagai editor kode, \textit{library Chart.js} sebagai pembuat bagan dan fitur pada \textit{JavaScript}.
 	
-	\item Fitur pemutaran ulang ini dapat membantu dosen dalam menganalisa proses berpikir mahasiswa saat menyelesaikan sebuah masalah pemrograman dan menjadi bukti indikasi terjadinya kecurangan.
+	\item Fitur pemutaran ulang ini dapat membantu dosen dalam menganalisis proses berpikir mahasiswa saat menyelesaikan sebuah masalah pemrograman dan menjadi bukti indikasi terjadinya kecurangan. Beberapa contoh pemahaman dalam analisis tersebut adalah:
+	\begin{itemize}
+		\item Pola Pergantian Kode \\
+		Pola ini menggunakan nilai \textit{Code Churn Rate} untuk menduga terjadinya kecurangan. Jika nilai tinggi akan mencerminkan proses \textit{debugging} oleh mahasiswa, sebaliknya jika nilai rendah maka tidak ada proses menulis ulang yang biasa dilakukan oleh mahasiswa. Tetapi pola ini dapat terjadinya \textit{false positive} dimana jika mahasiswa sudah mahir, nilai tersebut akan rendah dan dapat diduga melakukan kecurangan.
+		\item Pola \textit{Debugging} \\
+		Pola ini menggunakan nilai konsentrasi perubahan kode pada area tertentu dan nilai banyak perubahan input dan aksi \textit{Execute} oleh mahasiswa. Semakin tinggi kedua nilai tersebut, maka semakin tinggi juga proses \textit{debugging} oleh mahasiswa. Pola ini digunakan bersamaan dengan pola pergantian kode sebagai dukungan pola tersebut. Tetapi pola ini juga memiliki kesalahan yang sama dengan pola pergantian kode.
+		\item Pola Perubahan Navigasi \\
+		Pola ini menggunakan banyak pergantian fokus oleh mahasiswa. Fokus yang dimaksud adalah perubahan \textit{tab} dan aplikasi yang difokuskan selain SharIF Judge. Semakin tinggi pergantian fokus, semakin tinggi juga kecurigaan terhadap mahasiswa diduga melakukan kecurangan dengan menggunakan situs atau aplikasi lainnya. Tetapi \textit{false positive} dapat terjadi ketika pengguna melihat masalah pada \textit{tab} lain dan saat diberikan kebebasan untuk membuka dokumentasi bahasa pemrograman. Hal tersebut dapat dikurangi dengan menggunakan batas frekuensi perubahan navigasi dalam suatu waktu tertentu.
+		\item Pola Berpikir \\
+		Pola ini dinilai dengan memberikan batas frekuensi berpikir atau jeda dalam melakukan perubahan besar dan lamanya berpikir dalam suatu waktu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
+		\item Pola \textit{Copy-Paste} \\
+		Pola ini dinilai dengan seberapa besar penambahan kode tetapi tidak melakukan penghapusan kode sebelumnya. Jika terdapat penambahan kode yang besar tetapi tidak ada penghapusan kode sebelumnya, maka mahasiswa dapat diduga melakukan kecurangan dengan melakukan \textit{copy-paste} pada editor kode.
+	\end{itemize}
+
+	Pola-pola di atas dapat digabungkan menjadi sebuah nilai dengan menggunakan bobot dan menambahkan seluruh nilai pola-pola menjadi satu yang dapat direpresentasikan sebagai persentase terjadinya kecurangan pada rekaman tersebut. Karena eksperimen yang dilakukan berskala kecil, belum ada nilai pasti yang menandakan batasan diduga kecurangan.
 \end{enumerate}
 
 \section{Saran}
-Berdasarkan proses dan hasil analisis, perancagan, implementasi, dan pengujian perangkat lunak yang telah dibuat, maka diperoleh saran-saran sebagai berikut:
+Berdasarkan proses dan hasil analisis, perancangan, implementasi, dan pengujian perangkat lunak yang telah dibuat, maka diperoleh saran-saran sebagai berikut:
 
 \begin{enumerate}
-	\item Menambahkan analisis otomatis untuk mendeteksi pola kecuranga dari data ketikan.
+	\item Menambahkan analisis otomatis untuk mendeteksi pola kecurangan dari data ketikan.
 	\item Optimasi penyimpanan data rekaman dengan kompresi data.
-	\item Pada saat pengujian, banyak peserta yang menyampaikan keluhan mengenai perilaku IDE terutama untuk mengetahui kesalahan dalam kode program berbahasa \textit{python}. Maka IDE dapat dioptimasi agar kesalahan dalam kode program dapat dimunculkan.
+	\item Pada saat pengujian, banyak peserta yang menyampaikan keluhan mengenai perilaku IDE terutama untuk mengetahui kesalahan dalam kode program berbahasa \textit{Python}. Maka IDE dapat dioptimasi agar kesalahan dalam kode program dapat dimunculkan.
 	\item Menambahkan sebuah pilihan pada saat pembuatan tugas atau \textit{assignment} untuk menyalakan \textit{auto-complete} kode dalam SharIF Judge.
 \end{enumerate}

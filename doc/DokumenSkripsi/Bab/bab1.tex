@@ -4,9 +4,9 @@
 \section{Latar Belakang}
 \label{sec:1:latar_belakang}
 
-Institusi yang memberikan pendidikan, perlu memiliki cara untuk mengetahui pemahaman pelajarnya. Salah satu caranya adalah dengan memberikan tugas. Tugas merupakan sebuah bentuk penilaian dari pengajar kepada pelajarnya~\cite{febriana:plagiarisme}. Tugas diberikan kepada pelajar untuk membantu pelajar mendalami materi yang sudah diberikan sebelumnya oleh pengajar dan juga untuk melihat seberapa jauh pemahaman pelajar terhadap materi yang sudah diberikan.
+Institusi yang memberikan pendidikan, perlu memiliki cara untuk mengetahui pemahaman pelajarnya. Salah satu caranya adalah dengan memberikan tugas. Tugas merupakan sebuah bentuk penilaian oleh pengajar kepada pelajarnya~\cite{febriana:plagiarisme}. Tugas diberikan kepada pelajar untuk membantu pelajar mendalami materi yang sudah diberikan sebelumnya oleh pengajar dan juga untuk melihat seberapa jauh pemahaman pelajar terhadap materi yang sudah diberikan.
 
-Pada bidang informatika, banyak materi pembelajaran yang dapat diberikan. Salah satu pembelajaran utama dalam bidang informatika adalah keterampilan pemrograman. Oleh karena itu, diperlukan sebuah sistem untuk melatih keterampilan pemrograman yaitu dengan memberikan tugas menulis kode program sesuai dengan petunjuk yang diberikan dan program tersebut dapat berjalan sesuai dengan petunjuk~\cite{onder:judge}. Secara tradisional, tugas ini diberikan dengan cara pengajar menyiapkan dan mendistribusikan tugas tersebut kepada pelajar, kemudian dikumpulkan kembali hasil program pekerjaan pelajar, dan pengajar akan menilai kode program sesuai ketepatan dengan program yang diinginkan secara manual seperti Gambar \ref{fig:1:tradisional}. Karena menilai kode program mencakup keluaran program dan juga analisis kode, maka proses tersebut memakan waktu yang cukup lama untuk dilakukan. 
+Pada bidang informatika, banyak materi pembelajaran yang dapat diberikan. Salah satu pembelajaran utama dalam bidang informatika adalah keterampilan pemrograman. Oleh karena itu, diperlukan sebuah sistem untuk melatih keterampilan pemrograman yaitu dengan memberikan tugas menulis kode program sesuai dengan petunjuk yang diberikan dan program tersebut dapat berjalan sesuai dengan petunjuk~\cite{onder:judge}. Secara tradisional, tugas ini diberikan dengan cara pengajar menyiapkan dan mendistribusikan tugas tersebut kepada pelajar, kemudian dikumpulkan kembali hasil program pekerjaan pelajar, dan pengajar akan menilai kode program sesuai ketepatan dengan program yang diinginkan secara manual seperti Gambar \ref{fig:1:tradisional}. Karena menilai kode program mencakup keluaran program dan juga analisis kode, maka proses tersebut memerlukan waktu yang cukup lama. 
 % Walaupun begitu, cara tradisional ini masih bekerja jika jumlah pelajarnya sedikit.
 Meskipun demikian, cara tradisional \mbox{masih dapat digunakan jika jumlah siswanya sedikit.}
 
@@ -34,8 +34,8 @@ Sebagian besar program yang bersifat algoritmik hanyak perlu mengambil \textit{i
 \vspace{-0.25cm}
 
 Tugas pemrograman sudah menjadi keseharian dalam pembelajaran pada bidang informatika.
-Termasuk pada perguruan tinggi pada bidang informatika, maka \textit{online judge} menjadi sebuah kebutuhan termasuk pada Universitas Katolik Parahyangan atau yang biasa disebut UNPAR.
-\textit{Online Judge} yang digunakan oleh UNPAR dinamakan SharIF-Judge~\cite{stillmen:sharif} yang merupakan hasil dimodifikasi oleh Stillmen Vallian terhadap Sharif-Judge~\cite{javed:sharif} buatan Mohammad Javad Naderi yang dibuat menggunakan \textit{framework} CodeIgniter dan Bash. Gambar~\ref{fig:1:dashboardpng} merupakan tampilan halaman utama setelah memasuki situs web SharIF-Judge dalam \textit{browser} yaitu halaman \textit{Dashboard}.
+Termasuk pada perguruan tinggi pada bidang informatika, maka \textit{online judge} menjadi sebuah kebutuhan, termasuk di Universitas Katolik Parahyangan atau yang biasa disebut UNPAR.
+\textit{Online Judge} yang digunakan oleh UNPAR dinamakan SharIF-Judge~\cite{stillmen:sharif} yang merupakan hasil modifikasi oleh Stillmen Vallian terhadap Sharif-Judge~\cite{javed:sharif} buatan Mohammad Javad Naderi yang dibuat menggunakan \textit{framework} CodeIgniter dan Bash. Gambar~\ref{fig:1:dashboardpng} merupakan tampilan halaman utama setelah memasuki situs web SharIF-Judge dalam \textit{browser} yaitu halaman \textit{Dashboard}.
 
 \begin{figure}[H]
     \centering
@@ -45,11 +45,11 @@ Termasuk pada perguruan tinggi pada bidang informatika, maka \textit{online judg
     \vspace{-0.5cm}
 \end{figure}
 
-Ujian juga merupakan sebuah bentuk penilaian dari pengajar kepada pelajarnya. Tentunya pelajar maupun mahasiswa ingin memperoleh nilai yang memuaskan dalam ujiannya. Banyak cara yang dilakukan oleh pelajar maupun mahasiswa untuk memperoleh nilai tersebut, salah satunya adalah dengan melakukan kecurangan yaitu \textit{copy-paste} atau menyalin jawaban teman atau rekan mereka~\cite{febriana:plagiarisme}. Praktik ini diperparah jika ujian dilakukan secara \textit{online}, dikarenakan pelajar dapat mengakses berbagai fasilitas di internet. Oleh karena itu, diperlukanyna sebuah sistem pada sistem \textit{online judge} untuk mengawasi saat terjadinya ujian \textit{online}.
+Ujian juga merupakan bentuk penilaian oleh pengajar kepada pelajarnya. Tentunya pelajar maupun mahasiswa ingin memperoleh nilai yang memuaskan dalam ujiannya. Banyak cara yang dilakukan oleh pelajar maupun mahasiswa untuk memperoleh nilai tersebut, salah satunya adalah dengan melakukan kecurangan yaitu \textit{copy-paste} atau menyalin jawaban teman atau rekan mereka~\cite{febriana:plagiarisme}. Praktik ini diperparah jika ujian dilakukan secara \textit{online}, dikarenakan pelajar dapat mengakses berbagai fasilitas di internet. Oleh karena itu, diperlukan sebuah sistem pada sistem \textit{online judge} untuk mengawasi saat terjadinya ujian \textit{online}.
 
 Pada saat siswa mengerjakan tugas maupun ujian pembuatan kode program, umumnya pengerjaan kode tersebut dilakukan pada aplikasi eksternal seperti \textit{Visual Studio Code} atau \textit{notepad}. Hal ini juga terjadi pada sistem dalam UNPAR dimana mahasiswa akan membuat kode program pada aplikasi eksternal. Ini membuat pengawasan saat pembuatan kode program lebih sulit untuk dilakukan, terlebih jika ujian dilakukan secara \textit{online}. Maka dari itu, Nicholas Aditya Halim memodifikasi SharIF Judge agar semua sistem pemberian tugas seperti pada Gambar \ref{fig:1:onlinejudge} dapat dilakukan dalam sistem yang sama yaitu pada SharIF Judge. Sistem yang bangun oleh Nicholas Aditya Halim adalah ``Implementasi editor kode pada Sharif Judge''~\cite{nicholas:sharif}, dimana SharIF Judge ditambahkan sebuah \textit{Integrated Development Environment} atau yang disebut dengan IDE. IDE merupakan sebuah sistem yang memiliki kemampuan untuk membuat kode dalam editor kode dan menjalankan kode program tersebut. Dengan adanya IDE, seluruh proses pembuatan kode program dapat dilakukan dalam SharIF Judge. Maka dari itu, seluruh proses sistem pemberian tugas dapat dilakukan dalam satu sistem saja, yaitu SharIF Judge.
 
-Walaupun begitu, pada dasarnya IDE tidak dapat mengawasi jika terjadinya praktik \textit{copy-paste}. Maka dari itu pada tugas akhir ini, IDE pada SharIF Judge akan dimodifikasi untuk menangani hal tersebut dengan ditambahkannya fitur untuk merekam semua ketikan atau kejadian dalam editor kode dalam IDE. Lalu ketikan atau kejadian dalam editor dapat di putar kembali seperti rekaman. Fitur ini akan membuat pengawasan terhadap kegiatan kuliah lebih mudah untuk pengawas dan dapat menjadi bukti kecurangan jika dibutuhkan. Dalam tugas akhir ini juga, akan membahas analisa sederhana mengenai pola yang muncul pada data rekaman pemutaran ulang.
+Walaupun begitu, pada dasarnya IDE tidak dapat mengawasi jika terjadinya praktik \textit{copy-paste}. Maka dari itu pada tugas akhir ini, IDE pada SharIF Judge akan dimodifikasi untuk menangani hal tersebut dengan ditambahkan fitur untuk merekam semua ketikan atau kejadian dalam editor kode dalam IDE. Lalu ketikan atau kejadian dalam editor dapat diputar kembali seperti rekaman. Fitur ini akan membuat pengawasan terhadap kegiatan kuliah lebih mudah untuk pengawas dan dapat menjadi bukti kecurangan jika dibutuhkan. Dalam tugas akhir ini juga, akan membahas analisis sederhana mengenai pola yang muncul pada data rekaman pemutaran ulang.
 
 \section{Rumusan Masalah}
 \label{sec:1:rumusan}
@@ -58,7 +58,7 @@ Rumusan Masalah yang akan dibahas pada tugas akhir ini adalah:
 \begin{enumerate}
     \item Bagaimana merencanakan dan mengimplementasikan perekaman dan pemutaran ulang ketikan mahasiswa pada IDE SharIF-Judge?
     \item Bagaimana cara menyimpan data rekaman pemutaran ulang mahasiswa?
-    \item Bagaimana menganalisa data rekaman pemutaran ulang mahasiswa?
+    \item Bagaimana menganalisis data rekaman pemutaran ulang mahasiswa?
 \end{enumerate}
 
 \section{Tujuan}
@@ -68,7 +68,7 @@ Tujuan yang ingin dicapai skripsi ini adalah sebagai berikut:
 \begin{enumerate}
     \item Merencanakan dan mengimplementasikan perekaman dan pemutaran ulang ketikan mahasiswa pada IDE SharIF-Judge.
     \item Mencari cara penyimpanan data efektif dan sesuai dengan sistem yang sudah ada dan mengimplementasikannya pada perekaman dan pemutaran ulang ketikan.
-    \item Menganalisa data rekaman hasil eksperimen mengenai pola yang muncul dengan menvisualisasikan data menjadi bagan-bagan seperti \textit{histogram}. 
+    \item Menganalisis data rekaman hasil eksperimen mengenai pola yang muncul dengan memvisualisasikan data menjadi bagan-bagan seperti \textit{histogram}. 
 \end{enumerate}
 
 \section{Batasan Masalah}
@@ -78,7 +78,7 @@ Pada pengerjaan tugas akhir ini terhadap batasan sebagai berikut:
 \begin{itemize}
     % \item Perangkat lunak SharIF Judge hanya digunakan pada lingkungan Teknik Informatika Unpar.
     \item Perangkat lunak SharIF Judge hanya digunakan pada lingkungan mahasiswa yang menguasai hal mengenai pemrograman.
-    \item Pengujian perangkat lunak dilakukan pada dalam sistem tertutup di mana akan  diawasi.
+    \item Pengujian perangkat lunak dilakukan dalam sistem tertutup di mana akan  diawasi.
 \end{itemize}
 
 \section{Metodologi}
@@ -90,7 +90,7 @@ Metodologi pengerjaan tugas akhir ini adalah sebagai berikut:
     \item Merancang sistem perekaman dan pemutaran ulang ketikan berbasis web untuk SharIF Judge
     \item Mengimplementasikan IDE berbasis web pada SharIF Judge.
     \item Melakukan pengujian dan eksperimen.
-    \item Menganalisa hasil eksperimen.
+    \item Menganalisis hasil eksperimen.
     \item Menulis dokumen tugas akhir.
 \end{enumerate}
 
@@ -108,7 +108,7 @@ Sistematika pembahasan skripsi ini adalah sebagai berikut:
     \item \textbf{Bab 4:} Perancangan \\
           Membahas perancangan fitur yang akan diimplementasikan pada SharIF Judge.
     \item \textbf{Bab 5:} Implementasi dan Pengujian \\
-          Membahas implementasi fitur pada SharIF Judge dan pengujian yang dilakukan beserta dengan analisa hasil pengujian.
+          Membahas implementasi fitur pada SharIF Judge dan pengujian yang dilakukan beserta dengan analisis hasil pengujian.
     \item \textbf{Bab 6:} Kesimpulan dan Saran \\
           Membahas kesimpulan dari penelitian ini dan saran untuk penelitian berikutnya.
 \end{itemize}
