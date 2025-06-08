@@ -127,7 +127,7 @@ Fitur penyimpanan rekaman pada sistem bertujuan untuk menyimpan data secara perm
     File akan disimpan dalam direktori yang sama dengan penyimpanan kode \textit{submission} yang dijelaskan pada Bagian \ref{sub:3:1:penyimpanankode}. File akan diisi secara langsung oleh data rekaman dan tidak diubah oleh \textit{server}. Penamaan file dapat dibagi berdasarkan aksi yang membuat pengguna mengirimkan data rekaman. Untuk aksi \textit{save} dan \textit{execute}, file dengan data rekaman akan disimpan dengan nama \verb|recording|. Untuk aksi \textit{submit}, file akan disimpan dengan nama \verb|recording| dilanjutkan dengan sebuah `-' dan \textit{submit id} yang dibuat. File tersebut memiliki tipe data yang sama yaitu JSON karena itu extensi file yang digunakan adalah \verb|.json|.
  
     \item Menyimpan Data Dalam Database \\
-    Saat penyimpanan data ke dalam file sistem berhasil, maka penyimpanan kedalam database juga akan dilakukan. Data yang akan disimpan kedalam database akan digunakan untuk mendaftar rekaman yang ada dalam sistem, maka data yang akan disimpan bukan data rekaman melainkan data statistik. Berikut merupakan data yang akan disimpan ke dalam Database:
+    Saat penyimpanan data ke dalam file sistem berhasil, maka penyimpanan ke dalam database akan dilakukan. Data yang akan disimpan kedalam database akan digunakan untuk mendaftar rekaman yang ada dalam sistem, maka data yang akan disimpan bukan data rekaman melainkan data statistik. Berikut merupakan data yang akan disimpan ke dalam Database:
     \begin{itemize}
         \item \verb|rec_id|: pengenal rekaman yang sama dengan \textit{submit id}.  
         \item \verb|username|: nama pengguna yang mengirimkan data rekaman.
@@ -155,6 +155,8 @@ $this->db->query(
         ADD CONSTRAINT {$this->db->dbprefix('sruap_unique')} UNIQUE (rec_id, username, assignment, problem);"
 );
     \end{lstlisting}
+
+    \newpage
 
     Mengikuti arsitektural \textit{CodeIgniter}, untuk menambahkan sebuah data ke dalam database perlu menggunakan sebuah \textit{Model}. Oleh karena itu, dibutuhkannya \textit{model} baru bernama \verb|Recording_model.php| yang ditambahkan fungsi \verb|add_recording()| yang memiliki argumen yaitu seluruh data yang ingin disimpan dalam database.
 

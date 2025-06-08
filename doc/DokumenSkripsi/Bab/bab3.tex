@@ -818,7 +818,7 @@ Pada SharIF Judge, Kode yang dikumpulkan akan dijalankan satu per satu pada antr
 	\item \textit{Controller} \verb|Submit| akan memasukkan data \textit{submission} ke dalam \textit{model} \verb|Queue_model|.
 	\item \textit{Model} \verb|Queue_model| akan menyimpan data \textit{submission} pada \textit{database} \verb|submission| dan menambahkan data \verb|queue|.
 	\item Selanjutnya \textit{Controller} \verb|Submit| akan memanggil fungsi \verb|process_the_queue()| yang akan menjalankan fungsi \verb|run()| pada \textit{controller} \verb|Queueprocess|.
-	\item Lalu \verb|Queueprocess| akan menjalankan \verb|tester.sh| pada direktori \verb|tester| dengan data dari \verb|queue|.
+	\item \verb|Queueprocess| akan menjalankan \verb|tester.sh| pada direktori \verb|tester| dengan data dari \verb|queue|.
 	\item Selanjutnya \verb|tester.sh| akan menilai kode program sesuai dengan \textit{input} dan \textit{output} yang diinginkan. Lalu penilaian akan dibaca dan disimpan oleh \textit{controller} \verb|Queueprocess|.
 	\item Terakhir \verb|Queueprocess| akan menyimpan hasil penilaian pada \textit{database} \verb|submission| dan menghapus data \verb|queue| menggunakan \verb|Queue_model|.
 \end{enumerate}

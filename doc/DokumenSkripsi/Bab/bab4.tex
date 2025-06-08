@@ -63,7 +63,7 @@ Berikut merupakan penjelasan tentang format penyimpanan perekaman.
 \begin{itemize}
     \item \verb|<time>| akan menunjukkan pada milidetik berapa event terjadi setelah waktu awal perekaman dimulai. sedangkan \verb|<event>| dan \verb|<payload>| merupakan data event yang terjadi.
 
-    \item \verb|<event>| merupakan \textit{event} yang terjadi pada \verb|<time>|, pada contohnya adalah pengguna melakukan perubahan pada editor kode dengan menambahkan huruf `a', maka \textit{event} yang terjadi merupakan \textit{insert}. Semua event yang ditanggap oleh sistem akan dijelaskan pada sub Bagian \ref{sub:4:3:merekam}.
+    \item \verb|<event>| merupakan \textit{event} yang terjadi pada \verb|<time>|, contohnya adalah pengguna melakukan perubahan pada editor kode dengan menambahkan huruf `a', maka \textit{event} yang terjadi merupakan \textit{insert}. Semua event yang ditanggap akan dijelaskan pada sub Bagian \ref{sub:4:3:merekam}.
 
     \item \verb|<payload>| merupakan muatan \textit{event} yang terjadi. Muatan akan disesuaikan dengan \textit{event} yang terjadi. Sebagai contoh untuk event \textit{insert} di atas, maka isi dari \textit{event} tersebut adalah huruf `a', dan posisi kursor dalam editor kode dimana huruf tersebut dimasukkan.
 \end{itemize}
@@ -124,7 +124,7 @@ Untuk melihat semua daftar rekaman yang terjadi, maka dibutuhkannya \textit{data
     \item \textit{Controller} Submit:
           \begin{itemize}
               \item Fungsi \verb|save($type)|: \\
-                    Fungsi ini akan menambahkan \textit{metadata} rekaman pengguna ke dalam \textit{database}. \textit{Metadata} yang dimaksud adalah \textit{id problem}, \textit{id assignment}, dan pengguna rekaman ini direkam. Metadata dalam database digunakan untuk mendapatkan daftar rekaman yang belum disubmit pada sebuah \textit{problem} dalam \textit{assignment} beserta dengan nama pengguna rekaman.
+                    Fungsi ini menambahkan \textit{metadata} rekaman pengguna ke dalam \textit{database}. \textit{Metadata} yang dimaksud adalah \textit{id problem}, \textit{id assignment}, dan pengguna yang direkam. Metadata dalam database digunakan untuk mendapatkan daftar rekaman yang belum disubmit pada sebuah \textit{problem} dalam \textit{assignment} beserta dengan nama pengguna rekaman.
               \item Fungsi \verb|_submit($data, $problem_id, $language, $user_dir)|: \\
                     Perubahan untuk fitur melihat daftar rekaman akan menambahkan \textit{metadata} ke dalam \textit{database} sebagai daftar rekaman yang sudah di submit. \textit{Metadata} yang dimaksud adalah \textit{id problem}, \textit{id assignment}, dan pengguna yang direkam. Metadata dalam database digunakan untuk mendapatkan daftar rekaman yang sudah disubmit pada sebuah \textit{problem} dalam \textit{assignment} disertai dengan pengguna yang direkam.
           \end{itemize}
@@ -136,7 +136,7 @@ Untuk melihat semua daftar rekaman yang terjadi, maka dibutuhkannya \textit{data
           Sebuah \textit{model} baru yang menangani segala hal mengenai penyimpanan dan pengambilan data rekaman dalam \textit{database}. Fungsi-fungsi yang direncanakan untuk diimplementasikan dalam \textit{model} Recording adalah sebagai berikut:
           \begin{itemize}
               \item Fungsi \verb|get_recording()|: \\
-                    Fungsi ini digunakan untuk mendapatkan seluruh daftar rekaman dalam database, fungsi ini juga dapat menyaring daftar rekaman berdasarkan \textit{assignment}, \textit{problem}, dan pengguna.
+                    Fungsi digunakan untuk mendapatkan seluruh daftar rekaman dalam database. Fungsi ini dapat menyaring daftar rekaman berdasarkan \textit{assignment}, \textit{problem}, dan pengguna.
               \item Fungsi \verb|add_recording()|: \\
                     Fungsi ini digunakan untuk menyimpan sebuah rekaman ke dalam database.
           \end{itemize}
