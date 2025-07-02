@@ -518,3 +518,44 @@ Kode \ref{kode:2:6:chartjs} merupakan contoh penggunaan \textit{library} Chart.j
 	\caption{Hasil Halaman Web \textit{Library} Chart.js}
 	\label{fig:2:6:chartjs}
 \end{figure}
+
+\section{Code Churn}
+
+Code Churn merujuk pada perubahan yang dilakukan pada kode sumber dalam suatu perangkat lunak selama periode pengembangan tertentu. Perubahan ini dapat mencakup penambahan, penghapusan, atau perubahan pada baris kode. Konsep Code Churn digunakan untuk mengukur tingkat dinamika pengembangan perangkat lunak serta mengidentifikasi potensi ketidakstabilan atau area yang memerlukan perhatian lebih dalam basis kode.
+
+Kode yang baru diubah biasanya mengalami beberapa perubahan. Frekuensi perubahan kode dalam periode waktu tertentu dapat bervariasi karena beberapa faktor dan pergantian kode dapat menjadi baik atau buruk tergantung pada kapan dan mengapa hal itu terjadi.
+
+Misalnya, teknisi sering menguji, menulis ulang, dan memeriksa beberapa solusi untuk suatu masalah, khususnya saat mereka bereksperimen dengan solusi untuk tugas yang sedang dikerjakan. Dalam hal ini, pergantian kode adalah hal yang baik, karena merupakan hasil dari pemecahan masalah yang kreatif.
+
+\subsection{Code Churn Rate}
+
+Code Churn Rate adalah metrik yang menghitung frekuensi perubahan kode dalam suatu rentang waktu tertentu, biasanya dinyatakan dalam persentase atau jumlah perubahan per satuan waktu. Metrik ini membantu tim pengembang dan manajer proyek untuk memahami seberapa sering suatu kode dimodifikasi dan apakah perubahan tersebut bersifat wajar atau justru menunjukkan masalah dalam pengembangan. Rumus dasar untuk menghitung Code Churn Rate adalah:
+
+\begin{center}
+	\verb|Code Churn Rate = Jumlah Kode yang Berubah / Hasil Kode|
+\end{center}
+
+\section{Deteksi Kecurangan dalam Pengerjaan Tugas Pemrograman}
+\label{sec:2:deteksikecurangan}
+
+Dalam konteks penilaian tugas pemrograman, terutama pada ujian berbasis online judge, kecurangan akademik dapat terjadi dalam berbagai bentuk, seperti plagiarisme, kolusi, atau penggunaan sumber eksternal secara tidak sah. Untuk mengidentifikasi perilaku mencurigakan, diperlukan pendekatan sistematis yang memanfaatkan analisis pola aktivitas pengguna selama proses pengodean. Subbab ini membahas lima indikator utama kecurangan dalam pemrograman, yaitu sebagai berikut:
+
+\subsection{Perubahan Kode yang sedikit}
+
+Code churn rate dapat mengukur seberapa sering kode diubah atau ditulis ulang selama proses pengembangan. Pada kondisi normal, mahasiswa cenderung melakukan banyak percobaan dan revisi, sehingga nilai code churn rate biasanya tinggi karena adanya penghapusan, penambahan, atau perbaikan kode. Namun, jika code churn rate terlalu rendah atau mendekati nol, hal ini dapat mengindikasikan kecurangan, seperti menyalin kode dari sumber eksternal tanpa melakukan modifikasi signifikan. Sebaliknya, code churn rate yang sangat tinggi juga perlu diperhatikan karena bisa menunjukkan kebingungan atau ketidakefisienan dalam menyelesaikan masalah.
+
+\subsection{Navigasi yang tidak wajar}
+
+Aktivitas navigasi yang tidak wajar, seperti sering berpindah tab, membuka aplikasi lain, atau kehilangan fokus dari IDE dalam waktu singkat, dapat menjadi tanda bahwa mahasiswa mencari bantuan dari luar. Pada pengembangan kode yang alami, mahasiswa biasanya fokus pada IDE dalam jangka waktu tertentu sebelum beralih ke referensi dokumentasi. Jika sistem merekam frekuensi perpindahan tab yang tinggi dalam waktu singkat, terutama saat ujian berlangsung, hal ini patut dicurigai sebagai upaya melakukan pencarian jawaban.
+
+\subsection{Tidak Membutuhkan Waktu untuk Berpikir}
+
+Proses pengerjaan masalah pemrograman yang alami biasanya melibatkan jeda untuk menganalisis, merancang solusi, atau melakukan pengujian pada kode program. Jika aktivitas menunjukkan ketikan yang sangat cepat tanpa jeda berarti, terutama pada kode yang kompleks, hal ini dapat mengindikasikan bahwa mahasiswa tidak benar-benar memahami kode yang ditulis. Kecurangan seperti \textit{copy-paste} atau penggunaan bantuan AI sering kali menghasilkan kode yang tiba-tiba muncul tanpa melalui proses berpikir yang lama.
+
+\subsection{Tidak Ada Aktivitas \textit{Debugging}}
+
+\textit{Debugging} adalah bagian penting dalam pemrograman, di mana mahasiswa menguji, memperbaiki kesalahan, dan menyesuaikan input dan output kode program. Jika rekaman menunjukkan sedikit upaya \textit{debugging} seperti jarang menjalankan program, tidak mengubah input percobaan, tidak banyak menulis ulang pada bagian tertentu, tidak menjalankan input yang sama untuk melihat kesalahan yang terjadi dan mendapatkan solusi sempurna hal ini dapat menandakan bahwa kode tidak dikembangkan secara mandiri. Kode yang didapat dari sumber lain biasanya dapat langsung berjalan tanpa banyak penyesuaian, berbeda dengan kode yang ditulis sendiri yang biasanya melalui beberapa iterasi perbaikan.
+
+\subsection{\textit{Copy-Pasting}}
+
+Salah satu tanda kecurangan yang paling jelas adalah adanya \textit{copy-paste}, di mana blok kode panjang tiba-tiba muncul dalam editor tanpa proses pengetikan bertahap.

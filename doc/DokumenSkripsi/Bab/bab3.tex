@@ -823,7 +823,61 @@ Pada SharIF Judge, Kode yang dikumpulkan akan dijalankan satu per satu pada antr
 	\item Terakhir \verb|Queueprocess| akan menyimpan hasil penilaian pada \textit{database} \verb|submission| dan menghapus data \verb|queue| menggunakan \verb|Queue_model|.
 \end{enumerate}
 
-% \subsection{Editor Kode}
+\subsection{Editor Kode}
+
+Integrated Development Environment (IDE) pada SharIF Judge dirancang dengan antarmuka yang terdiri atas empat komponen utama, yaitu sebagai berikut:
+
+\begin{itemize}
+	\item Editor Kode \\
+	Editor kode ditandai dengan warna merah dalam Gambar~\ref{fig:3:1:editorkode} merupakan area utama tempat pengguna menulis dan mengedit kode program. Editor ini dilengkapi dengan fitur syntax highlighting dan auto-indent untuk mendukung produktivitas pengguna.
+	\item Editor Input \\
+	Editor Input ditandai dengan warna biru dalam Gambar~\ref{fig:3:1:editorkode} berfungsi sebagai tempat pengguna memasukkan data uji yang akan digunakan saat menjalankan program melalui aksi Execute. Input yang dimasukkan akan diproses sebagai \textit{standard input} atau \textit{stdin} saat kode dijalankan.
+	\item Editor Output \\
+	Editor Output ditandai dengan warna hijau dalam Gambar~\ref{fig:3:1:editorkode} menampilkan hasil eksekusi kode program, termasuk keluaran, pesan kesalahan jika ada, dan waktu komputasi. Konten pada bagian ini dihasilkan secara otomatis setiap aksi Execute dilakukan.
+	\item Tombol Aksi \\
+	Tombol Aksi ditandai dengan warna kuning dalam Gambar~\ref{fig:3:1:editorkode} menyediakan tiga tombol aksi interaksi yaitu sebagai berikut:
+	\item PDF Viewer \\
+	PDF Viewer ditandai dengan warna kuning dalam Gambar~\ref{fig:3:1:editorkode} merupakan sebuah komponen dalam IDE yang digunakan untuk menampilkan soal atau instruksi tugas kepada mahasiswa.
+
+	\begin{itemize}
+		\item \textbf{\textit{Save}}: Menyimpan sementara kode program tanpa menjalankan atau mengumpulkannya.
+		\item \textbf{\textit{Save \& Execute}}: Menyimpan kode sekaligus menjalankannya dengan input yang tersedia di Editor Input. Hasilnya ditampilkan di Editor Output.
+		\item \textbf{\textit{Save \& Submit}}: Menyimpan dan mengumpulkan kode sebagai submission untuk dinilai oleh SharIF Judge.  
+	\end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{editor-kode-colored.png}
+	\caption{Editor Kode SharIF Judge}
+	\label{fig:3:1:editorkode}
+\end{figure}
+
+Fitur Execute dan Submit merupakan inti dari alur kerja SharIF Judge. Execute memungkinkan pengguna menguji kode secara mandiri, sementara Submit mengirim kode ke sistem penilaian otomatis untuk evaluasi akhir. Desain warna yang konsisten ini memudahkan pengguna dalam mengidentifikasi fungsi masing-masing komponen selama sesi pemrograman.
+
+\section{Analisis Pola Kecurangan pada Rekaman Ketikan}
+
+Berdasarkan indikator yang dijelaskan pada Bagian~\ref{sec:2:deteksikecurangan}, sistem pemutaran ulang SharIF Judge akan mendeteksi pola perilaku yang mencurigakan. Bagian ini menjelaskan implementasi dari indikator-indikator tersebut serta metode analisis yang digunakan untuk mengidentifikasi kecurangan.
+
+\subsection{Analisis Perubahan Kode}
+
+Sistem menghitung code churn rate dengan membandingkan jumlah karakter yang ditambahkan, dihapus selama sesi pengerjaan. Rekaman ketikan yang menunjukkan perubahan minimal seperti angka code churn rate mendekati angka satu, akan ditandai sebagai potensi kecurangan. Tetapi code churn rate ini akan dibandingkan dengan keseluruhan code churn rate pada permasalahan tersebut agar lebih memiliki toleransi jika permasalahan yang diberikan merupakan permasalahan yang mudah.
+
+\subsection{Analisis Aktivitas Navigasi}
+
+Sistem akan merekam setiap peristiwa kehilangan fokus pada IDE, termasuk perpindahan tab browser. Pola kecurangan ditandai dengan frekuensi navigasi tinggi dalam waktu per jam yang berkorelasi.
+
+\subsection{Analisis Pengukuran Jeda Berpikir}
+
+Durasi jeda antara ketikan dianalisis untuk mengidentifikasi ketidakwajaran. Pada pemrograman alami, jeda lebih dari 10 detik sering muncul saat mahasiswa merancang solusi atau menguji logika. Rekaman yang menunjukkan ketikan berkelanjutan tanpa jeda atau jeda sangat singkat seperti 5 detik dan sering dianggap sebagai indikasi copy-paste. Sebaliknya juga jika jeda panjang juga dapat menjadi potensi kecurangan. Tetapi pengukuran ini juga akan dibandingkan dengan rata-rata pada permasalahan agar lebih toleransi.
+
+\subsection{Analisis Deteksi Debugging}
+
+Aktivitas debugging dapat diindikasikan dari frekuensi eksekusi kode, perubahan input, modifikasi pada area spesifik, dan perubahan hasil output dengan input yang sama. Semua aktivasitas tersebut akan direkam dan jika tidak ada indikasi debugging tersebut, kecurangan diduga terjadi.
+
+\subsection{Analisis \textit{Copy-Pasting}}
+
+Jika pada rekaman terdapat pemasukkan kode yang besar tanpa melakukan penghapusan dengan besar yang sama, maka dapat diduga bahwa dia mendapatkan kode eksternal.
 
 \section{Analisis Sistem Usulan}
 \label{sec:3:sistemusulan}
@@ -839,7 +893,7 @@ Pembuatan sistem pemutaran ulang ketikan membutuhkan 4 fitur baru yaitu fitur pe
 
 \subsection{Fitur perekaman perubahan atau event}
 \label{sub:3:2:rekam}
-Fitur perekaman pada editor kode bukan hanya perubahan text melainkan pada seluruh kejadian atau \textit{event} yang terjadi pada editor kode seperti contohnya adalah perubahan posisi kursor maupun pilihan pada kode. Fitur perekaman perubahan akan otomatis oleh browser dengan bantuan \textit{JavaScript} yang ada pada browser pengguna dan akan dijalankan saat \mbox{sebuah \textit{event} terjadi pada editor kode.}
+Fitur perekaman pada editor kode bukan hanya perubahan text melainkan pada seluruh kejadian atau \textit{event} yang terjadi pada editor kode seperti contohnya adalah perubahan posisi kursor maupun pilihan pada kode. Fitur perekaman perubahan akan otomatis oleh browser dengan bantuan \textit{JavaScript} yang ada pada browser pengguna dan akan dijalankan saat sebuah \textit{event} terjadi pada editor kode. Fitur ini membutuhkan perubahan pada \textit{Assets} \verb|shj_submit.js| untuk merekam event yang dibutuhkan.
 
 \subsubsection{Sequence Diagram}
 Gambar \ref{fig:3:2:seqdia_rekam} merupakan sebuah \textit{sequence} diagram yang menunjukkan bagaimana fitur perekaman perubahan atau event akan berintegrasi dengan sistem IDE akan bekerja pada SharIF Judge.
@@ -852,11 +906,11 @@ Gambar \ref{fig:3:2:seqdia_rekam} merupakan sebuah \textit{sequence} diagram yan
 
 \subsection{Fitur penyimpanan rekaman perubahan}
 \label{sub:3:2:save}
-Fitur penyimpanan rekaman perubahan akan dilakukan secara otomatis saat pengguna melakukan tindakan menyimpan kode program. Fitur penyimpanan rekaman akan berintegrasi dengan fitur penyimpanan kode program yang sudah ada. Pada fitur ini daftar rekaman akan diperbaharui dengan adanya rekaman baru atau perubahan pada \textit{file} rekaman.
+Fitur penyimpanan rekaman perubahan akan dilakukan secara otomatis saat pengguna melakukan tindakan menyimpan kode program. Fitur penyimpanan rekaman akan berintegrasi dengan fitur penyimpanan kode program yang sudah ada. Pada fitur ini daftar rekaman akan diperbaharui dengan adanya rekaman baru atau perubahan pada \textit{file} rekaman. Fitur ini membutuhkan perubahan pada \textit{Assets} \verb|shj_submit.js|, \textit{Controller} \verb|Submit|, \textit{Model} baru untuk \verb|Rekaman| untuk mengirimkan data rekaman, mendapatkan data rekaman dan mencatat data rekaman.
 
 \subsubsection{Sequence Diagram}
 Gambar \ref{fig:3:2:seqdia_save} merupakan sebuah \textit{sequence} diagram yang menunjukkan bagaimana fitur penyimpanan rekaman perubahan akan berintegrasi dengan sistem IDE akan bekerja pada SharIF Judge.
-\begin{figure}[H]
+\begin{figure}
 	\centering
 	\includegraphics[scale=0.55]{analisis/seqdia_save.png}
 	\caption{Sequence Diagram Fitur Penyimpanan Rekaman}
@@ -865,11 +919,11 @@ Gambar \ref{fig:3:2:seqdia_save} merupakan sebuah \textit{sequence} diagram yang
 
 \subsection{Fitur melihat daftar rekaman}
 \label{sub:3:2:lookup}
-Pada sistem pemutaran ulang ketikan dibutuhkannya sebuah halaman baru yang akan dinamakan halaman rekaman. Pada halaman ini akan ditampilkan daftar rekaman untuk \textit{assignment} yang dipilih pada halaman \textit{Assignment}. Fitur ini akan dijalankan pada saat halaman rekaman dimuat ke dalam browser oleh SharIF Judge, dimana data yang dimasukkan ke dalam halaman rekaman adalah daftar rekaman tersebut dan beberapa data yang dibutuhkan.
+Pada sistem pemutaran ulang ketikan dibutuhkannya sebuah halaman baru yang akan dinamakan halaman rekaman. Pada halaman ini akan ditampilkan daftar rekaman untuk \textit{assignment} yang dipilih pada halaman \textit{Assignment}. Fitur ini akan dijalankan pada saat halaman rekaman dimuat ke dalam browser oleh SharIF Judge, dimana data yang dimasukkan ke dalam halaman rekaman adalah daftar rekaman tersebut dan beberapa data yang dibutuhkan. Fitur ini membutuhkan \textit{View} dan \textit{Controller} baru untuk membuat sebuah halaman baru untuk menunjukkan list rekaman yang ada. Fitur ini juga membuatkan penambahan pada \textit{Model} Recording untuk mendapatkan daftar rekaman yang akan ditampilkan.
 
 \subsubsection{Sequence Diagram}
 Gambar \ref{fig:3:2:seqdia_lookup} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem akan bekerja saat user akan membuka halaman rekaman pada SharIF Judge.
-\begin{figure}[H]
+\begin{figure}
 	\centering
 	\includegraphics[scale=0.55]{analisis/seqdia_lookup.png}
 	\caption{Sequence Diagram Membuka Halaman Rekaman}
@@ -879,7 +933,7 @@ Gambar \ref{fig:3:2:seqdia_lookup} merupakan \textit{sequence} diagram yang menu
 \subsection{Fitur pemutaran ulang rekaman}
 \label{sub:3:2:seerecording}
 
-Fitur pemutaran ulang rekaman akan membuat satu buah rekaman dalam daftar rekaman dalam halaman rekaman dapat ditekan oleh pengguna untuk menandakan bahwa sebuah rekaman dipilih untuk dijalankan. Saat sebuah rekaman dipilih, browser akan meminta data rekaman kepada SharIF Judge dan dengan bantuan \textit{JavaScript} akan melakukan pemutaran ulang rekaman pada sebuah editor kode yang tidak dapat diubah dalam halaman rekaman.
+Fitur pemutaran ulang rekaman akan membuat satu buah rekaman dalam daftar rekaman dalam halaman rekaman dapat ditekan oleh pengguna untuk menandakan bahwa sebuah rekaman dipilih untuk dijalankan. Saat sebuah rekaman dipilih, browser akan meminta data rekaman kepada SharIF Judge dan dengan bantuan \textit{JavaScript} akan melakukan pemutaran ulang rekaman pada sebuah editor kode yang tidak dapat diubah dalam halaman rekaman. Fitur ini membatkan penambahan ada \textit{Controller} Rekaman dan penambahan halaman baru atau \textit{View} baru untuk menunjukkan sebuah rekaman. Fitur ini juga membutuhkan \textit{Assets} baru untuk memutar ulang dari data rekaman yang didapat.
 
 \subsubsection{Sequence Diagram}
 Gambar \ref{fig:3:2:seqdia_seerecording} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem SharIF Judge bekerja dari pemilihan rekaman hingga pemutaran ulang rekaman akan terjadi.

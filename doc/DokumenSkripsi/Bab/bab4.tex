@@ -3,42 +3,41 @@
 
 Bab ini membahas tentang perancangan untuk implementasi sistem perekaman ulang dalam SharIF-Judge. Perancangan akan dilakukan dengan mempertimbangkan aspek fungsionalitas, antarmuka pengguna, penyimpanan data, serta perubahan kode yang diperlukan pada sistem yang sudah ada.
 
-\section{Rancangan Antarmuka}
+\section{Rancangan Event yang direkam}
 
-Rancangan antarmuka sistem ini dibagi menjadi dua komponen utama yaitu sistem perekaman yang terintegrasi dengan halaman \verb|Submit| yang sudah ada dan sistem pemutaran ulang yang membutuhkan pengembangan halaman baru.
+Untuk mendukung fitur pemutaran ulang ketikan pada IDE SharIF Judge, sistem perlu merekam berbagai jenis interaksi pengguna selama proses pengerjaan tugas pemrograman berlangsung. Oleh karena itu, dirancanglah sejumlah event yang akan ditangkap dan dicatat secara real-time pada IDE. Berikut merupakan \textit{event} yang akan ditangkap oleh \textit{JavaScript} dalam halaman Submit:
 
-\subsection{Sistem Rekaman}
-\label{sub:4:1:rekaman}
+\begin{itemize}
+    \item \textbf{Perubahan isi kode pada editor kode.} \\
+    Event ini merupakan interaksi utama dalam proses pemutaran ulang, karena isi kode adalah peristiwa utama dari proses pengerjaan. Tanpa merekam perubahan kode secara kronologis, sistem tidak dapat memperlihatkan perubahan kode solusi yang dibuat oleh mahasiswa.
 
-Seluruh sistem rekaman akan diimplementasikan dalam halaman Submit tidak memerlukan perubahan pada antarmuka. Gambar \ref{fig:4:1:submit} menunjukkan halaman Submit dan IDE yang sudah diimplementasikan oleh Nicholas Aditya Halim~\cite{nicholas:sharif}.
+    \item \textbf{Perubahan posisi kursor pada editor kode.} \\
+    Posisi kursor penting agar sistem tidak hanya menampilkan isi kode, tetapi juga memperlihatkan lokasi interaksi pengguna seperti proses pengerjaan aslinya.
+      
+    \item \textbf{Perubahan fokus pada web page.} \\
+    Fokus halaman direkam agar bisa diketahui apakah mahasiswa tetap di halaman atau pindah ke halaman atau aplikasi lain. Hal ini memperkuat validitas rekaman sebagai alat pemantauan perilaku.
 
-\vspace{0.75cm}
+    \item \textbf{Pergantian \textit{tab} dalam browser.} \\
+    Pergantian tab perlu ditampilkan dalam pemutaran ulang agar pengajar dapat melihat jika terdapat pola perpindahan ke luar halaman yang mencurigakan, terutama saat pengerjaan berlangsung dalam waktu terbatas.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{views/submit.png}
-    \caption{Halaman}
-    \label{fig:4:1:submit}
-\end{figure}
+    \item \textbf{Perubahan fokus pada PDF Viewer.} \\
+    Perubahan fokus pada PDF Viewer perlu direkam karena saat mahasiswa membuka atau membaca soal, fokus pada halaman utama akan berubah. Perubahan ini direkam karena pada saat mahasiswa berganti fokus pada PDF Viewer, fokus pada halaman utama akan dianggap hilang yang seharusnya tidak.
 
-\subsection{Sistem Pemutaran ulang}
-\label{sub:4:1:pemutaranulang}
+    \item \textbf{Perubahan isi pada editor \textit{input} dalam IDE.} \\
+    Input merupakan bagian dari proses pengujian program. Dengan merekamnya, pemutaran ulang dapat menampilkan bagaimana mahasiswa bereksperimen terhadap berbagai kasus uji.
 
-Pada sistem pemutaran ulang dibutuhkan dua halaman baru yaitu halaman untuk menunjukkan daftar rekaman dalam sistem dan halaman untuk pemutaran ulang sebuah rekaman. Gambar \ref{fig:4:1:listrec} merupakan rancangan antarmuka untuk halaman daftar rekaman dan Gambar \ref{fig:4:1:rec} merupakan rancangan antarmuka untuk halaman pemutaran ulang.
+    \item \textbf{Perubahan isi pada editor \textit{output} dalam IDE.} \\
+    Output membantu merekonstruksi respon dari \textit{input} setelah aksi \textit{Execute} dilakukan. Dalam sistem, hal ini menunjukkan hasil dari setiap eksekusi, termasuk output yang keliru atau tidak sesuai harapan.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{design-recording-list.jpg}
-    \caption{Rancangan Antarmuka Halaman Daftar Rekaman}
-    \label{fig:4:1:listrec}
-\end{figure}
+    \item \textbf{Aksi men-\textit{Save}.} \\
+    Tindakan menyimpan kode menandakan momen penting dalam pengerjaan. Dalam sistem, event ini menandai checkpoint logis yang bisa membantu dosen memahami iterasi solusi mahasiswa.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\textwidth]{design-recording.jpg}
-    \caption{Rancangan Antarmuka Halaman Pemutaran Ulang}
-    \label{fig:4:1:rec}
-\end{figure}
+    \item \textbf{Aksi men-\textit{Save \& Execute}.} \\
+    Pemutaran ulang yang menampilkan momen eksekusi kode memberikan gambaran apakah mahasiswa sering mencoba kodenya, yang berkaitan erat dengan proses debugging dan iterasi.
+
+    \item \textbf{Aksi men-\textit{Save \& Submit}.} \\
+    Aksi submit merupakan akhir dari proses pengerjaan. Merekam dan menampilkannya dalam sistem sangat penting untuk menandai titik akhir pengerjaan dan mengevaluasi keseluruhan proses sebelumnya.
+\end{itemize}
 
 \section{Rancangan Penyimpanan Rekaman}
 \label{sec:4:2:storerekaman}
@@ -76,6 +75,44 @@ Berikut contoh hasil untuk sebuah \textit{event insert} pada penjelasan di atas:
 
 Penyimpanan rekaman juga akan disimpan pada direktori yang sama dengan penyimpanan kode submission seperti yang dijelaskan pada Bagian \ref{sub:3:1:penyimpanankode} dengan nama file \verb|record|.
 
+
+\section{Rancangan Antarmuka}
+
+Rancangan antarmuka sistem ini dibagi menjadi dua komponen utama yaitu sistem perekaman yang terintegrasi dengan halaman \verb|Submit| yang sudah ada dan sistem pemutaran ulang yang membutuhkan pengembangan halaman baru.
+
+\subsection{Sistem Rekaman}
+\label{sub:4:1:rekaman}
+
+Seluruh sistem rekaman akan diimplementasikan dalam halaman Submit tidak memerlukan perubahan pada antarmuka. Gambar \ref{fig:4:1:submit} menunjukkan halaman Submit dan IDE yang sudah diimplementasikan oleh Nicholas Aditya Halim~\cite{nicholas:sharif}.
+
+\vspace{0.75cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{views/submit.png}
+    \caption{Halaman}
+    \label{fig:4:1:submit}
+\end{figure}
+
+\subsection{Sistem Pemutaran ulang}
+\label{sub:4:1:pemutaranulang}
+
+Pada sistem pemutaran ulang dibutuhkan dua halaman baru yaitu halaman untuk menunjukkan daftar rekaman dalam sistem dan halaman untuk pemutaran ulang sebuah rekaman. Gambar \ref{fig:4:1:listrec} merupakan rancangan antarmuka untuk halaman daftar rekaman dan Gambar \ref{fig:4:1:rec} merupakan rancangan antarmuka untuk halaman pemutaran ulang.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{design-recording-list.jpg}
+    \caption{Rancangan Antarmuka Halaman Daftar Rekaman}
+    \label{fig:4:1:listrec}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{design-recording.jpg}
+    \caption{Rancangan Antarmuka Halaman Pemutaran Ulang}
+    \label{fig:4:1:rec}
+\end{figure}
+
 \section{Rancangan Perubahan Kode}
 
 Untuk mengimplementasikan fitur yang telah diusulkan pada Bagian \ref{sec:3:sistemusulan}, diperlukan beberapa perubahan pada kode sumber SharIF-Judge. Berikut merupakan rancangan untuk setiap fitur:
@@ -83,20 +120,7 @@ Untuk mengimplementasikan fitur yang telah diusulkan pada Bagian \ref{sec:3:sist
 \subsection{Merekam perubahan atau event}
 \label{sub:4:3:merekam}
 
-Untuk menambahakan fitur ini, diperlukan perubahan pada bagian \textit{JavaScript} yaitu \verb|assets/js/|\\\verb|shj_submit.js| dalam halaman Submit. Dimana \textit{JavaScript} tersebut akan menjalankan perekaman secara otomatis saat pengguna memilih \textit{problem} yang ada dalam \textit{assignment} yang dipilih. Berikut merupakan \textit{event} yang akan ditangkap oleh \textit{JavaScript} dalam halaman Submit:
-
-\begin{itemize}
-    \item Perubahan isi kode pada editor kode.
-    \item Perubahan posisi kursor pada editor kode.
-    \item Perubahan fokus pada web page.
-    \item Pergantian \textit{tab} dalam browser.
-    \item Perubahan fokus pada PDF Viewer.
-    \item Perubahan isi pada editor \textit{input} dalam IDE.
-    \item Perubahan isi pada editor \textit{output} dalam IDE.
-    \item Aksi men-\textit{Save}.
-    \item Aksi men-\textit{Save \& Execute}.
-    \item Aksi men-\textit{Save \& Submit}.
-\end{itemize}
+Untuk menambahakan fitur ini, diperlukan perubahan pada bagian \textit{JavaScript} yaitu \verb|assets/js/|\\\verb|shj_submit.js| dalam halaman Submit. Dimana \textit{JavaScript} tersebut akan menjalankan perekaman secara otomatis saat pengguna memilih \textit{problem} yang ada dalam \textit{assignment} yang dipilih.
 
 \subsection{Menyimpan rekaman}
 \label{sub:4:3:menyimpanrekaman}
