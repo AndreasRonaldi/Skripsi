@@ -156,14 +156,14 @@ $this->db->query(
 );
     \end{lstlisting}
 
-    \newpage
-
     Mengikuti arsitektural \textit{CodeIgniter}, untuk menambahkan sebuah data ke dalam database perlu menggunakan sebuah \textit{Model}. Oleh karena itu, dibutuhkannya \textit{model} baru bernama \verb|Recording_model.php| yang ditambahkan fungsi \verb|add_recording()| yang memiliki argumen yaitu seluruh data yang ingin disimpan dalam database.
 
     Untuk aksi \textit{save} dan \textit{execute} dimana tidak adanya \textit{submit id} maka akan menjadi angka nol (`0') pada pengenal rekamannya atau \verb|rec_id| jika aksinya merupakan \textit{submit}.
 \end{enumerate}
 
 Untuk alur pengiriman data ke \textit{server}, dibutuhkannya penambahan kode ke dalam \verb|assets/js/|\\\verb|shj_submit.js|. Agar dapat menyimpan dibutuhkannya perubahan dalam kode \textit{Controller} \verb|Submit| pada fungsi \verb|save($type)| dan fungsi \verb|_submit()|. Kode pembahan terdapat pada Lampiran \ref{lamp:A}.
+
+\vspace{-0.25cm}
 
 \subsubsection{Perbaikan Implementasi}
 
@@ -213,6 +213,8 @@ Fungsi pemutaran ulang rekaman menggunakan data rekaman yang sudah disimpan dala
     Untuk menambahkan sebuah halaman baru dalam SharIF-Judge dibutuhkannya juga fungsi baru pada \textit{Controller} \verb|Recording.php|. Fungsi baru akan dinamakan \verb|index| untuk menampilkan sebuah \textit{view} baru bernama \verb|recording.twig|. Fungsi \verb|index| akan menampilkan halaman baru itu melalui rute \verb|/recording/|. Penamaan \textit{index} itu agar rute tidak memerlukan \verb|/index| pada akhir rute karena jika rute \textit{function} (Bab \ref{sub:2:2:codeigniterurls}) akan otomatis mengarah pada fungsi \verb|index| dalam kelas tersebut.
 
     Fungsi \verb|index| akan mengirim data daftar rekaman pengguna lainnya dalam masalah yang dipilih. Data tersebut akan dipakai oleh \verb|recording.twig| untuk menambahkan daftar rekaman pengguna lainnya pada \textit{assignment} dan \textit{problem} yang sama. Gambar \ref{fig:hasil:recording} merupakan antarmuka yang diimplementasikan serupa dengan perancangan pada Bab \ref{sub:4:1:pemutaranulang}.
+
+    \newpage
 
     \item Implementasi Memuat Data Rekaman \\
     \label{ssub:5:2:4:memuatdata}Data rekaman yang akan diambil sudah disimpan (Bab \ref{sub:5:2:storerekaman}) dalam sistem. Tetapi data rekaman tidak akan dikirim oleh \textit{Controller} pada saat halaman \textit{recording} dimuat, melainkan menggunakan AJAX pada halaman \textit{recording}. Maka dibutuhkannya fungsi baru pada \textit{Controller} \verb|Recording.php| dan sebuah assets \textit{JavaScript} baru bernama \verb|shj_function.js|.
@@ -315,9 +317,11 @@ Tabel \ref{tab:5:2:1:lunakpembangunan} menunjukkan spesifikasi perangkat lunak y
 
 \subsection{Eksperimen}
 
-Pengujian dilakukan untuk mengetahui permasalah yang terjadi jika IDE dalam SharIF Judge dimasukkan sistem perekaman. Hasil Pengujian juga akan dianalisis secara sederhana agar dapat dibuatnya sebuah sistem untuk mendeteksi tindakan kecurangan.
+Pengujian dilakukan untuk mengetahui dampak dan masalah yang mungkin muncul jika sistem perekaman aktivitas ditambahkan ke dalam IDE pada SharIF Judge. Selain itu, hasil dari pengujian ini juga akan digunakan untuk melakukan analisis sederhana terhadap kemungkinan penerapan sistem deteksi kecurangan berdasarkan data rekaman.
 
-Pengujian pada sistem pemutaran ulang dilakukan dengan mengajak beberapa peserta yang masih menempuh kuliah dan sudah lulus kuliah dengan mengerjakan tiga permasalahan dengan tingkat kesusahan mudah, sedang, dan sulit dalam waktu satu hari. Para peserta dianjurkan mengerjakan 2 soal yang sudah disediakan dan dapat melihat \textit{syntax} bahasa pemrograman. Pada pengujian peserta juga dapat melakukan kecurangan pada satu nomor dengan cara apapun. Kecurangan akan dianggap terjadi pada saat peserta melihat cara pengerjaan permasalah.
+Eksperimen dilakukan dengan melibatkan beberapa responden, yaitu mahasiswa aktif dan alumni yang sudah menyelesaikan studinya. Masing-masing peserta diminta untuk mengerjakan tiga soal pemrograman dengan tingkat kesulitan berbeda, yaitu mudah, sedang, dan sulit. Seluruh pengerjaan dilakukan dalam satu hari dan menggunakan sistem IDE SharIF Judge yang sudah terintegrasi dengan fitur perekaman.
+
+Dalam eksperimen ini, peserta diberi kebebasan untuk melakukan kecurangan pada salah satu soal dengan cara apa pun, misalnya menyalin jawaban dari sumber lain atau melihat pembahasan di internet. Sistem tidak membatasi bentuk kecurangan, agar rekaman yang dihasilkan mencerminkan kondisi yang mungkin terjadi pada ujian aslinya. Kecurangan dianggap terjadi apabila peserta melihat atau menggunakan cara penyelesaian soal dari luar sistem. Hasil rekaman dari setiap peserta kemudian dianalisis untuk melihat pola pengerjaan normal dan pola yang mengindikasikan adanya kecurangan.
 
 Berikut merupakan masalah yang ditemukan pada saat pengujian sistem pemutaran ulang:
 
@@ -344,8 +348,32 @@ public function remove_saveonly_recording($assignment_id, $problem_id, $username
 
 Setelah pengujian berakhir, peserta diminta untuk mengisi beberapa pertanyaan mengenai permasalahan yang dikerjakan dan juga beberapa pertanyaan mengenai pengalaman mengerjakan permasalah pemrograman. Tetapi karena tidak ada eksperimen untuk fitur melihat perekaman, tidak ada umpan balik untuk fitur melihat rekaman. 
 
-\subsubsection{analisis Hasil Pengujian}
-analisis ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan menjadi bagan histogram dalam sistem dan bagan lainnya yang dibutuhkan pada proses analisis. Ada beberapa pola yang dapat dilihat pada saat melihat histogram hasil rekaman peserta pengujian. Berikut merupakan pola yang dapat dilihat pada:
+\subsubsection{Analisis Hasil Pengujian}
+
+Sebelum membahas pola-pola yang terlihat dalam histogram hasil rekaman peserta, perlu dijelaskan bahwa setiap jenis \textit{event} atau peristiwa yang direkam ditampilkan dalam warna yang berbeda-beda. Gambar~\ref{fig:warnaevent} menunjukkan representasi warna untuk masing-masing \textit{event} yang direkam dalam histogram. Warna digunakan untuk membedakan jenis aktivitas yang dilakukan oleh peserta selama mengerjakan soal. Berikut adalah daftar \textit{event} dan warna yang digunakan secara umum:
+
+\begin{itemize}
+    \item Penambahan kode ditampilkan dengan warna hijau.
+    \item Penghapusan kode ditampilkan dengan warna merah.
+    \item Halaman aktif (fokus ke halaman IDE) menggunakan warna biru terang.
+    \item Halaman tidak aktif (keluar dari fokus halaman) menggunakan warna biru gelap.
+    \item Fokus ke PDF Viewer ditandai dengan warna kuning terang.
+    \item Keluar dari PDF Viewer ditandai dengan warna kuning gelap.
+    \item Perubahan pada bagian input menggunakan warna ungu terang.
+    \item Perubahan pada bagian output menggunakan warna ungu gelap.
+    \item Menyimpan kode ditampilkan dengan warna hitam.
+    \item Menjalankan program menggunakan warna abu-abu.
+    \item Mengumpulkan kode (submit) ditampilkan dengan warna putih.
+\end{itemize}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{experiment/warna.png}
+\caption{Representasi warna untuk setiap jenis peristiwa pada histogram}
+\label{fig:warnaevent}
+\end{figure}
+
+Analisis ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan menjadi bagan histogram dalam sistem dan bagan lainnya yang dibutuhkan pada proses analisis. Ada beberapa pola yang dapat dilihat pada saat melihat histogram hasil rekaman peserta pengujian. Berikut merupakan pola yang dapat dilihat pada:
 
 \begin{itemize}
     \item Pola Pergantian Kode \\
@@ -381,8 +409,8 @@ analisis ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan
         \caption{Bagan Heatmap Perubahan Lokasi Kode Program}
         \label{fig:5:2:3:heatmapchange}
     \end{figure}
-    
-    Peserta yang \textit{debugging} juga akan mencoba untuk mengubah input dan melakukan aksi \textit{Execute} lebih banyak dibandingkan dengan peserta yang tidak melakukan \textit{debugging} pada saat mengerjakan soal. Gambar \ref{fig:5:2:3:debug} sebelah kiri menunjukkan warna kuning sebagai perubahan input dan warna biru sebagai aksi \textit{Execute} yang dilakukan sedangkan Gambar \ref{fig:5:2:3:debug} sebelah kanan menunjukkan warna biru sebagai perubahan input dan warna merah sebagai aksi \textit{Execute} yang dilakukan. Perbedaan kedua bagan adalah frekuensi dimana aksi \textit{Execute} dilakukan dan juga perubahan input. Maka pola \textit{debugging} juga dapat dilihat melalui frekuensi aksi \textit{Execute} dan juga frekuensi perubahan input.
+
+    Peserta yang melakukan \textit{debugging} cenderung lebih sering mengubah bagian input dan mengeksekusi program dibandingkan peserta yang tidak melakukan \textit{debugging}. Gambar~\ref{fig:5:2:3:debug} sebelah kiri menunjukkan bahwa terdapat banyak aktivitas perubahan input dan eksekusi program selama pengerjaan soal. Sebaliknya, pada Gambar~\ref{fig:5:2:3:debug} sebelah kanan, jumlah perubahan input dan eksekusi program jauh lebih sedikit. Perbedaan ini menunjukkan bahwa peserta pada gambar kiri kemungkinan besar sedang melakukan \textit{debugging}, sedangkan peserta pada gambar kanan lebih langsung mengerjakan tanpa banyak percobaan atau pengujian.
 
     \begin{figure}[H]
         \centering
@@ -428,12 +456,12 @@ analisis ini dilakukan dengan melihat data yang rekaman yang sudah di proses dan
     Gambar \ref{fig:5:2:3:berpikir} memiliki histogram yang dipisah setiap sepuluh detik dan memiliki waktu yang cukup lama sebelum melakukan perubahan yang cukup besar. Sebaliknya Gambar \ref{fig:5:2:3:tidakberpikir} menunjukkan peserta yang men-\textit{copy} kode dari sumber jawaban \textit{online}. Bagan ini menunjukkan lebih seringnya berhenti untuk melihat jawaban terlebih dahulu dan durasi pemberhentiannya lebih kecil dibandingkan bagan histogram pertama.
 
     Pola ini dinilai dengan memberikan batas frekuensi berpikir dan lamanya berpikir dalam suatu waktu. Jika nilai melebihi batas, maka peserta dapat diduga melakukan kecurangan.
-
-    \newpage
     
     \item Pola \textit{Copy-Paste} \\
     Pola ini merupakan pola sederhana dimana jika terjadinya penambahan kode yang panjang atau besar tetapi tidak melakukan penghapusan yang panjang atau besar terlebih dahulu, maka akan diduga melakukan kecurangan.
 
 \end{itemize}
+
+\newpage
 
 Tetapi pola-pola tersebut dapat juga mendapatkan \textit{false positive} karena banyaknya \textit{variable} yang harus diperhatikan dalam menentukan tidakan kecurangan itu sendiri. \textit{Variable} yang dimaksudkan antara lain adalah kesulitan masalah dan pengalaman programing. Jika kesulitan masalah mudah maka peserta dapat mengerjakan dengan mudah dan tidak memerlukannya \textit{debugging}, begitu juga jika pengalaman programing yang tinggi.

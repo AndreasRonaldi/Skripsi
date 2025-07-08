@@ -102,9 +102,6 @@ Berikut merupakan penjelasan dari kelas \textit{model} dan fungsi-fungsinya yang
 		            Memperbaharui sebuah \textit{notification}.
 		      \item \verb|delete_notification($id)| \\
 		            Menghapus sebuah \textit{notification}.
-
-		            \newpage
-
 		      \item \verb|get_notification($notif_id)| \\
 		            Mengembalikan sebuah \textit{notification}.
 		      \item \verb|have_new_notification($time)| \\
@@ -150,8 +147,6 @@ Berikut merupakan penjelasan dari kelas \textit{model} dan fungsi-fungsinya yang
 		      \item \verb|get_scoreboard($assignment_id)| \\
 		            Mengembalikan \textit{scoreboard} pada sebuah \textit{assignment}.
 	      \end{itemize}
-
-	      \newpage
 
 	\item \verb|Settings_model.php| \\
 	      Model ini digunakan untuk mengelola tabel \verb|settings|. Fungsi yang dimiliki oleh \textit{model} \\\verb|Settings_model.php| adalah sebagai berikut:
@@ -336,7 +331,7 @@ Pada bagian analisis MVC terakhir, terdapat \textit{controller} yang berada pada
 Gambar \ref{fig:3:1:1:controller} merupakan struktur kelas \textit{controller} yang terdapat pada SharIF Judge.
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.85\textwidth]{analisis/mvc/controller.png}
+	\includegraphics[width=\textwidth]{analisis/mvc/controller.png}
 	\caption{Struktur Kelas Controller pada SharIF Judge}
 	\label{fig:3:1:1:controller}
 \end{figure}
@@ -383,8 +378,6 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 			            \label{fig:3:1:1:assignments}
 		            \end{figure}
 	      \end{itemize}
-
-	      \newpage
 
 	\item \verb|Dashboard.php| \\
 	      Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Dashboard.php|:
@@ -510,7 +503,7 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 
 		            \begin{figure}[H]
 			            \centering
-			            \includegraphics[width=0.8\textwidth]{views/notifications.png}
+			            \includegraphics[width=0.75\textwidth]{views/notifications.png}
 			            \caption{Halaman Notifications}
 			            \label{fig:3:1:1:notif}
 		            \end{figure}
@@ -528,7 +521,7 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 
 		            \begin{figure}[H]
 			            \centering
-			            \includegraphics[width=0.725\textwidth]{views/problem.png}
+			            \includegraphics[width=0.75\textwidth]{views/problem.png}
 			            \caption{Halaman Problems}
 			            \label{fig:3:1:1:problem}
 		            \end{figure}
@@ -544,7 +537,7 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 
 		            \begin{figure}[H]
 			            \centering
-			            \includegraphics[width=0.725\textwidth]{views/profile.png}
+			            \includegraphics[width=0.9\textwidth]{views/profile.png}
 			            \caption{Halaman Profile}
 			            \label{fig:3:1:1:profile}
 		            \end{figure}
@@ -572,20 +565,19 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 		      \item \verb|index()| \\
 		            Mendapatkan data dari \textit{model} \verb|Queue|, \verb|Assignments_model|, dan \verb|Settings_model| yang dipakai dalam \textit{view} \verb|queue.twig| dan ditampilkan kepada pengguna. Gambar \ref{fig:3:1:1:queue} menunjukkan hasil halaman Queue.
 
-		            \vspace{0.9cm}
-
-		            \begin{figure}[H]
+		            \begin{figure}
 			            \centering
-			            \includegraphics[width=0.85\textwidth]{views/queue.png}
+			            \includegraphics[width=0.875\textwidth]{views/queue.png}
 			            \caption{Halaman Queue}
 			            \label{fig:3:1:1:queue}
 		            \end{figure}
 
-		            \vspace{0.9cm}
 	      \end{itemize}
 
 	\item \verb|Queueprocess.php| \\
 	      \textit{Controller} \verb|Queueprocess.php| hanya memiliki satu fungsi yaitu \verb|run()| yang akan menjalankan \textit{queue} satu per satu menggunakan \verb|bash|.
+
+	      \newpage
 
 	\item \verb|Rejudge.php| \\
 	      Berikut fungsi dengan penjelasannya pada \textit{controller} \verb|Profile.php|:
@@ -596,9 +588,9 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 		      \item \verb|index()| \\
 		            Mendapatkan data dan menampilkan \verb|rejudge.twig|. Fungsi ini juga dapat melakukan \textit{rejudge} pada sebuah \textit{problem} tertentu. Gambar \ref{fig:3:1:1:rejudge} menunjukkan halaman Rejudge.
 
-		            \begin{figure}[H]
+		            \begin{figure}[h]
 			            \centering
-			            \includegraphics[width=0.825\textwidth]{views/rejudge.png}
+			            \includegraphics[width=0.875\textwidth]{views/rejudge.png}
 			            \caption{Halaman Rejudge}
 			            \label{fig:3:1:1:rejudge}
 		            \end{figure}
@@ -608,9 +600,9 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 	\item \verb|Scoreboard.php| \\
 	      \textit{Controller} \verb|Queueprocess.php| hanya memiliki satu fungsi yaitu \verb|index()| yang akan menampilkan \textit{view} \verb|scoreboard.twig| dengan data yang didapat dari model \verb|Scoreboard_model|. Gambar \ref{fig:3:1:1:scoreboard} menunjukkan hasil halaman Scoreboard.
 
-	      \begin{figure}[H]
+	      \begin{figure}
 		      \centering
-		      \includegraphics[width=0.825\textwidth]{views/scoreboard.png}
+		      \includegraphics[width=0.875\textwidth]{views/scoreboard.png}
 		      \caption{Halaman Scoreboard}
 		      \label{fig:3:1:1:scoreboard}
 	      \end{figure}
@@ -629,7 +621,7 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 
 		            \begin{figure}[H]
 			            \centering
-			            \includegraphics[width=0.825\textwidth]{views/settings.png}
+			            \includegraphics[width=0.875\textwidth]{views/settings.png}
 			            \caption{Halaman Settings}
 			            \label{fig:3:1:1:settings}
 		            \end{figure}
@@ -643,11 +635,19 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 		      \item \verb|all()| \\
 		            Fungsi ini akan mendapatkan data dari \verb|Submit_model| untuk mendapatkan seluruh \textit{submission} dan menampilkan halaman \verb|submission.twig| berisi semua \textit{submission}. Gambar \ref{fig:3:1:1:all} menunjukkan halaman All Submissions .
 
-		            \begin{figure}[H]
+		            \begin{figure}
 			            \centering
 			            \includegraphics[width=0.825\textwidth]{views/all_submissions.png}
 			            \caption{Halaman All Submissions}
 			            \label{fig:3:1:1:all}
+		            \end{figure}
+		      \item \verb|the_final()| \\
+		            Fungsi ini akan mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}. Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions .
+		            \begin{figure}[h]
+			            \centering
+			            \includegraphics[width=0.825\textwidth]{views/final_submissions.png}
+			            \caption{Halaman Final Submissions}
+			            \label{fig:3:1:1:final}
 		            \end{figure}
 		      \item \verb|_download_excel($view)| \\
 		            Fungsi ini menggunakan \textit{library} PHPExcel untuk membuat sebuah \textit{file excel} dari \textit{submissions} yang akan diunduh pengguna.
@@ -663,14 +663,6 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 		            Digunakan untuk melihat kode, melihat hasil kode, atau melihat \textit{log} sebuah \textit{submission}.
 		      \item \verb|download_file()| \\
 		            Mengunduh \textit{file} kode sebuah \textit{submission}.
-		      \item \verb|the_final()| \\
-		            Fungsi ini akan mendapatkan data dari \verb|Submit_model| untuk mendapatkan \textit{final submission} dan menampilkan halaman \verb|submission.twig| berisi \textit{final submission}. Gambar \ref{fig:3:1:1:final} menunjukkan halaman Final Submissions .
-		            \begin{figure}[H]
-			            \centering
-			            \includegraphics[width=0.85\textwidth]{views/final_submissions.png}
-			            \caption{Halaman Final Submissions}
-			            \label{fig:3:1:1:final}
-		            \end{figure}
 	      \end{itemize}
 
 	\item \verb|Submit.php| \\
@@ -700,9 +692,9 @@ Berikut merupakan file \textit{controller} dan penjelasan fungsinya pada SharIF 
 		      \item \verb|index()| \\
 		            Fungsi ini akan mendapatkan data dari \textit{model} \verb|Assignments_model| untuk mendapatkan \textit{problem} dan data lainnya. Semua data tersebut akan dimasukkan dalam \textit{view} \verb|submit.twig|. Gambar \ref{fig:3:1:1:submit} menunjukkan hasil halaman Submit. Halaman ini terdapat editor kode yang sudah diimplementasikan~\cite{nicholas:sharif}.
 
-		            \begin{figure}[H]
+		            \begin{figure}
 			            \centering
-			            \includegraphics[width=0.8\textwidth]{views/submit.png}
+			            \includegraphics[width=0.85\textwidth]{views/submit.png}
 			            \caption{Halaman Submit}
 			            \label{fig:3:1:1:submit}
 		            \end{figure}
@@ -746,7 +738,6 @@ Pada SharIF Judge terdapat direktori bernama \textit{Assets} yang menjadi tempat
 	      Direktori ini berisi font khusus dan juga memiliki \textit{library JavaScript} bernama font-awesome yang digunakan untuk menyimpan icon berformat svg dalam tampilan SharIF Judge.
 	\item Direktori \verb|fullcalendar| \\
 	      Direktori ini berisi hasil \textit{build library} FullCalendar, menghasilkan file \textit{JavaScript} dan \textit{css} yang berfungsi untuk memasukkan kalendar dalam tampilan SharIF Judge.
-	      \newpage
 	\item Direktori \verb|gridster| \\
 	      Direktori ini berisi hasil \textit{build plugin} Gridster yang menggunakan \textit{library} jQuery, menghasilkan file \textit{JavaScript} dan \textit{css} yang berfungsi untuk memasukkan \textit{layout} grid yang dapat diubah dengan menggunakan sifat mouse \textit{drag and drop}.
 	\item Direktori \verb|images| \\
@@ -829,26 +820,26 @@ Integrated Development Environment (IDE) pada SharIF Judge dirancang dengan anta
 
 \begin{itemize}
 	\item Editor Kode \\
-	Editor kode ditandai dengan warna merah dalam Gambar~\ref{fig:3:1:editorkode} merupakan area utama tempat pengguna menulis dan mengedit kode program. Editor ini dilengkapi dengan fitur syntax highlighting dan auto-indent untuk mendukung produktivitas pengguna.
+	      Editor kode ditandai dengan warna merah dalam Gambar~\ref{fig:3:1:editorkode} merupakan area utama tempat pengguna menulis dan mengedit kode program. Editor ini dilengkapi dengan fitur syntax highlighting dan auto-indent untuk mendukung produktivitas pengguna.
 	\item Editor Input \\
-	Editor Input ditandai dengan warna biru dalam Gambar~\ref{fig:3:1:editorkode} berfungsi sebagai tempat pengguna memasukkan data uji yang akan digunakan saat menjalankan program melalui aksi Execute. Input yang dimasukkan akan diproses sebagai \textit{standard input} atau \textit{stdin} saat kode dijalankan.
+	      Editor Input ditandai dengan warna biru dalam Gambar~\ref{fig:3:1:editorkode} berfungsi sebagai tempat pengguna memasukkan data uji yang akan digunakan saat menjalankan program melalui aksi Execute. Input yang dimasukkan akan diproses sebagai \textit{standard input} atau \textit{stdin} saat kode dijalankan.
 	\item Editor Output \\
-	Editor Output ditandai dengan warna hijau dalam Gambar~\ref{fig:3:1:editorkode} menampilkan hasil eksekusi kode program, termasuk keluaran, pesan kesalahan jika ada, dan waktu komputasi. Konten pada bagian ini dihasilkan secara otomatis setiap aksi Execute dilakukan.
+	      Editor Output ditandai dengan warna hijau dalam Gambar~\ref{fig:3:1:editorkode} menampilkan hasil eksekusi kode program, termasuk keluaran, pesan kesalahan jika ada, dan waktu komputasi. Konten pada bagian ini dihasilkan secara otomatis setiap aksi Execute dilakukan.
 	\item Tombol Aksi \\
-	Tombol Aksi ditandai dengan warna kuning dalam Gambar~\ref{fig:3:1:editorkode} menyediakan tiga tombol aksi interaksi yaitu sebagai berikut:
+	      Tombol Aksi ditandai dengan warna kuning dalam Gambar~\ref{fig:3:1:editorkode} menyediakan tiga tombol aksi interaksi yaitu sebagai berikut:
 	\item PDF Viewer \\
-	PDF Viewer ditandai dengan warna kuning dalam Gambar~\ref{fig:3:1:editorkode} merupakan sebuah komponen dalam IDE yang digunakan untuk menampilkan soal atau instruksi tugas kepada mahasiswa.
+	      PDF Viewer ditandai dengan warna kuning dalam Gambar~\ref{fig:3:1:editorkode} merupakan sebuah komponen dalam IDE yang digunakan untuk menampilkan soal atau instruksi tugas kepada mahasiswa.
 
-	\begin{itemize}
-		\item \textbf{\textit{Save}}: Menyimpan sementara kode program tanpa menjalankan atau mengumpulkannya.
-		\item \textbf{\textit{Save \& Execute}}: Menyimpan kode sekaligus menjalankannya dengan input yang tersedia di Editor Input. Hasilnya ditampilkan di Editor Output.
-		\item \textbf{\textit{Save \& Submit}}: Menyimpan dan mengumpulkan kode sebagai submission untuk dinilai oleh SharIF Judge.  
-	\end{itemize}
+	      \begin{itemize}
+		      \item \textbf{\textit{Save}}: Menyimpan sementara kode program tanpa menjalankan atau mengumpulkannya.
+		      \item \textbf{\textit{Save \& Execute}}: Menyimpan kode sekaligus menjalankannya dengan input yang tersedia di Editor Input. Hasilnya ditampilkan di Editor Output.
+		      \item \textbf{\textit{Save \& Submit}}: Menyimpan dan mengumpulkan kode sebagai submission untuk dinilai oleh SharIF Judge.
+	      \end{itemize}
 \end{itemize}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{editor-kode-colored.png}
+	\includegraphics[width=\textwidth]{editor-kode-colored.png}
 	\caption{Editor Kode SharIF Judge}
 	\label{fig:3:1:editorkode}
 \end{figure}
@@ -899,7 +890,7 @@ Fitur perekaman pada editor kode bukan hanya perubahan text melainkan pada selur
 Gambar \ref{fig:3:2:seqdia_rekam} merupakan sebuah \textit{sequence} diagram yang menunjukkan bagaimana fitur perekaman perubahan atau event akan berintegrasi dengan sistem IDE akan bekerja pada SharIF Judge.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.55]{analisis/seqdia_rekam.png}
+	\includegraphics[scale=0.7]{analisis/seqdia_rekam.png}
 	\caption{Sequence Diagram Fitur Perekaman Perubahan}
 	\label{fig:3:2:seqdia_rekam}
 \end{figure}
@@ -912,7 +903,7 @@ Fitur penyimpanan rekaman perubahan akan dilakukan secara otomatis saat pengguna
 Gambar \ref{fig:3:2:seqdia_save} merupakan sebuah \textit{sequence} diagram yang menunjukkan bagaimana fitur penyimpanan rekaman perubahan akan berintegrasi dengan sistem IDE akan bekerja pada SharIF Judge.
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.55]{analisis/seqdia_save.png}
+	\includegraphics[scale=0.5]{analisis/seqdia_save.png}
 	\caption{Sequence Diagram Fitur Penyimpanan Rekaman}
 	\label{fig:3:2:seqdia_save}
 \end{figure}
@@ -925,7 +916,7 @@ Pada sistem pemutaran ulang ketikan dibutuhkannya sebuah halaman baru yang akan 
 Gambar \ref{fig:3:2:seqdia_lookup} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem akan bekerja saat user akan membuka halaman rekaman pada SharIF Judge.
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.55]{analisis/seqdia_lookup.png}
+	\includegraphics[scale=0.525]{analisis/seqdia_lookup.png}
 	\caption{Sequence Diagram Membuka Halaman Rekaman}
 	\label{fig:3:2:seqdia_lookup}
 \end{figure}
@@ -939,7 +930,7 @@ Fitur pemutaran ulang rekaman akan membuat satu buah rekaman dalam daftar rekama
 Gambar \ref{fig:3:2:seqdia_seerecording} merupakan \textit{sequence} diagram yang menunjukkan bagaimana sistem SharIF Judge bekerja dari pemilihan rekaman hingga pemutaran ulang rekaman akan terjadi.
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.55]{analisis/seqdia_seerecording.png}
+	\includegraphics[scale=0.525]{analisis/seqdia_seerecording.png}
 	\caption{Sequence Diagram Membuka Halaman Rekaman}
 	\label{fig:3:2:seqdia_seerecording}
 \end{figure}

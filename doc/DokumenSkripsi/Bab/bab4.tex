@@ -1,43 +1,7 @@
 \chapter{Perancangan}
 \label{chap:perancangan}
 
-Bab ini membahas tentang perancangan untuk implementasi sistem perekaman ulang dalam SharIF-Judge. Perancangan akan dilakukan dengan mempertimbangkan aspek fungsionalitas, antarmuka pengguna, penyimpanan data, serta perubahan kode yang diperlukan pada sistem yang sudah ada.
-
-\section{Rancangan Event yang direkam}
-
-Untuk mendukung fitur pemutaran ulang ketikan pada IDE SharIF Judge, sistem perlu merekam berbagai jenis interaksi pengguna selama proses pengerjaan tugas pemrograman berlangsung. Oleh karena itu, dirancanglah sejumlah event yang akan ditangkap dan dicatat secara real-time pada IDE. Berikut merupakan \textit{event} yang akan ditangkap oleh \textit{JavaScript} dalam halaman Submit:
-
-\begin{itemize}
-    \item \textbf{Perubahan isi kode pada editor kode.} \\
-    Event ini merupakan interaksi utama dalam proses pemutaran ulang, karena isi kode adalah peristiwa utama dari proses pengerjaan. Tanpa merekam perubahan kode secara kronologis, sistem tidak dapat memperlihatkan perubahan kode solusi yang dibuat oleh mahasiswa.
-
-    \item \textbf{Perubahan posisi kursor pada editor kode.} \\
-    Posisi kursor penting agar sistem tidak hanya menampilkan isi kode, tetapi juga memperlihatkan lokasi interaksi pengguna seperti proses pengerjaan aslinya.
-      
-    \item \textbf{Perubahan fokus pada web page.} \\
-    Fokus halaman direkam agar bisa diketahui apakah mahasiswa tetap di halaman atau pindah ke halaman atau aplikasi lain. Hal ini memperkuat validitas rekaman sebagai alat pemantauan perilaku.
-
-    \item \textbf{Pergantian \textit{tab} dalam browser.} \\
-    Pergantian tab perlu ditampilkan dalam pemutaran ulang agar pengajar dapat melihat jika terdapat pola perpindahan ke luar halaman yang mencurigakan, terutama saat pengerjaan berlangsung dalam waktu terbatas.
-
-    \item \textbf{Perubahan fokus pada PDF Viewer.} \\
-    Perubahan fokus pada PDF Viewer perlu direkam karena saat mahasiswa membuka atau membaca soal, fokus pada halaman utama akan berubah. Perubahan ini direkam karena pada saat mahasiswa berganti fokus pada PDF Viewer, fokus pada halaman utama akan dianggap hilang yang seharusnya tidak.
-
-    \item \textbf{Perubahan isi pada editor \textit{input} dalam IDE.} \\
-    Input merupakan bagian dari proses pengujian program. Dengan merekamnya, pemutaran ulang dapat menampilkan bagaimana mahasiswa bereksperimen terhadap berbagai kasus uji.
-
-    \item \textbf{Perubahan isi pada editor \textit{output} dalam IDE.} \\
-    Output membantu merekonstruksi respon dari \textit{input} setelah aksi \textit{Execute} dilakukan. Dalam sistem, hal ini menunjukkan hasil dari setiap eksekusi, termasuk output yang keliru atau tidak sesuai harapan.
-
-    \item \textbf{Aksi men-\textit{Save}.} \\
-    Tindakan menyimpan kode menandakan momen penting dalam pengerjaan. Dalam sistem, event ini menandai checkpoint logis yang bisa membantu dosen memahami iterasi solusi mahasiswa.
-
-    \item \textbf{Aksi men-\textit{Save \& Execute}.} \\
-    Pemutaran ulang yang menampilkan momen eksekusi kode memberikan gambaran apakah mahasiswa sering mencoba kodenya, yang berkaitan erat dengan proses debugging dan iterasi.
-
-    \item \textbf{Aksi men-\textit{Save \& Submit}.} \\
-    Aksi submit merupakan akhir dari proses pengerjaan. Merekam dan menampilkannya dalam sistem sangat penting untuk menandai titik akhir pengerjaan dan mengevaluasi keseluruhan proses sebelumnya.
-\end{itemize}
+Bab ini membahas tentang perancangan untuk implementasi sistem perekaman ulang dalam SharIF-Judge. Perancangan akan dilakukan dengan mempertimbangkan aspek fungsionalitas, antarmuka pengguna, penyimpanan data, event yang direkam serta perubahan kode yang diperlukan pada sistem yang sudah ada.
 
 \section{Rancangan Penyimpanan Rekaman}
 \label{sec:4:2:storerekaman}
@@ -74,7 +38,60 @@ Berikut contoh hasil untuk sebuah \textit{event insert} pada penjelasan di atas:
 \end{center}
 
 Penyimpanan rekaman juga akan disimpan pada direktori yang sama dengan penyimpanan kode submission seperti yang dijelaskan pada Bagian \ref{sub:3:1:penyimpanankode} dengan nama file \verb|record|.
+Meskipun file rekaman disimpan sebagai berkas JSON di direktori tersebut, informasi mengenai file tersebut juga dicatat ke dalam database agar sistem dapat menampilkan daftar rekaman yang tersedia untuk setiap problem. Informasi yang disimpan adalah pengguna yang melakukan rekaman, waktu perekaman, serta assignment dan problem yang terkait.
 
+Karena sistem SharIF Judge tidak menggunakan relasi antar tabel yang dapat dilihat dari Gambar \ref{fig:4:erdawal}, maka rancangan tabel penyimpanan rekaman ini juga dibuat tanpa \textit{foreign key}. Setiap kolom menyimpan data secara langsung seperti ID assignment atau ID problem dalam bentuk nilai biasa (bukan relasi). Hal ini dilakukan untuk menyesuaikan dengan struktur database SharIF Judge yang sudah ada dan menjaga kompatibilitas sistem. Rancangan struktur tabel dapat dilihat pada Gambar~\ref{fig:4:erdrekaman}.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{erd awal.png}
+\caption{Tabel SharIF Judge Saat Ini}
+\label{fig:4:erdawal}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.45\textwidth]{/erd-tambahan.png}
+\caption{Rancangan Tabel Penyimpanan Rekaman}
+\label{fig:4:erdrekaman}
+\end{figure}
+
+
+\section{Rancangan Event yang direkam}
+
+Untuk mendukung fitur pemutaran ulang ketikan pada IDE SharIF Judge, sistem perlu merekam berbagai jenis interaksi pengguna selama proses pengerjaan tugas pemrograman berlangsung. Oleh karena itu, dirancanglah sejumlah event yang akan ditangkap dan dicatat secara real-time pada IDE. Berikut merupakan \textit{event} yang akan ditangkap oleh \textit{JavaScript} dalam halaman Submit:
+
+\begin{itemize}
+    \item \textbf{Perubahan isi kode pada editor kode.} \\
+    Event ini merupakan interaksi utama dalam proses pemutaran ulang, karena isi kode adalah peristiwa utama dari proses pengerjaan. Tanpa merekam perubahan kode secara kronologis, sistem tidak dapat memperlihatkan perubahan kode solusi yang dibuat oleh mahasiswa.
+
+    \item \textbf{Perubahan posisi kursor pada editor kode.} \\
+    Posisi kursor penting agar sistem tidak hanya menampilkan isi kode, tetapi juga memperlihatkan lokasi interaksi pengguna seperti proses pengerjaan aslinya.
+      
+    \item \textbf{Perubahan fokus pada web page.} \\
+    Fokus halaman direkam agar bisa diketahui apakah mahasiswa tetap di halaman atau pindah ke halaman atau aplikasi lain. Hal ini memperkuat validitas rekaman sebagai alat pemantauan perilaku.
+
+    \item \textbf{Pergantian \textit{tab} dalam browser.} \\
+    Pergantian tab perlu ditampilkan dalam pemutaran ulang agar pengajar dapat melihat jika terdapat pola perpindahan ke luar halaman yang mencurigakan, terutama saat pengerjaan berlangsung dalam waktu terbatas.
+
+    \item \textbf{Perubahan fokus pada PDF Viewer.} \\
+    Perubahan fokus pada PDF Viewer perlu direkam karena saat mahasiswa membuka atau membaca soal, fokus pada halaman utama akan berubah. Perubahan ini direkam karena pada saat mahasiswa berganti fokus pada PDF Viewer, fokus pada halaman utama akan dianggap hilang yang seharusnya tidak.
+
+    \item \textbf{Perubahan isi pada editor \textit{input} dalam IDE.} \\
+    Input merupakan bagian dari proses pengujian program. Dengan merekamnya, pemutaran ulang dapat menampilkan bagaimana mahasiswa bereksperimen terhadap berbagai kasus uji.
+
+    \item \textbf{Perubahan isi pada editor \textit{output} dalam IDE.} \\
+    Output membantu merekonstruksi respon dari \textit{input} setelah aksi \textit{Execute} dilakukan. Dalam sistem, hal ini menunjukkan hasil dari setiap eksekusi, termasuk output yang keliru atau tidak sesuai harapan.
+
+    \item \textbf{Aksi men-\textit{Save}.} \\
+    Tindakan menyimpan kode menandakan momen penting dalam pengerjaan.
+
+    \item \textbf{Aksi men-\textit{Save \& Execute}.} \\
+    Pemutaran ulang yang menampilkan momen eksekusi kode memberikan gambaran apakah mahasiswa sering mencoba kodenya, yang berkaitan dengan proses alur  debugging.
+
+    \item \textbf{Aksi men-\textit{Save \& Submit}.} \\
+    Aksi submit merupakan akhir dari proses pengerjaan. Merekam dan menampilkannya dalam sistem sangat penting untuk menandai titik akhir pengerjaan.
+\end{itemize}
 
 \section{Rancangan Antarmuka}
 
@@ -89,8 +106,8 @@ Seluruh sistem rekaman akan diimplementasikan dalam halaman Submit tidak memerlu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{views/submit.png}
-    \caption{Halaman}
+    \includegraphics[width=0.9\textwidth]{views/submit.png}
+    \caption{Halaman Submit}
     \label{fig:4:1:submit}
 \end{figure}
 
@@ -101,14 +118,14 @@ Pada sistem pemutaran ulang dibutuhkan dua halaman baru yaitu halaman untuk menu
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{design-recording-list.jpg}
+    \includegraphics[width=0.9\textwidth]{design-recording-list.jpg}
     \caption{Rancangan Antarmuka Halaman Daftar Rekaman}
     \label{fig:4:1:listrec}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\textwidth]{design-recording.jpg}
+    \includegraphics[width=0.8\textwidth]{design-recording.jpg}
     \caption{Rancangan Antarmuka Halaman Pemutaran Ulang}
     \label{fig:4:1:rec}
 \end{figure}

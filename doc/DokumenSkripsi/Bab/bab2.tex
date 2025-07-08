@@ -383,12 +383,12 @@ Setelah \textit{library} Ace ditanam untuk mengakses berbagai macam fitur yang d
 
 Kode \ref{kode:2:5:ace} merupakan cara penggunaan Ace pada sebuah \texttt{div} dengan id \texttt{editor}. Ace juga memiliki beberapa konfigurasi, seperti terlihat pada Kode \ref{kode:2:5:ace}, yaitu editor menggunakan tema \textit{monokai} dan menggunakan \textit{syntax highlighting} untuk bahasa pemrograman \textit{JavaScript}. Gambar \ref{fig:2:5:ace} menunjukkan hasil halaman web yang dibuka dalam \textit{browser} menggunakan Kode \ref{kode:2:5:ace}.
 
-\begin{figure}[H]
+\begin{figure}
 	\centering
 	\includegraphics[width=0.65\textwidth]{ace.png}
 	\caption{Hasil Halaman Web \textit{Library} Ace}
 	\label{fig:2:5:ace}
-	\vspace{-1cm}
+	% \vspace{-1cm}
 \end{figure}
 
 \subsection{Perekaman Event}
@@ -474,6 +474,8 @@ Setelah itu \textit{library} Chart.js dapat digunakan dengan membuat sebuah kela
 	\textit{Key} \verb|options| merupakan fitur utama dari kelas \verb|Chart| dan hanyak menerima sebuah objek \textit{JavaScript} yang memiliki banyak \textit{key} untuk menyesuaikan bagan yang dibuat oleh \textit{library} Chart.js. Salah satu \textit{key} dalam \verb|options| adalah \verb|scales| yang digunakan untuk mengatur data yang ditampilkan untuk aksis X dan Y. Salah satu pengaturannya adalah untuk menumpuk data dengan data yang sama di aksis yang sama yaitu dengan menggunakan \textit{key} \verb|stacked|.
 \end{itemize}
 
+\newpage
+
 \begin{lstlisting}[language={html}, caption={Contoh kode penggunaan Chart.js}, label={kode:2:6:chartjs}]
 <!DOCTYPE html>
 <html lang="en">
@@ -514,7 +516,7 @@ Kode \ref{kode:2:6:chartjs} merupakan contoh penggunaan \textit{library} Chart.j
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{chartjs.png}
+	\includegraphics[width=0.8\textwidth]{chartjs.png}
 	\caption{Hasil Halaman Web \textit{Library} Chart.js}
 	\label{fig:2:6:chartjs}
 \end{figure}
@@ -525,7 +527,7 @@ Code Churn merujuk pada perubahan yang dilakukan pada kode sumber dalam suatu pe
 
 Kode yang baru diubah biasanya mengalami beberapa perubahan. Frekuensi perubahan kode dalam periode waktu tertentu dapat bervariasi karena beberapa faktor dan pergantian kode dapat menjadi baik atau buruk tergantung pada kapan dan mengapa hal itu terjadi.
 
-Misalnya, teknisi sering menguji, menulis ulang, dan memeriksa beberapa solusi untuk suatu masalah, khususnya saat mereka bereksperimen dengan solusi untuk tugas yang sedang dikerjakan. Dalam hal ini, pergantian kode adalah hal yang baik, karena merupakan hasil dari pemecahan masalah yang kreatif.
+Seperti contohnya, teknisi sering menguji, menulis ulang, dan memeriksa beberapa solusi untuk suatu masalah, khususnya saat mereka bereksperimen dengan solusi untuk tugas yang sedang dikerjakan. Dalam hal ini, pergantian kode adalah hal yang baik, karena merupakan hasil dari pemecahan masalah yang kreatif.
 
 \subsection{Code Churn Rate}
 

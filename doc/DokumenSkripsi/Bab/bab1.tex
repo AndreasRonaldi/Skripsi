@@ -59,6 +59,7 @@ Rumusan Masalah yang akan dibahas pada tugas akhir ini adalah:
     \item Bagaimana merencanakan dan mengimplementasikan perekaman dan pemutaran ulang ketikan mahasiswa pada IDE SharIF-Judge?
     \item Bagaimana cara menyimpan data rekaman pemutaran ulang mahasiswa?
     \item Bagaimana menganalisis data rekaman pemutaran ulang mahasiswa?
+    \item Aktivitas atau kecurangan apa saja yang dapat terdeteksi melalui data rekaman, dan apa saja yang tidak dapat dideteksi?
 \end{enumerate}
 
 \section{Tujuan}
@@ -69,6 +70,7 @@ Tujuan yang ingin dicapai skripsi ini adalah sebagai berikut:
     \item Merencanakan dan mengimplementasikan perekaman dan pemutaran ulang ketikan mahasiswa pada IDE SharIF-Judge.
     \item Mencari cara penyimpanan data efektif dan sesuai dengan sistem yang sudah ada dan mengimplementasikannya pada perekaman dan pemutaran ulang ketikan.
     \item Menganalisis data rekaman hasil eksperimen mengenai pola yang muncul dengan memvisualisasikan data menjadi bagan-bagan seperti \textit{histogram}. 
+    \item Melakukan analisis terhadap data rekaman untuk mengamati pola pengerjaan dan potensi kecurangan.
 \end{enumerate}
 
 \section{Batasan Masalah}
@@ -76,9 +78,12 @@ Tujuan yang ingin dicapai skripsi ini adalah sebagai berikut:
 
 Pada pengerjaan tugas akhir ini terhadap batasan sebagai berikut:
 \begin{itemize}
-    % \item Perangkat lunak SharIF Judge hanya digunakan pada lingkungan Teknik Informatika Unpar.
     \item Perangkat lunak SharIF Judge hanya digunakan pada lingkungan mahasiswa yang menguasai hal mengenai pemrograman.
     \item Pengujian perangkat lunak dilakukan dalam sistem tertutup di mana akan  diawasi.
+    \item Fitur yang dikembangkan hanya mencakup aktivitas yang terjadi di dalam halaman IDE SharIF Judge.
+    \item Rekaman yang dibuat hanya mencakup perubahan kode, \textit{input}/\textit{output}, eksekusi program, dan interaksi pada halaman (seperti navigasi tab).
+    \item Kecurangan yang terjadi di luar sistem, seperti menggunakan perangkat lain, menggunakan dua layar, atau menjiplak dengan cara manual dari luar sistem, tidak dapat dideteksi.
+    \item Sistem tidak menggunakan AI atau algoritma khusus untuk mendeteksi kecurangan, melainkan hanya menyediakan data rekaman yang bisa dianalisis oleh pengajar.
 \end{itemize}
 
 \section{Metodologi}
